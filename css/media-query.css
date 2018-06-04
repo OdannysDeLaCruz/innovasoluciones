@@ -3,6 +3,22 @@
 /*-------PAGINA DE INICO---------*/
 
 @media (min-width: 300px) and (max-width: 500px){
+	/*--ESTILOS DE CARRITO DESPLEGABLE--*/
+	.carrito_botones {
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+	}
+	.carrito_fila_titulo p {
+		font-size: 11px;
+	}
+	.carrito_fila_borrar > span  {
+		font-size: 20px;
+	}
+	.carrito_botones div {
+		width: 130px;
+		height: 40px;
+	}
 	/*--ESTILOS DE CAROUSEL--*/
 	.carousel .carousel-indicators {
 		margin-bottom: 5px;
@@ -97,7 +113,7 @@
 	}
 	/*---FIN ESTILOS DE PAGINA INICIO---*/
 
-	/*--ESTILOS DE PAGINA DE PRODCUCTOS--*/
+	/*--ESTILOS DE PAGINA DE PRODUCTOS--*/
 	.nav_categorias {
 		background: linear-gradient(to right, #0066ffff, #0ab1ffff);
 		margin-top: 60px;

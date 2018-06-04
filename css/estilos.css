@@ -54,16 +54,33 @@
 .carrito {
 	background: #fff;
 	max-width: 1000px;
-	/*min-width: 700px;*/
 	margin: auto;
 	border-radius: 5px;
 }
+.carrito::-webkit-scrollbar {
+	background: #fff;
+	height: 12px;
+}
+.carrito::-webkit-scrollbar-thumb {
+	background: #3150ED;
+	border: 2px solid #fff;
+}
 .carrito_botones {
 	display: flex;
-	justify-content: space-around;
-	width: 500px;
+	padding: 20px;
+	justify-content: center;
+	width: 100%;
+	height: auto;
 	margin: auto;
 	padding-bottom: 20px;
+}
+.carrito_botones div {
+	margin: 5px 10px;
+}
+.carrito_botones a, .btn_carrito_vaciar a {
+	border: 1px solid #fff;
+	color: #fff;
+
 }
 .carrito_botones .btn_carrito_vaciar a:hover {
 	background: tomato;
@@ -82,20 +99,36 @@
 	text-align: center;
 }
 .carrito_fila_img {
-	width: 50px;
+	width: 40px;
 }
 .carrito_fila_titulo {
+	min-width: 200px;
 	max-width: 300px;
 }
+.carrito_fila_titulo p {
+	font-size: 13px;
+	font-weight: bold;
+	text-align: left;
+	text-transform: uppercase;
+}
+.carrito_fila_cantidad input {
+	width: 40px;
+}
 .carrito_fila_precio {
+	min-width: 130px;
+	padding: 5px;
+	max-width: 200px;
 	font-weight: 600;
+	font-size: 15px;
 }
 .carrito_fila_borrar {
 	color: tomato;
-	margin-top: 10px;
+	width: 30px;
 }
 .carrito_fila_borrar > span {
 	cursor: pointer;
+	text-align: center;
+	font-size: 25px;
 }
 
 /*--FIN ESTILOS DEL CARRITO DESPLEGABLE--*/
@@ -428,14 +461,10 @@
 .seccion_nuevos_carrusel::-webkit-scrollbar {
 	background: #fff;
 	height: 20px;
-	border-radius: 25px;
-	-webkit-box-shadow: inset 0 0 10px #000;
-	   -moz-box-shadow: inset 0 0 10px #000;
-	        box-shadow: inset 0 0 10px #000;
 }
 .seccion_nuevos_carrusel::-webkit-scrollbar-thumb {
 	background: #3150ED;
-	border-radius: 25px;
+	border: 2px solid #fff;
 }
 
 /*--SECCION ALGUNOS PRODUCTOS Y PAGINA PRODUCTOS--*/
@@ -568,12 +597,12 @@ footer {
 
 .nav_categorias::-webkit-scrollbar {
 	background: #fff;
-	height: 10px;
+	height: 15px;
 }
 .nav_categorias::-webkit-scrollbar-thumb {
 	background: #3150ED;
 	background: linear-gradient(to right, #0256D4,#0997DA, #0ab1ff,#0997DA, #0256D4);
-	border-radius: 25px;
+	border: 2px solid #fff;
 }
 
 .nav_categorias a {
@@ -720,6 +749,4 @@ footer {
 	margin-top: 30px;
 }
 /*--FIN ESTILOS DE PAGINA DETALLE PRODUCTO--*/
-
-
 
