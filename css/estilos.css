@@ -662,7 +662,6 @@ footer {
 	margin: auto;
 	position: relative;
 	top: -250px;
-	padding: 30px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
@@ -670,7 +669,7 @@ footer {
 }
 .detalle > h1 {
 	text-align: center;
-	padding-bottom: 10px;
+	padding: 10px;
 	margin-bottom: 50px;
 	border-bottom: 1px solid #666;
 	font-size: 25px;
@@ -678,22 +677,29 @@ footer {
 	color: #666;
 }
 .detalle_descripcion_img {
-	height: 550px;
+	height: auto;
+	width: 100%;
 	text-align: center;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
+.detalle_descripcion_img #detalle_visializador {
+	border: 5px solid #8F8DEC;
+	padding: 10px;
+	position: relative;
+	width: 400px;
+}
 .detalle_descripcion_img img {
-	width: 350px;
+	width: 100%;
 }
 .detalle_descripcion_img_lista_img {
 	background: #fff;
 	padding: 10px;
 	width: 90%;
-	margin: auto;
-	position: absolute;
+	margin: 30px auto 0;
+	position: relative;
 	bottom: 0;
 	box-shadow: inset 0 0 10px 1px #ccc;
 	display: flex;
@@ -702,13 +708,13 @@ footer {
 	overflow-x: scroll;
 }
 .detalle_descripcion_img_lista_img::-webkit-scrollbar {
-	background: #fff;
+	background: #ccc;
 	height: 15px;
 }
 .detalle_descripcion_img_lista_img::-webkit-scrollbar-thumb {
 	background: #3150ED;
 	background: linear-gradient(to right, #0256D4,#0997DA, #0ab1ff,#0997DA, #0256D4);
-	border-radius: 25px;
+	border: 2px solid #ccc;
 }
 .detalle_descripcion_img_lista_img img {
 	width: 60px;
@@ -719,6 +725,9 @@ footer {
 .detalle_info {
 	width: 500px;
 	padding: 20px; 
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
 }
 .detalle_info_titulo {
 	font-size: 25px;
@@ -747,6 +756,7 @@ footer {
 }
 .detalle_info_btn_comprar {
 	margin-top: 30px;
+	align-self: center;
 }
 /*--FIN ESTILOS DE PAGINA DETALLE PRODUCTO--*/
 

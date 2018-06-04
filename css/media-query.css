@@ -56,6 +56,9 @@
 	.detalle {
 		top: 50px;
 	}
+	.detalle_descripcion_img #detalle_visializador {
+		width: 100%;
+	}
 }
 
 @media (min-width: 300px) and (max-width: 900px){

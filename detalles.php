@@ -55,7 +55,7 @@
 		<h1 class="col-12">Detalles del producto</h1>
 		<div class="detalle_descripcion_img col-md-6">
 			<div id="detalle_visializador">
-				<img src="img/zapatos.jpg">				
+				<img src="img/celular.jpg">				
 			</div>
 			<div class="detalle_descripcion_img_lista_img">
 				<img src="img/computadoras.png" alt="imganes de descripcion">
