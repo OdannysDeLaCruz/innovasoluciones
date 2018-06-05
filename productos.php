@@ -115,7 +115,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
@@ -130,7 +130,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
@@ -145,7 +145,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
@@ -160,7 +160,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
@@ -175,7 +175,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
@@ -190,7 +190,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
@@ -205,7 +205,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
@@ -220,7 +220,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
@@ -235,7 +235,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
@@ -250,7 +250,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
@@ -265,7 +265,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
@@ -280,7 +280,7 @@
 				<label class="producto_precio">$999.999.00</label>
 				<label class="producto_botones">
 					<div class="botones_innova">
-						<a href="">Detalles</a>
+						<a href="/detalles.php">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
