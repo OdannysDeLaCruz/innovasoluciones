@@ -59,6 +59,18 @@
 	.detalle_descripcion_img #detalle_visializador {
 		width: 100%;
 	}
+	/*--ESTILOS DE PAGINA DE REGISTRO--*/
+	.form_registro {
+		padding: 0;
+		padding-top: 20px;
+	}
+	.form_registro_titulo {
+		font-size: 18px;
+	}
+	.form_registro_grupo {
+		width: 100%;
+		padding: 20px;
+	}
 }
 
 @media (min-width: 300px) and (max-width: 900px){

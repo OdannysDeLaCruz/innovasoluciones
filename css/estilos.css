@@ -760,3 +760,95 @@ footer {
 }
 /*--FIN ESTILOS DE PAGINA DETALLE PRODUCTO--*/
 
+/*--ESTILOS DE PAGINA REGISTER--*/
+/*-Cuenta tambien para pagina Login---*/
+.contenedor_registro {
+	background: #ccc;
+	width: 100%;
+	padding: 30px 0;
+}
+.form_registro {
+	background: #fff;
+	max-width: 1000px;
+	margin: auto;
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+}
+.form_registro_titulo {
+	font-size: 20px;
+	font-weight: 500;
+	text-align: center;
+	color: #00aad4;
+	margin: 0px 5px 30px;
+}
+.form_registro > figure {
+	margin-bottom: 0px;
+}
+.form_registro_logo {
+	width: 200px;
+}
+.form_registro_grupo {
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 40px;
+	width: 500px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px 0px #ccc;
+}
+.form_registro_grupo > .texto {
+	font-size: 18px;
+	font-weight: 500;
+	font-style: italic;
+	color: #333;
+	margin-top: 30px;
+}
+.form_registro_grupo > input {
+	border-radius: 25px;
+	border: none;
+	height: 40px;
+	padding-left: 20px;
+	background: #DEDEDE;
+	font-size: 17px;
+	font-weight: 500;
+	font-style: italic;
+	color: #333;
+}
+.form_registro_grupo > input:focus {
+	outline: none;
+}
+.aceptar_terminos, .recordar_password  {
+	margin: 20px 0;
+	font-size: 16px;
+	font-weight: 500;
+	font-style: italic;
+}
+
+.btn_registrarse {
+	background: #00aad4;
+	color: #fff;
+	font-style: italic;
+	font-weight: 500;
+	width: 200px;
+	margin: 30px auto;
+	border-radius: 25px;
+	border: none;
+	padding: 10px;
+	cursor: pointer;
+}
+.btn_registrarse:hover {
+	background: #0388A9;
+}
+.ya_tengo_cuenta {
+	text-align: center;
+	margin-top: 20px;
+	font-size: 16px;
+	font-weight: 500;
+	font-style: italic;
+}
+/*--FIN ESTILOS DE PAGINA REGISTER--*/

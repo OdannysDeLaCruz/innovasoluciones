@@ -11,7 +11,6 @@
 	<title>Innova Soluciones | Home </title>
 </head>
 <body>
-	
 	<header class="header_principal">
 		<a class="header_principal_img" href="/">
 			<img src="img/logos/LogoInnova.svg" alt="Logotipo de Innova Soluciones">

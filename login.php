@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 	<link rel="stylesheet" type="text/css" href="css/media-query.css">
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-	<title> Detalles del producto | Innova Soluciones </title>
+	<title> Register | Innova Soluciones </title>
 </head>
 <body>
 	<header class="header_principal">
@@ -33,7 +33,6 @@
 		<span id="carrito_icono" class="fa fa-cart-plus carrito_icono"></span>
 		<span class="fa fa-bars abrir_menu"></span>
 	</header>
-	<!-- SECCION CARRITO -->
 	<section class="carrito_desplegable">
 		<section class="carrito table table-responsive">
 			<table class="table table-hover">
@@ -43,7 +42,7 @@
 				      <th>Productos</th>
 				      <th>Cantidad</th>
 				      <th>Precio</th>
-				      <th>Eliminar</th>
+				      <th></th>
 				    </tr>
 			  	</thead>
 			  	<tbody>
@@ -51,9 +50,9 @@
 				      	<td scope="row">
 				      		<img class="carrito_fila_img" src="img/zapatos.jpg" alt="">
 				      	</td>
-				      	<td class="carrito_fila_titulo"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></td>
-				      	<td class="carrito_fila_cantidad">
-				      		<input type="number" min="1" max="10" value="1">
+				      	<td class="carrito_fila_titulo">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+				      	<td>
+				      		<input type="number" min="0" max="10" value="1">
 				      	</td>
 				      	<td class="carrito_fila_precio"><i>$ 100.000 COP</i></td>
 				      	<td class="carrito_fila_borrar"><span class="fa fa-trash-o"></span></td>
@@ -62,26 +61,49 @@
 				      	<td scope="row">
 				      		<img class="carrito_fila_img" src="img/celular.jpg" alt="">
 				      	</td>
-				      	<td class="carrito_fila_titulo"><p>Lorem ipsum dolor sit amet.</p></td>
-				      	<td class="carrito_fila_cantidad">
-				      		<input type="number" min="1" max="10" value="1">
+				      	<td class="carrito_fila_titulo">Lorem ipsum dolor sit amet.</td>
+				      	<td>
+				      		<input type="number" min="0" max="10" value="1">
+				      	</td>
+				      	<td class="carrito_fila_precio"><i>$ 150.000 COP</i></td>
+				      	<td class="carrito_fila_borrar"><span class="fa fa-trash-o"></span></td>
+				    </tr>
+				    <tr class="carrito_fila">
+				      	<td scope="row">
+				      		<img class="carrito_fila_img" src="img/celular.jpg" alt="">
+				      	</td>
+				      	<td class="carrito_fila_titulo">Lorem ipsum dolor sit amet.</td>
+				      	<td>
+				      		<input type="number" min="0" max="10" value="1">
+				      	</td>
+				      	<td class="carrito_fila_precio"><i>$ 150.000 COP</i></td>
+				      	<td class="carrito_fila_borrar"><span class="fa fa-trash-o"></span></td>
+				    </tr>
+				    <tr class="carrito_fila">
+				      	<td scope="row">
+				      		<img class="carrito_fila_img" src="img/celular.jpg" alt="">
+				      	</td>
+				      	<td class="carrito_fila_titulo">Lorem ipsum dolor sit amet.</td>
+				      	<td>
+				      		<input type="number" min="0" max="10" value="1">
 				      	</td>
 				      	<td class="carrito_fila_precio"><i>$ 150.000 COP</i></td>
 				      	<td class="carrito_fila_borrar"><span class="fa fa-trash-o"></span></td>
 				    </tr>
 			  	</tbody>
-			</table>			
-		</section>
+			</table>
+			
 			<label class="carrito_botones">
-				<div class="btn_carrito_pagar botones_innova">
-					<a href="/payment.php"><span class="fa fa-credit-card-alt"></span> Pagar</a>
-				</div>
 				<div class="btn_carrito_vaciar botones_innova">
 					<a href=""><span class="fa fa-trash-o"></span> Vaciar carrito</a>
 				</div>
+				<div class="btn_carrito_pagar botones_innova">
+					<a href="/payment.php"><span class="fa fa-credit-card-alt"></span> Pagar</a>
+				</div>
 			</label>
+		</section>
 	</section>
-	<!-- FIN SECCION CARRITO -->
+	<!-- SECCION NAV CATEGORIAS -->
 	<nav class="nav_categorias">
 		<a href="#">Innovate Zapatos</a>
 		<a href="#">Innovate Celulares</a>
@@ -96,42 +118,38 @@
 		<a href="#">Innovate mas</a>
 		<a href="#">Innovate joyas</a>
 	</nav>
-	<div class="detalle_fondo_img">
-		<img src="img/detalle_fondo.jpg">
+	<!-- FIN SECCION NAV CATEGORIAS -->
+	<!-- SECCION DE FORMULARIO DE LOGIN -->
+	<div class="contenedor_registro">
+		<form class="form_registro" action="" method="post">
+			<figure>
+				<img class="form_registro_logo" src="img/logos/LogoInnova.svg">
+			</figure>
+			<h1 class="form_registro_titulo">Hola bienvenido, es un gusto tenerte aquí nuevamente.</h1>
+			<div class="form_registro_grupo">
+
+				<label for="email" class="texto">Email</label>
+				<input id="email" type="email" class="email" name="email" placeholder="Digite su correo electrónico" required>
+
+				<label for="password" class="texto">Contraseña</label>
+				<input id="password" type="password" class="password" name="password" placeholder="Digite su contraseña" required>
+
+				<button type="submit" class="btn_registrarse">Entrar</button>
+
+				<label class="recordar_password">
+					<a href="terminos">Olvidé mi contraseña</a>
+				</label>
+				<label class="ya_tengo_cuenta">
+					<p>Aun no tengo una cuenta <a href="/register.php">Registrarme</a></p>
+					
+				</label>
+			</div>
+		</form>
 	</div>
-	<section class="detalle row">
-		<h1 class="col-12">Detalles del producto</h1>
-		<div class="detalle_descripcion_img col-md-6">
-			<div id="detalle_visializador">
-				<img src="img/celular.jpg">				
-			</div>
-			<div class="detalle_descripcion_img_lista_img">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
-			</div>
-		</div>
-		<section class="detalle_info col-md-6">
-			<h1 class="detalle_info_titulo">Lorem ipsum dolor sit amet, consectetur adipisicing.</h1>
-			<p class="detalle_info_descripcion">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, eaque!</p>
-			<span class="detalle_info_precio">$ 1.200.000 COP</span>
-			
-			<select id="tallas" name="tallas" class="detalle_info_tallas">
-				<option>Escoje una talla</option>
-				<option value="28">28</option>
-				<option value="30">30</option>
-				<option value="32">32</option>
-			</select>
 
-			<div class="detalle_info_btn_comprar botones_innova">
-				<a href="">Comprar</a>
-			</div>
-		</section>
+	<!-- FIN SECCION DE FORMULARIO DE LOGIN -->
 
-	</section>
+	
 	<footer>
 		Footer
 	</footer>
