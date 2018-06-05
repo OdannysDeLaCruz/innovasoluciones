@@ -24,6 +24,7 @@
 		<nav class="nav_principal">
 			<span class="fa fa-times cerrar_menu" id="cerrar_menu"></span>
 			<ul>
+				<img class="nav_principal_logotipo" src="img/logos/LogoInnova.svg">
 				<li><a href="/">Home</a></li>
 				<li><a href="/productos.php">Productos</a></li>
 				<li><a href="/login.php">Entrar</a></li>

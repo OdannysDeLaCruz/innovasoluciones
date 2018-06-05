@@ -104,6 +104,10 @@
 	.nav_principal li {
 	    list-style: none;
 	    margin: 10px 0;
+	    border-bottom: 1px solid #0066ff;
+	}
+	.nav_principal_logotipo {
+		display: block;
 	}
 	.nav_principal .cerrar_menu {
 		display: block;

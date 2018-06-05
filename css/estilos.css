@@ -240,8 +240,15 @@
 }
 .nav_principal ul li {
 	padding: 0 10px;
+	
 }
-
+.nav_principal_logotipo {
+	display: none;
+}
+.nav_principal_logotipo {
+	width: 200px;
+	margin-bottom: 10px;
+}
 .nav_principal a {
 	color: #333;
 	font-size: 14px;
