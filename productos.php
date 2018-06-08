@@ -73,14 +73,14 @@
 			  	</tbody>
 			</table>			
 		</section>
-			<label class="carrito_botones">
-				<div class="btn_carrito_pagar botones_innova">
-					<a href="/payment.php"><span class="fa fa-credit-card-alt"></span> Pagar</a>
-				</div>
-				<div class="btn_carrito_vaciar botones_innova">
-					<a href=""><span class="fa fa-trash-o"></span> Vaciar carrito</a>
-				</div>
-			</label>
+		<label class="carrito_botones">
+			<div class="btn_carrito_pagar botones_innova">
+				<a href="/payment.php"><span class="fa fa-credit-card-alt"></span> Pagar</a>
+			</div>
+			<div class="btn_carrito_vaciar botones_innova">
+				<a href=""><span class="fa fa-trash-o"></span> Vaciar carrito</a>
+			</div>
+		</label>
 	</section>
 	<!-- FIN SECCION CARRITO -->
 	<!-- SECCION NAV CATEGORIAS -->
@@ -289,6 +289,7 @@
 			</section>
 		</div>
 	</section>
+	<!-- FIN SECCION PRODUCTOS -->
 	<footer>
 		Footer
 	</footer>

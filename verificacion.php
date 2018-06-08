@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<link rel="stylesheet" type="text/css" href="css/media-query.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<title> Verificación | Innova Soluciones</title>
+</head>
+<body>
+	<header class="header_principal">
+		<a class="header_principal_img" href="/">
+			<img src="img/logos/LogoInnova.svg" alt="Logotipo de Innova Soluciones">
+		</a>
+		<div class="contenedor_formulario">
+			<form class="formulario_buscar_producto" action="/search" method="post">
+				<input class="input_buscador_producto" type="text" name="buscar" placeholder="Busca por categorias" required>
+				<button class="btn_buscar" type="submit"><span class="fa fa-search"></span></button>
+			</form>
+		</div>
+		<nav class="nav_principal">
+			<span class="fa fa-times cerrar_menu" id="cerrar_menu"></span>
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="/productos.php">Productos</a></li>
+				<li><a href="/login.php">Entrar</a></li>
+				<li><a href="/register.php">Registrarse</a></li>
+			</ul>
+		</nav>
+		<span id="carrito_icono" class="fa fa-cart-plus carrito_icono"></span>
+		<span class="fa fa-bars abrir_menu"></span>
+	</header>
+	<!-- SECCION CARRITO -->
+	<section class="carrito_desplegable">
+		<section class="carrito table table-responsive">
+			<table class="table table-hover">
+			  	<thead>
+				    <tr class="carrito_titulo">
+				      <th>Imagen</th>
+				      <th>Productos</th>
+				      <th>Cantidad</th>
+				      <th>Precio</th>
+				      <th>Eliminar</th>
+				    </tr>
+			  	</thead>
+			  	<tbody>
+				    <tr class="carrito_fila">
+				      	<td scope="row">
+				      		<img class="carrito_fila_img" src="img/zapatos.jpg" alt="">
+				      	</td>
+				      	<td class="carrito_fila_titulo"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></td>
+				      	<td class="carrito_fila_cantidad">
+				      		<input type="number" min="1" max="10" value="1">
+				      	</td>
+				      	<td class="carrito_fila_precio"><i>$ 100.000 COP</i></td>
+				      	<td class="carrito_fila_borrar"><span class="fa fa-trash-o"></span></td>
+				    </tr>
+				    <tr class="carrito_fila">
+				      	<td scope="row">
+				      		<img class="carrito_fila_img" src="img/celular.jpg" alt="">
+				      	</td>
+				      	<td class="carrito_fila_titulo"><p>Lorem ipsum dolor sit amet.</p></td>
+				      	<td class="carrito_fila_cantidad">
+				      		<input type="number" min="1" max="10" value="1">
+				      	</td>
+				      	<td class="carrito_fila_precio"><i>$ 150.000 COP</i></td>
+				      	<td class="carrito_fila_borrar"><span class="fa fa-trash-o"></span></td>
+				    </tr>
+			  	</tbody>
+			</table>			
+		</section>
+		<label class="carrito_botones">
+			<div class="btn_carrito_pagar botones_innova">
+				<a href="/payment.php"><span class="fa fa-credit-card-alt"></span> Pagar</a>
+			</div>
+			<div class="btn_carrito_vaciar botones_innova">
+				<a href=""><span class="fa fa-trash-o"></span> Vaciar carrito</a>
+			</div>
+		</label>
+	</section>
+	<!-- FIN SECCION CARRITO -->
+	<!-- SECCION MENU PROCESO DE PAGO -->
+	<nav class="menu_proceso_pago">
+		<ul>
+			<li id="indicador_detalle" class="items active">Detalles</li>
+			<li id="indicador_envio" class="items datos_envio">Enviar a</li>
+			<!-- <li id="indicador_pagar" class="items pagar">Pagar</li> -->
+		</ul>
+	</nav>
+	<!-- FIN SECCION MENU PROCESO DE PAGO -->
+	<!-- SECCION DE PAYMENT -->
+	<section class="contenedor_payment">
+		<section id="detalles" class="payment_proceso payment_detalles payment_activo">
+			<section class="carrito table table-responsive">
+				<h1 class="carrito_titulo_seccion">Productos seleccionados</h1>
+				<table class="table table-hover tabla_payment">
+				  	<thead>
+					    <tr class="carrito_titulo">
+					      <th>Imagen</th>
+					      <th>Productos</th>
+					      <th>Cantidad</th>
+					      <th>Precio</th>
+					    </tr>
+				  	</thead>
+				  	<tbody>
+					    <tr class="carrito_fila">
+					      	<td scope="row">
+					      		<img class="carrito_fila_img" src="img/zapatos.jpg" alt="">
+					      	</td>
+					      	<td class="carrito_fila_titulo"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></td>
+					      	<td class="carrito_fila_cantidad">
+					      		<input type="number" min="1" max="10" value="1">
+					      	</td>
+					      	<td class="carrito_fila_precio"><i>$ 100.000 COP</i></td>
+					    </tr>
+					    <tr class="carrito_fila">
+					      	<td scope="row">
+					      		<img class="carrito_fila_img" src="img/celular.jpg" alt="">
+					      	</td>
+					      	<td class="carrito_fila_titulo"><p>Lorem ipsum dolor sit amet.</p></td>
+					      	<td class="carrito_fila_cantidad">
+					      		<input type="number" min="1" max="10" value="1">
+					      	</td>
+					      	<td class="carrito_fila_precio"><i>$ 150.000 COP</i></td>
+					    </tr>
+				  	</tbody>
+				</table>			
+			</section>
+			<div class="payment_detalles_total">
+				Total hasta ahora : <span class="total"> $ 250.000 COP </span>
+			</div>
+			<div class="payment_detalles_botones">
+				<div class="botones_innova btn_payment_procesos">
+					<a href="/productos.php"><i class="fa fa-arrow-left"></i>Seguir comprando</a>
+				</div>
+				<div class="botones_innova btn_payment_procesos">
+					<a id="btn_siguiente" href="#">Siguiente <i class="fa fa-arrow-right"></i></a>
+				</div>
+			</div>
+		</section>
+		<section id="datos_envio" class="payment_proceso payment_envio">
+			<h1 class="carrito_titulo_seccion">Datos del envio</h1>
+
+			<form action="/payment.php" method="post" class="formulario_datos_envio needs-validation">
+				<div class="form-control">
+					<label for="nombre">Nombre completo <span class="required">*</span></label>
+					<input id="nombre" class="datos_inputs" type="text" name="nombre_completo" required>
+					<div class="valid-feedback">
+				        Looks good!
+				    </div>
+				</div>
+				<div class="form-control">
+					<label for="direccion">Dirección <span class="required">*</span></label>
+					<input id="direccion" class="datos_inputs" type="text" name="direccion" required>
+				</div>
+				<div class="form-control">
+					<label for="pais">Pais<span class="required">*</span></label>
+					<select id="pais" class="datos_inputs" type="text" name="pais" required>
+						<option value="colombia">Colombia</option>
+					</select>
+				</div>
+				<div class="form-control">
+					<label for="ciudad">Ciudad<span class="required">*</span></label>
+					<input id="ciudad" class="datos_inputs" type="text" name="ciudad" required>
+				</div>
+				<div class="form-control">
+					<label for="barrio">Barrio<span class="required">*</span></label>
+					<input id="barrio" class="datos_inputs" type="text" name="barrio" required>
+				</div>
+				<div class="form-control">
+					<label for="telefono">Telefono<span class="required">*</span></label>
+					<input id="telefono" class="datos_inputs" type="text" name="telefono" required>
+				</div>
+				<div class="payment_datos_botones">
+				<div class="botones_innova">
+					<a id="btn_ver_detalles" href="#">
+						<i class="fa fa-arrow-left"> </i>
+						Ver detalles
+					</a> 
+				</div>
+				<button type="submit" class="btn_datos_envio">
+					Siguiente
+					<i class="fa fa-arrow-right"></i>
+					<i class="fa fa-credit-card-alt"></i>
+				</button>
+				</div>
+			</form>
+		</section>
+	</section>
+	<!-- FIN SECCION DE PAYMENT -->
+	
+	<footer>
+		Footer
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script src="js/app.js"></script>
+
+</body>
+</html>
