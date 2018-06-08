@@ -71,6 +71,37 @@
 		width: 100%;
 		padding: 20px;
 	}
+	/*--ESTILOS DE PAGINA DE VERIFICACION--*/
+	.payment_titulos {
+		font-size: 18px;
+	}
+	.payment_proceso, .detalles {
+		padding: 20px 10px;
+	}
+	.pedido_img {
+		width: 50px;
+		height: 50px;
+	}
+	.pedido_info_nombre {
+		font-size: 15px;
+	}
+	.pedido_info_cantidad, .pedido_info_precio {
+		font-size: 14px;
+	}
+	.pedidos_total {
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	.pedidos_total .total {
+		font-size: 16px;
+	}
+	.pedidos_botones {
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	.pedidos_botones .pedidos_botones_btn {
+		margin-bottom: 10px;
+	}
 }
 
 @media (min-width: 300px) and (max-width: 900px){

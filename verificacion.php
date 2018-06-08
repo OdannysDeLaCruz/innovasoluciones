@@ -94,56 +94,38 @@
 	<!-- FIN SECCION MENU PROCESO DE PAGO -->
 	<!-- SECCION DE PAYMENT -->
 	<section class="contenedor_payment">
-		<section id="detalles" class="payment_proceso payment_detalles payment_activo">
-			<section class="carrito table table-responsive">
-				<h1 class="carrito_titulo_seccion">Productos seleccionados</h1>
-				<table class="table table-hover tabla_payment">
-				  	<thead>
-					    <tr class="carrito_titulo">
-					      <th>Imagen</th>
-					      <th>Productos</th>
-					      <th>Cantidad</th>
-					      <th>Precio</th>
-					    </tr>
-				  	</thead>
-				  	<tbody>
-					    <tr class="carrito_fila">
-					      	<td scope="row">
-					      		<img class="carrito_fila_img" src="img/zapatos.jpg" alt="">
-					      	</td>
-					      	<td class="carrito_fila_titulo"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></td>
-					      	<td class="carrito_fila_cantidad">
-					      		<input type="number" min="1" max="10" value="1">
-					      	</td>
-					      	<td class="carrito_fila_precio"><i>$ 100.000 COP</i></td>
-					    </tr>
-					    <tr class="carrito_fila">
-					      	<td scope="row">
-					      		<img class="carrito_fila_img" src="img/celular.jpg" alt="">
-					      	</td>
-					      	<td class="carrito_fila_titulo"><p>Lorem ipsum dolor sit amet.</p></td>
-					      	<td class="carrito_fila_cantidad">
-					      		<input type="number" min="1" max="10" value="1">
-					      	</td>
-					      	<td class="carrito_fila_precio"><i>$ 150.000 COP</i></td>
-					    </tr>
-				  	</tbody>
-				</table>			
+		<section id="detalles" class="payment_proceso detalles payment_activo">
+			<h1 class="payment_titulos">Detalles del pedido</h1>
+			<section class="pedido">
+				<img class="pedido_img" src="img/reloj.jpg">
+				<div class="pedido_info">
+					<h1 class="pedido_info_nombre">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h1>
+					<label class="pedido_info_cantidad">Cantidad: <b>1</b> </label>
+					<label class="pedido_info_precio">Precio: <b>$ 250.000 COP </b> </label>
+				</div>
 			</section>
-			<div class="payment_detalles_total">
+			<section class="pedido">
+				<img class="pedido_img" src="img/celular.jpg">
+				<div class="pedido_info">
+					<h1 class="pedido_info_nombre">Lorem ipsum dolor sit amet, consectetur.</h1>
+					<label class="pedido_info_cantidad">Cantidad: <b>1</b> </label>
+					<label class="pedido_info_precio">Precio: <b>$ 250.000 COP </b> </label>
+				</div>
+			</section>
+			<div class="pedidos_total">
 				Total hasta ahora : <span class="total"> $ 250.000 COP </span>
 			</div>
-			<div class="payment_detalles_botones">
-				<div class="botones_innova btn_payment_procesos">
+			<div class="pedidos_botones">
+				<div class="botones_innova pedidos_botones_btn">
 					<a href="/productos.php"><i class="fa fa-arrow-left"></i>Seguir comprando</a>
 				</div>
-				<div class="botones_innova btn_payment_procesos">
+				<div class="botones_innova pedidos_botones_btn">
 					<a id="btn_siguiente" href="#">Siguiente <i class="fa fa-arrow-right"></i></a>
 				</div>
 			</div>
 		</section>
 		<section id="datos_envio" class="payment_proceso payment_envio">
-			<h1 class="carrito_titulo_seccion">Datos del envio</h1>
+			<h1 class="payment_titulos">Datos del envio</h1>
 
 			<form action="/payment.php" method="post" class="formulario_datos_envio needs-validation">
 				<div class="form-control">

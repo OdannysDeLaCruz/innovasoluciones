@@ -863,8 +863,9 @@ footer {
 
 .menu_proceso_pago {
 	margin: auto;
-	max-width: 1200px;
+	max-width: 800px;
 	margin-top: 30px;
+	padding: 0 10px;
 }
 .menu_proceso_pago > ul {
 	display: flex;
@@ -893,7 +894,6 @@ footer {
 .menu_proceso_pago > ul > .items.active {
 	background: #0066ff;
 	color: #fff;
-	/*cursor: no-drop;*/
 }
 .contenedor_payment {
 	background: #ccc;
@@ -904,60 +904,87 @@ footer {
 	display: none;
 	background: #fff;
 	border-radius: 10px;
-	max-width: 1200px;
+	max-width: 800px;
 	padding: 50px;
 	margin: auto;
+}
+.detalles {
+	max-width: 800px;
 }
 .payment_activo {
 	display: block;
 }
-.payment_detalles {
-	background: #fff;
-	border-radius: 10px;
-	max-width: 1200px;
-	padding: 50px;
-	margin: auto;
+.pedido {
+	background: #D7D7D7;
+	display: flex;
+	padding: 15px;
+	min-height: 100px;
+	width: 100%;
+	border-radius: 5px;
+	margin-bottom: 20px;
 }
-.carrito_titulo_seccion {
+.pedido_img {
+	width: 70px;
+	height: 70px;
+	margin: 0;
+}
+.pedido_info {
+	display: flex;
+	flex-direction: column;
+	padding-left: 20px;
+}
+.pedido_info_nombre {
+	font-size: 18px;
+	font-style: italic;
+	color: #3E3E3E;
+	text-align: justify;
+}
+.pedido_info_cantidad, .pedido_info_precio {
+	font-size: 16px;
+	color: #3E3E3E;
+	margin: 0;
+}
+.payment_titulos {
 	font-size: 25px;
 	color: #333;
 	font-weight: 500;
 	font-style: italic;
 	margin-bottom: 20px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #ccc;
 }
-.tabla_payment {
-	border: 1px solid #333;
-}
-.payment_detalles_total {
+.pedidos_total {
 	text-align: right;
 	margin-top: 40px;
 	text-transform: uppercase;
 	font-size: 14px;
 	font-weight: 500;
 	color: #333;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
-.payment_detalles_total .total {
+.pedidos_total .total {
 	font-size: 20px;
 	font-style: italic;
 	margin-left: 10px;
 	border-bottom: 2px solid #333;
 	padding-bottom: 3px;
 }
-.payment_detalles_botones {
+.pedidos_botones {
 	margin-top: 30px;
 	display: flex;
 	justify-content: flex-end;
 }
-.payment_detalles_botones .btn_payment_procesos:nth-child(1) {
+.pedidos_botones .pedidos_botones_btn:nth-child(1) {
 	margin-right: 20px;
 }
-.payment_detalles_botones .btn_payment_procesos:nth-child(1) > a > i {
+.pedidos_botones .pedidos_botones_btn:nth-child(1) > a > i {
 	margin-right: 10px;
 }
-.payment_detalles_botones .btn_payment_procesos:nth-child(2) > a > i {
+.pedidos_botones .pedidos_botones_btn:nth-child(2) > a > i {
 	margin-left: 10px;
 }
-
 .formulario_datos_envio {
 	max-width: 700px;
 	margin: auto;
