@@ -8,23 +8,23 @@
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 	<link rel="stylesheet" type="text/css" href="css/media-query.css">
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-	<title> Nombre usuario </title>
+	<title> Hola, Usuario </title>
 </head>
 <body>
 
 	<?php include_once('header.php'); ?>
 	
 	<section class="contenedor_perfil">
-		<section class="perfil">
-			<nav class="perfil_menu">
+		<section class="perfil row">
+			<nav class="col-xs-12 col-sm-3 perfil_menu">
 				<ul class="perfil_menu_ul">
-					<li class="active">Perfil</li>
-					<li>Compras</li>
-					<li>Facturas</li>
+					<li><a class="active" href="/perfil.php">Perfil</a></li>
+					<li><a href="/compras.php">Compras</a></li>
+					<li><a href="/facturas.php">Facturas</a></li>
 				</ul>
 			</nav>
-			<section class="perfil_info">
-				<h1 class="perfil_info_titulo">Datos personales</h1>
+			<section class="col-xs-12 col-sm-9 pl-sm-2 perfil_info">
+				<h1 class="perfil_info_titulo mt-2 mt-sm-0">Datos personales</h1>
 				<div class="perfil_info_user">
 					<div class="perfil_info_datos_block foto_perfil">
 						<img class="perfil_info_user_img" src="img/reloj.jpg">
@@ -42,7 +42,6 @@
 
 				<h1 class="perfil_info_titulo">Datos de la cuenta</h1>
 				<div class="perfil_info_user">
-					
 					<div class="perfil_info_datos_block">
 						<label>Usuario</label>
 						<label>Odanys_321 <a href="">Cambiar</a></label>
@@ -64,7 +63,6 @@
 						<label>Cll 6b # 41  36 Divino Niño <a href="">Cambiar</a></label>
 					</div>
 				</div>
-
 			</section>
 		</section>		
 	</section>
