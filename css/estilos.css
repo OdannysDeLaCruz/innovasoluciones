@@ -243,7 +243,10 @@ body {
 }
 .nav_principal ul li {
 	padding: 0 10px;
-	
+}
+.nav_principal ul li a > .logo_user {
+	display: inline;
+	margin-left: 5px;
 }
 .nav_principal_logotipo {
 	display: none;
@@ -309,10 +312,12 @@ body {
 	border-bottom-right-radius: 5px;
 }
 .header_principal .carrito_icono {
-	font-size: 30px;
-	color: #0066ff;
+	font-size: 25px;
+	color: #fff;
 	cursor: pointer;
 	margin-right: 20px;
+	background: #008AFF;
+	padding: 10px;
 }
 /*--SECCION CARRUSEL--*/
 
@@ -1190,6 +1195,41 @@ label.compras_pedido_estado {
 	font-size: 17px;
 	font-style: italic;
 	color: #333;
+}
+label.compras_pedido_info_monto {
+	font-weight: bold;
+}
+.facturas {
+	padding: 0;
+}
+.facturas .contenedor_table {
+	background: #666;
+	padding: 10px 5px;
+	border: 1px solid #bbbbbf;
+}
+.facturas table {
+	min-width: 700px;
+}
+
+.facturas_titulos th {
+	background: lightblue;
+	font-size: 16px;
+	color: #666;
+	text-align: center;
+	font-style: italic;
+}
+.facturas_datos td {
+	font-size: 16px;
+	text-align: center;	
+	font-style: italic;
+}
+.facturas_datos_estado_sin_pagar {
+	color: orange;
+	font-weight: bold;
+}
+.facturas_datos_estado_pagadas {
+	color: springgreen;
+	font-weight: bold;
 }
 /*--FIN ESTILOS DE PAGINA PERFIL DE USUARIOS--*/
 

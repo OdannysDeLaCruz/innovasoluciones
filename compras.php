@@ -16,15 +16,15 @@
 	
 	<section class="contenedor_perfil">
 		<section class="perfil row">
-			<nav class="col-xs-12 col-sm-4 perfil_menu">
+			<nav class="col-xs-12 col-sm-3 perfil_menu">
 				<ul class="perfil_menu_ul">
 					<li><a href="/perfil.php">Perfil</a></li>
 					<li><a class="active" href="/compras.php">Compras</a></li>
 					<li><a href="/facturas.php">Facturas</a></li>
 				</ul>
 			</nav>
-			<section class="col-xs-12 col-sm-8 pl-sm-2 compras">
-				<h1 class="compras_titulo mt-2 mt-sm-0">Compras</h1>
+			<section class="col-xs-12 col-sm-9 pl-sm-2 compras">
+				<h1 class="compras_titulo mt-5 mt-sm-0">Compras</h1>
 				<div class="compras_pedido">
 					<label class="compras_pedido_fecha">Fecha del pedido: 14/06/2018</label>
 					<label class="compras_pedido_estado">Compra finalizada</label>
@@ -47,7 +47,6 @@
 						</div>
 					</label>
 				</div>
-
 			</section>
 		</section>		
 	</section>

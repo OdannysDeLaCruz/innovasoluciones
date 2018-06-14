@@ -15,22 +15,6 @@
 	<?php include_once('header.php'); ?>	
 	<?php include_once('carrito.php'); ?>
 	
-	<!-- SECCION NAV CATEGORIAS -->
-	<nav class="nav_categorias">
-		<a href="#">Innovate Zapatos</a>
-		<a href="#">Innovate Celulares</a>
-		<a href="#">Innovate Joyas</a>
-		<a href="#">Innovate computadores</a>
-		<a href="#">Innovate computadores</a>
-		<a href="#">Innovate computadores</a>
-		<a href="#">Innovate joyas</a>
-		<a href="#">Innovate otras</a>
-		<a href="#">Innovate otras</a>
-		<a href="#">Innovate mas</a>
-		<a href="#">Innovate mas</a>
-		<a href="#">Innovate joyas</a>
-	</nav>
-	<!-- FIN SECCION NAV CATEGORIAS -->
 	<!-- SECCION DE FORMULARIO DE REGISTRO -->
 	<div class="contenedor_registro">
 		<form class="form_registro" action="" method="post">
@@ -40,14 +24,17 @@
 			<h1 class="form_registro_titulo">Hola, registrate para empezar a comprar.</h1>
 			<div class="form_registro_grupo">
 				<label for="nombre_completo" class="texto">Nombre completo</label>
-				<input id="nombre_completo" type="text" class="nombre_completo" name="nombre_completo" required>
+				<input id="nombre_completo" type="text" class="nombre_completo" name="nombre_completo" required placeholder="Ej: Juan Perez">
+
+				<label for="telefono" class="texto">Teléfono</label>
+				<input id="telefono" type="tel" class="telefono" name="telefono" placeholder="Digite un numero de celular o teléfono">
 
 				<label for="email" class="texto">Email <small clsas><b>(Este será usuario de ingreso)</b></small></label>
-				<input id="email" type="email" class="email" name="email" required>
+				<input id="email" type="email" class="email" name="email" required placeholder="Ej: example@hotmail.com, example@gmail.com">
 				<small>No compartiremos este email con nadie mas</small>
 
 				<label for="password" class="texto">Contraseña</label>
-				<input id="password" type="password" class="password" name="password" required>
+				<input id="password" type="password" class="password" name="password" min="6" max="15" required>
 
 				<label class="aceptar_terminos">
 					<input type="checkbox" class="terminos_condiciones" name="terminos_condiciones">

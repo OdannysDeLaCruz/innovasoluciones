@@ -24,7 +24,7 @@
 				</ul>
 			</nav>
 			<section class="col-xs-12 col-sm-9 pl-sm-2 perfil_info">
-				<h1 class="perfil_info_titulo mt-2 mt-sm-0">Datos personales</h1>
+				<h1 class="perfil_info_titulo mt-5 mt-sm-0">Datos personales</h1>
 				<div class="perfil_info_user">
 					<div class="perfil_info_datos_block foto_perfil">
 						<img class="perfil_info_user_img" src="img/reloj.jpg">

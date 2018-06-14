@@ -99,6 +99,16 @@
 	.detalle_info_precio {
 		font-size: 30px;
 	}
+	/*--ESTILOS DE PAGINA DE COMPRAS--*/
+	.compras_pedido_info_img {
+		width: 50px;
+	}
+	.compras_pedido_info_datos label {
+		font-size: 15px;
+	}
+	label.compras_pedido_info_monto {
+		font-size: 14px;
+	}
 		
 }
 
