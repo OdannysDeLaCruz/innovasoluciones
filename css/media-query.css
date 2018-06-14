@@ -3,6 +3,10 @@
 /*-------PAGINA DE INICO---------*/
 
 @media (min-width: 300px) and (max-width: 500px){
+	/*--ESTILOS DE HEADER PRINCIPAL--*/
+		.header_principal .carrito_icono {
+			font-size: 20px;
+		}
 	/*--ESTILOS DE CARRITO DESPLEGABLE--*/
 	.carrito_botones {
 		flex-direction: column;
@@ -155,7 +159,7 @@
 	.header_principal .abrir_menu {
 		display: block;
 		position: relative;
-		font-size: 30px;
+		font-size: 25px;
 		margin-right: 20px;
 		cursor: pointer;
 		align-self: center;

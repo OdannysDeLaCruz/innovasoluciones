@@ -1040,3 +1040,96 @@ footer {
 }
 
 /*--FIN ESTILOS DE PAGINA PAYMENT--*/
+
+/*--ESTILOS DE PAGINA PERFIL DE USUARIOS--*/
+
+.contenedor_perfil {
+	background: #b3b3b3;
+	padding: 30px 0;
+}
+.perfil {
+	background: #fff;
+	padding: 10px;
+	margin: auto;
+	max-width: 1200px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+.perfil_menu {
+	min-width: 300px;
+	max-width: 300px;
+	display: inline-block;
+}
+.perfil_menu_ul {
+	border: 1px solid #bbbbbf;
+	display: flex;
+	justify-content: left;
+	flex-direction: column;
+	padding: 10px;
+	margin: 0;
+}
+.perfil_menu_ul li {
+	font-size: 16px;
+	font-style: italic;
+	color: #333;
+	padding: 3px 7px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+.perfil_menu_ul li:hover {
+	background: #EBF1ED;
+}
+.perfil_menu_ul li.active {
+	background: #C1CAC4;
+}
+.perfil_info {
+	padding: 20px;
+}
+.perfil_info_titulo {
+	font-size: 20px;
+	color: #333;
+	font-weight: bold;
+	font-style: italic;
+}
+.perfil_info_user {
+	max-width: 700px;
+	padding: 20px;
+	margin-bottom: 20px;
+	border: 1px solid #bbbbbf;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+}
+.foto_perfil {
+	background: #ccc;
+	width: 200px;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.foto_perfil_nombre {
+	text-align: center;
+	padding-top: 10px;
+}
+.perfil_info_datos_block {
+	margin: 10px 0;
+}
+.perfil_info_datos_block > img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+.perfil_info_datos_block label {
+	width: 100%;
+	margin: 0;
+	font-style: italic;
+	font-size: 17px;
+}
+.perfil_info_datos_block label > a {
+	margin-left: 10px;
+}
+
+/*--FIN ESTILOS DE PAGINA PERFIL DE USUARIOS--*/
