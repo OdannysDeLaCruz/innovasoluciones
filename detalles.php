@@ -20,7 +20,7 @@
 		<img src="img/detalle_fondo.jpg">
 	</div>
 	<section class="detalle row">
-		<h1 class="col-12">Detalles del producto</h1>
+		<h1 class="col-12 detalle_titulo">Detalles del producto</h1>
 		<div class="detalle_descripcion_img col-md-6">
 			<div id="detalle_visualizador">
 				<img src="img/celular.jpg">			

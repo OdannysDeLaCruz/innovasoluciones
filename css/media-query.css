@@ -64,32 +64,13 @@
 
 	/*--ESTILOS DE PAGINA DE PRODUCTOS--*/
 	.nav_categorias {
-		background: linear-gradient(to right, #0066ffff, #0ab1ffff);
-		height: 80px;
-		left: 0;
-		width: 100%;
-		position: relative;
 		overflow: hidden;
 		overflow-x: scroll;
-		display: flex;
 		flex-wrap: nowrap;
 		justify-content: space-between;
-		align-items: center;
 	}
 	.nav_categorias a {
-		background: #fff;
-		font-size: 17px;
-		font-weight: 400;
-		color: #0ab1ff;
-		text-decoration: none;
-		max-width: 300px;
-		padding: 0 10px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		margin: 0 20px;
-		border-radius: 10px;
+		font-size: 15px;
 	}
 
 	/*--ESTILOS DE PAGNA DE DETALLES--*/
@@ -171,10 +152,22 @@
 		display: none;
 	}
 	.detalle {
-		top: 50px;
+		top: 20px;
+	}
+	.detalle_titulo {
+		font-size: 18px;
 	}
 	.detalle_descripcion_img #detalle_visualizador {
 		width: 100%;
+	}
+	.detalle_info_titulo {
+		font-size: 20px;
+	}
+	.detalle_info_descripcion {
+		font-size: 16px;
+	}
+	.detalle_info_precio {
+		font-size: 20px;
 	}
 	/*--ESTILOS DE PAGINA DE REGISTRO--*/
 	.form_registro {

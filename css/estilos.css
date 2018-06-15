@@ -317,7 +317,8 @@ body {
 	cursor: pointer;
 	margin-right: 20px;
 	background: #008AFF;
-	padding: 10px;
+	padding: 7px;
+	border-radius: 3px;
 }
 /*--SECCION CARRUSEL--*/
 
@@ -595,10 +596,11 @@ footer {
 
 .nav_categorias {
 	background: linear-gradient(to right, #0066ffff, #0ab1ffff);
-	height: 90px;
 	left: 0;
 	width: 100%;
+	height: auto;
 	position: relative;
+
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -627,7 +629,7 @@ footer {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	margin: 0 20px;
+	margin: 10px 20px;
 	border-radius: 10px;
 }
 .nav_categorias a:hover {
@@ -670,6 +672,8 @@ footer {
 	background: #fff;
 	max-width: 1200px;
 	margin: auto;
+	margin-bottom: 40px;
+	padding-bottom: 10px;
 	position: relative;
 	top: -250px;
 	display: flex;
@@ -677,7 +681,7 @@ footer {
 	justify-content: space-between;
 	box-shadow: 0 0 10px 1px rgba(0,0,0,0.2);
 }
-.detalle > h1 {
+.detalle_titulo {
 	text-align: center;
 	padding: 10px;
 	margin-bottom: 50px;
@@ -732,13 +736,9 @@ footer {
 	height: 60px;
 	margin: 0 10px;
 	cursor: pointer;
-
 	padding: 2px;
 }
-.detalle_descripcion_img_lista_img img a:focus {
-	border: 2px solid #333;
-	
-}
+
 .detalle_info {
 	width: 500px;
 	padding: 20px; 
