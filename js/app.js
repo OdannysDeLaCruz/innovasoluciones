@@ -18,7 +18,6 @@ $(document).ready(function(){
 
     // EFECTOS DE SECCIONES DE PAYMENT
 
-
     $('#indicador_detalle').on('click', function(){
         $('#indicador_detalle').addClass('active');
         $('#indicador_envio').removeClass('active');
@@ -60,5 +59,24 @@ $(document).ready(function(){
         $( "#detalles" ).addClass('payment_activo');
         $( "#datos_envio" ).removeClass('payment_activo');
         $( "#datos_pagar" ).removeClass('payment_activo');
+    });
+
+    // EFECTOS DE PAGINA DESTALLES.PHP, DETALLE_VISUALIZADOR
+    $('.lista_img').on('click', function () {
+
+        // Obtengo la url de la imagen clickeada
+        const url_img = $(this).attr('src');
+
+        // Elimino los bordes de las imagenes clickeadas anteriormente
+        $('.lista_img').css('border', 'none');
+
+        // Le asigno bordes a la imagen clickeada actualmente
+        $(this).css('border', '2px solid #333');
+
+        // Remuevo la imagen que esta actualmente
+        $("#detalle_visualizador img").remove();
+
+        // Asigno la nueva imagen clickeada
+        $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
     });
 })

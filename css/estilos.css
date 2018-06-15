@@ -695,7 +695,7 @@ footer {
 	flex-direction: column;
 	align-items: center;
 }
-.detalle_descripcion_img #detalle_visializador {
+.detalle_descripcion_img #detalle_visualizador {
 	border: 5px solid #8F8DEC;
 	padding: 10px;
 	position: relative;
@@ -707,7 +707,8 @@ footer {
 .detalle_descripcion_img_lista_img {
 	background: #fff;
 	padding: 10px;
-	width: 90%;
+	width: auto;
+	max-width: 90%;
 	margin: 30px auto 0;
 	position: relative;
 	bottom: 0;
@@ -731,6 +732,12 @@ footer {
 	height: 60px;
 	margin: 0 10px;
 	cursor: pointer;
+
+	padding: 2px;
+}
+.detalle_descripcion_img_lista_img img a:focus {
+	border: 2px solid #333;
+	
 }
 .detalle_info {
 	width: 500px;

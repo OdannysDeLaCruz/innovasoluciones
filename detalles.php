@@ -22,16 +22,16 @@
 	<section class="detalle row">
 		<h1 class="col-12">Detalles del producto</h1>
 		<div class="detalle_descripcion_img col-md-6">
-			<div id="detalle_visializador">
-				<img src="img/celular.jpg">				
+			<div id="detalle_visualizador">
+				<img src="img/celular.jpg">			
 			</div>
 			<div class="detalle_descripcion_img_lista_img">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
-				<img src="img/computadoras.png" alt="imganes de descripcion">
+				
+				<img class="lista_img" src="img/computadoras.png" alt="imganes de descripcion">	
+				<img class="lista_img" src="img/celular.jpg" alt="imganes de descripcion">
+				<img class="lista_img" src="img/reloj.jpg" alt="imganes de descripcion">
+				<img class="lista_img" src="img/zapatos.jpg" alt="imganes de descripcion">
+				<img class="lista_img" src="img/camara.jpg" alt="imganes de descripcion">
 			</div>
 		</div>
 		<section class="detalle_info col-md-6">
