@@ -147,6 +147,17 @@
 	.seccion_publicidad_img img {
 		width: 300px;
 	}
+	/*--ESTILOS DE PAGINA DE PRODUCTOS--*/
+
+	.seccion_productos {
+		padding: 20px 0;
+	}
+	.seccion_productos_logo {
+		margin-bottom: 0px;
+	}
+	.contenedor_logo {
+		width: 150px;
+	}
 	/*--ESTILOS DE PAGNA DE DETALLES--*/
 	.detalle_fondo_img {
 		display: none;

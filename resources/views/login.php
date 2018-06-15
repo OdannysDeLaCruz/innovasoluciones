@@ -17,7 +17,7 @@
 	
 	<!-- SECCION DE FORMULARIO DE LOGIN -->
 	<div class="contenedor_registro">
-		<form class="form_registro" action="" method="post">
+		<form class="form_registro" action="/perfil.php" method="post">
 			<figure>
 				<img class="form_registro_logo" src="img/logos/LogoInnova.svg">
 			</figure>

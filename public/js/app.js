@@ -62,6 +62,12 @@ $(document).ready(function(){
     });
 
     // EFECTOS DE PAGINA DESTALLES.PHP, DETALLE_VISUALIZADOR
+
+    // Poner la primera imagen de la lista en el visualizador 
+    $('.lista_img:first-child').css('border', '2px solid #333');
+    const url_img = $('.lista_img:first-child').attr('src');
+    $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
+
     $('.lista_img').on('click', function () {
 
         // Obtengo la url de la imagen clickeada
