@@ -29,12 +29,12 @@
 				<label for="telefono" class="texto">Teléfono</label>
 				<input id="telefono" type="tel" class="telefono" name="telefono" placeholder="Digite un numero de celular o teléfono">
 
-				<label for="email" class="texto">Email <small clsas><b>(Este será usuario de ingreso)</b></small></label>
+				<label for="email" class="texto">Email <small clsas><b>(Este será su usuario de ingreso)</b></small></label>
 				<input id="email" type="email" class="email" name="email" required placeholder="Ej: example@hotmail.com, example@gmail.com">
 				<small>No compartiremos este email con nadie mas</small>
 
 				<label for="password" class="texto">Contraseña</label>
-				<input id="password" type="password" class="password" name="password" min="6" max="15" required>
+				<input id="password" type="password" class="password" name="password" min="6" max="15" required placeholder="Minimo 6 caracteres">
 
 				<label class="aceptar_terminos">
 					<input type="checkbox" class="terminos_condiciones" name="terminos_condiciones">
@@ -48,7 +48,6 @@
 			</div>
 		</form>
 	</div>
-
 	<!-- FIN SECCION DE FORMULARIO DE REGISTRO -->
 
 	

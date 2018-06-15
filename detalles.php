@@ -14,21 +14,8 @@
 	
 	<?php include_once('header.php'); ?>	
 	<?php include_once('carrito.php'); ?>
-
-	<nav class="nav_categorias">
-		<a href="#">Innovate Zapatos</a>
-		<a href="#">Innovate Celulares</a>
-		<a href="#">Innovate Joyas</a>
-		<a href="#">Innovate computadores</a>
-		<a href="#">Innovate computadores</a>
-		<a href="#">Innovate computadores</a>
-		<a href="#">Innovate joyas</a>
-		<a href="#">Innovate otras</a>
-		<a href="#">Innovate otras</a>
-		<a href="#">Innovate mas</a>
-		<a href="#">Innovate mas</a>
-		<a href="#">Innovate joyas</a>
-	</nav>
+	<?php include_once('menu_categorias.php'); ?>
+	
 	<div class="detalle_fondo_img">
 		<img src="img/detalle_fondo.jpg">
 	</div>

@@ -42,7 +42,6 @@
 			</div>
 		</form>
 	</div>
-
 	<!-- FIN SECCION DE FORMULARIO DE LOGIN -->
 
 	
