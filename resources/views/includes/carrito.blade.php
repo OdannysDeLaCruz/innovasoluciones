@@ -40,7 +40,7 @@
 	</section>
 	<label class="carrito_botones">
 		<div class="btn_carrito_pagar botones_innova">
-			<a href="/verificacion.php"><span class="fa fa-credit-card-alt"></span> Pagar</a>
+			<a href="{{ route('verificacion') }}"><span class="fa fa-credit-card-alt"></span> Pagar</a>
 		</div>
 		<div class="btn_carrito_vaciar botones_innova">
 			<a href=""><span class="fa fa-trash-o"></span> Vaciar carrito</a>

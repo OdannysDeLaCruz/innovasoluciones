@@ -11,6 +11,30 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'PrincipalController@index');
+
+
+// RUTAS PARA PRODUCTOS
+Route::get('/productos/{id?}', 'ProductosController@show')->name('productos');
+
+
+// RUTAS PARA USUARIOS
+Route::get('/perfil/', function () {
+    return view('users/perfil');
+})->name('perfil');
+
+Route::get('/perfil/compras', function () {
+    return view('users/compras');
+})->name('compras');
+
+Route::get('/perfil/facturas', function () {
+    return view('users/facturas');
+})->name('facturas');
+
+
+// RUTAS PARA PAGOS
+Route::get('/verificacion', function () {
+    return view('verificacion');
+})->name('verificacion');
+
+Route::post('/payment', 'PaymentController@payment')->name('payment');

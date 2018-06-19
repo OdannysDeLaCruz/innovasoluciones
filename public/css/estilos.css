@@ -506,6 +506,7 @@ body {
 }
 .btn_seccion_ver_mas {
 	margin: 50px auto;
+	width: 200px;
 }
 .btn_seccion_ver_mas a {
 	border: 1px solid #333;
@@ -566,6 +567,7 @@ body {
 .btn_publicidad {
 	position: relative;
 	margin: 50px auto;
+	width: 200px;
 }
 .btn_publicidad a {
 	position: absolute;
@@ -757,7 +759,7 @@ footer {
 	color: #5D5C5C;
 }
 .detalle_info_precio {
-	font-size: 35px;
+	font-size: 30px;
 	margin-bottom: 20px;
 	display: block;
 	font-weight: 600;

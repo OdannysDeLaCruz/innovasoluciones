@@ -13,15 +13,19 @@
 </head>
 <body>
 	
-	<?php include_once('header.php'); ?>
-	<?php include_once('carrito.php'); ?>
+	<!-- SECCION HEADER -->
+	@include('includes/header')
+	<!-- FIN HEADER -->
+	
+	<!-- SECCION CARRITO -->
+	@include('includes/carrito')
+	<!-- FIN CARRITO -->
 	
 	<!-- SECCION MENU PROCESO DE PAGO -->
 	<nav class="menu_proceso_pago">
 		<ul>
 			<li id="indicador_detalle" class="items active">Detalles</li>
 			<li id="indicador_envio" class="items datos_envio">Enviar a</li>
-			<!-- <li id="indicador_pagar" class="items pagar">Pagar</li> -->
 		</ul>
 	</nav>
 	<!-- FIN SECCION MENU PROCESO DE PAGO -->
@@ -60,7 +64,8 @@
 		<section id="datos_envio" class="payment_proceso payment_envio">
 			<h1 class="payment_titulos">Datos del envio</h1>
 
-			<form action="/payment.php" method="post" class="formulario_datos_envio needs-validation">
+			<form action="{{ route('payment') }}" method="post" class="formulario_datos_envio needs-validation">
+				{{ csrf_field() }}
 				<div class="form-control">
 					<label for="nombre">Nombre completo <span class="required">*</span></label>
 					<input id="nombre" class="datos_inputs" type="text" name="nombre_completo" required>
@@ -75,7 +80,7 @@
 				<div class="form-control">
 					<label for="pais">Pais<span class="required">*</span></label>
 					<select id="pais" class="datos_inputs" type="text" name="pais" required>
-						<option value="colombia">Colombia</option>
+						<option value="Colombia">Colombia</option>
 					</select>
 				</div>
 				<div class="form-control">
@@ -91,17 +96,17 @@
 					<input id="telefono" class="datos_inputs" type="text" name="telefono" required>
 				</div>
 				<div class="payment_datos_botones">
-				<div class="botones_innova">
-					<a id="btn_ver_detalles" href="#">
-						<i class="fa fa-arrow-left"> </i>
-						Ver detalles
-					</a> 
-				</div>
-				<button type="submit" class="btn_datos_envio">
-					Siguiente
-					<i class="fa fa-arrow-right"></i>
-					<i class="fa fa-credit-card-alt"></i>
-				</button>
+					<div class="botones_innova">
+						<a id="btn_ver_detalles" href="#">
+							<i class="fa fa-arrow-left"> </i>
+							Ver detalles
+						</a> 
+					</div>
+					<button type="submit" class="btn_datos_envio">
+						Siguiente
+						<i class="fa fa-arrow-right"></i>
+						<i class="fa fa-credit-card-alt"></i>
+					</button>
 				</div>
 			</form>
 		</section>
