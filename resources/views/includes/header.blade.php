@@ -13,7 +13,7 @@
 		<ul>
 			<a href="/"><img class="nav_principal_logotipo" src="{{ asset('img/logos/LogoInnova.svg') }}"></a>
 			<li><a href="/">Home</a></li>
-			<li><a href="{{ route('productos') }}">Productos</a></li>
+			<li><a href="/productos">Productos</a></li>
 			<li><a href="/register">Registrarse</a></li>
 			<li><a href="/login">Ingresar<i class="fa fa-user logo_user"></i></a></li>
 		</ul>

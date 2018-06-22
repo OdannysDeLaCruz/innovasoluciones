@@ -1,9 +1,7 @@
-<!-- SECCION NAV CATEGORIAS -->
+<!--SECCION NAV CATEGORIAS -->
 <nav class="nav_categorias">
-	<a href="#">Innovate Zapatos</a>
-	<a href="#">Innovate Celulares</a>
-	<a href="#">Innovate Joyas</a>
-	<a href="#">Innovate computadores</a>
-	<a href="#">Innovate joyas</a>
+	@foreach($secciones as $seccion)
+		<a href="#"> {{ $seccion['nombre'] }} </a>
+	@endforeach
 </nav>
-<!-- FIN SECCION NAV CATEGORIAS -->
+<!-- FIN SECCION NAV CATEGORIAS

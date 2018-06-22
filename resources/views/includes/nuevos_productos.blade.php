@@ -12,81 +12,24 @@
 		</h1>
 	</label>
 	<div class="seccion_nuevos_carrusel">
-		<section class="producto">
-			<figure>
-				<img src="img/celular.jpg" class="producto_img">
-			</figure>
-			<h1 class="producto_titulo">Lorem ipsum dolor sit amet</h1>
-			<label class="producto_precio">$999.999.00</label>
-			<label class="producto_botones">
-				<div class="botones_innova">
-					<a href="/detalles.php">Detalles</a>
-				</div>
-				<div class="botones_innova">
-					<a href="">Comprar</a>
-				</div>
-			</label>
-		</section>
-		<section class="producto">
-			<figure>
-				<img src="img/computadoras.png" class="producto_img">
-			</figure>
-			<h1 class="producto_titulo">Lorem ipsum dolor sit amet</h1>
-			<label class="producto_precio">$999.999.00</label>
-			<label class="producto_botones">
-				<div class="botones_innova">
-					<a href="/detalles.php">Detalles</a>
-				</div>
-				<div class="botones_innova">
-					<a href="">Comprar</a>
-				</div>
-			</label>
-		</section>
-		<section class="producto">
-			<figure>
-				<img src="img/reloj.jpg" class="producto_img">
-			</figure>
-			<h1 class="producto_titulo">Lorem ipsum dolor sit amet</h1>
-			<label class="producto_precio">$999.999.00</label>
-			<label class="producto_botones">
-				<div class="botones_innova">
-					<a href="/detalles.php">Detalles</a>
-				</div>
-				<div class="botones_innova">
-					<a href="">Comprar</a>
-				</div>
-			</label>
-		</section>
-		<section class="producto">
-			<figure>
-				<img src="img/zapatos.jpg" class="producto_img">
-			</figure>
-			<h1 class="producto_titulo">Lorem ipsum dolor sit amet</h1>
-			<label class="producto_precio">$999.999.00</label>
-			<label class="producto_botones">
-				<div class="botones_innova">
-					<a href="/detalles.php">Detalles</a>
-				</div>
-				<div class="botones_innova">
-					<a href="">Comprar</a>
-				</div>
-			</label>
-		</section>
-		<section class="producto">
-			<figure>
-				<img src="img/camara.jpg" class="producto_img">
-			</figure>
-			<h1 class="producto_titulo">Lorem ipsum dolor sit amet</h1>
-			<label class="producto_precio">$999.999.00</label>
-			<label class="producto_botones">
-				<div class="botones_innova">
-					<a href="/detalles.php">Detalles</a>
-				</div>
-				<div class="botones_innova">
-					<a href="">Comprar</a>
-				</div>
-			</label>
-		</section>
+		
+		@foreach($productos_nuevos as $nuevos)
+			<section class="producto">
+				<figure>
+					<img src="{{ $nuevos['imagen'] }}" class="producto_img" alt="{{ $nuevos['descripcion'] }}">
+				</figure>
+				<h1 class="producto_titulo">{{ $nuevos['descripcion'] }}</h1>
+				<label class="producto_precio">$ {{ $nuevos['precio'] }} COP</label>
+				<label class="producto_botones">
+					<div class="botones_innova">
+						<a href="productos/{{ $nuevos['id'] }}-{{ $nuevos['descripcion'] }}">Detalles</a>
+					</div>
+					<div class="botones_innova">
+						<a href="">Comprar</a>
+					</div>
+				</label>
+			</section>
+		@endforeach
 
 	</div>
 </section>

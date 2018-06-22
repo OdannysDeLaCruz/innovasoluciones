@@ -29,31 +29,40 @@
 	</div>
 	<section class="detalle row">
 		<h1 class="col-12 detalle_titulo">Detalles del producto</h1>
-		<div class="detalle_descripcion_img col-md-6">
-			<div id="detalle_visualizador"></div>
-			<div class="detalle_descripcion_img_lista_img">				
-				<img class="lista_img" src="{{ asset('img/zapatos.jpg') }}" alt="imganes de descripcion">
-				<img class="lista_img" src="{{ asset('img/camara.jpg') }}" alt="imganes de descripcion">
-				<img class="lista_img" src="{{ asset('img/celular.jpg') }}" alt="imganes de descripcion">
-				<img class="lista_img" src="{{ asset('img/reloj.jpg') }}" alt="imganes de descripcion">
+		
+		@foreach($producto as $detalle)
+			
+			<div class="detalle_descripcion_img col-md-6">
+				<div id="detalle_visualizador"></div>
+				<div class="detalle_descripcion_img_lista_img">	
+					<!-- Va de primero la imagen que viene desde la tabla producto -->
+					<img class="lista_img" src="{{ asset($detalle['imagen']) }}" alt="imganes de descripcion">
+					<!-- Luego las imagenes que vienen de la tabla imagenes_productos -->
+			        @foreach ($imagenes as $imagen)
+						<img class="lista_img" src="{{ asset($imagen['nombre_imagen']) }}" alt="imganes de descripcion">
+			        @endforeach
+				</div>
 			</div>
-		</div>
 		<section class="detalle_info col-md-6">
-			<h1 class="detalle_info_titulo">{{ 'Producto #' . $id }}</h1>
-			<p class="detalle_info_descripcion">{{ 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, eaque!' }} </p>
-			<span class="detalle_info_precio"> {{ '$ 1.200.000 COP' }}</span>
+			<h1 class="detalle_info_titulo">{{ $detalle['descripcion'] }}</h1>
+			<span class="detalle_info_precio">$ {{ $detalle['precio'] }} COP </span>
+			<span class="detalle_info_precio">Categoria: {{ $detalle['id_categoria'] }}</span>
 			
 			<!-- OPCIONAL SI ES ALGUN ARTICULO QUE REQUIERA DE TALLAS, COMO ZAPATOS, CAMISAS ETC -->
-			<select id="tallas" name="tallas" class="detalle_info_tallas">
-				<option>Escoje una talla</option>
-				<option value="28">28</option>
-				<option value="30">30</option>
-				<option value="32">32</option>
-			</select>
+			@if( $detalle['id_categoria'] == 6 )
+				<select id="tallas" name="tallas" class="detalle_info_tallas">
+					<option>Escoje una talla</option>
+					<option value="28">28</option>
+					<option value="30">30</option>
+					<option value="32">32</option>
+				</select>
+			@endif
+			
 
 			<div class="detalle_info_btn_comprar botones_innova">
 				<a href="">Comprar</a>
 			</div>
+		@endforeach
 		</section>
 	</section>
 

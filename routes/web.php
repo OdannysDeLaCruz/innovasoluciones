@@ -12,10 +12,9 @@
 */
 
 Route::get('/', 'PrincipalController@index');
-
-
 // RUTAS PARA PRODUCTOS
-Route::get('/productos/{id?}', 'ProductosController@show')->name('productos');
+Route::get('/productos', 'PrincipalController@showProductos');
+Route::get('/productos/{id}-{nombre}', 'PrincipalController@showDetalles');
 
 
 // RUTAS PARA USUARIOS

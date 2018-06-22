@@ -36,7 +36,7 @@
 	<!-- FIN ALGUNOS PRODUCTOS -->
 
 	<!-- SECCION PUBLICIDAD -->
-	@include('includes/publicidad')	
+	@include('includes/publicidad')
 	<!-- FIN PUBLICIDAD -->
 
 	<!-- SECCION FOOTER -->
