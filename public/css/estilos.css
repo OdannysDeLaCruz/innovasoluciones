@@ -542,31 +542,29 @@ body {
 	align-items: center;
 }
 .seccion_publicidad_mensaje {
-	height: 300px;
+	height: auto;
+	width: 800px;
 	padding-top: 20px;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
 }
 .seccion_publicidad_titulo {
+	width: 100%;
 	font-size: 30px;
 	font-weight: 600;
 	color: #fff;
 	text-align: center;
 }
-.seccion_publicidad_texto {
-	display: block;
-	text-align: center;
-	font-size: 25px;
-	font-weight: 400;
-	color: #fff;
-}
 .seccion_publicidad_precio {
+	width: 100%;
 	font-size: 30px;
 	font-weight: 500;
 	color: #fff;
 }
 .btn_publicidad {
 	position: relative;
-	margin: 50px auto;
+	margin: 50px auto 20px;
 	width: 200px;
 }
 .btn_publicidad a {

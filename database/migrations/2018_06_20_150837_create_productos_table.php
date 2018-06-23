@@ -19,6 +19,7 @@ class CreateProductosTable extends Migration
             $table->string('descripcion')->unique();
             $table->string('imagen');
             $table->integer('precio');
+            $table->integer('descuento');
             $table->integer('cant_disponible'); //0 = no disponible
 
             $table->timestamps();

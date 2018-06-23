@@ -12,20 +12,20 @@ class CrearSeccionesSeeder extends Seeder
     public function run()
     {
         App\Seccion::create([
-            'nombre' => 'Innonva Tecnologias',
+            'nombre' => 'innova tecnologias',
             'descripcion' => 'Sección de articulos tecnologicos',
             'imagen' => 'celular.svg',
         ]);
 
         App\Seccion::create([
-            'nombre' => 'Innonva Zapatos',
-            'descripcion' => 'Cliente',
+            'nombre' => 'innova zapatos',
+            'descripcion' => 'Sección de venta de calzado',
             'imagen' => 'zapatos.svg',
         ]);
 
         App\Seccion::create([
-            'nombre' => 'Innonva Joyas',
-            'descripcion' => 'Cliente',
+            'nombre' => 'innova joyas',
+            'descripcion' => 'Sección de venta de joyas',
             'imagen' => 'joyas.svg',
         ]);
     }

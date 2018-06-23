@@ -9,24 +9,25 @@ class PrincipalController extends Controller
     public function index() {
 
     	// Productos nuevos, los que sean del mes actual
-        $productos_nuevos = App\Producto::select('id','id_categoria','descripcion','precio','imagen')
+        $productos_nuevos = App\Producto::select('id','id_categoria','descripcion','precio','descuento','imagen')
                                         ->latest()
                                         ->limit(10)
                                         ->orderBy('id','desc')
                                         ->get();
 
     	// Algunos productos, los que sean del mes actual
-        $algunos_productos = App\Producto::select('id','id_categoria','descripcion','precio','imagen')
+        $algunos_productos = App\Producto::select('id','id_categoria','descripcion','precio','descuento','imagen')
                                          ->limit(20)
                                          ->get();
 
     	// Publicidad, algun producto en promosion
-    	// ****pendiente*****
+    	$publicidad = App\Producto::select('id','id_categoria','descripcion','precio','descuento','imagen')->first()->where('id', 1)->get();
     	
     	return view('index',
     		compact(
                 'productos_nuevos',
-                'algunos_productos'
+                'algunos_productos',
+                'publicidad'
     		)
     	);
     }

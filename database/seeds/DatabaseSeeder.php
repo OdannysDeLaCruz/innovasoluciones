@@ -15,11 +15,12 @@ class DatabaseSeeder extends Seeder
         	CrearRolesSeeder::class,
         	CrearSeccionesSeeder::class,
         	CrearUsersSeeder::class,
-        	CrearPedidosSeeder::class,
-        	CrearCategoriasSeeder::class,
+            CrearCategoriasSeeder::class,
+        	CrearCodDescuentoSeeder::class,
+            CrearPedidosSeeder::class,
             CrearProductosSeeder::class,
             CrearDetallePedidosSeeder::class,
-        	CrearImagenProductoSeeder::class,
+            CrearImagenProductoSeeder::class,
         ]);
     }
 }
