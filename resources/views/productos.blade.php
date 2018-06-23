@@ -30,10 +30,11 @@
 		<div class="seccion_productos_content">
 			<span class="seccion_productos_logo">
 				<div class="contenedor_logo">
-					<img class="logo" src="img/logos/LogoInnovate.svg">					
+					<img class="logo" src="{{asset('img/logos/LogoInnovate.svg')}}">					
 				</div>
 			</span>
 
+		@if(isset($productos))
 			@foreach($productos as $producto)
 				<section class="producto">
 					<figure>
@@ -43,7 +44,7 @@
 					<label class="producto_precio">$ {{ $producto['precio'] }} COP</label>
 					<label class="producto_botones">
 						<div class="botones_innova">
-							<a href="productos/{{ $producto['id'] }}-{{ $producto['descripcion'] }}">Detalles</a>
+							<a href="/productos/{{ $producto['id'] }}-{{ $producto['descripcion'] }}">Detalles</a>
 						</div>
 						<div class="botones_innova">
 							<a href="">Comprar</a>
@@ -51,7 +52,9 @@
 					</label>
 				</section>	
 			@endforeach
-			
+		@else 
+			{{ $response }}
+		@endif
 		</div>
 	</section>
 	<!-- FIN SECCION PRODUCTOS -->

@@ -12,11 +12,7 @@
 					<img src="img/logos/svg/{{ $seccion['imagen'] }}">
 				</label>
 				<h1 class="item_titulo">{{ $seccion['nombre'] }} </h1>
-				<?php 
-					$ruta =  str_replace(' ','-', $seccion['nombre']);
-					$ruta = strtolower($ruta); 
-				?>
-				<a class="item_link" href="/productos/{{ $ruta }}"></a>
+				<a class="item_link" href="/productos/{{ $seccion['nombre'] }}"></a>
 			</div>
 
 		@endforeach

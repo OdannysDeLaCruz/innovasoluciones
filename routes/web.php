@@ -15,6 +15,7 @@ Route::get('/', 'PrincipalController@index');
 // RUTAS PARA PRODUCTOS
 Route::get('/productos', 'PrincipalController@showProductos');
 Route::get('/productos/{id}-{nombre}', 'PrincipalController@showDetalles');
+Route::get('/productos/{seccion?}', 'PrincipalController@showCategoria');
 
 
 // RUTAS PARA USUARIOS

@@ -33,9 +33,35 @@ class PrincipalController extends Controller
     }
 
     public function showProductos() {
-
         // Productos
         $productos = App\Producto::all();
+        return view('productos', compact('productos'));        
+    }
+
+    public function showCategoria($seccion) {
+        $id_seccion = App\Seccion::where('nombre', $seccion)->value('id');
+
+        if($id_seccion === null){
+            //Si sección no existe
+            return response()->view('error.404',['response' => 'Esta categoria no existe'],404);
+        }
+
+        $ids_categorias = App\Categoria::select('id')->where('id_seccion', $id_seccion)->get();
+       
+        if($ids_categorias->isEmpty() === true){
+            // Si la seccion no tiene categorias
+            return view('productos', ['response' => 'Woops!, Aún no hay productos disponibles en esta categoria']);    
+        }
+        foreach ($ids_categorias as $categoria) { 
+            // si la seccion tiene categorias
+            $id_categoria[] = $categoria['id']; 
+        }
+
+        // Selecciono los productos de dichas categorias
+        $productos = App\Producto::select('id','id_categoria','descripcion','precio','descuento','imagen')
+                                 ->whereIn('id_categoria', $id_categoria)
+                                 ->get();
+
         return view('productos', compact('productos'));        
     }
 
@@ -46,7 +72,7 @@ class PrincipalController extends Controller
         
         // Si producto no existe, mandar un error 404
         if($producto->isEmpty() === true){
-            return response()->view('error.404',[],404);
+            return response()->view('error.404',['response' => 'Producto no existe'],404);
         }
         // Si el producto existe, traer las imagenes
         $imagenes = App\imagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
