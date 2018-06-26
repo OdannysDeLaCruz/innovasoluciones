@@ -38,6 +38,7 @@ class PrincipalController extends Controller
         return view('productos', compact('productos'));        
     }
 
+    // Muestra los productos de la categoria seleccionada
     public function showCategoria($seccion) {
         $id_seccion = App\Seccion::where('nombre', $seccion)->value('id');
 

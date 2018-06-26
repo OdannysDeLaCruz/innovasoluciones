@@ -32,7 +32,7 @@
 		
 		@foreach($producto as $detalle)
 			
-			<div class="detalle_descripcion_img col-md-6">
+			<div class="detalle_descripcion_img col-md-7">
 				<div id="detalle_visualizador"></div>
 				<div class="detalle_descripcion_img_lista_img">	
 					<!-- Va de primero la imagen que viene desde la tabla producto -->
@@ -43,27 +43,27 @@
 			        @endforeach
 				</div>
 			</div>
-		<section class="detalle_info col-md-6">
-			<h1 class="detalle_info_titulo">{{ $detalle['descripcion'] }}</h1>
-			<span class="detalle_info_precio">$ {{ $detalle['precio'] }} COP </span>
-			<span class="detalle_info_precio">Categoria: {{ $detalle['id_categoria'] }}</span>
-			
-			<!-- OPCIONAL SI ES ALGUN ARTICULO QUE REQUIERA DE TALLAS, COMO ZAPATOS, CAMISAS ETC -->
-			@if( $detalle['id_categoria'] == 6 )
-				<select id="tallas" name="tallas" class="detalle_info_tallas">
-					<option>Escoje una talla</option>
-					<option value="28">28</option>
-					<option value="30">30</option>
-					<option value="32">32</option>
-				</select>
-			@endif
-			
+			<section class="detalle_info col-md-5">
+				<h1 class="detalle_info_titulo">{{ $detalle['descripcion'] }}</h1>
+				<span class="detalle_info_precio">$ {{ $detalle['precio'] }} </span>
+				<span class="detalle_info_titulo">Categoria: {{ $detalle['id_categoria'] }}</span>
+				
+				<!-- OPCIONAL SI ES ALGUN ARTICULO QUE REQUIERA DE TALLAS, COMO ZAPATOS, CAMISAS ETC -->
+				@if( $detalle['id_categoria'] == 6 )
+					<select id="tallas" name="tallas" class="detalle_info_tallas">
+						<option>Escoje una talla</option>
+						<option value="28">28</option>
+						<option value="30">30</option>
+						<option value="32">32</option>
+					</select>
+				@endif
+				
 
-			<div class="detalle_info_btn_comprar botones_innova">
-				<a href="">Comprar</a>
-			</div>
+				<div class="detalle_info_btn_comprar botones_innova">
+					<a href="">Comprar</a>
+				</div>
+			</section>
 		@endforeach
-		</section>
 	</section>
 
 	<!-- SECCION FOOTER -->

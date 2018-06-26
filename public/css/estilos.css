@@ -695,7 +695,7 @@ footer {
 	border-bottom: 1px solid #666;
 	font-size: 25px;
 	font-weight: 500;
-	color: #666;
+	color: #333;
 }
 .detalle_descripcion_img {
 	height: auto;
@@ -707,10 +707,13 @@ footer {
 	align-items: center;
 }
 .detalle_descripcion_img #detalle_visualizador {
-	border: 5px solid #8F8DEC;
 	padding: 10px;
 	position: relative;
 	width: 400px;
+}
+#detalle_visualizador {
+	border: 2px solid #ccc;
+
 }
 .detalle_descripcion_img img {
 	width: 100%;
@@ -752,11 +755,14 @@ footer {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
+
+	border-left: 1px solid #ccc ;
 }
 .detalle_info_titulo {
 	font-size: 25px;
 	font-weight: 500;
-	color: #5D5C5C;
+	text-transform: capitalize;
+	color: #333333;
 }
 .detalle_info_descripcion {
 	font-size: 19px;
@@ -764,10 +770,10 @@ footer {
 	color: #5D5C5C;
 }
 .detalle_info_precio {
-	font-size: 30px;
-	margin-bottom: 20px;
+	font-size: 35px;
+	margin: 20px 0;
 	display: block;
-	font-weight: 600;
+	font-weight: 400;
 	color: #0066ff;
 }
 .detalle_info_tallas {
