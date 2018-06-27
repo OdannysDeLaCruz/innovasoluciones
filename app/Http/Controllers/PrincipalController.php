@@ -76,7 +76,7 @@ class PrincipalController extends Controller
             return response()->view('error.404',['response' => 'Producto no existe'],404);
         }
         // Si el producto existe, traer las imagenes
-        $imagenes = App\imagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
+        $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
 
         return view('detalles', compact('producto', 'imagenes'));        
     }
