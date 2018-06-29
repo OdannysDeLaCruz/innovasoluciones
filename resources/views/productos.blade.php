@@ -27,35 +27,47 @@
 	
 	<!-- SECCION PRODUCTOS -->
 	<section class="seccion_productos">
+		<span class="seccion_productos_logo">
+			<div class="contenedor_logo">
+				<img class="logo" src="{{asset('img/logos/LogoInnovate.svg')}}">					
+			</div>
+		</span>
 		<div class="seccion_productos_content">
-			<span class="seccion_productos_logo">
-				<div class="contenedor_logo">
-					<img class="logo" src="{{asset('img/logos/LogoInnovate.svg')}}">					
-				</div>
-			</span>
 
-		@if(isset($productos))
-			@foreach($productos as $producto)
-				<section class="producto">
-					<figure>
-						<img src="{{ $producto['imagen'] }}" class="producto_img" alt="{{ $producto['descripcion'] }}">
-					</figure>
-					<h1 class="producto_titulo"> {{ $producto['descripcion'] }}</h1>
-					<label class="producto_precio">$ {{ $producto['precio'] }} COP</label>
-					<label class="producto_botones">
-						<div class="botones_innova">
-							<a href="/productos/{{ $producto['id'] }}-{{ $producto['descripcion'] }}">Detalles</a>
+			@if(isset($productos))
+				@foreach($productos as $producto)
+					<section class="producto">
+						<figure>
+							<a href="/productos/{{ $producto['id'] }}-{{ $producto['descripcion'] }}">
+								<img src="{{ $producto['imagen'] }}" class="producto_img" alt="{{ $producto['descripcion'] }}">							
+							</a>
+						</figure>
+						<div class="producto_info">
+							<a href="/productos/{{ $producto['id'] }}-{{ $producto['descripcion'] }}">
+								<h1 class="producto_titulo"> {{ $producto['descripcion'] }}</h1>
+							</a>
+							<label class="producto_precio">$ {{ $producto['precio'] }} COP</label>					
 						</div>
-						<div class="botones_innova">
-							<a href="">Comprar</a>
-						</div>
-					</label>
-				</section>	
-			@endforeach
-		@else 
-			{{ $response }}
-		@endif
+						<!-- <label class="producto_botones"> -->
+							<!-- <div class="botones_innova btn_producto">
+								<a href="/productos/{{ $producto['id'] }}-{{ $producto['descripcion'] }}">Detalles</a>
+							</div> -->
+							<!-- <div class="botones_innova btn_producto">
+								<a href="">Comprar</a>
+							</div> -->
+						<!-- </label> -->
+					</section>	
+				@endforeach
 		</div>
+			@else 
+				<div class="respuesta">
+					<img src="{{asset('img/logos/svg/box.svg')}}">
+					<p>
+						{{ $response }} <br>
+						Ver otras categorias de <a href="/productos">productos</a>
+					</p>
+				</div>
+			@endif
 	</section>
 	<!-- FIN SECCION PRODUCTOS -->
 	

@@ -51,7 +51,7 @@ class PrincipalController extends Controller
        
         if($ids_categorias->isEmpty() === true){
             // Si la seccion no tiene categorias
-            return view('productos', ['response' => 'Woops!, Aún no hay productos disponibles en esta categoria']);    
+            return view('productos', ['response' => 'Woops!, Aún no hay productos disponibles en esta categoria.']);    
         }
         foreach ($ids_categorias as $categoria) { 
             // si la seccion tiene categorias

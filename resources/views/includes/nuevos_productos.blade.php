@@ -15,19 +15,34 @@
 		
 		@foreach($productos_nuevos as $nuevos)
 			<section class="producto">
-				<figure>
+				<!-- <figure>
 					<img src="{{ $nuevos['imagen'] }}" class="producto_img" alt="{{ $nuevos['descripcion'] }}">
-				</figure>
-				<h1 class="producto_titulo">{{ $nuevos['descripcion'] }}</h1>
-				<label class="producto_precio">$ {{ $nuevos['precio'] }} COP</label>
-				<label class="producto_botones">
+				</figure> -->
+				<!-- <h1 class="producto_titulo">{{ $nuevos['descripcion'] }}</h1>
+				<label class="producto_precio">$ {{ $nuevos['precio'] }} COP</label> -->
+				
+				<!-- <label class="producto_botones">
 					<div class="botones_innova">
 						<a href="productos/{{ $nuevos['id'] }}-{{ $nuevos['descripcion'] }}">Detalles</a>
 					</div>
 					<div class="botones_innova">
 						<a href="">Comprar</a>
 					</div>
-				</label>
+				</label> -->
+				
+				<figure>
+					<a href="/productos/{{ $nuevos['id'] }}-{{ $nuevos['descripcion'] }}">
+						<img src="{{ $nuevos['imagen'] }}" class="producto_img" alt="{{ $nuevos['descripcion'] }}">							
+					</a>
+				</figure>
+
+				<div class="producto_info">
+					<a href="/productos/{{ $nuevos['id'] }}-{{ $nuevos['descripcion'] }}">
+						<h1 class="producto_titulo"> {{ $nuevos['descripcion'] }}</h1>
+					</a>
+					<label class="producto_precio">$ {{ $nuevos['precio'] }} COP</label>					
+				</div>
+				
 			</section>
 		@endforeach
 
