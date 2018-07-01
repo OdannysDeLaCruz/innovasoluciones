@@ -12,6 +12,7 @@ class Pedido extends Model
     	'fecha',
     	'direccion_envio',
     	'metodo_pago',
-    	'total_pago'
+    	'total_pago',
+    	'estado'
     ];
 }

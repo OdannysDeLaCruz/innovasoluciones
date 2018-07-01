@@ -11,38 +11,44 @@
 	<title> Register | Innova Soluciones </title>
 </head>
 <body>
-
+	
 	<?php include_once('header.php'); ?>	
 	<?php include_once('carrito.php'); ?>
 	
-	<!-- SECCION DE FORMULARIO DE LOGIN -->
+	<!-- SECCION DE FORMULARIO DE REGISTRO -->
 	<div class="contenedor_registro">
-		<form class="form_registro" action="/perfil.php" method="post">
+		<form class="form_registro" action="" method="post">
 			<figure>
 				<img class="form_registro_logo" src="img/logos/LogoInnova.svg">
 			</figure>
-			<h1 class="form_registro_titulo">Hola bienvenido, es un gusto tenerte aquí nuevamente.</h1>
+			<h1 class="form_registro_titulo">Hola, registrate para empezar a comprar.</h1>
 			<div class="form_registro_grupo">
+				<label for="nombre_completo" class="texto">Nombre completo</label>
+				<input id="nombre_completo" type="text" class="nombre_completo" name="nombre_completo" required placeholder="Ej: Juan Perez">
 
-				<label for="email" class="texto">Email</label>
-				<input id="email" type="email" class="email" name="email" placeholder="Digite su correo electrónico" required>
+				<label for="telefono" class="texto">Teléfono</label>
+				<input id="telefono" type="tel" class="telefono" name="telefono" placeholder="Digite un numero de celular o teléfono">
+
+				<label for="email" class="texto">Email <small clsas><b>(Este será su usuario de ingreso)</b></small></label>
+				<input id="email" type="email" class="email" name="email" required placeholder="Ej: example@hotmail.com, example@gmail.com">
+				<small>No compartiremos este email con nadie mas</small>
 
 				<label for="password" class="texto">Contraseña</label>
-				<input id="password" type="password" class="password" name="password" placeholder="Digite su contraseña" required>
+				<input id="password" type="password" class="password" name="password" min="6" max="15" required placeholder="Minimo 6 caracteres">
 
-				<button type="submit" class="btn_registrarse">Entrar</button>
-
-				<label class="recordar_password">
-					<a href="terminos">Olvidé mi contraseña</a>
+				<label class="aceptar_terminos">
+					<input type="checkbox" class="terminos_condiciones" name="terminos_condiciones">
+					Aceptar <a href="terminos">Terminos y Condiciones</a>
 				</label>
+				<button type="submit" class="btn_registrarse">Registrarme</button>
 				<label class="ya_tengo_cuenta">
-					<p>Aun no tengo una cuenta <a href="/register.php">Registrarme</a></p>
+					<p>Ya tengo una cuenta <a href="/login.php">Iniciar sesión</a></p>
 					
 				</label>
 			</div>
 		</form>
 	</div>
-	<!-- FIN SECCION DE FORMULARIO DE LOGIN -->
+	<!-- FIN SECCION DE FORMULARIO DE REGISTRO -->
 
 	
 	<footer>

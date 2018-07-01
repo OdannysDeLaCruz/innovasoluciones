@@ -23,6 +23,6 @@ class CrearPedidosSeeder extends Seeder
         //        echo 'Cantidad de uso exedida';
         //    }
 
-        $pedidos = factory(App\Pedido::class, 5)->create();
+        $pedidos = factory(App\Pedido::class, 10)->create();
     }
 }

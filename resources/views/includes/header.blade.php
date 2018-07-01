@@ -10,13 +10,47 @@
 	</div>
 	<nav class="nav_principal">
 		<span class="fa fa-times cerrar_menu" id="cerrar_menu"></span>
-		<ul>
+		<!-- <ul>
 			<a href="/"><img class="nav_principal_logotipo" src="{{ asset('img/logos/LogoInnova.svg') }}"></a>
 			<li><a href="/">Home</a></li>
 			<li><a href="/productos">Productos</a></li>
 			<li><a href="/register">Registrarse</a></li>
 			<li><a href="/login">Ingresar<i class="fa fa-user logo_user"></i></a></li>
-		</ul>
+		</ul> -->
+
+		<ul>
+			<a href="/"><img class="nav_principal_logotipo" src="{{ asset('img/logos/LogoInnova.svg') }}"></a>
+			<li><a href="/">Home</a></li>
+			<li><a href="/productos">Productos</a></li>
+            <!-- Authentication Links -->
+            @guest
+                <li><a href="{{ route('login') }}">Ingresar<i class="fa fa-user logo_user"></i></a></li>
+                <li><a href="{{ route('register') }}">Registrarse</a></li>
+            @else
+                <li class="nav-item dropdown">
+
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fa fa-user logo_user"></i></a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    	<a class="dropdown-item">
+                        	{{ Auth::user()->nombre_completo }} <span class="caret"></span>
+                    	</a>
+                    	<a class="dropdown-item" href="{{ route('perfil') }}">
+                        	{{ __('Mi cuenta') }}
+                    	</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                            {{ __('Salir') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            @endguest
+        </ul>
 	</nav>
 	<span id="carrito_icono" class="fa fa-cart-plus carrito_icono"></span>
 	<span class="fa fa-bars abrir_menu"></span>

@@ -18,32 +18,42 @@
 	
 	<!-- SECCION PERFIL -->
 	@extends('users/layout')
-		@section('compras') active @stop
+		@section('pedidos') active @stop
 		@section('content')
 			<section class="col-xs-12 col-sm-9 pl-sm-2 compras">
-				<h1 class="compras_titulo mt-5 mt-sm-0">Compras</h1>
-				<div class="compras_pedido">
-					<label class="compras_pedido_fecha">Fecha del pedido: 14/06/2018</label>
-					<label class="compras_pedido_estado">Compra finalizada</label>
-					<label class="compras_pedido_info">
-						<img class="compras_pedido_info_img" src="img/reloj.jpg"></img>
-						<div class="compras_pedido_info_datos">
-							<label class="compras_pedido_info_nombre">Celular Samsung Galaxy J7 Prime Lte Ds - 32 Gb Blanco Dorado</label>
-							<label class="compras_pedido_info_monto">$ 723.000 x 1 unidad</label>	
+				<h1 class="compras_titulo mt-5 mt-sm-0">
+					Pedido N° {{ $idPedido }}
+				</h1>
+		
+				@isset($compras)
+					@foreach( $compras as $compra )
+						<div class="compras_pedido">
+							<!-- <label class="compras_pedido_estado">Compra finalizada</label> -->
+
+							<label class="compras_pedido_info">
+								<a href="/productos/{{ $compra['id'] }}-{{ $compra['descripcion'] }}">
+									<img class="compras_pedido_info_img" src="{{ $compra['imagen'] }}"></img>
+								
+								</a>
+								<div class="compras_pedido_info_datos">
+									<a href="/productos/{{ $compra['id'] }}-{{ $compra['descripcion'] }}">
+										<label class="compras_pedido_info_nombre">{{ $compra['descripcion'] }}</label>
+									</a>
+									<label class="compras_pedido_info_monto">$ {{ $compra['precio'] }} x {{ $compra['cantidad'] }} unidad</label>
+
+									<label class="compras_pedido_info_monto">
+									Total: $ {{ $compra['precio'] * $compra['cantidad'] }} </label>	
+								</div>
+							</label>
 						</div>
-					</label>
-				</div>
-				<div class="compras_pedido">
-					<label class="compras_pedido_fecha">Fecha del pedido: 14/06/2018</label>
-					<label class="compras_pedido_estado">Compra finalizada</label>
-					<label class="compras_pedido_info">
-						<img class="compras_pedido_info_img" src="img/celular.jpg"></img>
-						<div class="compras_pedido_info_datos">
-							<label class="compras_pedido_info_nombre">Celular Samsung Galaxy J7 Prime Lte Ds - 32 Gb Blanco Dorad</label>
-							<label class="compras_pedido_info_monto">$ 799.000 x 1 unidad</label>	
-						</div>
-					</label>
-				</div>
+					@endforeach
+				@endisset
+				<!-- si no existe compra, es por que la idPedido no existe para este usuario, verificamos si existe la variable Error -->
+				@isset($Error)
+					<div class="compras_pedido">
+						<label class="compras_pedido_error">{{ $Error }}</label>
+					</div>
+				@endisset
 			</section> 
 		@stop
 	<!-- FIN PERFIL -->

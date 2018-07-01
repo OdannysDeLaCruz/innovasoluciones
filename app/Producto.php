@@ -12,6 +12,9 @@ class Producto extends Model
     	'descripcion',
         'imagen',
         'precio',
+        'descuento',
+        'tamaño',
+        'color',
     	'cant_disponible',
     	'disponibilidad'
     ];

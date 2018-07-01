@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/estilos.css') }}" >
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/media-query.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
-	<title> Hola, Usuario </title>
+	<title> Hola, {{ Auth::user()->nombre_completo }} </title>
 </head>
 <body>
 
@@ -25,23 +25,23 @@
 				<div class="perfil_info_user">
 					<div class="perfil_info_datos_block foto_perfil">
 						<img class="perfil_info_user_img" src="img/reloj.jpg">
-						<label class="foto_perfil_nombre">Odannys De La Cruz</label>
+						<label class="foto_perfil_nombre"> {{ Auth::user()->nombre_completo }} </label>
 					</div>
 					<div class="perfil_info_datos_block">
 						<label>Teléfono</label>
-						<label>3005445768 <a href="">Cambiar</a></label>
+						<label>{{ Auth::user()->telefono }} <a href="">Cambiar</a></label>
 					</div>
 					<div class="perfil_info_datos_block">
 						<label>E-mail</label>
-						<label>el_odanis321@hotmail.com <a href="">Cambiar</a></label>
+						<label>{{ Auth::user()->email }} <a href="">Cambiar</a></label>
 					</div>
 				</div>
 
 				<h1 class="perfil_info_titulo">Datos de la cuenta</h1>
 				<div class="perfil_info_user">
 					<div class="perfil_info_datos_block">
-						<label>Usuario</label>
-						<label>Odanys_321 <a href="">Cambiar</a></label>
+						<label>Usuario de ingreso</label>
+						<label>{{ Auth::user()->email }} <a href="">Cambiar</a></label>
 					</div>
 					<div class="perfil_info_datos_block">
 						<label>Clave</label>
@@ -52,13 +52,22 @@
 				<h1 class="perfil_info_titulo">Datos de envio</h1>
 				<div class="perfil_info_user">					
 					<div class="perfil_info_datos_block">
-						<label>Dirección 1 <small>(Esta será a dirección de envío por defecto)</small></label>
-						<label>Cll 6b # 41  36 La Nevada <a href="">Cambiar</a></label>
+						<label>País</label>
+						<label>{{ Auth::user()->pais }} <a href="">Cambiar</a></label>
 					</div>
 					<div class="perfil_info_datos_block">
-						<label>Dirección 2 </label>
-						<label>Cll 6b # 41  36 Divino Niño <a href="">Cambiar</a></label>
+						<label>Ciudad</label>
+						<label>{{ Auth::user()->ciudad }} <a href="">Cambiar</a></label>
 					</div>
+					<div class="perfil_info_datos_block">
+						<label>Barrio</label>
+						<label>{{ Auth::user()->barrio }} <a href="">Cambiar</a></label>
+					</div>
+					<div class="perfil_info_datos_block">
+						<label>Dirección 1 <small>(Esta será a dirección de llegada de sus pedidos)</small></label>
+						<label>{{ Auth::user()->direccion }} <a href="">Cambiar</a></label>
+					</div>
+					
 				</div>
 			</section>
 		@stop

@@ -39,7 +39,7 @@ class PrincipalController extends Controller
     }
 
     // Muestra los productos de la categoria seleccionada
-    public function showCategoria($seccion) {
+    public function showCategoriaProductos($seccion) {
         $id_seccion = App\Seccion::where('nombre', $seccion)->value('id');
 
         if($id_seccion === null){

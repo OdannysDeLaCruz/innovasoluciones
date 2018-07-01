@@ -17,9 +17,7 @@ class CreateDetallePedidosTable extends Migration
             $table->increments('id');
             $table->integer('id_producto')->unsigned();
             $table->integer('id_pedido')->unsigned();
-            $table->integer('precio_unidad');
             $table->integer('cantidad');
-            $table->integer('descuento');
 
             $table->timestamps();
 

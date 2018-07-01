@@ -16,11 +16,11 @@ class CreatePedidosTable extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_user')->unsigned();
-            $table->date('fecha');
             $table->string('direccion_envio');
             $table->string('metodo_pago');
             $table->integer('id_codigo_descuento')->unsigned()->nullable();
             $table->integer('total_pago');
+            $table->integer('estado');            
             
             $table->timestamps();
 
