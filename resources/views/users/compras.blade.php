@@ -22,7 +22,7 @@
 		@section('content')
 			<section class="col-xs-12 col-sm-9 pl-sm-2 compras">
 				<h1 class="compras_titulo mt-5 mt-sm-0">
-					Pedido N° {{ $idPedido }}
+					Pedido N° {{ $idPedido }}, <span class="compras_titulo_total"> Valor del pedido: $ {{ $importe_total }}</span>
 				</h1>
 		
 				@isset($compras)
@@ -39,10 +39,12 @@
 									<a href="/productos/{{ $compra['id'] }}-{{ $compra['descripcion'] }}">
 										<label class="compras_pedido_info_nombre">{{ $compra['descripcion'] }}</label>
 									</a>
-									<label class="compras_pedido_info_monto">$ {{ $compra['precio'] }} x {{ $compra['cantidad'] }} unidad</label>
+									<label class="compras_pedido_info_monto">
+										$ {{ $compra['precio'] }} x {{ $compra['cantidad'] }} unidad, 
+										<b>{{ $compra['descuento'] }} % desc</b></label>
 
 									<label class="compras_pedido_info_monto">
-									Total: $ {{ $compra['precio'] * $compra['cantidad'] }} </label>	
+									Total: $ {{ $compra['total'] }} </label>	
 								</div>
 							</label>
 						</div>

@@ -10,8 +10,13 @@ class DetallePedido extends Model
     protected $fillable = [
     	'id_producto',
     	'id_pedido',
-    	'precio_unidad',
-    	'cantidad',
-    	'descuento'
+    	'descripcion',
+    	'imagen',
+    	'precio',
+    	'descuento',
+    	'tamaño',
+		'color',
+		'cantidad',
+		'importe_total'
     ];
 }

@@ -1210,7 +1210,9 @@ footer {
 	font-size: 20px;
 	color: #333;
 	font-weight: bold;
-	font-style: italic;
+	/*font-style: italic;*/
+	font-family: 'Roboto Condensed', sans-serif;
+
 }
 .perfil_info_user {
 	width: 100%;
@@ -1253,6 +1255,10 @@ footer {
 }
 .compras {
 	padding: 0px;
+}
+
+.compras_titulo_total {
+	font-family: 'Roboto Condensed', sans-serif;
 }
 .compras_pedido {
 	width: 100%;

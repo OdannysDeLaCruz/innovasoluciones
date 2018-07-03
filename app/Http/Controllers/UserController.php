@@ -32,8 +32,18 @@ class UserController extends Controller
     public function showPedidos() {
 
         $id_user = Auth::user()->id;
-        // Obtenemos los pedidos de este usuario logueado
-        $mis_pedidos = App\Pedido::where('id_user', $id_user)->get();
+
+        $mis_pedidos = App\Pedido::select(
+                            'pedidos.id', 
+                            'pedidos.created_at',
+                            'pedidos.estado', 
+                            'pedidos.direccion_envio', 
+                            'pedidos.codigo_descuento',
+                            'pedidos.metodo_pago', 
+                            'pedidos.total_pago')
+                        ->where('pedidos.id_user', $id_user)
+                        ->get();
+                       
         return view('users.pedidos', compact('mis_pedidos'));
     }
 
@@ -103,10 +113,20 @@ class UserController extends Controller
             $mis_productos['descuento']    = $descuento[$contador];
             $mis_productos['cantidad']     = $mis_cantidades[$contador];
 
+            $precio_neto   = ($mis_productos['precio'] * $mis_productos['cantidad']);
+            $desc          = $mis_productos['descuento'] / 100;
+            $a_descontar   = $precio_neto * $desc;
+            $total         = $precio_neto - $a_descontar;
+            $mis_productos['total'] = $total;
             $compras[] = $mis_productos;
 
-        }   
-        return view('users.compras', compact('compras', 'idPedido'));
+        }
+        //Obtener valor del pedido, dependiendo de los productos
+        $importe_total = App\DetallePedido::select('importe_total')
+                        ->where('id_pedido', $idPedido)
+                        ->sum('importe_total');
+
+        return view('users.compras', compact('compras', 'idPedido', 'importe_total'));
     }
 
     public function showFacturas() {
