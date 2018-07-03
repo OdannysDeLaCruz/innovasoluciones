@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         	CrearCodDescuentoSeeder::class,
             CrearPedidosSeeder::class,
             CrearProductosSeeder::class,
+            CrearModoPagoSeeder::class,
+            CrearFacturasSeeder::class,
             CrearDetallePedidosSeeder::class,
             CrearImagenProductoSeeder::class,
         ]);

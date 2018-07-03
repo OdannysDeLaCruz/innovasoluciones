@@ -46,10 +46,10 @@
 									<strong> Codigos de descuento : </strong>
 									Ninguno
 								</label>
-								<label class="compras_pedido_info_total">
+								<!-- <label class="compras_pedido_info_total">
 									<strong> Total pago: </strong>
 									 $ {{ $pedidos['total_pago'] }}
-								</label>
+								</label> -->
 								<label class="compras_pedido_info_detalles"> 
 									<a href="/perfil/pedidos/{{ $pedidos['id'] }}"> 
 										<strong> Ver detalles </strong>

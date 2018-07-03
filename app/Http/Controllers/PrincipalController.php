@@ -73,7 +73,7 @@ class PrincipalController extends Controller
         
         // Si producto no existe, mandar un error 404
         if($producto->isEmpty() === true){
-            return response()->view('error.404',['response' => 'Producto no existe'],404);
+            return response()->view('error.404',['response' => 'Lo sentimos, no esta disponible este producto en este momento'],404);
         }
         // Si el producto existe, traer las imagenes
         $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();

@@ -22,29 +22,34 @@
 		@section('content')
 			<section class="col-xs-12 col-sm-9 pl-sm-2 compras">
 				<h1 class="compras_titulo mt-5 mt-sm-0">
-					Pedido N° {{ $idPedido }}, <span class="compras_titulo_total"> Valor del pedido: $ {{ $importe_total }}</span>
+					Pedido N° {{ $idPedido }}, 
+					<span class="compras_titulo_total">
+						@isset($total_pedido)
+							Valor del pedido: $ {{ $total_pedido }}
+						@endisset
+					</span>
 				</h1>
 		
-				@isset($compras)
-					@foreach( $compras as $compra )
+				@isset($detalle_pedidos)
+					@foreach( $detalle_pedidos as $detalle )
 						<div class="compras_pedido">
 							<!-- <label class="compras_pedido_estado">Compra finalizada</label> -->
 
 							<label class="compras_pedido_info">
-								<a href="/productos/{{ $compra['id'] }}-{{ $compra['descripcion'] }}">
-									<img class="compras_pedido_info_img" src="{{ $compra['imagen'] }}"></img>
+								<a href="/productos/{{ $detalle['id_producto'] }}-{{ $detalle['descripcion'] }}">
+									<img class="compras_pedido_info_img" src="{{ $detalle['imagen'] }}"></img>
 								
 								</a>
 								<div class="compras_pedido_info_datos">
-									<a href="/productos/{{ $compra['id'] }}-{{ $compra['descripcion'] }}">
-										<label class="compras_pedido_info_nombre">{{ $compra['descripcion'] }}</label>
+									<a target="_blanc" href="/productos/{{ $detalle['id_producto'] }}-{{ $detalle['descripcion'] }}">
+										<label class="compras_pedido_info_nombre">{{ $detalle['descripcion'] }}</label>
 									</a>
 									<label class="compras_pedido_info_monto">
-										$ {{ $compra['precio'] }} x {{ $compra['cantidad'] }} unidad, 
-										<b>{{ $compra['descuento'] }} % desc</b></label>
+										$ {{ $detalle['precio'] }} x {{ $detalle['cantidad'] }} unidad, 
+										<b>{{ $detalle['descuento_porcentual'] }} % desc</b></label>
 
 									<label class="compras_pedido_info_monto">
-									Total: $ {{ $compra['total'] }} </label>	
+									Total: $ {{ $detalle['importe_total'] }} </label>	
 								</div>
 							</label>
 						</div>

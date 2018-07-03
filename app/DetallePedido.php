@@ -13,7 +13,7 @@ class DetallePedido extends Model
     	'descripcion',
     	'imagen',
     	'precio',
-    	'descuento',
+    	'descuento_porcentual',
     	'tamaño',
 		'color',
 		'cantidad',
