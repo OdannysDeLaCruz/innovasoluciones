@@ -17,15 +17,14 @@ class CreatePedidosTable extends Migration
             $table->increments('id');
             $table->integer('id_user')->unsigned();
             $table->string('direccion_envio');
-            $table->string('metodo_pago');
+            $table->integer('modo_pago')->unsigned();
             $table->string('codigo_descuento')->nullable();
-            // $table->string('codigo_descuento')->unique()->nullable();
-            $table->integer('estado');            
+            $table->integer('estado_pedido');            
             
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            // $table->foreign('id_codigo_descuento')->references('id')->on('cod_descuentos')->onDelete('cascade');
+            $table->foreign('modo_pago')->references('num_pago')->on('modo_pago')->onDelete('cascade');
         });
     }
 

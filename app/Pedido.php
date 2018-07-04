@@ -11,7 +11,7 @@ class Pedido extends Model
     	'id_user',
     	'fecha',
     	'direccion_envio',
-    	'metodo_pago',
+    	'modo_pago',
     	'codigo_descuento',
     	'estado'
     ];

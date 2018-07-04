@@ -25,7 +25,6 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function showPerfil() {
-
         return view('users.perfil');
     }
 
@@ -83,6 +82,10 @@ class UserController extends Controller
     }
 
     public function showFacturas() {
+        
+        $id_user = Auth::user()->id;
+
+        $facturas = App\Pedido::select('id', 'estado')->where('id_user', $id_user)->get();
         
         return view('users.facturas');
     }
