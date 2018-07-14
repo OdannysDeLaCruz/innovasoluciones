@@ -14,11 +14,12 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\User::class, function (Faker $faker) {
-    
+    date_default_timezone_set('America/Bogota');
     static $password;
 	return [
 	    'id_rol'           => 2,
-	    'nombre_completo'  => $faker->name,
+	    'nombre'           => $faker->firstName,
+	    'apellido'         => $faker->lastName,
 	    'num_cedula'       => rand(000000000, 999999999),
 	    'telefono'         => $faker->phoneNumber,
 	    'email'            => $faker->unique()->safeEmail,
@@ -27,7 +28,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 	    'barrio'           => $faker->streetName,
 	    'direccion'        => $faker->address,
 	    'password'         => $password ?: $password = bcrypt('secret'),
-	    'fecha_registro'   => $faker->date,
+	    'fecha_registro'   => date('Y-n-j H:i:s'),
 	    'remember_token'   => str_random(10)
 	];
 });

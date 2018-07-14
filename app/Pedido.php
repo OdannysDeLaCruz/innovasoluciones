@@ -12,7 +12,8 @@ class Pedido extends Model
     	'fecha',
     	'direccion_envio',
     	'modo_pago',
-    	'codigo_descuento',
+    	'descuento_por_codigo',
+    	'envio',
     	'estado'
     ];
 }

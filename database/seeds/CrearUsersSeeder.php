@@ -14,7 +14,8 @@ class CrearUsersSeeder extends Seeder
         App\User::create([
 
             'id_rol'           => 1,
-            'nombre_completo'  => 'Odannys De La Cruz Calvo',
+            'nombre'           => 'Odannys',
+            'apellido'         => 'De La Cruz Calvo',
             'num_cedula'       => '1065825573',
             'telefono'         => '3107484079',
             'email'            => 'el_odanis321@hotmail.com',

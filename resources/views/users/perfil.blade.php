@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/estilos.css') }}" >
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/media-query.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
-	<title> Hola, {{ Auth::user()->nombre_completo }} </title>
+	<title> Hola, {{ Auth::user()->nombre }} </title>
 </head>
 <body>
 
@@ -25,15 +25,21 @@
 				<div class="perfil_info_user">
 					<div class="perfil_info_datos_block foto_perfil">
 						<img class="perfil_info_user_img" src="img/reloj.jpg">
-						<label class="foto_perfil_nombre"> {{ Auth::user()->nombre_completo }} </label>
+						<label class="foto_perfil_nombre"> {{ Auth::user()->nombre }} {{ Auth::user()->apellido }} </label>
 					</div>
 					<div class="perfil_info_datos_block">
 						<label>Teléfono</label>
-						<label>{{ Auth::user()->telefono }} <a href="">Cambiar</a></label>
+						<label>
+							@empty(!Auth::user()->telefono)
+								{{ Auth::user()->telefono }} 
+								<a href="perfil/actualizar">Cambiar</a>
+							@else 
+								<a href="perfil/actualizar">Agregar</a>
+							@endempty
 					</div>
 					<div class="perfil_info_datos_block">
 						<label>E-mail</label>
-						<label>{{ Auth::user()->email }} <a href="">Cambiar</a></label>
+						<label>{{ Auth::user()->email }} <a href="perfil/actualizar">Cambiar</a></label>
 					</div>
 				</div>
 
@@ -41,11 +47,11 @@
 				<div class="perfil_info_user">
 					<div class="perfil_info_datos_block">
 						<label>Usuario de ingreso</label>
-						<label>{{ Auth::user()->email }} <a href="">Cambiar</a></label>
+						<label>{{ Auth::user()->email }} <a href="perfil/actualizar">Cambiar</a></label>
 					</div>
 					<div class="perfil_info_datos_block">
 						<label>Clave</label>
-						<label>********** <a href="">Cambiar</a></label>
+						<label>********** <a href="perfil/actualizar">Cambiar</a></label>
 					</div>
 				</div>
 
@@ -53,19 +59,46 @@
 				<div class="perfil_info_user">					
 					<div class="perfil_info_datos_block">
 						<label>País</label>
-						<label>{{ Auth::user()->pais }} <a href="">Cambiar</a></label>
+						<label>
+							@empty(!Auth::user()->pais)
+								{{ Auth::user()->pais }} 
+								<a href="perfil/actualizar">Cambiar</a>
+							@else 
+								<a href="perfil/actualizar">Agregar</a>
+							@endempty
 					</div>
 					<div class="perfil_info_datos_block">
 						<label>Ciudad</label>
-						<label>{{ Auth::user()->ciudad }} <a href="">Cambiar</a></label>
+						<label>
+							@empty(!Auth::user()->ciudad)
+								{{ Auth::user()->ciudad }} 
+								<a href="perfil/actualizar">Cambiar</a>
+							@else 
+								<a href="perfil/actualizar">Agregar</a>
+							@endempty
+						</label>
 					</div>
 					<div class="perfil_info_datos_block">
 						<label>Barrio</label>
-						<label>{{ Auth::user()->barrio }} <a href="">Cambiar</a></label>
+						<label>
+							@empty(!Auth::user()->barrio)
+								{{ Auth::user()->barrio }} 
+								<a href="perfil/actualizar">Cambiar</a>
+							@else 
+								<a href="perfil/actualizar">Agregar</a>
+							@endempty
+						</label>
 					</div>
 					<div class="perfil_info_datos_block">
 						<label>Dirección 1 <small>(Esta será a dirección de llegada de sus pedidos)</small></label>
-						<label>{{ Auth::user()->direccion }} <a href="">Cambiar</a></label>
+						<label>
+							@empty(!Auth::user()->direccion)
+								{{ Auth::user()->direccion }} 
+								<a href="perfil/actualizar">Cambiar</a>
+							@else 
+								<a href="perfil/actualizar">Agregar</a>
+							@endempty
+						</label>
 					</div>
 					
 				</div>

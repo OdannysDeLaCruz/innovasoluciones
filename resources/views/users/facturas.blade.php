@@ -23,61 +23,62 @@
 			<section class="col-xs-12 col-sm-9 pl-sm-2 facturas">
 				<h1 class="facturas_titulo mt-5 mt-sm-0">Facturas pendientes</h1>
 
+			@if($pedidos_pendientes !== '')
 				<div class="contenedor_table facturas_pendientes table table-responsive">
+					
 					<table class="table table-hover table-bordered">
 						<thead>
 							<tr class="facturas_titulos">
 								<th>Fecha de la factura</th>
 								<th>Detalles</th>
-								<th>Monto</th>
+								<!-- <th>Monto</th> -->
 								<th>Estado</th>
 							</tr>
 						</thead>
+					@foreach($pedidos_pendientes as $factura_pendiente)
 						<tbody>
 							<tr class="facturas_datos">
-								<td>02/06/2018</td>
-								<td><a href="">Ver</a> | <a href="">Descargar</a></td>
-								<td>$ 200.000 COP</td>
-								<td class="facturas_datos_estado_sin_pagar">Sin pagar</td>
-							</tr>
-							<tr class="facturas_datos">
-								<td>02/06/2018</td>
-								<td><a href="">Ver</a> | <a href="">Descargar</a></td>
-								<td>$ 200.000 COP</td>
+								<td>{{$factura_pendiente['created_at']}}</td>
+								<td><a target="_blanc" href="/perfil/facturas/{{$factura_pendiente['id']}}">Ver</a> | <a href="/perfil/facturas/descargar/{{$factura_pendiente['id']}}">Descargar</a></td>
+								<!-- <td>$ 200.000 COP</td> -->
 								<td class="facturas_datos_estado_sin_pagar">Sin pagar</td>
 							</tr>
 						</tbody>
+					@endforeach
 					</table>
 				</div>
+			@else
+				{{ 'Todo en orden por aquí' }}
+			@endif
 
 				<h1 class="facturas_titulo mt-2 mt-sm-0">Facturas pagadas</h1>
 
+			@if($pedidos_pagados !== '')
 				<div class="contenedor_table facturas_pagadas table table-responsive">
 					<table class="table table-hover table-bordered">
 						<thead>
 							<tr class="facturas_titulos">
 								<th>Fecha de la factura</th>
 								<th>Detalles</th>
-								<th>Monto</th>
+								<!-- <th>Monto</th> -->
 								<th>Estado</th>
 							</tr>
 						</thead>
+					@foreach($pedidos_pagados as $factura_pagada)
 						<tbody>
 							<tr class="facturas_datos">
-								<td>02/06/2018</td>
-								<td><a href="">Ver</a> | <a href="">Descargar</a></td>
-								<td>$ 200.000 COP</td>
-								<td class="facturas_datos_estado_pagadas">Pagada</td>
-							</tr>
-							<tr class="facturas_datos">
-								<td>02/06/2018</td>
-								<td><a href="">Ver</a> | <a href="">Descargar</a></td>
-								<td>$ 200.000 COP</td>
-								<td class="facturas_datos_estado_pagadas">Pagada</td>
+								<td>{{$factura_pagada['created_at']}}</td>
+								<td><a target="_blanc" href="/perfil/facturas/{{$factura_pagada['id']}}">Ver</a> | <a href="/perfil/facturas/descargar/{{$factura_pagada['id']}}">Descargar</a></td>
+								<!-- <td>$ 200.000 COP</td> -->
+								<td class="facturas_datos_estado_pagadas">Pagadas</td>
 							</tr>
 						</tbody>
+					@endforeach
 					</table>
 				</div>
+			@else
+				{{ 'Todo en orden por aquí' }}
+			@endif
 			</section>			
 		@stop
 	<!-- FIN PERFIL -->

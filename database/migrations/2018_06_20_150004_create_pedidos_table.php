@@ -18,7 +18,8 @@ class CreatePedidosTable extends Migration
             $table->integer('id_user')->unsigned();
             $table->string('direccion_envio');
             $table->integer('modo_pago')->unsigned();
-            $table->string('codigo_descuento')->nullable();
+            $table->integer('descuento_por_codigo')->nullable();
+            $table->integer('envio'); // 0 o 16000
             $table->integer('estado_pedido');            
             
             $table->timestamps();

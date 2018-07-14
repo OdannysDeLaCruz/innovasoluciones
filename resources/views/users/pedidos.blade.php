@@ -40,7 +40,7 @@
 								</label>
 								<label class="compras_pedido_info_metodo">
 									<strong> Metodo de pago: </strong>
-									 {{ $pedidos['metodo_pago'] }}
+									 {{ $pedidos['modo_pago'] }}
 								</label>
 								<label class="compras_pedido_info_codigo">
 									<strong> Codigos de descuento : </strong>

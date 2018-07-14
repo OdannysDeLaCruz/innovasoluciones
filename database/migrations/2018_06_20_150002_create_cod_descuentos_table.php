@@ -21,7 +21,7 @@ class CreateCodDescuentosTable extends Migration
             $table->datetime('fecha_final');
             $table->integer('numero_canjeo');
             $table->integer('minimo_carrito')->nullable();
-            $table->string('tipo_descuento');
+            $table->integer('descuento');
             $table->integer('tipo_producto')->unsigned();
             
             $table->timestamps();

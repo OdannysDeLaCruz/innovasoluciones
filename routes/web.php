@@ -28,6 +28,10 @@ Route::get('/perfil/pedidos/{id?}', 'UserController@showPedidoDetalles')->name('
 Route::get('/perfil/facturas','UserController@showFacturas')->name('facturas');
 
 
+Route::get('/perfil/facturas/{id?}','UserController@showFacturasDetalles')->name('detalle_factura');
+Route::get('/perfil/facturas/descargar/{id?}','UserController@descargarFactura')->name('descargar_factura');
+
+
 // RUTAS PARA PAGOS
 Route::get('/verificacion', function () {
     return view('verificacion');
@@ -38,5 +42,3 @@ Route::post('/payment', 'PaymentController@payment')->name('payment');
 
 // RUTAS PARA AUTENTICACION DE USUARIOS
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

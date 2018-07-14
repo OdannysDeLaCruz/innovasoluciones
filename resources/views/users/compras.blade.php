@@ -36,7 +36,7 @@
 							<!-- <label class="compras_pedido_estado">Compra finalizada</label> -->
 
 							<label class="compras_pedido_info">
-								<a href="/productos/{{ $detalle['id_producto'] }}-{{ $detalle['descripcion'] }}">
+								<a target="_blanc" href="/productos/{{ $detalle['id_producto'] }}-{{ $detalle['descripcion'] }}">
 									<img class="compras_pedido_info_img" src="{{ $detalle['imagen'] }}"></img>
 								
 								</a>

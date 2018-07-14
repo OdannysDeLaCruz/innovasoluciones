@@ -15,7 +15,7 @@ class CodDescuento extends Model
 		'fecha_final',
 		'numero_canjeo',
 		'minimo_carrito',
-		'tipo_descuento',
+		'descuento',
 		'tipo_producto'
 	];
 }

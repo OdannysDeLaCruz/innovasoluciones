@@ -39,7 +39,7 @@
                     </span>
                 @endif
 
-				<label for="password" class="texto">Contraseña</label>
+				<label for="password" class="texto">Clave</label>
 				<input id="password" type="password" class="password {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Digite su contraseña" required>
 
                 @if ($errors->has('password'))
@@ -48,13 +48,10 @@
                     </span>
                 @endif
 
-				<div class="form-group row">
-                    <div class="col-md-6 pt-2">
-                        <label>
-                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
-                        </label>
-                    </div>
-                </div>
+                <label class="recordar_password">
+                    <input type="checkbox" class="recordar_password" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Recordar clave') }}
+				</label>
+
 				<button type="submit" class="btn_registrarse">Entrar</button>
 				<label class="recordar_password">
 					<a href="{{ route('password.request') }}">Olvidé mi contraseña</a>

@@ -14,18 +14,20 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            // Los campos nullable se llenaran cunado se necesiten
             $table->increments('id');
             $table->integer('id_rol')->unsigned();
-            $table->string('nombre_completo');
-            $table->string('num_cedula');
-            $table->string('telefono');
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->string('num_cedula')->nullable();
+            $table->string('telefono')->nullable();
             $table->string('email', 60)->unique();
-            $table->string('pais');
-            $table->string('ciudad');
-            $table->string('barrio');
-            $table->string('direccion');
+            $table->string('pais')->nullable();
+            $table->string('ciudad')->nullable();
+            $table->string('barrio')->nullable();
+            $table->string('direccion')->nullable();
             $table->string('password');
-            $table->string('fecha_registro');
+            $table->timestamp('fecha_registro');
 
             $table->rememberToken();
             $table->timestamps();
