@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 	<link rel="stylesheet" type="text/css" href="css/media-query.css">
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-	<title> Register | Innova Soluciones </title>
+	<title> Login | Innova Soluciones </title>
 </head>
 <body>
 
