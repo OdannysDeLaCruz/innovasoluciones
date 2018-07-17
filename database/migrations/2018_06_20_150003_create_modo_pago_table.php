@@ -14,7 +14,8 @@ class CreateModoPagoTable extends Migration
     public function up()
     {
         Schema::create('modo_pago', function (Blueprint $table) {
-            $table->increments('num_pago');
+            $table->increments('id');
+            $table->integer('num_pago');
             $table->string('nombre_pago');
             $table->timestamps();
         });

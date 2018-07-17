@@ -12,23 +12,23 @@ class CrearModoPagoSeeder extends Seeder
     public function run()
     {
         App\ModoPago::create([
-            'num_pago' => '11111',
+            'num_pago' => 11111,
             'nombre_pago' => 'Tarjeta Credito'
         ]);
         App\ModoPago::create([
-            'num_pago' => '22222',
+            'num_pago' => 22222,
             'nombre_pago' => 'Paypal'
         ]);
         App\ModoPago::create([
-            'num_pago' => '33333',
+            'num_pago' => 33333,
             'nombre_pago' => 'Payu'
         ]);
         App\ModoPago::create([
-            'num_pago' => '44444',
+            'num_pago' => 44444,
             'nombre_pago' => 'Transferencia bancaria'
         ]);
         App\ModoPago::create([
-            'num_pago' => '55555',
+            'num_pago' => 55555,
             'nombre_pago' => 'Efecty'
         ]);
     }
