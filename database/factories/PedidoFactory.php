@@ -13,7 +13,7 @@ $factory->define(App\Pedido::class, function (Faker $faker) {
     return [
         'id_user'              => $id_user,
         'direccion_envio'      => $faker->address,
-        'modo_pago'            => $id_modo_pago,
+        'id_modo_pago'            => $id_modo_pago,
         'descuento_por_codigo' => $descuento,
         'envio'                => $envios[rand(0,1)],
         'estado_pedido'        => rand(0, 1),
