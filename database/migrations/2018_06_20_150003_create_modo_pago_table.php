@@ -17,7 +17,7 @@ class CreateModoPagoTable extends Migration
             $table->increments('id');
             $table->integer('num_pago');
             $table->string('nombre_pago');
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

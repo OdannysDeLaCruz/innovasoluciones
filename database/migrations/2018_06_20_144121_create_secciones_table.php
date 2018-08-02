@@ -18,7 +18,7 @@ class CreateSeccionesTable extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->string('imagen');
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

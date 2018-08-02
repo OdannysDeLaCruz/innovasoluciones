@@ -3,7 +3,8 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Producto::class, function (Faker $faker) {
-
+    date_default_timezone_set('America/Bogota');
+    
 	$id_categoria = App\Categoria::where('id', rand(1,15))->value('id');
 
     $precio_productos = [10,20,30,40,50,60,70,80,90];
@@ -15,11 +16,13 @@ $factory->define(App\Producto::class, function (Faker $faker) {
     return [
         'id_categoria'    => $id_categoria,
         'descripcion'     => $faker->text(50),
+        'referencia'      => $faker->word . rand(0,100) . $faker->word,
         'imagen'          => $faker->imageUrl($width = 200, $height = 200),
         'precio'          => $precio,
         'descuento'       => $desc,
         'tamaño'          => $faker->word,
         'color'           => $faker->word,
-        'cant_disponible' => rand(0,10)
+        'cant_disponible' => rand(0,10),
+        'fecha_creado'    => date('Y-n-j H:i:s')
     ];
 });

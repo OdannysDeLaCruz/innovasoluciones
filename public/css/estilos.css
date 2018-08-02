@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i');
 * {
 	box-sizing: border-box;
 	
 	/*  Fuente global  */
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto Condensed', sans-serif;
 
 	/*  Para li  */
 	list-style: none;
@@ -46,19 +45,27 @@ body {
 }
 /*--ESTILOS DEL CARRITO DESPLEGABLE--*/
 
-.carrito_desplegable {
-	display: none;
+.contenedor_carrito {
+	display: block;
 	background: #333;
 	padding: 20px;
 }
-.carrito_desplegable_visible {
-	display: block;
-}
 .carrito {
 	background: #fff;
-	max-width: 1000px;
+	max-width: 1100px;
 	margin: auto;
 	border-radius: 5px;
+}
+.suma_total_carrito {
+	background: #fff;
+	width: 200px;
+	padding: 10px;
+	margin: 30px auto;
+	border-radius: 5px;
+	text-align: center;
+	color: #333;
+	font-size: 20px;
+	font-weight: 600;
 }
 .carrito::-webkit-scrollbar {
 	background: #fff;
@@ -80,16 +87,16 @@ body {
 .carrito_botones div {
 	margin: 5px 10px;
 }
-.carrito_botones a, .btn_carrito_vaciar a {
+.carrito_botones a, .btn_seguir_comprando a {
 	border: 1px solid #fff;
 	color: #fff;
 
 }
-.carrito_botones .btn_carrito_vaciar a:hover {
-	background: tomato;
-	border: 1px solid tomato;
+.carrito_botones .btn_seguir_comprando a:hover {
+	background: #008AFF;
+	border: 1px solid #008AFF;
 }
-.carrito_botones .btn_carrito_vaciar a span,
+.carrito_botones .btn_seguir_comprando a span,
 .carrito_botones .btn_carrito_pagar a span {
 	margin-right: 10px;
 	font-size: 20px;
@@ -97,6 +104,7 @@ body {
 .carrito_titulo {
 	text-align: center;
 	color: #666;
+	font-size: 15px;
 }
 .carrito_fila td {
 	text-align: center;
@@ -114,8 +122,11 @@ body {
 	text-align: left;
 	text-transform: uppercase;
 }
+.carrito_fila_cantidad {
+	width: 100px;
+}
 .carrito_fila_cantidad input {
-	width: 40px;
+	width: 30px;
 }
 .carrito_fila_precio {
 	min-width: 130px;
@@ -124,14 +135,25 @@ body {
 	font-weight: 600;
 	font-size: 15px;
 }
-.carrito_fila_borrar {
+.carrito_fila_borrar a {
 	color: tomato;
-	width: 30px;
 }
-.carrito_fila_borrar > span {
+.carrito_fila_borrar a > span {
 	cursor: pointer;
 	text-align: center;
 	font-size: 25px;
+}
+.contenedor_carrito > .msm_carrito_vacio {
+	background: #fff;
+	padding: 20px;
+	width: 300px;
+	margin: auto;
+	font-size: 20px;
+	text-align: center;
+	border-radius: 5px;
+	color: #666;
+
+	font-family: 'Roboto Condensed', sans-serif;
 }
 
 /*--FIN ESTILOS DEL CARRITO DESPLEGABLE--*/
@@ -159,6 +181,7 @@ body {
 	font-family: 'Roboto Condensed', sans-serif;	
 }
 .producto {
+	position: relative;
 	background: #fff;
 	width: 250px;
 	min-width: 250px;
@@ -191,12 +214,40 @@ body {
 .producto_titulo:hover {
 	color: #000;
 }
+.producto_precio_anterior {
+	display: flex;
+	font-size: 16px;
+	margin-top: 10px;
+	font-weight: 300;
+}
+.producto_precio_anterior > .precio_anterior {
+	margin: 0 5px;
+	color: tomato;
+	text-decoration: line-through;
+}
+.producto_precio_anterior > .descuento {
+	color: #fff;
+	font-weight: bold;
+	background:  linear-gradient(to right, #0AB0FF, #0499E0);
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .producto_precio {
+	margin: 0;
 	width: 100%;
 	color: #333;
 	font-size: 22px;
 	font-weight: 500;
 	font-family: 'Roboto Condensed', sans-serif;
+}
+.producto_precio p {
+	margin: 0;
 }
 .producto_botones {
 	position: relative;
@@ -324,6 +375,7 @@ body {
 	border-bottom-right-radius: 5px;
 }
 .header_principal .carrito_icono {
+	position: relative;
 	font-size: 25px;
 	color: #fff;
 	cursor: pointer;
@@ -331,6 +383,19 @@ body {
 	background: #008AFF;
 	padding: 7px;
 	border-radius: 3px;
+}
+.header_principal .carrito_icono > .notificacion_carrito {
+	position: absolute;
+	bottom: -5px;
+	left: -10px;
+	background: #FF2525;
+	font-size: 15px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 /*--SECCION CARRUSEL--*/
 
@@ -428,6 +493,7 @@ body {
 	width: 100px;
 	height: 100px;
 	background: #0066FF;
+	/*background: linear-gradient(to right, #0066FF, #00FF42);*/
 	padding: 20px;
 	border-radius: 50%;
 	display: flex;
@@ -712,7 +778,8 @@ footer {
 	max-width: 1200px;
 	margin: auto;
 	margin-bottom: 40px;
-	padding-bottom: 10px;
+	padding-top: 40px;
+	padding-bottom: 20px;
 	position: relative;
 	top: -250px;
 	display: flex;
@@ -726,7 +793,7 @@ footer {
 	text-align: center;
 	padding: 10px;
 	margin-bottom: 50px;
-	border-bottom: 1px solid #666;
+	border-bottom: 1px solid #ccc;
 	font-size: 25px;
 	font-weight: 500;
 	color: #333;
@@ -794,7 +861,6 @@ footer {
 .detalle_info_titulo {
 	font-size: 25px;
 	font-weight: 600;
-	font-style: italic;
 	text-transform: capitalize;
 	color: #333333;
 }
@@ -812,11 +878,17 @@ footer {
 	font-size: 16px;
 	margin-top: 10px;
 	font-weight: 300;
-	color: #666;
 }
 .detalle_info_precio_anterior p {
-	display: inline;	
+	display: inline;
+	color: tomato;
 	text-decoration: line-through;	
+}
+.detalle_info_precio_anterior p.descuento {
+	color: #0CB418;	
+	margin-left: 10px;
+	text-decoration: none;	
+
 }
 .detalle_info_precio {
 	font-size: 18px;
@@ -874,8 +946,14 @@ footer {
 
 /*--ESTILOS DE PAGINA REGISTER--*/
 /*-Cuenta tambien para pagina Login---*/
+.valid-feedback {
+	display: block !important;
+	font-size: 17px !important;
+	color: #00A800;
+}
 .invalid-feedback {
 	display: block;
+	font-size: 15px;
 }
 .contenedor_registro {
 	background: #ccc;
@@ -927,9 +1005,6 @@ footer {
 .nombre_apellido .user > label {
     margin-top: 0px;
 }
-.user {
-	/*background: blue;*/
-}
 .texto {
 	font-size: 18px;
 	color: #333;
@@ -948,7 +1023,7 @@ footer {
 	font-style: italic;
 	font-family: 'Roboto Condensed', sans-serif;
 }
-.form_registro_grupo input, select,
+.form_registro_grupo > input, select,
 .nombre_apellido .user input, select {
 	border: none;
 	border-bottom: 1px solid #ccc;
@@ -966,7 +1041,7 @@ footer {
 	outline: none;
 	background: #8FBBE9;
 }
-.aceptar_terminos, .recordar_password  {
+.aceptar_terminos {
 	margin: 20px 0;
 	font-size: 14px;
 	font-style: italic;
@@ -975,6 +1050,14 @@ footer {
 }
 .recordar_password {
 	font-size: 15px;
+	margin-top: 20px;
+}
+.recordar_password input {
+	font-size: 15px;
+}
+.olvide_password {
+	font-size: 15px;
+	text-align: center;
 }
 .btn_registrarse {
 	background: #00aad4;
@@ -994,10 +1077,10 @@ footer {
 }
 .ya_tengo_cuenta {
 	text-align: center;
-	margin-top: 20px;
 	font-size: 16px;
 	font-weight: 500;
 	font-style: italic;
+	text-align: center;
 }
 /*--FIN ESTILOS DE PAGINA REGISTER--*/
 
@@ -1047,7 +1130,7 @@ footer {
 	background: #fff;
 	border-radius: 10px;
 	max-width: 800px;
-	padding: 50px;
+	padding: 0px 50px 50px 50px;
 	margin: auto;
 }
 .detalles {
@@ -1062,8 +1145,8 @@ footer {
 	padding: 15px;
 	min-height: 100px;
 	width: 100%;
-	border-radius: 5px;
-	margin-bottom: 20px;
+	border-radius: 2px;
+	margin-bottom: 10px;
 }
 .pedido_img {
 	width: 70px;
@@ -1087,31 +1170,56 @@ footer {
 	margin: 0;
 }
 .payment_titulos {
-	font-size: 25px;
+	font-size: 22px;
 	color: #333;
 	font-weight: 500;
-	font-style: italic;
 	margin-bottom: 20px;
-	padding-bottom: 5px;
+	padding: 10px 0;
 	border-bottom: 1px solid #ccc;
 }
-.pedidos_total {
+.codigo_descuento {
 	text-align: right;
-	margin-top: 40px;
-	text-transform: uppercase;
-	font-size: 14px;
+	margin: 20px 0;
+	font-size: 16px;
+	color: #333;
+}
+.codigo_descuento > form > div > label {
+	margin-bottom: 0;
+}
+.codigo_descuento > form > div > input {
+	border: 1px solid #666;
+	border-radius: 2px;
+	padding-left: 10px;
+	margin: 0 10px;
+}
+.codigo_descuento > form > div > .btn_enviar_codigo {
+	border: none;
+	background: #008AFF;
+	color: #fff;
+	font-size: 15px;
+	padding: 3px 10px;
+	border-radius: 2px;
+}
+.resumen_pedidos {
+	text-align: right;
+	margin-top: 5px;
+	font-size: 16px;
 	font-weight: 500;
 	color: #333;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 }
-.pedidos_total .total {
-	font-size: 20px;
-	font-style: italic;
+.total_neto,
+.descuento_codigo,
+.costo_envio,
+.impuesto_iva,
+.total_pagar {
 	margin-left: 10px;
-	border-bottom: 2px solid #333;
-	padding-bottom: 3px;
+}
+.total_pagar {
+	border-bottom: 2px solid #333;	
+	text-transform: uppercase;
 }
 .pedidos_botones {
 	margin-top: 30px;
@@ -1145,18 +1253,18 @@ footer {
 	min-width: 200px;
 	max-width: 200px;
 	font-size: 17px;
-	font-style: italic;
-	font-weight: 500;
+	font-weight: 400;
 }
 .formulario_datos_envio .datos_inputs {
-	background: #DBD9D9;
 	border: none;
 	width: 400px;
-	padding: 10px;
+	padding: 5px;
 	font-size: 17px;
 	font-style: italic;
 	font-weight: 500;
 	color: #747474;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 .payment_datos_botones {
 	margin-top: 30px;

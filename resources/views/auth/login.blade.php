@@ -15,10 +15,6 @@
 	<!-- SECCION HEADER -->
 	@include('includes/header')
 	<!-- FIN HEADER -->
-
-	<!-- SECCION CARRITO -->
-	@include('includes/carrito')
-	<!-- FIN CARRITO -->
 	
 	<!-- SECCION DE FORMULARIO DE LOGIN -->
 	<div class="contenedor_registro">
@@ -49,17 +45,18 @@
                 @endif
 
                 <label class="recordar_password">
-                    <input type="checkbox" class="recordar_password" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Recordar clave') }}
+                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Recordar clave') }}
 				</label>
 
-				<button type="submit" class="btn_registrarse">Entrar</button>
-				<label class="recordar_password">
-					<a href="{{ route('password.request') }}">Olvidé mi contraseña</a>
-				</label>
-				<label class="ya_tengo_cuenta">
-					<p>Aun no tengo una cuenta <a href="{{ route('register') }}">Registrarme</a></p>
-					
-				</label>
+				<button type="submit" class="btn_registrarse">Ingresar</button>
+				<div class="row">
+					<label class="col-12 col-md-6 olvide_password text-md-left">
+						<a href="{{ route('password.request') }}">Olvidé mi contraseña</a>
+					</label>
+					<label class="col-12 col-md-6 ya_tengo_cuenta text-md-right">
+						<p>Aun no tengo una cuenta <a href="{{ route('register') }}">Registrarme</a></p>
+					</label>
+				</div>
 			</div>
 		</form>
 	</div>

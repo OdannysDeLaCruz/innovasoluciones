@@ -13,32 +13,50 @@
 
 Route::get('/', 'PrincipalController@index');
 // RUTAS PARA PRODUCTOS
-Route::get('/productos', 'PrincipalController@showProductos');
-Route::get('/productos/{id}-{descripcion}', 'PrincipalController@showDetalles');
+Route::get('/productos', 'PrincipalController@showProductos')->name('productos');
+Route::get('/productos/{id}-{descripcion}', 'PrincipalController@showDetalles')->name('showDetalles');
 Route::get('/productos/{seccion?}', 'PrincipalController@showCategoriaProductos');
 
 
 // RUTAS PARA USUARIOS
-Route::get('/perfil/', 'UserController@showPerfil')->name('perfil');
+Route::group(['namespace' => 'User', 'prefix' => 'perfil'], function(){
 
-Route::get('/perfil/pedidos', 'UserController@showPedidos')->name('pedidos');
+	Route::get('/', 'UserController@showPerfil')->name('perfil');
 
-Route::get('/perfil/pedidos/{id?}', 'UserController@showPedidoDetalles')->name('compras');
+	Route::get('pedidos', 'UserController@showPedidos')->name('pedidos');
 
-Route::get('/perfil/facturas','UserController@showFacturas')->name('facturas');
+	Route::get('pedidos/{id?}', 'UserController@showPedidoDetalles')->name('compras');
+
+	Route::get('facturas','UserController@showFacturas')->name('facturas');
+
+	Route::get('facturas/{id?}','UserController@showFacturasDetalles')->name('detalle_factura');
+
+	Route::get('facturas/descargar/{id?}','UserController@descargarFactura')->name('descargar_factura');
+});
 
 
-Route::get('/perfil/facturas/{id?}','UserController@showFacturasDetalles')->name('detalle_factura');
-Route::get('/perfil/facturas/descargar/{id?}','UserController@descargarFactura')->name('descargar_factura');
+// RUTAS PARA CARRITO DE COMPRAS
+Route::get('/cart', 'CartController@show')->name('showCart');
 
+Route::get('/cart/add/{id}-{descripcion}', 'CartController@add')->name('addItem');
+
+Route::get('/cart/delete/{producto}', 'CartController@delete')->name('deleteItem');
+
+Route::get('/cart/update/{producto}/{cantidad}', 'CartController@update')->name('updateItem');
 
 // RUTAS PARA PAGOS
-Route::get('/verificacion', function () {
-    return view('verificacion');
-})->name('verificacion');
+Route::get('/verificacion', 'VerificarPedidoController@verificar')->name('verificar');
+
+Route::post('/verificarCodigo', 'VerificarPedidoController@verificarCodigo')->name('verificarCodigo');
 
 Route::post('/payment', 'PaymentController@payment')->name('payment');
 
 
 // RUTAS PARA AUTENTICACION DE USUARIOS
 Auth::routes();
+
+// 	RUTAS PARA ADMIN - PANEL DE ADMINISTRACION
+
+Route::get('/admin', function() {
+	return view('admin/home');
+});

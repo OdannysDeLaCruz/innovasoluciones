@@ -8,14 +8,7 @@ $(document).ready(function(){
     $('.cerrar_menu').on('click', function(){
     	$('.nav_principal').css("left", "-100%");
     });
-
-    // EFECTOS DEL CARRITO DESPLEGABLE 
-
-    $('#carrito_icono').on( 'click', function() {
-    	$( document ).scrollTop( 0 );
-    	$('.carrito_desplegable').toggleClass("carrito_desplegable_visible");    		
-    });
-
+    
     // EFECTOS DE SECCIONES DE PAYMENT
 
     $('#indicador_detalle').on('click', function(){
@@ -84,5 +77,15 @@ $(document).ready(function(){
 
         // Asigno la nueva imagen clickeada
         $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
+    });
+
+    // ACTUALIZAR CANTIDAD DE PRODUCTOS DEL CARRITO
+    $('.btn_actualizar_carrito').on('click', function(e){
+        e.preventDefault();
+
+        const id   = $(this).data('id'); 
+        const href = $(this).data('href'); 
+        const cantidad = $('#producto_' + id).val();
+        window.location.href = href + '/' + cantidad;
     });
 })

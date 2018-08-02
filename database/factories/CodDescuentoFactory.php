@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\CodDescuento::class, function (Faker $faker) {
-	
+
     $minimo_carrito = [0, 300000, 500000, 1000000];
     $carrito = $minimo_carrito[ rand(0,3) ];
 

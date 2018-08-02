@@ -18,7 +18,7 @@ class CreateCategoriasTable extends Migration
             $table->integer('id_seccion')->unsigned();
             $table->string('nombre', 100)->unique();
             $table->string('descripcion');
-            $table->timestamps();
+            // $table->timestamps();
 
             $table->foreign('id_seccion')->references('id')->on('secciones')->onDelete('cascade');
         });

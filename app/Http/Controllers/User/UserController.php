@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -19,11 +20,6 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function showPerfil() {
         return view('users.perfil');
     }
@@ -31,14 +27,13 @@ class UserController extends Controller
     public function showPedidos() {
 
         $id_user = Auth::user()->id;
-
         $mis_pedidos = App\Pedido::select(
                             'pedidos.id', 
                             'pedidos.created_at',
                             'pedidos.estado_pedido', 
                             'pedidos.direccion_envio', 
-                            'pedidos.descuento_por_codigo',
-                            'pedidos.modo_pago')
+                            'pedidos.codigo_descuento',
+                            'pedidos.id_modo_pago')
                         ->where('pedidos.id_user', $id_user)
                         ->get();
         return view('users.pedidos', compact('mis_pedidos'));
@@ -67,6 +62,17 @@ class UserController extends Controller
                         )
                         ->where('id_pedido', $idPedido)
                         ->get();
+        foreach ($detalle_pedidos as $detalles) {
+            $dato_detalle['precio']          = $detalles->precio;
+            $dato_detalle['cantidad']        = $detalles->cantidad;
+            $dato_detalle['descuento_porcentual'] = $detalles->descuento_porcentual;
+            $precio_neto                     = $detalles->precio * $detalles->cantidad;
+            $descuento_porcentual            = $dato_detalle['descuento_porcentual'] / 100;
+            // Valor a descontar en peso
+            $dato_detalle['descuento_peso']  = round($precio_neto * $descuento_porcentual);
+            $dato_detalle['importe_total']   = $precio_neto - $dato_detalle['descuento_peso'];
+            $datos_detalles_factura[]        = $dato_detalle;
+        }
 
         // Verificamos que el pedido tenga detalle_pedidos
         if($detalle_pedidos->isEmpty()){
@@ -74,10 +80,11 @@ class UserController extends Controller
         }
 
         //Obtener valor del pedido, dependiendo de los productos
-        $total_pedido = App\DetallePedido::select('importe_total')
-                        ->where('id_pedido', $idPedido)
-                        ->sum('importe_total');
-
+        foreach ($datos_detalles_factura as $key => $value) {
+            $importes[] = $value['importe_total'];
+            $total_pedido = array_sum($importes);
+        }
+        
         return view('users.compras', compact('detalle_pedidos', 'idPedido', 'total_pedido'));
     }
 
@@ -111,12 +118,12 @@ class UserController extends Controller
         }
         // Datos de la factura
         foreach ($factura as $dato) {
-            $datos_factura['id']                    = $dato->id;
-            $datos_factura['direccion_envio']       = $dato->direccion_envio;
-            $datos_factura['modo_pago']             = $dato->modo_pago;
-            $datos_factura['descuento_por_codigo']  = $dato->descuento_por_codigo;
-            $datos_factura['envio']                 = $dato->envio;
-            $datos_factura['fecha_pedido']          = $dato->created_at;
+            $datos_factura['id']               = $dato->id;
+            $datos_factura['direccion_envio']  = $dato->direccion_envio;
+            $datos_factura['modo_pago']        = $dato->modo_pago;
+            $datos_factura['codigo_descuento'] = $dato->codigo_descuento;
+            $datos_factura['envio']            = $dato->envio;
+            $datos_factura['fecha_pedido']     = $dato->created_at;
         }
         //Datos de los detalles de la factura
         $detalles_factura = App\DetallePedido::select(
@@ -135,23 +142,20 @@ class UserController extends Controller
             return response()->view('error.404', ['response' => 'Esta factura no tiene detalles!'], 404);
         }
         foreach ($detalles_factura as $detalles) {
-            $dato_detalle['descripcion']   = $detalles->descripcion;
-            $dato_detalle['precio']        = $detalles->precio;
-            $dato_detalle['cantidad']      = $detalles->cantidad;
-
-            $precio_neto          = $detalles->precio * $detalles->cantidad;
-            $descuento_porcentual = $detalles->descuento_porcentual / 100;
+            $dato_detalle['descripcion']    = $detalles->descripcion;
+            $dato_detalle['precio']         = $detalles->precio;
+            $dato_detalle['cantidad']       = $detalles->cantidad;
+            $dato_detalle['descuento_porcentual'] = $detalles->descuento_porcentual;
+            $precio_neto                    = $detalles->precio * $detalles->cantidad;
+            $descuento_porcentual           = $dato_detalle['descuento_porcentual'] / 100;
             // Valor a descontar en peso
-            $descuento_peso       = $precio_neto * $descuento_porcentual;
-            $dato_detalle['descuento_peso']   = round($descuento_peso);
-            
-            $dato_detalle['tamaño']        = $detalles->tamaño;
-            $dato_detalle['color']         = $detalles->color;
+            $dato_detalle['descuento_peso'] = round($precio_neto * $descuento_porcentual);
+            $dato_detalle['tamaño']         = $detalles->tamaño;
+            $dato_detalle['color']          = $detalles->color;
             // Hay que eliminar esta columna de la tabla de detalle_pedidos
             // $dato_detalle['importe_total'] = $detalles->importe_total;
-            $dato_detalle['importe_total'] = $precio_neto - $descuento_peso;
-
-            $datos_detalles_factura[] = $dato_detalle;
+            $dato_detalle['importe_total']  = $precio_neto - $dato_detalle['descuento_peso'];
+            $datos_detalles_factura[]       = $dato_detalle;
         }
         //Obtener valor de la factura, suma del importe_total de los productos
         foreach ($datos_detalles_factura as $key => $value) {
@@ -159,10 +163,12 @@ class UserController extends Controller
             $subtotal = array_sum($importes);
         }
 
-        //Obtener el descuento por codigo
-        $descuento_por_codigo = $datos_factura['descuento_por_codigo'];
+        //Obtener el codigo de descuento
+        $codigo_descuento = $datos_factura['codigo_descuento'];
+        // Obtener el valor del codigo insertado en el pedido
+        $porcentaje_codigo_descuento = App\CodDescuento::where('codigo_descuento', $codigo_descuento)->value('descuento');
         // Obtenemos de cuanto es el valor a descontar por el codigo
-        $valor_del_codigo = $subtotal * ($descuento_por_codigo / 100);
+        $valor_del_codigo = $subtotal * ($porcentaje_codigo_descuento / 100);
         // Restamos el valor_del_codigo a el subtotal del pedido
         $total_sin_iva = round($subtotal - $valor_del_codigo);
         // Cobramos el costo envio si es diferente de cero (0), osea no es gratis
@@ -198,6 +204,5 @@ class UserController extends Controller
         $pdf = \PDF::loadView('users.template-factura.factura', compact('factura'));
         return $pdf->download('factura-' . $idFactura . '.pdf');
     }
-  
 
 }

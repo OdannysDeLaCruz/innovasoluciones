@@ -62,16 +62,6 @@
 	}
 	/*---FIN ESTILOS DE PAGINA INICIO---*/
 
-	/*--ESTILOS DE PAGINA DE PRODUCTOS--*/
-	.nav_categorias {
-		overflow: hidden;
-		overflow-x: scroll;
-		flex-wrap: nowrap;
-	}
-	.nav_categorias a {
-		font-size: 15px;
-	}
-
 	/*--ESTILOS DE PAGNA DE DETALLES--*/
 	.detalle_descripcion_img {
 		margin: auto;
@@ -116,6 +106,15 @@
 		width: 130px;
 		height: 40px;
 	}
+	/*ESTILOS DE NAV DE CATEGORIAS*/
+	.nav_categorias {
+		overflow: hidden;
+		overflow-x: scroll;
+		flex-wrap: nowrap;
+	}
+	.nav_categorias a {
+		font-size: 15px;
+	}
 	/*--ESTILOS DE CAROUSEL--*/
 	.carousel .carousel-indicators {
 		margin-bottom: 5px;
@@ -133,18 +132,18 @@
 	}
 	
 	.seccion_categorias_items .item {
-		width: 130px;
+		width: 110px;
 	}
 	.seccion_categorias_items .item .item_img {
-		width: 70px;
-		height: 70px;
+		width: 60px;
+		height: 60px;
 	}
 	.seccion_categorias_items .item .item_img img {
-		width: 50px;
-		height: 50px;
+		width: 40px;
+		height: 40px;
 	}
 	.seccion_categorias_items .item .item_titulo  {
-		font-size: 12px;
+		font-size: 11px;
 	}
 	/*--ESTILOS DE NUEVOS PRODUCTOS--*/
 	.seccion_nuevos_titulo {
@@ -162,9 +161,13 @@
 		width: 300px;
 	}
 	/*--ESTILOS DE PAGINA DE PRODUCTOS--*/
-
+	.seccion_algunos_productos_content > .producto,
+	.seccion_productos_content > .producto {
+		padding-right: 50px;
+	}
 	.seccion_productos {
-		padding: 20px 0;
+		padding: 40px 0;
+
 	}
 	.contenedor_logo {
 		width: 150px;

@@ -12,7 +12,7 @@ class Pedido extends Model
     	'fecha',
     	'direccion_envio',
     	'modo_pago',
-    	'descuento_por_codigo',
+    	'codigo_descuento',
     	'envio',
     	'estado'
     ];

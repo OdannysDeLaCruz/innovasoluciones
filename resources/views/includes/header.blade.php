@@ -44,6 +44,12 @@
             @endguest
         </ul>
 	</nav>
-	<span id="carrito_icono" class="fa fa-cart-plus carrito_icono"></span>
+    <a href="/cart">
+        <?php $cart = session('cart') ?>
+            
+        <span id="carrito_icono" class="fa fa-cart-plus carrito_icono">
+            <span class="notificacion_carrito">{{ count($cart) }}</span>
+        </span>
+    </a>
 	<span class="fa fa-bars abrir_menu"></span>
 </header>

@@ -18,11 +18,12 @@ class CreatePedidosTable extends Migration
             $table->integer('id_user')->unsigned();
             $table->string('direccion_envio');
             $table->integer('id_modo_pago')->unsigned();
-            $table->integer('descuento_por_codigo')->nullable();
+            $table->string('codigo_descuento')->nullable();
             $table->integer('envio'); // 0 o 16000
             $table->integer('estado_pedido');
-            
-            $table->timestamps();
+            $table->timestamp('fecha_pedido');
+
+            // $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_modo_pago')->references('id')->on('modo_pago')->onDelete('cascade');

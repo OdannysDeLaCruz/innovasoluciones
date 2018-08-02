@@ -16,10 +16,6 @@
 	<!-- SECCION HEADER -->
 	@include('includes/header')
 	<!-- FIN HEADER -->
-	
-	<!-- SECCION CARRITO -->
-	@include('includes/carrito')
-	<!-- FIN CARRITO -->
 
 	<!-- SECCION CATEGORIAS -->
 	@include('includes/menu_categorias')	
@@ -46,7 +42,21 @@
 							<a href="/productos/{{ $producto['id'] }}-{{ $producto['descripcion'] }}">
 								<h1 class="producto_titulo"> {{ $producto['descripcion'] }}</h1>
 							</a>
-							<label class="producto_precio">$ {{ $producto['precio'] }} COP</label>					
+							@if($producto['descuento'] != 0)
+								<span class="producto_precio_anterior">
+									<p class="precio_anterior"> ${{ number_format($producto['precio'], 2) }} </p>
+									<p class="descuento">
+									-{{ $producto['descuento'] }}%
+									</p>
+								</span>
+							@endif
+							<label class="producto_precio">
+								@php 
+									$descuento = $producto['precio'] * ($producto['descuento'] / 100);
+									$total = $producto['precio'] - $descuento;
+								@endphp
+								<p>${{ number_format($total, 2) }} <small>COP</small></p>			
+							</label>
 						</div>
 						<!-- <label class="producto_botones"> -->
 							<!-- <div class="botones_innova btn_producto">

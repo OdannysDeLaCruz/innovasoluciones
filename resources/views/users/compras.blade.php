@@ -33,8 +33,6 @@
 				@isset($detalle_pedidos)
 					@foreach( $detalle_pedidos as $detalle )
 						<div class="compras_pedido">
-							<!-- <label class="compras_pedido_estado">Compra finalizada</label> -->
-
 							<label class="compras_pedido_info">
 								<a target="_blanc" href="/productos/{{ $detalle['id_producto'] }}-{{ $detalle['descripcion'] }}">
 									<img class="compras_pedido_info_img" src="{{ $detalle['imagen'] }}"></img>
@@ -45,11 +43,17 @@
 										<label class="compras_pedido_info_nombre">{{ $detalle['descripcion'] }}</label>
 									</a>
 									<label class="compras_pedido_info_monto">
-										$ {{ $detalle['precio'] }} x {{ $detalle['cantidad'] }} unidad, 
+										$ {{ number_format($detalle['precio'], 2) }} x {{ $detalle['cantidad'] }} unidad(es), 
 										<b>{{ $detalle['descuento_porcentual'] }} % desc</b></label>
 
 									<label class="compras_pedido_info_monto">
-									Total: $ {{ $detalle['importe_total'] }} </label>	
+										<?php 
+											$precio = $detalle['precio'] * $detalle['cantidad'];
+											$a_descontar = $precio * ($detalle['descuento_porcentual'] / 100);
+											$total = $precio - $a_descontar;
+										?> 
+										Total: $ {{ number_format($total, 2) }} 
+									</label>	
 								</div>
 							</label>
 						</div>

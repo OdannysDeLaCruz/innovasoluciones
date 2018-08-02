@@ -15,10 +15,6 @@
 	<!-- SECCION HEADER -->
 	@include('includes/header')
 	<!-- FIN HEADER -->
-	
-	<!-- SECCION CARRITO -->
-	@include('includes/carrito')
-	<!-- FIN CARRITO -->
 
 	<!-- SECCION CATEGORIAS -->
 	@include('includes/menu_categorias')	
@@ -28,7 +24,7 @@
 		<img src="{{ asset('img/detalle_fondo.jpg') }}">
 	</div>
 	<section class="detalle row">
-		<h1 class="col-12 detalle_titulo">Detalles del producto</h1>
+		<!-- <h1 class="col-12 detalle_titulo">Detalles del producto</h1> -->
 		
 		@foreach($producto as $detalle)
 			
@@ -45,15 +41,29 @@
 			</div>
 			<section class="detalle_info col-md-5 pt-4 pt-md-0">
 				<h1 class="detalle_info_titulo ">{{ $detalle['descripcion'] }}</h1>
-				<h1 class="detalle_info_opinion">{{ 'Buen producto' }}</h1>
-				<span class="detalle_info_precio_anterior"><p>$ {{ $detalle['precio'] }}</p>  Precio normal</span>
-				<span class="detalle_info_precio"> <p>$ {{ $detalle['precio'] }}</p> {{ $detalle['descuento'] }}% DESCUENTO</span>
-				<span class="detalle_info_tiempo_envio">Tiempo de envio estimado: <p>20 - 27 días despues de realizar pago.</p></span>
+				<!-- <h1 class="detalle_info_opinion">{{ 'Buen producto' }}</h1> -->
+				<span class="detalle_info_precio_anterior">
+					@if($detalle['descuento'] != 0)
+						<p> Antes ${{ number_format($detalle['precio'], 2) }}</p> 
+						<p class="descuento">
+						-{{ $detalle['descuento'] }}% DESCUENTO
+						</p>
+					@endif
+					
+				</span>
+				<span class="detalle_info_precio"> 
+					<?php 
+						$descuento = $detalle['precio'] * ($detalle['descuento'] / 100);
+						$total = $detalle['precio'] - $descuento;
+					 ?>
+					Ahora <p>${{ number_format($total, 2) }}</p>
+				</span>
+				<span class="detalle_info_tiempo_envio">Tiempo de envío: <p>Entre 20 y 27 días despues de realizar pago.</p></span>
 				<span class="detalle_info_envio_gratis"> 
 					<!-- Verificar si el envio es gratis o no -->
-					@if(true)
+					<!-- @if(true)
 						{{ 'Envío gratis' }} <i class="fa fa-check-circle"></i> 
-					@endif
+					@endif -->
 				</span>
 				
 				<!-- OPCIONAL SI ES ALGUN ARTICULO QUE REQUIERA DE TALLAS, COMO ZAPATOS, CAMISAS ETC -->
@@ -67,7 +77,7 @@
 				@endif
 				
 				<div class="detalle_info_btn_comprar botones_innova">
-					<a href="">Agregar al carro</a>
+					<a href="/cart/add/{{ $detalle['id'] }}-{{ $detalle['descripcion'] }}">Agregar al carro</a>
 				</div>
 			</section>
 		@endforeach

@@ -8,10 +8,9 @@ $factory->define(App\DetallePedido::class, function (Faker $faker) {
     $id_pedido = App\Pedido::where('id', rand(1,5))->value('id');
     $cantidad     = rand(1, 5);
     $precio       = $producto[0]->precio;
-    $descuento    = $producto[0]->descuento;
 
     $precio_neto   = ($precio * $cantidad);
-    $descuento     = $descuento / 100;
+    $descuento     = $producto[0]->descuento / 100;
     $a_descontar   = $precio_neto * $descuento;
     $importe_total = $precio_neto - $a_descontar;
 
@@ -24,7 +23,7 @@ $factory->define(App\DetallePedido::class, function (Faker $faker) {
         'id_pedido'             => $id_pedido,
         'descripcion'           => $producto[0]->descripcion,
         'imagen'                => $producto[0]->imagen,
-        'precio'                => $producto[0]->precio,
+        'precio'                => $precio,
         'cantidad'              => $cantidad,
         'descuento_porcentual'  => $producto[0]->descuento,
         'tamaño'                => $tallas[rand(0, 6)],

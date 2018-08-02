@@ -26,7 +26,7 @@ class CreateDetallePedidosTable extends Migration
             $table->string('color')->nullable(); //Colores disponibles del articulo separados por comas (verde, rojo, negro) etc...
             $table->integer('importe_total');
 
-            $table->timestamps();
+            // $table->timestamps();
 
             // $table->foreign('id_producto')->references('id')->on('productos')->onDelete('cascade');
             $table->foreign('id_pedido')->references('id')->on('pedidos')->onDelete('cascade');

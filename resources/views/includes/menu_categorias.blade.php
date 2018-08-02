@@ -1,10 +1,10 @@
 <!--SECCION NAV CATEGORIAS -->
 <nav class="nav_categorias">
 	@foreach($secciones as $seccion)
-		<?php
+		@php
 			$ruta = str_replace(' ','-', $seccion['nombre']);
 			$ruta = strtolower($ruta);
-		?>
+		@endphp
 		<a href="/productos/{{ $ruta }}"> {{ $seccion['nombre'] }} </a>
 	@endforeach
 </nav>

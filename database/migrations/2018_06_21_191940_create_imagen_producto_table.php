@@ -17,7 +17,7 @@ class CreateImagenProductoTable extends Migration
             $table->increments('id');
             $table->integer('id_producto')->unsigned();
             $table->string('nombre_imagen');
-            $table->timestamps();
+            // $table->timestamps();
 
             $table->foreign('id_producto')->references('id')->on('productos')->onDelete('cascade');
         });

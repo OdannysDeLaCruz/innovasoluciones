@@ -24,7 +24,7 @@ class CreateCodDescuentosTable extends Migration
             $table->integer('descuento');
             $table->integer('tipo_producto')->unsigned();
             
-            $table->timestamps();
+            // $table->timestamps();
 
             $table->foreign('tipo_producto')->references('id')->on('categorias')->onDelete('cascade');
         });

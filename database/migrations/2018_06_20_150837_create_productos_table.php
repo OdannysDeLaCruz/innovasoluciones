@@ -17,6 +17,7 @@ class CreateProductosTable extends Migration
             $table->increments('id');
             $table->integer('id_categoria')->unsigned(); //Dependiendo de la categoria se rellenan los campos tamaño y color
             $table->string('descripcion')->unique();
+            $table->string('referencia')->unique();
             $table->string('imagen');
             $table->integer('precio');
             $table->integer('descuento');
@@ -24,8 +25,8 @@ class CreateProductosTable extends Migration
             $table->string('color')->nullable(); //Colores disponibles del articulo separados por comas (verde, rojo, negro) etc...
 
             $table->integer('cant_disponible'); //0 = no disponible
-
-            $table->timestamps();
+            $table->timestamp('fecha_creado');
+            // $table->timestamps();
 
             $table->foreign('id_categoria')->references('id')->on('categorias')->onDelete('cascade');
         });

@@ -15,10 +15,6 @@
 	<!-- SECCION HEADER -->
 	@include('includes/header')
 	<!-- FIN HEADER -->
-
-	<!-- SECCION CARRITO -->
-	@include('includes/carrito')
-	<!-- FIN CARRITO -->
 	
 	<!-- SECCION DE FORMULARIO DE REGISTRO -->
 	<div class="contenedor_registro">

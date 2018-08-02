@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('fecha_registro');
 
             $table->rememberToken();
-            $table->timestamps();
+            // $table->timestamps();
 
             $table->foreign('id_rol')->references('id')->on('roles')->onDelete('cascade');;
         });
