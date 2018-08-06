@@ -11,4 +11,6 @@ class Factura extends Model
     	'id_user',
     	'num_pago'
     ];
+
+    public $timestamps = false;
 }

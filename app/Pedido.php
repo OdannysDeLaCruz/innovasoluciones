@@ -16,4 +16,6 @@ class Pedido extends Model
     	'envio',
     	'estado'
     ];
+
+    public $timestamps = false;
 }

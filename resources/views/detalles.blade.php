@@ -42,6 +42,13 @@
 			<section class="detalle_info col-md-5 pt-4 pt-md-0">
 				<h1 class="detalle_info_titulo ">{{ $detalle['descripcion'] }}</h1>
 				<!-- <h1 class="detalle_info_opinion">{{ 'Buen producto' }}</h1> -->
+				<span class="detalle_info_tags">
+					@foreach($tags as $tag)
+						<a href="{{ route('productoTag', $tag) }}">
+							<h3 class="tag">{{ $tag }}</h3>	
+						</a>											
+					@endforeach
+				</span>
 				<span class="detalle_info_precio_anterior">
 					@if($detalle['descuento'] != 0)
 						<p> Antes ${{ number_format($detalle['precio'], 2) }}</p> 

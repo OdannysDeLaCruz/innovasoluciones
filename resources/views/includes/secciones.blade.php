@@ -11,7 +11,7 @@
 		@foreach ($secciones as $seccion)
 
     		<div class="item">
-				<label class="item_img" style="background: linear-gradient(to right, {{  $c[rand(0,14)] }}, {{ $c[rand(0,14)] }});">
+				<label class="item_img" style="background: linear-gradient(to right, {{  $c[rand(0,11)] }}, {{ $c[rand(0,11)] }});">
 					<img src="img/logos/svg/{{ $seccion['imagen'] }}">
 				</label>
 				<h1 class="item_titulo">{{ $seccion['nombre'] }} </h1>

@@ -12,4 +12,5 @@ class Categoria extends Model
     	'nombre',
     	'descripcion'
     ];
+    public $timestamps = false;
 }

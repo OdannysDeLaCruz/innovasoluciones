@@ -11,4 +11,6 @@ class ModoPago extends Model
     	'num_pago',
     	'nombre_pago',
     ];
+
+    public $timestamps = false;
 }

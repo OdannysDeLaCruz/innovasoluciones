@@ -11,4 +11,6 @@ class ImagenProducto extends Model
     	'id_producto',
     	'nombre_imagen',
     ];
+
+    public $timestamps = false;
 }

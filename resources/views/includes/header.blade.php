@@ -3,10 +3,20 @@
 		<img src="{{ asset('img/logos/LogoInnova.svg') }}" alt="Logotipo de Innova Soluciones">
 	</a>
 	<div class="contenedor_formulario">
-		<form class="formulario_buscar_producto" action="/search" method="post">
-			<input class="input_buscador_producto" type="search" name="buscar" placeholder="Busca por categorias" required>
+		<form class="formulario_buscar_producto" action="{{ route('searchtags') }}" method="POST">
+            {{ csrf_field() }}
+            <input class="input_buscador_producto" type="text" name="search" placeholder="Busca por categorias" value="@isset($search) {{ $search }} @endisset" required>
+            <button class="btn_buscar" type="submit"><span class="fa fa-search"></span></button>
+        </form>
+<!-- 
+        <div class="formulario_buscar_producto">
+			<input class="input_buscador_producto" type="text" name="search" placeholder="Busca por categorias" value="@isset($search) {{ $search }} @endisset" required>
+            
 			<button class="btn_buscar" type="submit"><span class="fa fa-search"></span></button>
-		</form>
+		</div> -->
+
+
+
 	</div>
 	<nav class="nav_principal">
 		<span class="fa fa-times cerrar_menu" id="cerrar_menu"></span>
@@ -24,13 +34,19 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fa fa-user logo_user"></i></a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    	<a class="dropdown-item">
-                        	{{ Auth::user()->nombre }} {{ Auth::user()->apellido }} <span class="caret"></span>
+                    	<a class="dropdown-item" style="font-size: 16px;">
+                        	<strong>{{ Auth::user()->nombre }} {{ Auth::user()->apellido }}</strong>
                     	</a>
-                    	<a class="dropdown-item" href="{{ route('perfil') }}">
-                        	{{ __('Mi cuenta') }}
-                    	</a>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        @if(Auth::user()->id_rol == 1)
+                        	<a class="dropdown-item" style="font-size: 14px;" href="{{ route('admin') }}">
+                            	{{ __('Panel de administración') }}
+                        	</a>
+                        @else
+                            <a class="dropdown-item" style="font-size: 14px;" href="{{ route('perfil') }}">
+                                {{ __('Mi cuenta') }}
+                            </a>
+                        @endif
+                        <a class="dropdown-item" style="font-size: 14px;" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                             {{ __('Salir') }}

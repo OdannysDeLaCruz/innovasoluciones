@@ -12,4 +12,6 @@ class Seccion extends Model
     	'descripcion',
     	'imagen'
     ];
+
+    public $timestamps = false;
 }

@@ -9,7 +9,8 @@ class Producto extends Model
     protected $table = 'productos';
     protected $fillable = [
     	'id_categoria',
-    	'descripcion',
+        'descripcion',
+    	'tags',
         'imagen',
         'precio',
         'descuento',
@@ -18,4 +19,5 @@ class Producto extends Model
     	'cant_disponible',
     	'disponibilidad'
     ];
+    public $timestamps = false;
 }

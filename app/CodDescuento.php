@@ -18,4 +18,5 @@ class CodDescuento extends Model
 		'descuento',
 		'tipo_producto'
 	];
+	public $timestamps = false;
 }

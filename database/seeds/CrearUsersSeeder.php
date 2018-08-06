@@ -11,6 +11,7 @@ class CrearUsersSeeder extends Seeder
      */
     public function run()
     {
+        date_default_timezone_set('America/Bogota');
         App\User::create([
 
             'id_rol'           => 1,
@@ -24,7 +25,7 @@ class CrearUsersSeeder extends Seeder
             'barrio'           => 'La Nevada',
             'direccion'        => 'Cll 6b # 41-36',
             'password'         => bcrypt('odannys321'),
-            'fecha_registro'   => '2018-2-2',
+            'fecha_registro'   => date('Y-n-j H:i:s'),
             'remember_token'   => str_random(10),
         ]);
         $users = factory(App\User::class, 5)->create();

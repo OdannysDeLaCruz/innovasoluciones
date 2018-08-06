@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,8 +29,17 @@
 				<img class="logo" src="{{asset('img/logos/LogoInnovate.svg')}}">					
 			</div>
 		</span>
+		<span>
+			@isset($search) 
+				@isset($productos)
+					<h1 style="font-size: 18px; text-align: center;">
+						{{ count($productos) }} resultados para <b>{{ $search }}</b>
+					</h1>
+				@endisset
+			@endisset
+			
+		</span>
 		<div class="seccion_productos_content">
-
 			@if(isset($productos))
 				@foreach($productos as $producto)
 					<section class="producto">
@@ -73,8 +83,11 @@
 				<div class="respuesta">
 					<img src="{{asset('img/logos/svg/box.svg')}}">
 					<p>
-						{{ $response }} <br>
-						Ver otras categorias de <a href="/productos">productos</a>
+						@isset($response)
+							{{ $response }} 
+								@isset($search) <b>  {{ $search }} </b> @endisset<br>
+							Ver otras categorias de <a href="/productos">productos</a>
+						@endisset
 					</p>
 				</div>
 			@endif

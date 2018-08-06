@@ -874,6 +874,26 @@ footer {
 	font-weight: 400;
 	color: #0CB418;
 }
+.detalle_info_tags {
+}
+.detalle_info_tags > a {
+	text-decoration: none;
+}
+.detalle_info_tags > a > .tag {
+	font-size: 13px;
+	text-transform: capitalize;
+	display: inline-block;
+	margin: 0;
+	padding: 3px;
+	border-radius: 3px;
+	border: 1px solid #6363FF;
+	color: #6363FF;
+}
+.detalle_info_tags > a > .tag:hover {
+	background: #6363FF;
+	color: #fff;
+
+}
 .detalle_info_precio_anterior {
 	font-size: 16px;
 	margin-top: 10px;

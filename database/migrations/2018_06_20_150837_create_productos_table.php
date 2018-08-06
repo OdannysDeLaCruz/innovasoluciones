@@ -17,6 +17,7 @@ class CreateProductosTable extends Migration
             $table->increments('id');
             $table->integer('id_categoria')->unsigned(); //Dependiendo de la categoria se rellenan los campos tamaño y color
             $table->string('descripcion')->unique();
+            $table->string('tags');
             $table->string('referencia')->unique();
             $table->string('imagen');
             $table->integer('precio');

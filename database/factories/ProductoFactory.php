@@ -13,9 +13,14 @@ $factory->define(App\Producto::class, function (Faker $faker) {
     $descuentos = [0,20,40,60,70,80];
     $desc = $descuentos[ rand(0,5) ];
 
+    $tags = ['celular', 'cel', 'zapatos', 'joyas', 'ruedas', 'tv', 'televisor', 'tennis', 'pc', 'computadores', 'tablets', 'portatiles', 'smartphones', 'phone', 'cadenas', 'perlas', 'mause', 'cargador', 'reloj', 'plasma'];
+
+    $mis_tags = $tags[rand(0, count($tags) - 1)] . ',' . $tags[rand(0, count($tags) - 1)] . ',' . $tags[rand(0, count($tags) - 1)] . ',' . $tags[rand(0, count($tags) - 1)] . ',' . $tags[rand(0, count($tags) - 1)];
+
     return [
         'id_categoria'    => $id_categoria,
         'descripcion'     => $faker->text(50),
+        'tags'            => $mis_tags,
         'referencia'      => $faker->word . rand(0,100) . $faker->word,
         'imagen'          => $faker->imageUrl($width = 200, $height = 200),
         'precio'          => $precio,

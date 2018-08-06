@@ -19,4 +19,6 @@ class DetallePedido extends Model
 		'cantidad',
 		'importe_total'
     ];
+
+    public $timestamps = false;
 }

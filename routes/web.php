@@ -12,10 +12,17 @@
 */
 
 Route::get('/', 'PrincipalController@index');
+
 // RUTAS PARA PRODUCTOS
 Route::get('/productos', 'PrincipalController@showProductos')->name('productos');
+
 Route::get('/productos/{id}-{descripcion}', 'PrincipalController@showDetalles')->name('showDetalles');
+
 Route::get('/productos/{seccion?}', 'PrincipalController@showCategoriaProductos');
+
+Route::get('/search/{tag?}', 'SearchProductsController@showProductosTag')->name('productoTag');
+
+Route::post('/searchtags', 'SearchProductsController@index')->name('searchtags');
 
 
 // RUTAS PARA USUARIOS
@@ -59,4 +66,4 @@ Auth::routes();
 
 Route::get('/admin', function() {
 	return view('admin/home');
-});
+})->name('admin');

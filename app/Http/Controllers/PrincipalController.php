@@ -10,7 +10,7 @@ class PrincipalController extends Controller
 
     	// Productos nuevos, los que sean del mes actual
         $productos_nuevos = App\Producto::select('id','id_categoria','descripcion','precio','descuento','imagen')
-                                        ->latest()
+                                        ->latest('fecha_creado')
                                         ->limit(10)
                                         ->orderBy('id','desc')
                                         ->get();
@@ -21,7 +21,10 @@ class PrincipalController extends Controller
                                          ->get();
 
     	// Publicidad, algun producto en promosion
-    	$publicidad = App\Producto::select('id','id_categoria','descripcion','precio','descuento','imagen')->first()->where('id', 1)->get();
+    	$publicidad = App\Producto::select('id','id_categoria','descripcion','precio','descuento','imagen')
+                                  ->first()
+                                  ->where('id', 1)
+                                  ->get();
     	
     	return view('index',
     		compact(
@@ -77,7 +80,12 @@ class PrincipalController extends Controller
         }
         // Si el producto existe, traer las imagenes
         $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
+        // Formatear los tags
 
-        return view('detalles', compact('producto', 'imagenes'));        
+        foreach ($producto as $product) {
+            $tags = explode( ',', $product->tags );
+        }
+
+        return view('detalles', compact('producto', 'imagenes', 'tags'));        
     }
 }
