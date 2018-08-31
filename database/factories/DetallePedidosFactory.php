@@ -28,6 +28,6 @@ $factory->define(App\DetallePedido::class, function (Faker $faker) {
         'descuento_porcentual'  => $producto[0]->descuento,
         'tamaño'                => $tallas[rand(0, 6)],
         'color'                 => $colores[rand(0, 4)],
-        'importe_total'         => number_format($importe_total),
+        'importe_total'         => number_format($importe_total), //eliminar esta fila, no se va a utilizar mas
     ];
 });

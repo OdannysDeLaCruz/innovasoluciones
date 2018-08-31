@@ -26,25 +26,19 @@ class VerificarPedidoController extends Controller
             session()->flash('response', true);
             return redirect()->route('showCart');
         }
-        // Hago descuento por el codigo ingresado
+        // Hago descuento por el codigo ingresado por usuario, este codigo ya ha sido verificado por la funcion verificarCodigo
         $total_del_pedido = session('total_del_pedido');
         $descuento_peso   = session('descuento_peso') ? session('descuento_peso') : 0;
         $total_con_descuento = $total_del_pedido - $descuento_peso;
-        // Verificamos el cobro del envío
-        $costo_envio = 16;
-        $total_con_envio = $total_con_descuento + $costo_envio;
 
         // Cobro el iva
-        $iva = $total_con_envio * 0.19; 
-        $total_pagar = number_format($total_con_envio + $iva, 2);
+        $iva = $total_con_descuento * 0.19; 
+        $total_pagar = number_format($total_con_descuento + $iva);
 
         return view('verificacion', 
             compact(
                 'cart',
                 'total_del_pedido',
-                'descuento_peso',
-                'costo_envio',
-                'iva',
                 'total_pagar'
             )
         );
@@ -107,10 +101,31 @@ class VerificarPedidoController extends Controller
         // Despues de validar todas los posibles filtros, lo guardo y el flujo sigue adelante
         session()->put('codigos_usados', $codigo_usuario);
         // guardo el descuento en una variable de session
-        session()->put('descuento_peso', $descuento_peso);            
+        session()->put('descuento_peso', $descuento_peso);
+        //guardo la notificacion del descuento a true
+        session()->put('notificacion_codigo', true);
+
         
 
-        return redirect()->route('verificar')->with('noticia_descuento', 'El descuento se ha efectuado correctamente' );
-    
+        return redirect()->route('verificar')->with('noticia_descuento', 'Ha recibido un descuento de $' . number_format($descuento_peso, 2));
     }
+
+    // /*
+    // * VERIFICAR COSTO DE ENVÍO
+    // * Existen dos formas de entregar el pedido al cliente.
+    // * 1 - Envío a su domicilio (Se cobra el valor del envío).
+    // * 2 - Recogerlo en la tienda fisica del vendedor.
+    // */
+
+    // public function verificarEnvio(request $request) {
+    //     $tipo_envio = $request->input('tipo_envio');
+
+    //     // Verifico que tipo de envío se escogio.
+    //     // Si $tipo_envio = 1, cobrar el costo de envio en caso de tener, verificar si es envio gratis.
+    //     // Si $tipo_envio = 2, recoger en tienda, no cobrar envío.
+
+    //     // dd($tipo_envio);
+
+    //     return redirect()->route('payment');
+    // }
 }

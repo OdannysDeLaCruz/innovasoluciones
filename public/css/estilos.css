@@ -920,28 +920,38 @@ footer {
 	color: #333;
 	display: inline;
 }
-.detalle_info_tiempo_envio {
+.detalle_info_costo_envio {
 	margin-top: 20px;
 	font-size: 17px;
-	display: block;
+	display: flex;
+	align-items: center;
 	font-weight: 400;
-	color: #666;
-}
-.detalle_info_tiempo_envio p {
 	color: #0CB418;
 }
-.detalle_info_envio_gratis {
-	color: #1F72D9;
-	font-size: 20px;
+.detalle_info_costo_envio .fa-bus {
+	border: 2px solid #0CB418;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.detalle_info_tallas {
-	width: 100%;
-	padding: 10px;
-	font-size: 19px;
+.detalle_info_tiempo_envio {
+	font-size: 17px;
 	font-weight: 400;
-	color: #5D5C5C;
-	border: 1px solid #333;
+	color: #9C9C9C;
+	margin-bottom: 20px;
 }
+
+.detalle_info_color, 
+.detalle_info_talla {
+	color: #9C9C9C;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+}
+
 .detalle_info_btn_comprar {
 	margin-top: 30px;
 	align-self: center;
@@ -1140,27 +1150,65 @@ footer {
 	background: #0066ff;
 	color: #fff;
 }
+/*--ESTILOS DE PAGINA VERIFICACION--*/
 .contenedor_payment {
-	background: #ccc;
+	background: #eee;
 	width: 100%;
-	padding: 30px 0;
+	margin: 0;
+	/*padding: 30px 0;*/
+}
+.seccion_payment_proceso {
+	background: tomato;
+	background: #eee;
+	padding-top: 20px;
+}
+.seccion_metodo_pago {
+	padding: 30px;
+}
+.seccion_metodo_pago_lista li {
+	font-weight: 300;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+}
+.seccion_metodo_pago_lista li > span {
+	width: 50px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #008AFF;
+}
+.seccion_resumen_pedido {
+	background: #F5F5F5;
 }
 .payment_proceso {
 	display: none;
-	background: #fff;
-	border-radius: 10px;
+	border-radius: 5px;
 	max-width: 800px;
-	padding: 0px 50px 50px 50px;
 	margin: auto;
-}
-.detalles {
-	max-width: 800px;
 }
 .payment_activo {
 	display: block;
 }
+.payment_titulos {
+	font-size: 24px;
+	color: #333;
+	font-weight: 500;
+	margin-bottom: 20px;
+	padding: 10px 0;
+	border-bottom: 1px solid #ccc;
+}
+.payment_proceso_tarjeta {
+	background: #fff;
+	max-width: 800px;
+	margin: 20px auto;
+	border-radius: 5px;
+	padding: 20px;
+	box-shadow: 0 0 3px 0 rgba(0,0,0,.3);
+}
 .pedido {
-	background: #D7D7D7;
+	background: #F5F5F5;
 	display: flex;
 	padding: 15px;
 	min-height: 100px;
@@ -1178,9 +1226,11 @@ footer {
 	flex-direction: column;
 	padding-left: 20px;
 }
+.pedido_info a:hover {
+	text-decoration: none;
+}
 .pedido_info_nombre {
 	font-size: 18px;
-	font-style: italic;
 	color: #3E3E3E;
 	text-align: justify;
 }
@@ -1188,31 +1238,23 @@ footer {
 	font-size: 16px;
 	color: #3E3E3E;
 	margin: 0;
+
 }
-.payment_titulos {
-	font-size: 22px;
-	color: #333;
-	font-weight: 500;
-	margin-bottom: 20px;
-	padding: 10px 0;
-	border-bottom: 1px solid #ccc;
-}
-.codigo_descuento {
+.tarjeta_codigo_descuento > .codigo_descuento {
 	text-align: right;
-	margin: 20px 0;
 	font-size: 16px;
 	color: #333;
 }
-.codigo_descuento > form > div > label {
+.tarjeta_codigo_descuento > .codigo_descuento > form > div > label {
 	margin-bottom: 0;
 }
-.codigo_descuento > form > div > input {
+.tarjeta_codigo_descuento > .codigo_descuento > form > div > input {
 	border: 1px solid #666;
 	border-radius: 2px;
 	padding-left: 10px;
 	margin: 0 10px;
 }
-.codigo_descuento > form > div > .btn_enviar_codigo {
+.tarjeta_codigo_descuento > .codigo_descuento > form > div > .btn_enviar_codigo {
 	border: none;
 	background: #008AFF;
 	color: #fff;
@@ -1220,95 +1262,154 @@ footer {
 	padding: 3px 10px;
 	border-radius: 2px;
 }
-.resumen_pedidos {
-	text-align: right;
-	margin-top: 5px;
-	font-size: 16px;
-	font-weight: 500;
-	color: #333;
+.tarjeta_resumen_pedido {
+ 	display: flex;
+ 	justify-content: flex-end;
+}
+.tarjeta_resumen_pedido > .resumen_table {
+ 	width: 500px;
+ 	margin: 0;
+}
+.tarjeta_resumen_pedido > .resumen_table th {
+ 	text-align: left;
+ 	font-weight: 300;
+ 	font-size: 18px;
+}
+.tarjeta_resumen_pedido > .resumen_table td {
+ 	text-align: right;
+}
+.tarjeta_botones_pedidos > .pedidos_botones {
 	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-}
-.total_neto,
-.descuento_codigo,
-.costo_envio,
-.impuesto_iva,
-.total_pagar {
-	margin-left: 10px;
-}
-.total_pagar {
-	border-bottom: 2px solid #333;	
-	text-transform: uppercase;
-}
-.pedidos_botones {
-	margin-top: 30px;
-	display: flex;
-	justify-content: flex-end;
-}
-.pedidos_botones .pedidos_botones_btn:nth-child(1) {
-	margin-right: 20px;
-}
-.pedidos_botones .pedidos_botones_btn:nth-child(1) > a > i {
-	margin-right: 10px;
-}
-.pedidos_botones .pedidos_botones_btn:nth-child(2) > a > i {
-	margin-left: 10px;
-}
-.formulario_datos_envio {
-	max-width: 700px;
-	margin: auto;
-}
-.required {
-	color: red;
-}
-.formulario_datos_envio > div {
-	border: none;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
 	justify-content: space-between;
 }
-.formulario_datos_envio label {
-	min-width: 200px;
-	max-width: 200px;
-	font-size: 17px;
-	font-weight: 400;
+.tarjeta_botones_pedidos > .pedidos_botones > .pedidos_botones_btn:nth-child(1) > a > i {
+	margin-right: 10px;
 }
-.formulario_datos_envio .datos_inputs {
-	border: none;
-	width: 400px;
-	padding: 5px;
-	font-size: 17px;
-	font-style: italic;
-	font-weight: 500;
-	color: #747474;
-	border: 1px solid #ccc;
-	border-radius: 5px;
+.tarjeta_botones_pedidos > .pedidos_botones > .pedidos_botones_btn:nth-child(2) > a > i {
+	margin-left: 10px;
 }
-.payment_datos_botones {
-	margin-top: 30px;
+.tarjeta_ver_detalle_pedido {
+	display: flex;
+}
+
+
+.tarjeta_form_btn_payu {
 	display: flex;
 	justify-content: center;
 }
-.btn_datos_envio {
-	height: 50px;
+.tarjeta_form_btn_payu > .btn_datos_envio {
+	height: 60px;
 	padding: 0 20px;
-	background: none;
-	border-radius: 25px;
-	border: 1px solid #333;
-	color: #333;
-	font-size: 15px;
-	font-weight: 450;
-}
-.btn_datos_envio:hover {
-	background: #0066ff;
-	color: #fff;
+	background: #A6C307;
+	border-radius: 30px;
 	border: none;
+	color: #fff;
+	font-size: 16px;
+	font-weight: 450;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-.btn_datos_envio > a > i {
+
+.tarjeta_form_btn_payu > .btn_datos_envio:hover {
+	background: #91AA06;
+	cursor: pointer;
+	font-weight: bold;
+}
+.tarjeta_form_btn_payu > .btn_datos_envio > .logo_payu {
+	width: 50px;
 	margin-left: 10px;
 }
+/*.tarjeta_form_btn_payu > .btn_datos_envio > a > i {
+	margin: 0 10px;
+}*/
+
+/*--EESTILOS DE ENVIAR A --*/
+
+.tarjeta_direccion_envio {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.tarjeta_direccion_envio > .direccion_envio {
+	display: flex;
+}
+.tarjeta_direccion_envio > .direccion_envio > .direccion_envio_texto {
+	font-weight: 300;
+	padding-left: 20px;
+	display: flex;
+	flex-direction: column;
+}
+.tarjeta_direccion_envio > .direccion_envio > .direccion_envio_icono {
+	width: 50px;
+	height: 50px;
+	color: #3483FA;
+	font-size: 25px;
+	background: #fff;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 0 3px 0 rgba(0,0,0,.3);
+}
+.tarjeta_direccion_envio > .direccion_link {
+	margin-left: 10px;
+	font-size: 16px;
+}
+.tarjeta_tipo_envio > .tarjeta_envio_domicilio,
+.tarjeta_tipo_envio > .tarjeta_retiro_tienda {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: 400;
+	font-size: 17px;
+}
+.form_opcion_envio {
+	width: 100%;
+}
+.btn_opcion_envio {
+	position: relative;
+	background: #ccc;
+	width: 100%;
+	border: none;
+	cursor: pointer;
+	padding: 20px;
+	margin-top: 10px;
+	border-radius: 5px;
+	overflow: hidden;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: 400;
+	font-size: 17px;
+}
+.btn_opcion_envio:hover {
+	background: #BCBCBC;
+}
+.btn_opcion_envio:hover:after {
+	content: '';
+	position: absolute;
+	width: 7px;
+	height: 100%;
+	background: #A1BD04;
+	top: 0;
+	left: 0;
+}
+.btn_opcion_envio > .text_opcion_envio {
+	text-align: left;
+}
+.btn_opcion_envio > .tarjeta_envio_domicilio_valor {
+	color: #A1BD04;
+	font-size: 19px;
+	font-weight: bold;
+}
+.tarjeta_tipo_envio > .tarjeta_envio_domicilio > .tarjeta_envio_domicilio_valor {
+	color: #4ABB59;
+	font-size: 18px;
+}
+
 
 /*--FIN ESTILOS DE PAGINA PAYMENT--*/
 

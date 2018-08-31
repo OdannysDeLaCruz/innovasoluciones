@@ -47,8 +47,11 @@
 					      		<td class="carrito_fila_titulo">
 					      			<p>
 					      				<a target="_blank" href="/productos/{{ $carrito['id'] }}-{{ $carrito['descripcion'] }}">
-					      					{{ $carrito['descripcion'] }} 
+					      					{{ $carrito['descripcion'] }}
 					      				</a>
+					      				<br>
+					      				Color: {{ $carrito['color'] }} <br>
+					      				Talla: {{ $carrito['talla'] }} 
 							      	</p>					      					
 					      		</td>
 					      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['precio'], 2) }}</i></td>
@@ -61,6 +64,10 @@
 					      			id="producto_{{ $carrito['id'] }}" 
 					      		>
 					      		<a 
+					      			data-toggle="tooltip" 
+					      			data-placement="top" 
+					      			title="Actualizar cantidad"
+
 					      			href="#"
 					      			class="btn btn-primary btn-sm btn_actualizar_carrito"
 					      			data-href="/cart/update/{{ $carrito['id'] }}"
@@ -72,7 +79,7 @@
 					      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['total'], 2) }}</i></td>
 					      		</td>
 					      		<td class="carrito_fila_borrar">
-					      			<a href="{{ route('deleteItem', $carrito['id']) }}">
+					      			<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
 					      				<span class="fa fa-trash-o"></span>
 					      			</a>
 					      		</td>
@@ -98,10 +105,11 @@
 					<a href="{{ route('productos') }}"><span class="fa fa-arrow-left mr-2"> </span> Ver productos</a>
 				</div>
 			</label>
-			<!-- Elimino el las variables de session codigos_usados y descuento_peso-->
+			<!-- Elimino el las variables de session codigos_usados, descuento_peso y notificacion_codigo-->
 			@php
 				session()->put('codigos_usados', '');				
 				session()->put('descuento_peso', '');				
+				session()->put('notificacion_codigo', '');			
 			@endphp
 		@endif
 	</section>

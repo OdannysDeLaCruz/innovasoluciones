@@ -15,9 +15,9 @@ $(document).ready(function(){
         $('#indicador_detalle').addClass('active');
         $('#indicador_envio').removeClass('active');
         $('#indicador_pagar').removeClass('active');
-        $( "#detalles" ).addClass('payment_activo');
-        $( "#datos_envio" ).removeClass('payment_activo');
-        $( "#datos_pagar" ).removeClass('payment_activo');
+        $('#detalles').addClass('payment_activo');
+        $('#datos_envio').removeClass('payment_activo');
+        $('#datos_pagar').removeClass('payment_activo');
     });
     
      $('#indicador_envio').on('click', function(){
@@ -52,6 +52,7 @@ $(document).ready(function(){
         $( "#detalles" ).addClass('payment_activo');
         $( "#datos_envio" ).removeClass('payment_activo');
         $( "#datos_pagar" ).removeClass('payment_activo');
+
     });
 
     // EFECTOS DE PAGINA DESTALLES.PHP, DETALLE_VISUALIZADOR
@@ -88,4 +89,31 @@ $(document).ready(function(){
         const cantidad = $('#producto_' + id).val();
         window.location.href = href + '/' + cantidad;
     });
-})
+
+
+    // ADMIN - PRODUCTOS
+
+    // $('.producto_menu_logo').on('click', function(e){
+    //     let ele = e.target.id;
+    //     $('#' + ele + ' + .producto_menu_accion').toggleClass('menu_visible');        
+    // });
+
+    $('.menu_opcion_logo').on('click', function(e){
+        let ele = e.target.id;
+        $('#' + ele + ' + .menu_opcion_items').toggleClass('menu_visible');        
+    });
+
+
+    // function confirmar() {
+    //     const res = confirm('Seguro desea abrir esto?');
+    //     if (res == true) {
+    //        $('.producto_menu_accion').toggleClass('menu_visible');        
+    //     }
+    // }
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+});
+

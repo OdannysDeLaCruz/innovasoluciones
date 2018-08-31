@@ -25,8 +25,9 @@ $factory->define(App\Producto::class, function (Faker $faker) {
         'imagen'          => $faker->imageUrl($width = 200, $height = 200),
         'precio'          => $precio,
         'descuento'       => $desc,
-        'tamaño'          => $faker->word,
-        'color'           => $faker->word,
+        'tallas'          => $faker->word,
+        'colores'         => $faker->word,
+        'tiempo_entrega'  => $faker->word,
         'cant_disponible' => rand(0,10),
         'fecha_creado'    => date('Y-n-j H:i:s')
     ];

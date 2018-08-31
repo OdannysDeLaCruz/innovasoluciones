@@ -33,7 +33,13 @@
 							</p>
 						</span>
 					@endif
-					<label class="producto_precio">$ {{ $nuevos['precio'] }} COP</label>					
+					<label class="producto_precio">
+						@php
+							$descuento = $nuevos['precio'] * ($nuevos['descuento'] / 100);
+							$total = $nuevos['precio'] - $descuento;
+						@endphp
+						<p>${{ number_format($total, 2) }} <small>COP</small></p>
+					</label>					
 				</div>
 				
 			</section>

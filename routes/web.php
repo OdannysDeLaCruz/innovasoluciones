@@ -45,7 +45,8 @@ Route::group(['namespace' => 'User', 'prefix' => 'perfil'], function(){
 // RUTAS PARA CARRITO DE COMPRAS
 Route::get('/cart', 'CartController@show')->name('showCart');
 
-Route::get('/cart/add/{id}-{descripcion}', 'CartController@add')->name('addItem');
+// Route::get('/cart/add/{id}-{descripcion}', 'CartController@add')->name('addItem');
+Route::post('/cart/add/', 'CartController@add')->name('addItem');
 
 Route::get('/cart/delete/{producto}', 'CartController@delete')->name('deleteItem');
 
@@ -56,8 +57,13 @@ Route::get('/verificacion', 'VerificarPedidoController@verificar')->name('verifi
 
 Route::post('/verificarCodigo', 'VerificarPedidoController@verificarCodigo')->name('verificarCodigo');
 
-Route::post('/payment', 'PaymentController@payment')->name('payment');
+// Route::post('/verificarEnvio', 'PaymentController@verificarEnvio')->name('payment');
 
+Route::post('checkout/buying/payment', 'PaymentController@payment')->name('payment');
+
+Route::get('/response', function() {
+	return view('response');
+});
 
 // RUTAS PARA AUTENTICACION DE USUARIOS
 Auth::routes();
@@ -66,4 +72,27 @@ Auth::routes();
 
 Route::get('/admin', function() {
 	return view('admin/home');
+})->name('admin');
+
+Route::get('/admin/productos', 'AdminController@getProducts')->name('getProducts');
+Route::get('/admin/pedidos', 'AdminController@getPedidos')->name('getPedidos');
+
+// Route::get('/admin/pedidos', function() {
+// 	return view('admin/pedidos');
+// })->name('admin');
+
+Route::get('/admin/clientes', function() {
+	return view('admin/clientes');
+})->name('admin');
+
+Route::get('/admin/codigo-de-descuento', function() {
+	return view('admin/cod_descuento');
+})->name('admin');
+
+Route::get('/admin/secciones', function() {
+	return view('admin/secciones');
+})->name('admin');
+
+Route::get('/admin/usuarios', function() {
+	return view('admin/usuarios');
 })->name('admin');
