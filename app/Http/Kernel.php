@@ -36,6 +36,13 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        // middleware groups para verificar si esta logueado y es admin
+        'adminAuth' => [
+            // Verificar si esta logueado
+            \Illuminate\Auth\Middleware\Authenticate::class,
+            // Verificar si es admin
+            \App\Http\Middleware\AdminAuthentication::class,
+        ],
 
         'api' => [
             'throttle:60,1',

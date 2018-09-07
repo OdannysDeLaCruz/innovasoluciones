@@ -15,18 +15,17 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_user')->unsigned();
+            // almaceno el id del usuario, pero tambien el nombre completo del usuario comprador
+            $table->integer('id_user');
+            $table->string('comprador');
+            // --------------------------------
+            $table->string('ref_venta');
             $table->string('direccion_envio');
-            $table->integer('id_modo_pago')->unsigned();
+            $table->string('modo_pago');
             $table->string('codigo_descuento')->nullable();
-            $table->integer('envio'); // 0 o 16000
-            $table->integer('estado_pedido');
+            $table->string('modo_envio');
+            $table->string('estado_pedido');
             $table->timestamp('fecha_pedido');
-
-            // $table->timestamps();
-
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_modo_pago')->references('id')->on('modo_pago')->onDelete('cascade');
         });
     }
 

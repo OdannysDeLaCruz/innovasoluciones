@@ -16,8 +16,6 @@ class VerificarPedidoController extends Controller
         $this->middleware('auth');
         
     }
-    // - VERIFICAR COBRO DE ENVIO
-    // - COBRAR IVA DEL PEDIDO
     
     public function verificar() {
         $cart = session('cart');
@@ -29,11 +27,7 @@ class VerificarPedidoController extends Controller
         // Hago descuento por el codigo ingresado por usuario, este codigo ya ha sido verificado por la funcion verificarCodigo
         $total_del_pedido = session('total_del_pedido');
         $descuento_peso   = session('descuento_peso') ? session('descuento_peso') : 0;
-        $total_con_descuento = $total_del_pedido - $descuento_peso;
-
-        // Cobro el iva
-        $iva = $total_con_descuento * 0.19; 
-        $total_pagar = number_format($total_con_descuento + $iva);
+        $total_pagar      = $total_del_pedido - $descuento_peso;
 
         return view('verificacion', 
             compact(
@@ -44,7 +38,8 @@ class VerificarPedidoController extends Controller
         );
     }
 
-    // - VERIFICAR CODIGO DE DESCUENTO
+    // VERIFICAR CODIGO DE DESCUENTO
+
     public function verificarCodigo(Request $request) {
         // Creo una variable para guardar el código usado, esto se hace para evitar que se vuelva a usar el mismo codigo dos veces y para llevar un conteo de cuantos codigos se han usado ya que solo se permite uno solo
 
@@ -105,27 +100,6 @@ class VerificarPedidoController extends Controller
         //guardo la notificacion del descuento a true
         session()->put('notificacion_codigo', true);
 
-        
-
         return redirect()->route('verificar')->with('noticia_descuento', 'Ha recibido un descuento de $' . number_format($descuento_peso, 2));
     }
-
-    // /*
-    // * VERIFICAR COSTO DE ENVÍO
-    // * Existen dos formas de entregar el pedido al cliente.
-    // * 1 - Envío a su domicilio (Se cobra el valor del envío).
-    // * 2 - Recogerlo en la tienda fisica del vendedor.
-    // */
-
-    // public function verificarEnvio(request $request) {
-    //     $tipo_envio = $request->input('tipo_envio');
-
-    //     // Verifico que tipo de envío se escogio.
-    //     // Si $tipo_envio = 1, cobrar el costo de envio en caso de tener, verificar si es envio gratis.
-    //     // Si $tipo_envio = 2, recoger en tienda, no cobrar envío.
-
-    //     // dd($tipo_envio);
-
-    //     return redirect()->route('payment');
-    // }
 }

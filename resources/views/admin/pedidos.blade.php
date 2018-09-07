@@ -102,12 +102,12 @@
 						@endif
 					</tbody>
 				</table>
-				<section class="paginacion_links">
-					@isset($misPedidos)
-						<p>Ver mas resultados </p>
+				@if($misPedidos->links())
+					<section class="paginacion_links">
+						<p class="text-muted">Página {{ $misPedidos->currentPage() }} de {{$misPedidos->total()}} resultados</p>
 						{{ $misPedidos->links() }}
-					@endisset
-				</section>
+					</section>
+				@endif
 			</section>
 		</section>
 	@endsection

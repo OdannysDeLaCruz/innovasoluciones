@@ -43,7 +43,7 @@ body {
 	border: 1px solid #0066ff;
 	color: #fff;
 }
-/*--ESTILOS DEL CARRITO DESPLEGABLE--*/
+/*--ESTILOS DEL CARRITO--*/
 
 .contenedor_carrito {
 	display: block;
@@ -90,7 +90,6 @@ body {
 .carrito_botones a, .btn_seguir_comprando a {
 	border: 1px solid #fff;
 	color: #fff;
-
 }
 .carrito_botones .btn_seguir_comprando a:hover {
 	background: #008AFF;
@@ -152,11 +151,10 @@ body {
 	text-align: center;
 	border-radius: 5px;
 	color: #666;
-
 	font-family: 'Roboto Condensed', sans-serif;
 }
 
-/*--FIN ESTILOS DEL CARRITO DESPLEGABLE--*/
+/*--FIN ESTILOS DEL CARRITO --*/
 
 /*---ESTILOS DE TARJETAS DE PRODUCTOS---*/
 /*--Mensaje de respuesta en caso de que no haya productos en una categoria--*/
@@ -326,7 +324,6 @@ body {
 	text-decoration: none;
 	color: #0066ff;
 }
-
 .nav_principal .cerrar_menu {
 	display: none;
 }
@@ -440,7 +437,6 @@ body {
 	color: #fff;	
 }
 
-
 /*--SECCION CARRUSEL--*/
 
 .seccion_categorias {
@@ -461,7 +457,6 @@ body {
 	color: #333;
 	font-size: 16px;
 }
-
 .seccion_categorias_link {
 	color: #1A96FF;
 	font-size: 15px;
@@ -469,7 +464,6 @@ body {
 .seccion_categorias_link:hover {
 	color: #1A96FF;	
 }
-
 .seccion_categorias_items {
 	max-width: 1200px;
 	margin: 20px auto;
@@ -493,7 +487,6 @@ body {
 	width: 100px;
 	height: 100px;
 	background: #0066FF;
-	/*background: linear-gradient(to right, #0066FF, #00FF42);*/
 	padding: 20px;
 	border-radius: 50%;
 	display: flex;
@@ -550,7 +543,6 @@ body {
 	overflow-x: scroll;
 	display: flex;
 	justify-content: space-between;
-
 	box-shadow: inset 0px -5px 20px rgba(0,0,0,0.8);
 }
 .seccion_nuevos_carrusel > .producto {
@@ -571,7 +563,6 @@ body {
 	padding: 50px 0;
 	background: #cccccc;
 	margin: 0;
-	
 }
 .seccion_productos {
 	background: #cccccc;
@@ -586,7 +577,6 @@ body {
 	text-transform: uppercase;
 	padding: 0 10px;
 }
-
 .seccion_algunos_productos_content,
 .seccion_productos_content {
 	max-width: 1300px;
@@ -674,19 +664,13 @@ body {
 	transform: scaleX(-1);
 	width: 350px;
 }
-
-/*--SECCION FOOTER--*/
-
 footer {
 	background: #151313;
 	padding: 20px;
 	color: #fff;
-	/*width: 100%;
-	position: absolute;
-	bottom: 0;*/
 }
 
-/*-----FIN PAGINA DE INICIO-----*/
+/*--FIN PAGINA DE INICIO--*/
 
 /*--ESTILOS DE PAGINA DE PRODUCTOS--*/
 
@@ -696,13 +680,11 @@ footer {
 	width: 100%;
 	height: auto;
 	position: relative;
-
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
 }
-
 .nav_categorias::-webkit-scrollbar {
 	background: #fff;
 	height: 15px;
@@ -712,7 +694,6 @@ footer {
 	background: linear-gradient(to right, #0256D4,#0997DA, #0ab1ff,#0997DA, #0256D4);
 	border: 2px solid #fff;
 }
-
 .nav_categorias a {
 	background: #fff;
 	font-size: 15px;
@@ -736,7 +717,6 @@ footer {
 .seccion_productos {
 	min-height: 100vh;
 }
-
 .seccion_productos_logo {
 	display: flex;
 	justify-content: flex-start;
@@ -814,7 +794,6 @@ footer {
 }
 #detalle_visualizador {
 	border: 2px solid #ccc;
-
 }
 .detalle_descripcion_img img {
 	width: 100%;
@@ -849,7 +828,6 @@ footer {
 	cursor: pointer;
 	padding: 2px;
 }
-
 .detalle_info {
 	width: 500px;
 	padding: 0px 20px; 
@@ -892,7 +870,6 @@ footer {
 .detalle_info_tags > a > .tag:hover {
 	background: #6363FF;
 	color: #fff;
-
 }
 .detalle_info_precio_anterior {
 	font-size: 16px;
@@ -908,7 +885,6 @@ footer {
 	color: #0CB418;	
 	margin-left: 10px;
 	text-decoration: none;	
-
 }
 .detalle_info_precio {
 	font-size: 18px;
@@ -921,14 +897,14 @@ footer {
 	display: inline;
 }
 .detalle_info_costo_envio {
-	margin-top: 20px;
+	margin: 10px 0;
 	font-size: 17px;
 	display: flex;
 	align-items: center;
 	font-weight: 400;
 	color: #0CB418;
 }
-.detalle_info_costo_envio .fa-bus {
+.detalle_info_costo_envio .icon_envio {
 	border: 2px solid #0CB418;
 	border-radius: 50%;
 	width: 40px;
@@ -938,20 +914,12 @@ footer {
 	justify-content: center;
 	align-items: center;
 }
-.detalle_info_tiempo_envio {
-	font-size: 17px;
-	font-weight: 400;
-	color: #9C9C9C;
-	margin-bottom: 20px;
-}
-
 .detalle_info_color, 
 .detalle_info_talla {
 	color: #9C9C9C;
 	margin-bottom: 20px;
 	border: 1px solid #ccc;
 }
-
 .detalle_info_btn_comprar {
 	margin-top: 30px;
 	align-self: center;
@@ -1115,7 +1083,6 @@ footer {
 /*--FIN ESTILOS DE PAGINA REGISTER--*/
 
 /*--ESTILOS DE PAGINA PAYMENT--*/
-
 .menu_proceso_pago {
 	margin: auto;
 	max-width: 800px;
@@ -1155,7 +1122,6 @@ footer {
 	background: #eee;
 	width: 100%;
 	margin: 0;
-	/*padding: 30px 0;*/
 }
 .seccion_payment_proceso {
 	background: tomato;
@@ -1238,7 +1204,6 @@ footer {
 	font-size: 16px;
 	color: #3E3E3E;
 	margin: 0;
-
 }
 .tarjeta_codigo_descuento > .codigo_descuento {
 	text-align: right;
@@ -1265,6 +1230,15 @@ footer {
 .tarjeta_resumen_pedido {
  	display: flex;
  	justify-content: flex-end;
+ 	flex-direction: column;
+}
+.tarjeta_resumen_pedido > .titulo_resumen_table {
+ 	width: 100%;
+ 	text-align: center;
+ 	padding: 10px;
+ 	margin: 0 0 10px;
+ 	background: #5795E2;
+ 	color: #fff;
 }
 .tarjeta_resumen_pedido > .resumen_table {
  	width: 500px;
@@ -1291,8 +1265,6 @@ footer {
 .tarjeta_ver_detalle_pedido {
 	display: flex;
 }
-
-
 .tarjeta_form_btn_payu {
 	display: flex;
 	justify-content: center;
@@ -1310,7 +1282,6 @@ footer {
 	justify-content: space-between;
 	align-items: center;
 }
-
 .tarjeta_form_btn_payu > .btn_datos_envio:hover {
 	background: #91AA06;
 	cursor: pointer;
@@ -1320,12 +1291,6 @@ footer {
 	width: 50px;
 	margin-left: 10px;
 }
-/*.tarjeta_form_btn_payu > .btn_datos_envio > a > i {
-	margin: 0 10px;
-}*/
-
-/*--EESTILOS DE ENVIAR A --*/
-
 .tarjeta_direccion_envio {
 	display: flex;
 	flex-direction: row;
@@ -1378,7 +1343,6 @@ footer {
 	margin-top: 10px;
 	border-radius: 5px;
 	overflow: hidden;
-
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -1400,18 +1364,7 @@ footer {
 .btn_opcion_envio > .text_opcion_envio {
 	text-align: left;
 }
-.btn_opcion_envio > .tarjeta_envio_domicilio_valor {
-	color: #A1BD04;
-	font-size: 19px;
-	font-weight: bold;
-}
-.tarjeta_tipo_envio > .tarjeta_envio_domicilio > .tarjeta_envio_domicilio_valor {
-	color: #4ABB59;
-	font-size: 18px;
-}
-
-
-/*--FIN ESTILOS DE PAGINA PAYMENT--*/
+/*--FIN ESTILOS DE PAGINA VERIFICACIÓN--*/
 
 /*--ESTILOS DE PAGINA PERFIL DE USUARIOS--*/
 
@@ -1475,7 +1428,6 @@ footer {
 	font-size: 20px;
 	color: #333;
 	font-weight: bold;
-	/*font-style: italic;*/
 	font-family: 'Roboto Condensed', sans-serif;
 
 }
@@ -1521,7 +1473,6 @@ footer {
 .compras {
 	padding: 0px;
 }
-
 .compras_titulo_total {
 	font-family: 'Roboto Condensed', sans-serif;
 }
@@ -1624,7 +1575,6 @@ label.compras_pedido_info_detalles {
 .facturas table {
 	min-width: 700px;
 }
-
 .facturas_titulos th {
 	background: lightblue;
 	font-size: 16px;
@@ -1645,5 +1595,65 @@ label.compras_pedido_info_detalles {
 	color: springgreen;
 	font-weight: bold;
 }
-/*--FIN ESTILOS DE PAGINA PERFIL DE USUARIOS--
+/*--FIN ESTILOS DE PAGINA PERFIL DE USUARIOS--*/
 
+/*--ESTILOS DE PAGINA DE RESPUESTA DE TRANSACCIÓN--*/
+.respuesta_trans {
+	/*background: red;*/
+}
+.respuesta_trans .respuesta_trans_txt {
+	background: #fff;
+	width: 300px;
+}
+.respuesta_trans .respuesta_trans_txt .respuesta_trans_txt_titulo {
+	font-size: 25px;
+	text-align: center;
+	margin: 0;
+}
+.respuesta_trans .respuesta_trans_txt .icono_respuesta {
+	font-size: 60px;
+	color: #39E245;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	border: 8px solid #39E245;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px auto;
+}
+.respuesta_trans .respuesta_trans_txt .respuesta_trans_txt_transaccion,
+.respuesta_trans .respuesta_trans_txt .respuesta_trans_txt_refventa {
+	font-size: 18px;
+	text-align: center;
+}
+.respuesta_trans .respuesta_trans_table .respuesta_trans_table_costo {
+	background: #B7D3E8;
+	padding: 10px;
+	text-align: center;
+	color: #333;
+	font-weight: bold;
+	font-size: 20px;
+}
+.respuesta_trans .respuesta_trans_table .respuesta_trans_table_titulo {
+	font-size: 18px;
+	margin: 0;
+	padding: 10px 0;
+	text-align: center;
+}
+.respuesta_trans_btn_opcion {
+	display: flex;
+	justify-content: space-between;
+}
+.respuesta_trans_btn_opcion > button {
+	position: relative;
+	border: none;
+	border-radius: 125px;
+	padding: 10px 20px;
+	background: #008AFF;
+}
+.respuesta_trans_btn_opcion > button a {
+	color: #fff;
+}
+
+/*--FIN ESTILOS DE PAGINA DE RESPUESTA DE TRANSACCIÓN--*/

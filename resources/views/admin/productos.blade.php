@@ -101,10 +101,12 @@
 						@endif										
 					</tbody>
 				</table>
-				<section class="paginacion_links">
-					<p>Ver mas resultados </p>
-					{{ $productos->links() }}					
-				</section>
+				@if($productos->links())
+					<section class="paginacion_links">
+						<p class="text-muted">Página {{ $productos->currentPage() }} de {{$productos->total()}} resultados</p>
+						{{ $productos->links() }}
+					</section>
+				@endif
 			</section>
 		</section>
 	@endsection

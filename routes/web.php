@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'PrincipalController@index');
+Route::get('/', 'PrincipalController@index')->name('home');
 
 // RUTAS PARA PRODUCTOS
 Route::get('/productos', 'PrincipalController@showProductos')->name('productos');
@@ -57,42 +57,29 @@ Route::get('/verificacion', 'VerificarPedidoController@verificar')->name('verifi
 
 Route::post('/verificarCodigo', 'VerificarPedidoController@verificarCodigo')->name('verificarCodigo');
 
-// Route::post('/verificarEnvio', 'PaymentController@verificarEnvio')->name('payment');
-
 Route::post('checkout/buying/payment', 'PaymentController@payment')->name('payment');
 
-Route::get('/response', function() {
-	return view('response');
-});
+Route::get('/response', 'ConfirmationController@response');
+
+Route::post('/confirmation', 'ConfirmationController@confirmation');
 
 // RUTAS PARA AUTENTICACION DE USUARIOS
 Auth::routes();
 
 // 	RUTAS PARA ADMIN - PANEL DE ADMINISTRACION
+Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function(){
 
-Route::get('/admin', function() {
-	return view('admin/home');
-})->name('admin');
+	Route::get('/', 'AdminController@index')->name('admin');
 
-Route::get('/admin/productos', 'AdminController@getProducts')->name('getProducts');
-Route::get('/admin/pedidos', 'AdminController@getPedidos')->name('getPedidos');
+	Route::get('/productos', 'AdminController@getProductos')->name('getProductos');
 
-// Route::get('/admin/pedidos', function() {
-// 	return view('admin/pedidos');
-// })->name('admin');
+	Route::get('/pedidos', 'AdminController@getPedidos')->name('getPedidos');
 
-Route::get('/admin/clientes', function() {
-	return view('admin/clientes');
-})->name('admin');
+	Route::get('/clientes', 'AdminController@getClientes')->name('getClientes');
 
-Route::get('/admin/codigo-de-descuento', function() {
-	return view('admin/cod_descuento');
-})->name('admin');
+	Route::get('/codigos', 'AdminController@getCodigos')->name('getCodigos');
 
-Route::get('/admin/secciones', function() {
-	return view('admin/secciones');
-})->name('admin');
+	Route::get('/secciones', 'AdminController@getSecciones')->name('getSecciones');
 
-Route::get('/admin/usuarios', function() {
-	return view('admin/usuarios');
-})->name('admin');
+	Route::get('/usuarios', 'AdminController@getUsuarios')->name('getUsuarios');
+});

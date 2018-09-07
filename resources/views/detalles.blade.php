@@ -66,9 +66,11 @@
 					Ahora <p>${{ number_format($total, 2) }}</p>
 				</span>
 				<span class="detalle_info_costo_envio">
-					<i class="fa fa-bus"></i>Envío gratis a todo Colombia
+					<i class="fa fa-truck icon_envio"></i>Envío gratis a todo Colombia
 				</span>
-				<span class="detalle_info_tiempo_envio">Llega dentro de 0 días</span>
+				<span class="detalle_info_costo_envio">
+					<i class="fa fa-hourglass-half icon_envio"></i>Tiempo de entrega: {{ $detalle['tiempo_entrega'] }}
+				</span>
 				<!-- OPCIONAL SI ES ALGUN ARTICULO QUE REQUIERA DE TALLAS, COMO ZAPATOS, CAMISAS ETC -->
 				
 				<!-- <div class="detalle_info_btn_comprar botones_innova">
@@ -80,18 +82,24 @@
 					{{ csrf_field() }}
 					<input type="hidden" class="inputs" id="id" name="id" value="{{ $detalle['id'] }}">
 					<input type="hidden" class="inputs" id="descripcion" name="descripcion" value="{{ $detalle['descripcion'] }}">
-					<label for="colores">Colores</label>
-					<select id="colores" name="colores" class="detalle_info_color" required>
-						<option value="Rojo">Rojo</option>
-						<option value="Azul">Azul</option>
-						<option value="Negro">Negro</option>
-					</select>
-					<label for="tallas">Tallas</label>
-					<select id="tallas" name="tallas" class="detalle_info_talla" required>
-						<option value="28">28</option>
-						<option value="30">30</option>
-						<option value="32">32</option>
-					</select>
+					@empty(!$detalle['colores'])
+						<label for="colores">Colores</label>
+						<select id="colores" name="colores" class="detalle_info_color" required>
+							@php $colores = explode( ',', $detalle['colores'] ); @endphp
+							@foreach($colores as $color)
+								<option value="{{$color}}">{{$color}}</option>					
+							@endforeach
+						</select>
+					@endempty
+					@empty(!$detalle['tallas'])
+						<label for="tallas">Tallas</label>
+						<select id="tallas" name="tallas" class="detalle_info_talla" required>
+							@php $tallas = explode( ',', $detalle['tallas'] ); @endphp
+							@foreach($tallas as $talla)
+								<option value="{{$talla}}">{{$talla}}</option>					
+							@endforeach
+						</select>
+					@endempty
 					<button type="submit" id="btn-agregar-producto" class="btn btn-primary detalle_info_btn_comprar">Comprar</button>
 				</form>
 			</section>

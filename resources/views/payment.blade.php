@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -40,7 +39,15 @@
 				  	<input name="currency"      type="hidden"  value="{{ $dataPayu['currency'] }}" >
 				  	<input name="signature"     type="hidden"  value="{{ $dataPayu['signature'] }}"  >
 				  	<input name="test"          type="hidden"  value="{{ $dataPayu['test'] }}" >
+				  	
+				  	<input name="buyerFullName" type="hidden"  value="{{ $dataPayu['buyerFullName'] }}" >
 				  	<input name="buyerEmail"    type="hidden"  value="{{ $dataPayu['buyerEmail'] }}" >
+				  	<input name="telephone"    type="hidden"  value="{{ $dataPayu['telephone'] }}" >
+				  	
+				  	<input name="shippingAddress" type="hidden"  value="{{ $dataPayu['shippingAddress'] }}" >
+				  	<input name="shippingCity"  type="hidden"  value="{{ $dataPayu['shippingCity'] }}" >
+				  	<input name="shippingCountry" type="hidden"  value="{{ $dataPayu['shippingCountry'] }}" >
+				  	
 				  	<input name="responseUrl"   type="hidden"  value="{{ $dataPayu['responseUrl'] }}" >
 				  	<input name="confirmationUrl" type="hidden"  value="{{ $dataPayu['confirmationUrl'] }}" >
 
@@ -55,20 +62,13 @@
 		</div>	
 		<div class="col-md-4 seccion_resumen_pedido">
 			<section class="payment_proceso_tarjeta tarjeta_resumen_pedido">
+				<span class="payment_proceso_tarjeta titulo_resumen_table">
+					<strong>Resumen de la pedido</strong>
+				</span>
 				<table class="table table-bordered resumen_table">
 					<tr>
-				    	<th>Total pedido</th>
-				    	<td>${{ $total_pedido }}</td>
-				  	</tr>
-				  	<tr>
-				    	<th>Envío</th>
-				    	<td>
-				    		@isset($costo_envio)
-				    			${{ number_format($costo_envio, 0, '', '.') }}
-				    		@else
-				    			{{ '-' }}
-				    		@endisset
-				    	</td>
+				    	<th>Producto</th>
+				    	<td>${{ number_format( $total_pagar, 0, '', '.')  }}</td>
 				  	</tr>
 				  	<tr>
 				    	<th style="font-weight: 400;">TOTAL A PAGAR</th>

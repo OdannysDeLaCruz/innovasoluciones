@@ -44,7 +44,7 @@
 									</a>
 									<label class="compras_pedido_info_monto">
 										$ {{ number_format($detalle['precio'], 2) }} x {{ $detalle['cantidad'] }} unidad(es), 
-										<b>{{ $detalle['descuento_porcentual'] }} % desc</b></label>
+										<b>-{{ $detalle['descuento_porcentual'] }}%</b></label>
 
 									<label class="compras_pedido_info_monto">
 										<?php 

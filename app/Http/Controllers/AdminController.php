@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function index() {
-
+        return view('admin.home');
     }
-    public function getProducts() {
-    	// Productos
+    public function getProductos() {
+        // Productos
         $productos = App\Producto::paginate(20);
         return view('admin.productos', compact('productos'));
     }
@@ -60,6 +60,18 @@ class AdminController extends Controller
         	$pedidos[] = $pedido;
         }
         return view('admin.pedidos', compact('pedidos', 'misPedidos'));
+    }
+    public function getClientes() {
+        return view('admin.clientes');
+    }
+    public function getCodigos() {
+        return view('admin.cod_descuento');
+    }
+    public function getSecciones() {
+        return view('admin.secciones');
+    }
+    public function getUsuarios() {
+        return view('admin.usuarios');
     }
 }
 

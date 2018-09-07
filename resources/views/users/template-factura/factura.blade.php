@@ -204,13 +204,12 @@
 	<div class="info">
 		<div class="info_factura">
 			<div>Numero factura: {{ $datos_factura['id'] }}</div>
-			<div><b>Fecha limite de pago: 03/05/2018</b> </div>
 			<div>Metodo de pago: Payu </div>
 			<div>Referencia de pago: <b>75318670-53</b></div>
 		</div>
 		<div class="info_importante">
 			<h1>¡IMPORTANTE!</h1>
-			<p>El pago de esta factura debe realizarse antes del tiempo limite de vencimiento, si no es así, el pedido realizado sera borrado de su cuenta. </p>
+			<p><b>Fecha limite de pago: 7 días.</b> <small>El pago de esta factura debe realizarse antes del tiempo limite, de lo contrario el pedido sera borrado de su cuenta. Si usted ya realizo el pago, omita este mensaje.</small></p>
 		</div>
 	</div>
 	

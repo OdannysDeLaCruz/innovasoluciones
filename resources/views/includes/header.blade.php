@@ -8,15 +8,6 @@
             <input class="input_buscador_producto" type="text" name="search" placeholder="Busca por categorias" value="@isset($search) {{ $search }} @endisset" required>
             <button class="btn_buscar" type="submit"><span class="fa fa-search"></span></button>
         </form>
-<!-- 
-        <div class="formulario_buscar_producto">
-			<input class="input_buscador_producto" type="text" name="search" placeholder="Busca por categorias" value="@isset($search) {{ $search }} @endisset" required>
-            
-			<button class="btn_buscar" type="submit"><span class="fa fa-search"></span></button>
-		</div> -->
-
-
-
 	</div>
 	<nav class="nav_principal">
 		<span class="fa fa-times cerrar_menu" id="cerrar_menu"></span>
@@ -38,7 +29,7 @@
                         	<strong>{{ Auth::user()->nombre }} {{ Auth::user()->apellido }}</strong>
                     	</a>
                         @if(Auth::user()->id_rol == 1)
-                        	<a class="dropdown-item" style="font-size: 14px;" href="{{ route('admin') }}">
+                        	<a target="blank" class="dropdown-item" style="font-size: 14px;" href="{{ route('admin') }}">
                             	{{ __('Panel de administración') }}
                         	</a>
                         @else

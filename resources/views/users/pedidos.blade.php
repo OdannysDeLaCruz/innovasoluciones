@@ -26,7 +26,7 @@
 				@if(isset($mis_pedidos))
 					@foreach($mis_pedidos as $pedidos)
 						<div class="compras_pedido">
-						<label class="compras_pedido_fecha">Fecha del pedido: {{ $pedidos['created_at'] }}</label>
+						<label class="compras_pedido_fecha">Fecha del pedido: {{ $pedidos['fecha_pedido'] }}</label>
 						<!-- <label class="compras_pedido_estado">Pedido facturado <i class="fa fa-check-circle"></i></label> -->
 
 						<label class="compras_pedido_info">

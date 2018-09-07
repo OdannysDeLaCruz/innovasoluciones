@@ -31,16 +31,14 @@
 							<tr class="facturas_titulos">
 								<th>Fecha de la factura</th>
 								<th>Detalles</th>
-								<!-- <th>Monto</th> -->
 								<th>Estado</th>
 							</tr>
 						</thead>
 					@foreach($pedidos_pendientes as $factura_pendiente)
 						<tbody>
 							<tr class="facturas_datos">
-								<td>{{$factura_pendiente['created_at']}}</td>
+								<td>{{$factura_pendiente['fecha_pedido']}}</td>
 								<td><a target="_blanc" href="/perfil/facturas/{{$factura_pendiente['id']}}">Ver</a> | <a href="/perfil/facturas/descargar/{{$factura_pendiente['id']}}">Descargar</a></td>
-								<!-- <td>$ 200.000 COP</td> -->
 								<td class="facturas_datos_estado_sin_pagar">Sin pagar</td>
 							</tr>
 						</tbody>
@@ -60,16 +58,14 @@
 							<tr class="facturas_titulos">
 								<th>Fecha de la factura</th>
 								<th>Detalles</th>
-								<!-- <th>Monto</th> -->
 								<th>Estado</th>
 							</tr>
 						</thead>
 					@foreach($pedidos_pagados as $factura_pagada)
 						<tbody>
 							<tr class="facturas_datos">
-								<td>{{$factura_pagada['created_at']}}</td>
+								<td>{{$factura_pagada['fecha_pedido']}}</td>
 								<td><a target="_blanc" href="/perfil/facturas/{{$factura_pagada['id']}}">Ver</a> | <a href="/perfil/facturas/descargar/{{$factura_pagada['id']}}">Descargar</a></td>
-								<!-- <td>$ 200.000 COP</td> -->
 								<td class="facturas_datos_estado_pagadas">Pagadas</td>
 							</tr>
 						</tbody>

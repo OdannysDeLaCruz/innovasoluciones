@@ -1,95 +1,103 @@
-<?php
-$ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
-$merchant_id = $_REQUEST['merchantId'];
-$referenceCode = $_REQUEST['referenceCode'];
-$TX_VALUE = $_REQUEST['TX_VALUE'];
-$New_value = number_format($TX_VALUE, 1, '.', '');
-$currency = $_REQUEST['currency'];
-$transactionState = $_REQUEST['transactionState'];
-$firma_cadena = "$ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
-$firmacreada = md5($firma_cadena);
-$firma = $_REQUEST['signature'];
-$reference_pol = $_REQUEST['reference_pol'];
-$cus = $_REQUEST['cus'];
-$extra1 = $_REQUEST['description'];
-$pseBank = $_REQUEST['pseBank'];
-$lapPaymentMethod = $_REQUEST['lapPaymentMethod'];
-$transactionId = $_REQUEST['transactionId'];
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-if ($_REQUEST['transactionState'] == 4 ) {
-	$estadoTx = "Transacción aprobada";
-}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/estilos.css') }}" >
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/media-query.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
+	<title> Productos | Confirmación de su compra</title>
+</head>
+<body>
+	<!-- SECCION HEADER -->
+	@include('includes/header')
+	<!-- FIN HEADER -->
+	@if (strtoupper($firma) == strtoupper($firmacreada))
 
-else if ($_REQUEST['transactionState'] == 6 ) {
-	$estadoTx = "Transacción rechazada";
-}
+		<section class="payment_proceso_tarjeta respuesta_trans">
+			<section class="payment_proceso_tarjeta respuesta_trans_txt">
+				@if($transactionState == 4)
+					<h1 class="respuesta_trans_txt_titulo">{{ $estadoTx }}</h1>
+					<span style="
+					color:orange; 
+					border: 8px solid #39E245;" 
+					class="fa fa-check icono_respuesta"></span>					
+				@elseif($transactionState == 7)
+					<h1 class="respuesta_trans_txt_titulo">{{ $estadoTx }}</h1>
+					<p style="
+					font-size: 15px; 
+					text-align: center;"
+					class="text-muted">Nos pondremos en contacto con usted cuando haya respuesta de su pago.</p>
+					<span style="color:orange; border: 8px solid orange;" class="fa fa-check icono_respuesta"></span>
+				@endif
 
-else if ($_REQUEST['transactionState'] == 104 ) {
-	$estadoTx = "Error";
-}
+				<h1 class="respuesta_trans_txt_transaccion"><strong>Transacción: </strong>{{ $reference_pol }}</h1>
+				<h1 class="respuesta_trans_txt_refventa"><strong>Ref. venta: </strong>{{ $referenceCode }}</h1>
+			</section>
+			<section class="payment_proceso_tarjeta respuesta_trans_table">
+				<section class="respuesta_trans_table_costo">${{ number_format($TX_VALUE, 0, ',', '.') }} {{ $currency }}</section>
+				<h1 class="respuesta_trans_table_titulo">Detalles de su compra</h1>
+				<table class="table table-bordered">
 
-else if ($_REQUEST['transactionState'] == 7 ) {
-	$estadoTx = "Transacción pendiente";
-}
+					@if($pseBank != null)		
+						<tr>
+							<td>cus </td>
+							<td>{{ $cus }}</td>
+						</tr>
+						<tr>
+							<td>Banco </td>
+							<td>{{ $pseBank }}</td>
+						</tr>
+					@endif
+					<tr>
+						<td>Descripción de venta</td>
+						<td>{{ $extra1 }}</td>
+					</tr>
+					<tr>
+						<td>Dirección de envio</td>
+						<td>{{ $direccion_envio }}</td>
+					</tr>
+					<tr>
+						<td>Forma de entrega</td>
+						<td>{{ $forma_entrega }}</td>
+					</tr>
+					<tr>
+						<td>Medio de pago</td>
+						<td>{{ $lapPaymentMethod }} {{ $lapPaymentMethodType }}</td>
+					</tr>
+					<tr>
+						<td>Fecha</td>
+						<td></td>
+					</tr>
+				</table>
+			</section>
+			<section class="respuesta_trans_btn_opcion">
+				<button>
+					<a href="{{ route('productos') }}">Ver mas productos</a>				
+				</button>
+				<button>
+					<a href="{{ route('pedidos') }}">Ver mis compras</a>
+				</button>
+			</section>
+		</section>
+	
+	@else
+		<section class="payment_proceso_tarjeta">
+			<h1>Error validando firma digital.</h1>		
+		</section>
+	@endif
 
-else {
-	$estadoTx=$_REQUEST['mensaje'];
-}
 
+	<!-- SECCION FOOTER -->
+	@include('includes/footer')	
+	<!-- FIN FOOTER -->
+	
+	<!-- SECCION SCRIPTS JS -->
+	@include('includes/scripts')
+	<!-- FIN SCRIPTS JS -->
+	
+</body>
+</html>
 
-if (strtoupper($firma) == strtoupper($firmacreada)) { ?>
-	<h2>Resumen Transacción</h2>
-	<table>
-		<tr>
-			<td>Estado de la transaccion</td>
-			<td><?php echo $estadoTx; ?></td>
-		</tr>
-		<tr>
-			<td>ID de la transaccion</td>
-			<td><?php echo $transactionId; ?></td>
-		</tr>
-		<tr>
-			<td>Referencia de la venta</td>
-			<td><?php echo $reference_pol; ?></td>
-		</tr>
-		<tr>
-			<td>Referencia de la transaccion</td>
-			<td><?php echo $referenceCode; ?></td>
-		</tr>
-		<tr>
-		<?php
-			if($pseBank != null) { ?>
-		
-			<td>cus </td>
-			<td><?php echo $cus; ?> </td>
-		</tr>
-		<tr>
-			<td>Banco </td>
-			<td><?php echo $pseBank; ?> </td>
-		</tr>
-	<?php
-} ?>
-		<tr>
-			<td>Valor total</td>
-			<td>$<?php echo number_format($TX_VALUE, 2); ?></td>
-		</tr>
-		<tr>
-			<td>Moneda</td>
-			<td><?php echo $currency; ?></td>
-		</tr>
-		<tr>
-			<td>Descripción</td>
-			<td><?php echo ($extra1); ?></td>
-		</tr>
-		<tr>
-			<td>Entidad:</td>
-			<td><?php echo ($lapPaymentMethod); ?></td>
-		</tr>
-	</table>
-<?php
-}
-else { ?>
-	<h1>Error validando firma digital.</h1>
-<?php } ?>
-
-<a href="{{ route('productos') }}">Ver mas productos</a>

@@ -86,6 +86,8 @@ class PrincipalController extends Controller
             $tags = explode( ',', $product->tags );
         }
 
+        // dd($producto);
+
         return view('detalles', compact('producto', 'imagenes', 'tags'));        
     }
 }

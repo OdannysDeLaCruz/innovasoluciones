@@ -137,7 +137,7 @@
 						<span class="direccion_envio_texto">
 							<b> {{ Auth::user()->direccion }} </b>
 							<small>
-								{{ Auth::user()->ciudad }} - {{ Auth::user()->barrio }} - {{ Auth::user()->pais }}							
+								{{ Auth::user()->barrio }} - {{ Auth::user()->ciudad }} - {{ Auth::user()->pais }}							
 							</small>
 						</span>
 					</div>
@@ -154,11 +154,11 @@
 							<button class="btn_opcion_envio">
 								<span class="text_opcion_envio">
 									Normal a domicilio <br>
-									<small>Llega dentro de 0 días despues de efectuarse el pago</small>
+									<!-- <small>Llega dentro de 0 días despues de efectuarse el pago</small> -->
 								</span>
-								<span class="tarjeta_envio_domicilio_valor">
+								<!-- <span class="tarjeta_envio_domicilio_valor">
 									$16.000
-								</span>
+								</span> -->
 							</button>
 						</form>
 					</section>
@@ -188,23 +188,16 @@
 		</div>
 		<div class="col-md-4 seccion_resumen_pedido">
 			<section class="payment_proceso_tarjeta tarjeta_resumen_pedido">
+				<span class="payment_proceso_tarjeta titulo_resumen_table">
+					<strong>Resumen del pedido</strong>
+				</span>
 				<table class="table table-bordered resumen_table">
 					<tr>
 				    	<th>Producto</th>
-				    	<td>${{ number_format( $total_del_pedido, 0, '', '.')  }}</td>
+				    	<td>${{ number_format( $total_pagar, 0, '', '.')  }}</td>
 				  	</tr>
 				  	<tr>
-				    	<th>Envío</th>
-				    	<td>
-				    		@isset($envio_pedido)
-				    			{{ $envio_pedido }}
-				    		@else
-				    			{{ '-' }}
-				    		@endisset
-				    	</td>
-				  	</tr>
-				  	<tr>
-				    	<th style="font-weight: 400;">TOTAL A PAGAR <small>(+ iva incluido)</small></th>
+				    	<th style="font-weight: 400;">TOTAL A PAGAR</th>
 				    	<td>${{  number_format($total_pagar, 0, '', '.') }}</td>
 				  	</tr>
 				</table>

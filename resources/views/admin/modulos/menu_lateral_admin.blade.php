@@ -29,12 +29,12 @@
 				<span class="items_text">clientes</span>
 				<a href="/admin/clientes" class="items_link"></a>
 			</li>
-			<li class="items  @yield('codigo-de-descuento')">
+			<li class="items  @yield('codigos')">
 				<span class="items_icon">
 					<img class="cod_desc" src="{{ asset('img/logos/svg/admin/codigo-de-descuento.svg') }}">	
 				</span>
 				<span class="items_text">códigos de descuento</span>				
-				<a href="/admin/codigo-de-descuento" class="items_link"></a>
+				<a href="/admin/codigos" class="items_link"></a>
 			</li>
 			<li class="items  @yield('secciones')">
 				<span class="items_icon">
@@ -47,7 +47,7 @@
 				<span class="items_icon">
 					<img class="items_icon" src="{{ asset('img/logos/svg/admin/usuarios.svg') }}">	
 				</span>
-				<span class="items_text">usuarios</span>
+				<span class="items_text">usuarios del sistema</span>
 				<a href="/admin/usuarios" class="items_link"></a>
 			</li>
 		</ul>

@@ -15,8 +15,7 @@ class UserController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
@@ -29,7 +28,7 @@ class UserController extends Controller
         $id_user = Auth::user()->id;
         $mis_pedidos = App\Pedido::select(
                             'pedidos.id', 
-                            'pedidos.created_at',
+                            'pedidos.fecha_pedido',
                             'pedidos.estado_pedido', 
                             'pedidos.direccion_envio', 
                             'pedidos.codigo_descuento',
@@ -92,7 +91,7 @@ class UserController extends Controller
         
         function getPedidos($estado) {
             $id_user = Auth::user()->id;
-            $pedidos = App\Pedido::select('id', 'direccion_envio', 'created_at')
+            $pedidos = App\Pedido::select('id', 'direccion_envio', 'fecha_pedido')
                             ->where('id_user', $id_user)
                             ->where('estado_pedido', $estado)
                             ->get();
@@ -123,7 +122,7 @@ class UserController extends Controller
             $datos_factura['modo_pago']        = $dato->modo_pago;
             $datos_factura['codigo_descuento'] = $dato->codigo_descuento;
             $datos_factura['envio']            = $dato->envio;
-            $datos_factura['fecha_pedido']     = $dato->created_at;
+            $datos_factura['fecha_pedido']     = $dato->fecha_pedido;
         }
         //Datos de los detalles de la factura
         $detalles_factura = App\DetallePedido::select(

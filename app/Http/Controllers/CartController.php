@@ -24,38 +24,6 @@ class CartController extends Controller
         return view('carrito', compact('cart'));
     }
     
-    // Agragar item al carrito
-    // public function add($id, $descripcion) {
-
-    // 	$producto = App\Producto::select('id', 'descripcion', 'imagen', 'precio', 'descuento', 'tamaño', 'color')->where('id', $id)->where('descripcion', $descripcion)->get();
-
-    // 	foreach ($producto as $prod) {
-    // 		$dato['id']           = $prod->id;
-    // 		$dato['descripcion']  = $prod->descripcion;
-    // 		$dato['imagen']       = $prod->imagen;
-    // 		$dato['precio']       = $prod->precio;
-    // 		$dato['cantidad']     = 1;
-    // 		$dato['descuento_%']  = $prod->descuento;
-
-    // 		$total                  = $dato['precio'] * $dato['cantidad'];
-    // 		$dato['descuento_peso'] = $total * ($dato['descuento_%'] / 100);
-    // 		$dato['total']          = $total - $dato['descuento_peso'];
-
-    // 		// Para cuando se verifique el codigo de descuento
-    // 		$dato['descuento_codigo'] = 0;
-
-    // 		$dato['tamaño']       = $prod->tamaño;
-    // 		$dato['color']        = $prod->color;
-    // 	}
-
-    //     $cart = session('cart');
-    //     $cart[$dato['id']] = $dato;
-    //     session()->put('cart', $cart);
-    //     // Sacar total del pedido
-    //     $this->total();
-    //     return redirect()->route('verificar');
-    // }
-
     // Agragar item al carrito, metodo post
     public function add(Request $request) {
 
@@ -64,7 +32,7 @@ class CartController extends Controller
         $colorEscogido = $request->input('colores');
         $tallaEscogido = $request->input('tallas');
 
-        $producto = App\Producto::select('id', 'descripcion', 'imagen', 'precio', 'descuento', 'tamaño', 'color')->where('id', $id)->where('descripcion', $descripcion)->get();
+        $producto = App\Producto::select('id', 'descripcion', 'imagen', 'precio', 'tiempo_entrega', 'descuento')->where('id', $id)->where('descripcion', $descripcion)->get();
 
         foreach ($producto as $prod) {
             $dato['id']           = $prod->id;
@@ -73,6 +41,7 @@ class CartController extends Controller
             $dato['precio']       = $prod->precio;
             $dato['cantidad']     = 1;
             $dato['descuento_%']  = $prod->descuento;
+            $dato['tiempo_entrega']  = $prod->tiempo_entrega;
 
             $total                  = $dato['precio'] * $dato['cantidad'];
             $dato['descuento_peso'] = $total * ($dato['descuento_%'] / 100);
@@ -81,8 +50,8 @@ class CartController extends Controller
             // Para cuando se verifique el codigo de descuento
             $dato['descuento_codigo'] = 0;
 
-            $dato['color']       = $colorEscogido;
-            $dato['talla']        = $tallaEscogido;
+            $dato['color'] = $colorEscogido;
+            $dato['talla'] = $tallaEscogido;
         }
 
         $cart = session('cart');
