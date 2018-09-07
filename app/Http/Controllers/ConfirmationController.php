@@ -89,7 +89,7 @@ class ConfirmationController extends Controller
 
     	if($state_pol == 4) {
     		App\Pedido::create([ 
-		        'id_user' => 2,
+		        'id_user' => Auth::user()->id,
 	            'comprador' => $nickname_buyer,
 	            'ref_venta' => $reference_sale,
 	            'direccion_envio' => $shipping_city,

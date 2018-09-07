@@ -32,7 +32,7 @@ class UserController extends Controller
                             'pedidos.estado_pedido', 
                             'pedidos.direccion_envio', 
                             'pedidos.codigo_descuento',
-                            'pedidos.id_modo_pago')
+                            'pedidos.modo_pago')
                         ->where('pedidos.id_user', $id_user)
                         ->get();
         return view('users.pedidos', compact('mis_pedidos'));
