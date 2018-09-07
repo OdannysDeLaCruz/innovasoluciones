@@ -97,8 +97,8 @@ class PaymentController extends Controller
         $dataPayu['shippingCity'] = Auth::user()->ciudad;
         $dataPayu['shippingCountry'] = 'CO';
 
-        $dataPayu['responseUrl'] = "http://www.innovasoluciones.com/response";
-        $dataPayu['confirmationUrl'] = "http://www.innovasoluciones.com/confirmation";
+        $dataPayu['responseUrl'] = "http://innovasoluciones.herokuapp.com/response";
+        $dataPayu['confirmationUrl'] = "http://innovasoluciones.herokuapp.com/confirmation";
 
         return view('payment', 
             compact(
