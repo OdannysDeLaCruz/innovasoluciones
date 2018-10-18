@@ -26,6 +26,7 @@ class CreateProductosTable extends Migration
             $table->string('colores')->nullable(); //Colores disponibles del articulo separados por comas (verde, rojo, negro) etc...
             $table->string('tiempo_entrega');
 
+            $table->boolean('imagenDescripcion')->nullable(); // Columna para especificar si tiene descripción por imagenes
             $table->integer('cant_disponible'); //0 = no disponible
             $table->timestamp('fecha_creado');
             // $table->timestamps();
