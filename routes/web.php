@@ -16,7 +16,10 @@ Route::get('/', 'PrincipalController@index')->name('home');
 // RUTAS PARA PRODUCTOS
 Route::get('/productos', 'PrincipalController@showProductos')->name('productos');
 
-Route::get('/productos/{id}-{descripcion}', 'PrincipalController@showDetalles')->name('showDetalles');
+// Descripción del producto 
+Route::get('/productos/{id}-{descripcion}', 'PrincipalController@seleccionarDescripcion')->name('seleccionarDescripcion');
+// Detalle del producto y boton para comprar
+Route::get('/productos/{id}-{descripcion}/detalle-compra', 'PrincipalController@showDetalles')->name('showDetalles');
 
 Route::get('/productos/{seccion?}', 'PrincipalController@showCategoriaProductos');
 
@@ -66,12 +69,16 @@ Route::post('/confirmation', 'ConfirmationController@confirmation');
 // RUTAS PARA AUTENTICACION DE USUARIOS
 Auth::routes();
 
-// 	RUTAS PARA ADMIN - PANEL DE ADMINISTRACION
+// RUTAS PARA ADMIN - PANEL DE ADMINISTRACION
 Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function(){
 
 	Route::get('/', 'AdminController@index')->name('admin');
 
 	Route::get('/productos', 'AdminController@getProductos')->name('getProductos');
+	
+	Route::get('/productos/nuevo', 'AdminController@showCreateProductos')->name('showCreateProductos');
+	
+	Route::post('/productos/registrar', 'AdminController@createProductos')->name('createProductos');
 
 	Route::get('/pedidos', 'AdminController@getPedidos')->name('getPedidos');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -10,9 +11,17 @@ class AdminController extends Controller
         return view('admin.home');
     }
     public function getProductos() {
+        // Obtener el listado de categorias para el forulario de filtrado
+        $categorias = App\Categoria::select('id', 'nombre')->orderBy('nombre')->get();
         // Productos
         $productos = App\Producto::paginate(20);
-        return view('admin.productos', compact('productos'));
+        return view('admin.productos', compact('categorias','productos'));
+    }
+    public function showCreateProductos() {
+        return view('admin.crear-productos');
+    }
+    public function createProductos(Request $request) {
+        
     }
 
     public function getPedidos() {
@@ -72,6 +81,29 @@ class AdminController extends Controller
     }
     public function getUsuarios() {
         return view('admin.usuarios');
+    }
+
+
+    protected function validator(array $data)
+    {
+
+        return Validator::make($data, [
+            // 'nombre'         => 'required|string|max:255',
+            // 'apellido'       => 'required|string|max:255',
+            // 'num_documento'  => 'required|string|max:255',
+            // 'email'          => 'required|string|email|max:255|unique:users',
+            // 'password'       => 'required|string|min:6|confirmed',
+
+            "descripcion"       => 'required|string|min:1',
+            "codigo-referencia" => 'required|string|min:1',
+            "precio-unitario"   => 'required|int',
+            "descuento"         => 'required|int',
+            "categoria"         => 'required|string|min:1',
+            "etiquetas"         => 'required|string|min:1',
+            "tamaño"            => 'required|int',
+            "color"             => 'required|string|min:1',
+            "cantidades"        => 'required|int',
+        ]);
     }
 }
 

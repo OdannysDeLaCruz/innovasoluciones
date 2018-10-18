@@ -122,6 +122,12 @@
 .filtro_id {
 	width: 70px !important;
 }
+.filtro_descripcion, .filtro_categoria, .filtro_categoria > option {
+	text-transform: capitalize;
+}
+.filtro_referencia {
+	text-transform: uppercase;		
+}
 .filtro_categoria,
 .filtro_estado,
 .filtro_modo_pago,

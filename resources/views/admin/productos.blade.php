@@ -8,7 +8,7 @@
 			<header class="encabezado_principal">
 				<h1 class="titulo_principal">productos</h1>
 				<div class="crear_productos">
-					<a href="/admin/productos/crear-nuevo">
+					<a href="/admin/productos/nuevo">
 						<span class="fa fa-plus crear_productos_icon"></span>
 						Nuevo producto					
 					</a>
@@ -24,9 +24,12 @@
 
 					<select name="categoria_producto" class="form-control filtro_categoria">
 						<option>Categorias</option>
-						<option value="">Categoría 1</option>
-						<option value="">Categoría 2</option>
-						<option value="">Categoría 3</option>
+						@if(isset($categorias))
+							@foreach($categorias as $categoria)
+								<option value="">{{ $categoria->nombre }}</option>
+							@endforeach
+						@else
+						@endif
 					</select>
 
 					<input type="text" name="referencia_producto" class="form-control filtro_referencia" placeholder="Referencia">
@@ -86,7 +89,7 @@
 									@endphp
 									${{ number_format($total, 2) }} 
 								</td>
-								<td>{{ $producto['tamaño'] }} - {{ $producto['color'] }}</td>
+								<td>{{ $producto['tallas'] }} - {{ $producto['colores'] }}</td>
 								<td>{{ $producto['fecha_creado'] }}</td>
 								<td class="menu_opcion">
 									<i class="fa fa-ellipsis-h menu_opcion_logo" id="menu_opcion_logo_{{ $producto['id'] }}" aria-hidden="true"></i>

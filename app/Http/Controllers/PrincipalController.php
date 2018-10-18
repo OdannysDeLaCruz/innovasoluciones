@@ -69,8 +69,29 @@ class PrincipalController extends Controller
         return view('productos', compact('productos'));        
     }
 
-    public function showDetalles($id, $descripcion) {
+    // public function showDetalles($id, $descripcion) {
 
+    //     // Si $id y $descripcion no estan vacios o no son null, hacer la consulta de ese producto
+    //     $producto = App\Producto::where('id', $id)->where('descripcion', $descripcion)->get();
+        
+    //     // Si producto no existe, mandar un error 404
+    //     if($producto->isEmpty() === true){
+    //         return response()->view('error.404',['response' => 'Lo sentimos, no esta disponible este producto en este momento'],404);
+    //     }
+    //     // Si el producto existe, traer las imagenes
+    //     $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
+    //     // Formatear los tags
+
+    //     foreach ($producto as $product) {
+    //         $tags = explode( ',', $product->tags );
+    //     }
+
+    //     // dd($producto);
+
+    //     return view('detalles', compact('producto', 'imagenes', 'tags'));        
+    // }
+
+    public function seleccionarDescripcion($id, $descripcion) {
         // Si $id y $descripcion no estan vacios o no son null, hacer la consulta de ese producto
         $producto = App\Producto::where('id', $id)->where('descripcion', $descripcion)->get();
         
@@ -78,16 +99,22 @@ class PrincipalController extends Controller
         if($producto->isEmpty() === true){
             return response()->view('error.404',['response' => 'Lo sentimos, no esta disponible este producto en este momento'],404);
         }
-        // Si el producto existe, traer las imagenes
-        $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
-        // Formatear los tags
 
-        foreach ($producto as $product) {
-            $tags = explode( ',', $product->tags );
+        // SI EL PRODUCTOS TIENE imagenDescripcion == true
+        if ($producto[0]->imagenDescripcion == true) {
+            return view('referencias');
         }
 
-        // dd($producto);
+        // SI EL PRODUCTOS TIENE imagenDescripcion == false
+        else {
+            // Si el producto existe, traer las imagenes
+            $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
 
-        return view('detalles', compact('producto', 'imagenes', 'tags'));        
+            // Formatear los tags
+            foreach ($producto as $product) {
+                $tags = explode( ',', $product->tags );
+            }
+            return view('detalles', compact('producto', 'imagenes', 'tags'));
+        }
     }
 }
