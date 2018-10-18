@@ -102,12 +102,16 @@ class PrincipalController extends Controller
 
         // SI EL PRODUCTOS TIENE imagenDescripcion == true
         if ($producto[0]->imagenDescripcion == true) {
-            return view('referencias');
+            $producto['id'] = $producto[0]->id;
+            $producto['descripcion'] = $producto[0]->descripcion;
+            $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
+
+            return view('referencias', compact('producto', 'imagenes'));
         }
 
         // SI EL PRODUCTOS TIENE imagenDescripcion == false
         else {
-            // Si el producto existe, traer las imagenes
+           
             $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
 
             // Formatear los tags
@@ -116,5 +120,16 @@ class PrincipalController extends Controller
             }
             return view('detalles', compact('producto', 'imagenes', 'tags'));
         }
+    }
+
+    public function showDetallesCompra($id, $descripcion) {
+        // dd($id, $descripcion);
+        $producto = App\Producto::where('id', $id)->where('descripcion', $descripcion)->get();
+        // Formatear los tags
+        foreach ($producto as $product) {
+            $tags = explode( ',', $product->tags );
+        }
+
+        return view('detalles_referencia', compact('producto', 'tags'));
     }
 }

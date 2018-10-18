@@ -18,8 +18,8 @@ Route::get('/productos', 'PrincipalController@showProductos')->name('productos')
 
 // Descripción del producto 
 Route::get('/productos/{id}-{descripcion}', 'PrincipalController@seleccionarDescripcion')->name('seleccionarDescripcion');
-// Detalle del producto y boton para comprar
-Route::get('/productos/{id}-{descripcion}/detalle-compra', 'PrincipalController@showDetalles')->name('showDetalles');
+// Detalle del producto y boton para comprar solo para productos que vengan de la pagina referencias
+Route::get('detalle-compra/{id}-{descripcion}', 'PrincipalController@showDetallesCompra')->name('showDetallesCompra');
 
 Route::get('/productos/{seccion?}', 'PrincipalController@showCategoriaProductos');
 

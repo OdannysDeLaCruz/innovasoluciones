@@ -15,8 +15,14 @@
 	@include('includes/header')
 	<!-- FIN HEADER -->
 	
-	<section>
-		<h1>REFERENCIAS</h1>
+	<section class="contenido_principal">
+		<section class="section_principal">
+			<span class="section_principal_atras"> < </span>
+			<h1 class="section_principal_titulo">{{ $producto['descripcion'] }}</h1>
+			<a href="{{ route('showDetallesCompra', [ $producto['id'], $producto['descripcion'] ]) }}">
+				<button class="section_principal_titulo">Comprar</button>				
+			</a>
+		</section>
 	</section>
 
 	<!-- SECCION FOOTER -->
