@@ -7,6 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}" >
+
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/estilos.css') }}" >
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/media-query.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
@@ -26,7 +29,7 @@
 	<section class="seccion_productos">
 		<span class="seccion_productos_logo">
 			<div class="contenedor_logo">
-				<img class="logo" src="{{asset('img/logos/LogoInnovate.svg')}}">					
+				<img class="logo" src="{{asset('img/logos/LogoInnovate.svg')}}">
 			</div>
 		</span>
 		<span>
@@ -45,7 +48,8 @@
 					<section class="producto">
 						<figure>
 							<a href="/productos/{{ $producto['id'] }}-{{ $producto['descripcion'] }}">
-								<img src="{{ $producto['imagen'] }}" class="producto_img" alt="{{ $producto['descripcion'] }}">							
+								<!-- <img src="{{ $producto['imagen'] }}" class="producto_img" alt="{{ $producto['descripcion'] }}"> -->
+								<img src="img/zapatos.jpg" class="producto_img">							
 							</a>
 						</figure>
 						<div class="producto_info">

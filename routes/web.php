@@ -16,9 +16,10 @@ Route::get('/', 'PrincipalController@index')->name('home');
 // RUTAS PARA PRODUCTOS
 Route::get('/productos', 'PrincipalController@showProductos')->name('productos');
 
-// Descripción del producto 
+// Seleccinoador de pagina de descripcion, se mostrará la vista referencias (Donde esta el boton que lleva a la vista detalles_referencias (opción de comprar) ) ó mostrará directamente la vista detalles (donde esta la información del producto completa, incluida la opcion de comprar).
 Route::get('/productos/{id}-{descripcion}', 'PrincipalController@seleccionarDescripcion')->name('seleccionarDescripcion');
-// Detalle del producto y boton para comprar solo para productos que vengan de la pagina referencias
+
+// Esta ruta mostrará la vista de opción de comprar de los productos que vengan de la vista referencias
 Route::get('detalle-compra/{id}-{descripcion}', 'PrincipalController@showDetallesCompra')->name('showDetallesCompra');
 
 Route::get('/productos/{seccion?}', 'PrincipalController@showCategoriaProductos');

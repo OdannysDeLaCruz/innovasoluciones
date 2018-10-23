@@ -6,7 +6,8 @@
 			<section class="producto">
 				<figure>
 					<a href="/productos/{{ $algunos['id'] }}-{{ $algunos['descripcion'] }}">
-						<img src="{{ $algunos['imagen'] }}" class="producto_img" alt="{{ $algunos['descripcion'] }}">							
+						<!-- <img src="{{ $algunos['imagen'] }}" class="producto_img" alt="{{ $algunos['descripcion'] }}"> -->
+						<img src="img/zapatos.jpg" class="producto_img">
 					</a>
 				</figure>
 				<div class="producto_info">

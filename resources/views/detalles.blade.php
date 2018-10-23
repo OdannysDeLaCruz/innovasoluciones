@@ -5,10 +5,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}" >
+
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/estilos.css') }}" >
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/media-query.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
-	<title> Detalles del producto | Innova Soluciones </title>
+	<title> Detalles del producto - opción de compra | Innova Soluciones </title>
 </head>
 <body>
 	
@@ -28,18 +31,25 @@
 		
 		@foreach($producto as $detalle)
 			
-			<div class="detalle_descripcion_img col-md-7">
-				<div id="detalle_visualizador"></div>
+			<div class="detalle_descripcion_img col-md-7" style="background: red;">
+				<div id="detalle_visualizador">
+					<img src="{{ asset('img/zapatos.jpg') }}" class="producto_img">
+				</div>
 				<div class="detalle_descripcion_img_lista_img">	
 					<!-- Va de primero la imagen que viene desde la tabla producto -->
-					<img class="lista_img" src="{{ asset($detalle['imagen']) }}" alt="imganes de descripcion">
+
+					<!-- <img class="lista_img" src="{{ asset($detalle['imagen']) }}" alt="imganes de descripcion"> -->
+
+					<img src="{{ asset('img/zapatos.jpg') }}" class="producto_img">
 					<!-- Luego las imagenes que vienen de la tabla imagenes_productos -->
 			        @foreach ($imagenes as $imagen)
-						<img class="lista_img" src="{{ asset($imagen['nombre_imagen']) }}" alt="imganes de descripcion">
+						<!-- <img class="lista_img" src="{{ asset($imagen['nombre_imagen']) }}" alt="imganes de descripcion"> -->
+
+						<img src="{{ asset('img/zapatos.jpg') }}" class="producto_img">
 			        @endforeach
 				</div>
 			</div>
-			<section class="detalle_info col-md-5 pt-4 pt-md-0">
+			<section class="detalle_info col-md-5 pt-4 pt-md-0" style="background: #ccc;">
 				<h1 class="detalle_info_titulo ">{{ $detalle['descripcion'] }}</h1>
 				<!-- <h1 class="detalle_info_opinion">{{ 'Buen producto' }}</h1> -->
 				<span class="detalle_info_tags">
