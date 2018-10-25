@@ -5,7 +5,7 @@
 	<div class="contenedor_formulario">
 		<form class="formulario_buscar_producto" action="{{ route('searchtags') }}" method="POST">
             {{ csrf_field() }}
-            <input class="input_buscador_producto" type="text" name="search" placeholder="Busca por categorias" value="@isset($search) {{ $search }} @endisset" required>
+            <input class="input_buscador_producto" type="text" name="search" placeholder="Buscar por productos, categorias, caracteristicas y más..." value="@isset($search) {{ $search }} @endisset" required>
             <button class="btn_buscar" type="submit"><span class="fa fa-search"></span></button>
         </form>
 	</div>

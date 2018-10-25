@@ -10,7 +10,7 @@
 						<img src="img/zapatos.jpg" class="producto_img">
 					</a>
 				</figure>
-				<div class="producto_info">
+				<!-- <div class="producto_info">
 					<a href="/productos/{{ $algunos['id'] }}-{{ $algunos['descripcion'] }}">
 						<h1 class="producto_titulo"> {{ $algunos['descripcion'] }}</h1>
 					</a>
@@ -30,7 +30,7 @@
 						@endphp
 						<p>${{ number_format($total, 2) }} <small>COP</small></p>
 					</label>					
-				</div>
+				</div> -->
 			</section>
 		@endforeach
 
