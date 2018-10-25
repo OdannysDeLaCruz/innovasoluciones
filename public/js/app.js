@@ -58,27 +58,27 @@ $(document).ready(function(){
     // EFECTOS DE PAGINA DESTALLES.PHP, DETALLE_VISUALIZADOR
 
     // Poner la primera imagen de la lista en el visualizador 
-    $('.lista_img:first-child').css('border', '2px solid #333');
-    const url_img = $('.lista_img:first-child').attr('src');
-    $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
+    // $('.lista_img:first-child').css('border', '2px solid #333');
+    // const url_img = $('.lista_img:first-child').attr('src');
+    // $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
 
-    $('.lista_img').on('click', function () {
+    // $('.lista_img').on('click', function () {
 
         // Obtengo la url de la imagen clickeada
-        const url_img = $(this).attr('src');
+        // const url_img = $(this).attr('src');
 
         // Elimino los bordes de las imagenes clickeadas anteriormente
-        $('.lista_img').css('border', 'none');
+        // $('.lista_img').css('border', 'none');
 
         // Le asigno bordes a la imagen clickeada actualmente
-        $(this).css('border', '2px solid #333');
+        // $(this).css('border', '2px solid #333');
 
         // Remuevo la imagen que esta actualmente
-        $("#detalle_visualizador img").remove();
+        // $("#detalle_visualizador img").remove();
 
         // Asigno la nueva imagen clickeada
-        $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
-    });
+        // $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
+    // });
 
     // ACTUALIZAR CANTIDAD DE PRODUCTOS DEL CARRITO
     $('.btn_actualizar_carrito').on('click', function(e){

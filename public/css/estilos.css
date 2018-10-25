@@ -844,28 +844,16 @@ footer {
 	max-width: 1200px;
 	margin: auto;
 	margin-bottom: 40px;
-	padding-top: 40px;
-	padding-bottom: 20px;
 	position: relative;
-	top: -250px;
+	top: -350px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	box-shadow: 0 0 10px 1px rgba(0,0,0,0.2);
-	
-}
-.detalle_titulo {
-	font-family: 'Roboto Condensed', sans-serif;
-	text-align: center;
-	padding: 10px;
-	margin-bottom: 50px;
-	border-bottom: 1px solid #ccc;
-	font-size: 25px;
-	font-weight: 500;
-	color: #333;
 }
 .detalle_descripcion_img {
 	height: auto;
+	padding: 30px;
 	width: 100%;
 	text-align: center;
 	position: relative;
@@ -873,18 +861,21 @@ footer {
 	flex-direction: column;
 	align-items: center;
 }
-.detalle_descripcion_img #detalle_visualizador {
-	padding: 10px;
-	position: relative;
-	width: 400px;
-}
-#detalle_visualizador {
-	border: 2px solid #ccc;
-}
 .detalle_descripcion_img img {
 	width: 100%;
+	margin: 0;
 }
-.detalle_descripcion_img_lista_img {
+/*.detalle_visualizador {
+	padding: 10px;
+	position: relative;
+	width: 100%;
+	border: 2px solid #ccc;
+}*/
+/*.detalle_visualizador img {
+	imagen que jquery inserta en el visualizador
+	width: 100%;
+}*/
+/*.detalle_descripcion_img_lista_img {
 	background: #fff;
 	padding: 10px;
 	width: auto;
@@ -897,8 +888,8 @@ footer {
 	align-items: center;
 	justify-content: flex-start;
 	overflow-x: scroll;
-}
-.detalle_descripcion_img_lista_img::-webkit-scrollbar {
+}*/
+/*.detalle_descripcion_img_lista_img::-webkit-scrollbar {
 	background: #ccc;
 	height: 15px;
 }
@@ -913,14 +904,14 @@ footer {
 	margin: 0 10px;
 	cursor: pointer;
 	padding: 2px;
-}
+}*/
 .detalle_info {
 	width: 500px;
-	padding: 0px 20px; 
+	padding: 20px; 
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	border-left: 1px solid #ccc ;
+	border-left: 1px solid #fff;
 }
 .detalle_info_titulo {
 	font-size: 25px;
@@ -947,7 +938,7 @@ footer {
 	font-size: 13px;
 	text-transform: capitalize;
 	display: inline-block;
-	margin: 0;
+	margin: 1px;
 	padding: 3px;
 	border-radius: 3px;
 	border: 1px solid #6363FF;

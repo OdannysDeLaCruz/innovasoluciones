@@ -27,29 +27,28 @@
 		<img src="{{ asset('img/detalle_fondo.jpg') }}">
 	</div>
 	<section class="detalle row">
-		<!-- <h1 class="col-12 detalle_titulo">Detalles del producto</h1> -->
 		
 		@foreach($producto as $detalle)
 			
-			<div class="detalle_descripcion_img col-md-7" style="background: red;">
-				<div id="detalle_visualizador">
-					<img src="{{ asset('img/zapatos.jpg') }}" class="producto_img">
-				</div>
-				<div class="detalle_descripcion_img_lista_img">	
+			<div class="detalle_descripcion_img col-12 col-md-9">
+				<!-- <div class="detalle_visualizador" id="detalle_visualizador"></div> -->
+				<!-- <div class="detalle_descripcion_img_lista_img">	 -->
 					<!-- Va de primero la imagen que viene desde la tabla producto -->
 
 					<!-- <img class="lista_img" src="{{ asset($detalle['imagen']) }}" alt="imganes de descripcion"> -->
 
-					<img src="{{ asset('img/zapatos.jpg') }}" class="producto_img">
 					<!-- Luego las imagenes que vienen de la tabla imagenes_productos -->
-			        @foreach ($imagenes as $imagen)
-						<!-- <img class="lista_img" src="{{ asset($imagen['nombre_imagen']) }}" alt="imganes de descripcion"> -->
+			        <!-- @foreach ($imagenes as $imagen)
+						<img class="lista_img" src="{{ asset($imagen['nombre_imagen']) }}" alt="imganes de descripcion">
+			        @endforeach -->
+				<!-- </div> -->
+				<img class="lista_img" src="{{ asset($detalle['imagen']) }}" alt="imganes de descripcion">
+				 @foreach ($imagenes as $imagen)
+					<img class="lista_img" src="{{ asset($imagen['nombre_imagen']) }}" alt="imganes de descripcion">
+		        @endforeach
 
-						<img src="{{ asset('img/zapatos.jpg') }}" class="producto_img">
-			        @endforeach
-				</div>
 			</div>
-			<section class="detalle_info col-md-5 pt-4 pt-md-0" style="background: #ccc;">
+			<section class="detalle_info col-12 col-md-3 pt-4 pt-md-0"">
 				<h1 class="detalle_info_titulo ">{{ $detalle['descripcion'] }}</h1>
 				<!-- <h1 class="detalle_info_opinion">{{ 'Buen producto' }}</h1> -->
 				<span class="detalle_info_tags">
