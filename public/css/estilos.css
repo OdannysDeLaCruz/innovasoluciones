@@ -799,6 +799,7 @@ footer {
 	padding: 50px;
 	background: url('../img/detalle_fondo.jpg');
 	background-repeat: no-repeat;
+	background-size: cover;
 
 	display: flex;
 	justify-content: center;
@@ -812,13 +813,19 @@ footer {
 }
 .detalle_referencia > .detalle_referencia_info {
 	width: 500px;
-	padding: 10px 20px; 
+	margin-bottom: 20px;
+	padding: 30px; 
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 }
+.detalle_referencia > .detalle_referencia_info .detalle_info_titulo {
+	margin-top: 0;
+}
 .detalle_referencia > .detalle_referencia_mensajes {
-	background: red;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	padding: 0;
 }
 .detalle_referencia > .detalle_referencia_mensajes img {

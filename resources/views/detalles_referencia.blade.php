@@ -24,9 +24,9 @@
 	<!-- FIN CATEGORIAS -->
 	
 	<div class="contenedor_detalle_referencia">
-		<section class="detalle_referencia">
-			@foreach($producto as $detalle)				
-				<section class="detalle_referencia_info col-md-6">
+		<section class="detalle_referencia row">
+			<section class="detalle_referencia_info col-12 col-md-6">
+				@foreach($producto as $detalle)
 					<h1 class="detalle_info_titulo ">{{ $detalle['descripcion'] }}</h1>
 					<span class="detalle_info_tags">
 						@foreach($tags as $tag)
@@ -83,12 +83,11 @@
 						@endempty
 						<button type="submit" id="btn-agregar-producto" class="btn btn-primary detalle_info_btn_comprar">Realizar compra</button>
 					</form>
-				</section>
-
-				<section class="detalle_referencia_mensajes col-md-6">
-					<img src="{{ asset('img/zapatos.jpg') }}">
-				</section>
-			@endforeach
+				@endforeach
+			</section>
+			<section class="detalle_referencia_mensajes col-12 col-md-6">
+				<img src="{{ asset('img/zapatos.jpg') }}">
+			</section>
 		</section>
 	</div>
 

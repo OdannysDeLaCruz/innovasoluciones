@@ -229,6 +229,11 @@
 		justify-content: flex-start;
 
 	}
+	/*--ESTILOS DE PAGINA DE DETALLES POR REFERENCIAS--*/
+	.contenedor_detalle_referencia {
+		padding: 0;
+		background: #fff;
+	}
 	/*--ESTILOS DE PAGNA DE DETALLES--*/
 	.detalle_fondo_img {
 		display: none;
