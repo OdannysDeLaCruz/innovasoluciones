@@ -11,13 +11,13 @@ class ConfirmationController extends Controller
 	
     public function response(Request $request) {
 
-		// $file = fopen("data.txt", "a");
-		// fwrite($file, "# Datos\n");
-		// fwrite($file, "#-------------------------------------------------------\n");
-		// foreach($_GET as $id => $responseValue){
-		//   fwrite($file, $id . " => " . $responseValue . "\n");
-		// }
-		// fclose($file);   	
+		$file = fopen("data.txt", "a");
+		fwrite($file, "# Response\n");
+		fwrite($file, "#-------------------------------------------------------\n");
+		foreach($_GET as $id => $responseValue){
+		  fwrite($file, $id . " => " . $responseValue . "\n");
+		}
+		fclose($file);   	
 	
 
 		// $merchant_id   = $request['merchantId'];
@@ -120,7 +120,7 @@ class ConfirmationController extends Controller
 	    	// ]);
 
     	$file = fopen("data.txt", "a");
-		fwrite($file, "# Datos\n");
+		fwrite($file, "# Confirmation\n");
 		fwrite($file, "#-------------------------------------------------------\n");
 		foreach($_POST as $id => $responseValue){
 		  fwrite($file, $id . " => " . $responseValue . "\n");
