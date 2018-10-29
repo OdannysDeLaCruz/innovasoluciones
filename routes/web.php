@@ -91,3 +91,14 @@ Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function(){
 
 	Route::get('/usuarios', 'AdminController@getUsuarios')->name('getUsuarios');
 });
+
+// Ruta para prueba de datos de la pagina confirmation
+Route::get('/datosconfirmation', function(){
+
+	$file = fopen("data.txt", "r") or exit("Unable to open file!");
+	//Output a line of the file until the end is reached
+	while(!feof($file)) {
+		echo fgets($file). "<br />";
+	}
+	fclose($file);
+});
