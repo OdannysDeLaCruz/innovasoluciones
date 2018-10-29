@@ -11,18 +11,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->truncateTables([
-            'roles',
-            'secciones',
-            'users',
-            'categorias',
-            'cod_descuentos',
-            'modo_pago',
-            'pedidos',
-            'productos',
-            'detalle_pedidos',
-            'imagenes_productos'
-        ]);
+        // $this->truncateTables([
+        //     'roles',
+        //     'secciones',
+        //     'users',
+        //     'categorias',
+        //     'cod_descuentos',
+        //     'modo_pago',
+        //     'pedidos',
+        //     'productos',
+        //     'detalle_pedidos',
+        //     'imagenes_productos'
+        // ]);
         $this->call([
         	CrearRolesSeeder::class,
         	CrearSeccionesSeeder::class,
@@ -37,14 +37,14 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 
-    protected function truncateTables(array $tables)
-    {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+    // protected function truncateTables(array $tables)
+    // {
+    //     DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
 
-        foreach ($tables as $table) {
-            DB::table($table)->truncate();
-        }
+    //     foreach ($tables as $table) {
+    //         DB::table($table)->truncate();
+    //     }
 
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
-    }
+    //     DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
+    // }
 }

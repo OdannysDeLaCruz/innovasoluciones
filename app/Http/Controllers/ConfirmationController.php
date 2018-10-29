@@ -71,7 +71,7 @@ class ConfirmationController extends Controller
     		)
     	);
     }
-    public function confirmation(Request $request) {
+    public function confirmation(/*Request $request*/) {
     	// Configuracion de zona horaria
 		date_default_timezone_set('America/Bogota');
 
@@ -86,10 +86,15 @@ class ConfirmationController extends Controller
     	// $shipping_city = $request['shipping_city'];
     	// $payment_method_name = $request['payment_method_name'];
 
-    	$reference_sale = $request['reference_sale'];
+    	/*$reference_sale = $request['reference_sale'];
     	$reference_pol = $request['reference_pol'];
     	$transaction_id = $request['transaction_id'];
-    	$state_pol = $request['state_pol'];
+    	$state_pol = $request['state_pol'];*/
+
+    	$reference_sale = $_Request['reference_sale'];
+    	$reference_pol  = $_Request['reference_pol'];
+    	$transaction_id = $_Request['transaction_id'];
+    	$state_pol      = $_Request['state_pol'];
     	
 
     	if($state_pol == 4) {

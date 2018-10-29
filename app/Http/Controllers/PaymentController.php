@@ -98,7 +98,9 @@ class PaymentController extends Controller
         $dataPayu['shippingCountry'] = 'CO';
 
         $dataPayu['responseUrl'] = "http://innovasoluciones.herokuapp.com/response";
+        // $dataPayu['responseUrl'] = "www.innovasoluciones.com/response";
         $dataPayu['confirmationUrl'] = "http://innovasoluciones.herokuapp.com/confirmation";
+        // $dataPayu['confirmationUrl'] = "www.innovasoluciones.com/confirmation";
 
         return view('payment', 
             compact(
