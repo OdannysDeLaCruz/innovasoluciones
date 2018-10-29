@@ -20,65 +20,65 @@ class ConfirmationController extends Controller
 		fclose($file);   	
 	
 
-		// $merchant_id   = $request['merchantId'];
-		// $referenceCode = $request['referenceCode'];
-		// $TX_VALUE      = $request['TX_VALUE'];
-		// $New_value     = number_format($TX_VALUE, 1, '.', '');
-		// $currency      = $request['currency'];
-		// $transactionState = $request['transactionState'];
-		// $firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
-		// $firmacreada   = md5($firma_cadena);
-		// $firma         = $request['signature'];
-		// $reference_pol = $request['reference_pol'];
-		// $cus           = $request['cus'];
-		// $extra1        = $request['description'];
-		// $pseBank       = $request['pseBank'];
-		// $lapPaymentMethod = $request['lapPaymentMethod'];
-		// $lapPaymentMethodType = $request['lapPaymentMethodType'];
-		// $transactionId = $request['transactionId'];
+		$merchant_id   = $request['merchantId'];
+		$referenceCode = $request['referenceCode'];
+		$TX_VALUE      = $request['TX_VALUE'];
+		$New_value     = number_format($TX_VALUE, 1, '.', '');
+		$currency      = $request['currency'];
+		$transactionState = $request['transactionState'];
+		$firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
+		$firmacreada   = md5($firma_cadena);
+		$firma         = $request['signature'];
+		$reference_pol = $request['reference_pol'];
+		$cus           = $request['cus'];
+		$extra1        = $request['description'];
+		$pseBank       = $request['pseBank'];
+		$lapPaymentMethod = $request['lapPaymentMethod'];
+		$lapPaymentMethodType = $request['lapPaymentMethodType'];
+		$transactionId = $request['transactionId'];
 
-		// $direccion_envio = Auth::user()->direccion . ' - ' . Auth::user()->barrio;
-		// $forma_entrega = session('entrega_pedido');
+		$direccion_envio = Auth::user()->direccion . ' - ' . Auth::user()->barrio;
+		$forma_entrega = session('entrega_pedido');
 		
-		// if ($transactionState == 4 ) {
-		// 	$estadoTx = "Transacción aprobada";
-		// }
-		// else if ($transactionState == 6 ) {
-		// 	$estadoTx = "Transacción rechazada";
-		// }
-		// else if ($transactionState == 7 ) {
-		// 	$estadoTx = "Transacción pendiente";
-		// }
-		// else if ($transactionState == 104 ) {
-		// 	$estadoTx = "Error";
-		// }
-		// else {
-		// 	$estadoTx = $request['mensaje'];
-		// }
+		if ($transactionState == 4 ) {
+			$estadoTx = "Transacción aprobada";
+		}
+		else if ($transactionState == 6 ) {
+			$estadoTx = "Transacción rechazada";
+		}
+		else if ($transactionState == 7 ) {
+			$estadoTx = "Transacción pendiente";
+		}
+		else if ($transactionState == 104 ) {
+			$estadoTx = "Error";
+		}
+		else {
+			$estadoTx = $request['mensaje'];
+		}
 
-  //   	return view('response',
-  //   		compact(
-  //   			'estadoTx',
-  //   			'merchant_id',
-  //   			'referenceCode',
-  //   			'TX_VALUE',
-  //   			'New_value',
-  //   			'currency',
-  //   			'transactionState',
-  //   			'firma_cadena',
-  //   			'firmacreada',
-  //   			'firma',
-  //   			'reference_pol',
-  //   			'cus',
-  //   			'extra1',
-  //   			'pseBank',
-  //   			'lapPaymentMethod',
-  //   			'lapPaymentMethodType',
-  //   			'transactionId', 
-  //   			'direccion_envio',
-  //   			'forma_entrega'
-  //   		)
-  //   	);
+    	return view('response',
+    		compact(
+    			'estadoTx',
+    			'merchant_id',
+    			'referenceCode',
+    			'TX_VALUE',
+    			'New_value',
+    			'currency',
+    			'transactionState',
+    			'firma_cadena',
+    			'firmacreada',
+    			'firma',
+    			'reference_pol',
+    			'cus',
+    			'extra1',
+    			'pseBank',
+    			'lapPaymentMethod',
+    			'lapPaymentMethodType',
+    			'transactionId', 
+    			'direccion_envio',
+    			'forma_entrega'
+    		)
+    	);
     }
     public function confirmation(/*Request $request*/) {
     	// \Log::debug('Datos desde payu');
