@@ -1,5 +1,5 @@
 <form class="form_registro" method="POST" action="{{ route('confirmation') }}">
-    @csrf
+    <!-- @csrf -->
 
     <label>Nombre</label>
     <input type="text" name="nombre">

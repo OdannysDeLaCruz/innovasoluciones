@@ -6,3 +6,16 @@ Array
     [apellido] => De La Cruz
 )
 
+Array
+(
+    [_token] => E87lZKMi11GhsCYIxJAsZd3E0XgUSZP1FogxsspY
+    [nombre] => Jose
+    [apellido] => Luis
+)
+
+Array
+(
+    [nombre] => Odannys
+    [apellido] => Luis
+)
+
