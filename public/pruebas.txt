@@ -1,6 +1,0 @@
-Array
-(
-    [nombre] => Odannys
-    [apellido] => De La Cruz
-)
-

@@ -81,72 +81,73 @@ class ConfirmationController extends Controller
     	);
     }
     public function confirmation(Request $request) {
-    	// \Log::debug('Datos desde payu');
     	// Configuracion de zona horaria
-		// date_default_timezone_set('America/Bogota');
+		date_default_timezone_set('America/Bogota');
 
     	// $sign = $request['sign'];
     	// $merchant_id = $request['merchant_id'];
-    	// $reference_sale = $request['reference_sale'];
     	// $reference_pol = $request['reference_pol'];
 
     	// $firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
 
-    	// $nickname_buyer = $request['nickname_buyer'];
-    	// $shipping_city = $request['shipping_city'];
-    	// $payment_method_name = $request['payment_method_name'];
+		$state_pol            = $request['state_pol'];
+		$response_message_pol = $request['response_message_pol'];
+		$response_code_pol    = $request['response_code_pol'];
 
-    	// $reference_sale = $request['reference_sale'];
-    	// $reference_pol = $request['reference_pol'];
-    	// $transaction_id = $request['transaction_id'];
-    	$state_pol = $request['state_pol'];
-    	// $response_message_pol = $request['response_message_pol'];
-    	
+		$id_user   = Auth::user()->id;
+		$comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
+		$ref_venta = $request['reference_sale'];
+		$direccion_envio = $request['shipping_address'];
 
-    		// App\Pedido::create([ 
-		    //     'id_user' => Auth::user()->id,
-	     //        'comprador' => $nickname_buyer,
-	     //        'ref_venta' => $reference_sale,
-	     //        'direccion_envio' => $shipping_city,
-	     //        'modo_pago' => $payment_method_name,
-	     //        'codigo_descuento' => session('codigos_usados'),
-	     //        'modo_envio' => session('entrega_pedido'),
-	     //        'estado_pedido' => $state_pol,
-	     //        'fecha_pedido' => date('Y-n-j H:i:s')
-	    	// ]);
-
-        //$file = fopen("data.txt", "a");
-		// fwrite($file, "# Confirmation\n");
-		// fwrite($file, "#-------------------------------------------------------\n");
-		// foreach($_POST as $id => $responseValue){
-		//   fwrite($file, $id . " => " . $responseValue . "\n");
-		// }
-		// fclose($file); 
-    	$mensajeLog = print_r($_POST,true) . "\r\n";
-		if(strlen($mensajeLog)>0){
-			$filename = "pruebas.txt";
-			$fp = fopen($filename, "a");
-			if($fp) {
-				fwrite($fp, $mensajeLog, strlen($mensajeLog));
-			fclose($fp);
-
-			}
+		$payment_method_id = $request['payment_method_id'];
+		switch ($payment_method_id) {
+			case 2:
+				$medio_pago = 'CREDIT_CARD';
+				break;
+			case 4:
+				$medio_pago = '	PSE';
+				break;
+			case 5:
+				$medio_pago = 'ACH';
+				break;
+			case 6:
+				$medio_pago = 'DEBIT_CARD';
+				break;
+			case 7:
+				$medio_pago = 'CASH';
+				break;
+			case 8:
+				$medio_pago = 'REFERENCED';
+				break;
+			case 10:
+				$medio_pago = 'BANK_REFERENCED';
+				break;
+			case 14:
+				$medio_pago = 'SPEI';
+				break;
 		}
+		$payment_method_name = $request['payment_method_name'];
+		$date = $request['date'];
 
-    	if($state_pol == 4) {
+    	if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
     		App\Pedido::create([ 
-		        'id_user' => Auth::user()->id,
-	            'comprador' => 'PRUEBA',
-	            'ref_venta' => 'PRUEBA',
-	            'direccion_envio' => 'PRUEBA',
-	            'modo_pago' => 'PRUEBA',
-	            'codigo_descuento' => 'PRUEBA',
-	            'modo_envio' => 'PRUEBA',
-	            'estado_pedido' => 'PRUEBA',
-	            'fecha_pedido' => 'PRUEBA'
+		        'id_user'         => Auth::user()->id,
+	            'comprador'       => $comprador,
+	            'ref_venta'       => $ref_venta,
+	            'direccion_envio' => $direccion_envio,
+	            'modo_pago'       => $medio_pago . " - " . $payment_method_name,
+	            'codigo_descuento'=> session('codigos_usados'),
+	            'modo_envio'      => session('entrega_pedido'),
+	            'estado_pedido'   => $response_message_pol,
+	            'fecha_pedido'    => $date
 	    	]);
     	}
-
-
+    	else {
+    		$fp = fopen('pruebas.txt', "a");
+			if($fp) {
+				fwrite($fp, 'No se ha podido crear el usuario');
+				fclose($fp);
+			}
+		}
     }
 }
