@@ -145,15 +145,31 @@ class ConfirmationController extends Controller
 	   //  	]);
     // 	}
 
-    	$mensajeLog = print_r($_POST,true) . "\r\n";
-		if(strlen($mensajeLog)>0){
+
+  //   	$mensajeLog = print_r($_POST,true) . "\r\n";
+		// if(strlen($mensajeLog)>0){
+		// 	$filename = "pruebas.txt";
+		// 	$fp = fopen($filename, "a");
+		// 	if($fp) {
+		// 		fwrite($fp, $mensajeLog, strlen($mensajeLog));
+		// 	fclose($fp);
+
+		// 	}
+		// }
+
+		
+    	$response_message_pol = $request['response_message_pol'];
+
+		// $mensajeLog = print_r($_POST,true) . "\r\n";
+		if(strlen($response_message_pol)>0){
 			$filename = "pruebas.txt";
 			$fp = fopen($filename, "a");
 			if($fp) {
-				fwrite($fp, $mensajeLog, strlen($mensajeLog));
+				fwrite($fp, $response_message_pol, strlen($response_message_pol));
 			fclose($fp);
 
 			}
 		}
+
     }
 }
