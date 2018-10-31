@@ -37,54 +37,56 @@
 					    </tr>
 				  	</thead>
 				  	<tbody>
-				  		@foreach($cart as $carrito)
-				  			<tr class="carrito_fila">
-				  				<td scope="row">
-				  					<a target="_blank" href="/productos/{{ $carrito['id'] }}-{{ $carrito['descripcion'] }}">
-				  						<img class="carrito_fila_img" src="{{ $carrito['imagen'] }}" alt="{{ $carrito['descripcion'] }}">			
-				  					</a>
-					      		</td>
-					      		<td class="carrito_fila_titulo">
-					      			<p>
-					      				<a target="_blank" href="/productos/{{ $carrito['id'] }}-{{ $carrito['descripcion'] }}">
-					      					{{ $carrito['descripcion'] }}
-					      				</a>
-					      				<br>
-					      				Color: {{ $carrito['color'] }} <br>
-					      				Talla: {{ $carrito['talla'] }} 
-							      	</p>					      					
-					      		</td>
-					      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['precio'], 2) }}</i></td>
-					      		<td class="carrito_fila_cantidad">
-					      		<input 
-					      			type="number" 
-					      			min="1" 
-					      			max="10" 
-					      			value="{{ $carrito['cantidad'] }}"
-					      			id="producto_{{ $carrito['id'] }}" 
-					      		>
-					      		<a 
-					      			data-toggle="tooltip" 
-					      			data-placement="top" 
-					      			title="Actualizar cantidad"
+				  		@isset($cart)
+					  		@foreach($cart as $carrito)
+					  			<tr class="carrito_fila">
+					  				<td scope="row">
+					  					<a target="_blank" href="/productos/{{ $carrito['id'] }}-{{ $carrito['descripcion'] }}">
+					  						<img class="carrito_fila_img" src="{{ $carrito['imagen'] }}" alt="{{ $carrito['descripcion'] }}">			
+					  					</a>
+						      		</td>
+						      		<td class="carrito_fila_titulo">
+						      			<p>
+						      				<a target="_blank" href="/productos/{{ $carrito['id'] }}-{{ $carrito['descripcion'] }}">
+						      					{{ $carrito['descripcion'] }}
+						      				</a>
+						      				<br>
+						      				Color: {{ $carrito['color'] }} <br>
+						      				Talla: {{ $carrito['talla'] }} 
+								      	</p>					      					
+						      		</td>
+						      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['precio'], 2) }}</i></td>
+						      		<td class="carrito_fila_cantidad">
+						      		<input 
+						      			type="number" 
+						      			min="1" 
+						      			max="10" 
+						      			value="{{ $carrito['cantidad'] }}"
+						      			id="producto_{{ $carrito['id'] }}" 
+						      		>
+						      		<a 
+						      			data-toggle="tooltip" 
+						      			data-placement="top" 
+						      			title="Actualizar cantidad"
 
-					      			href="#"
-					      			class="btn btn-primary btn-sm btn_actualizar_carrito"
-					      			data-href="/cart/update/{{ $carrito['id'] }}"
-					      			data-id="{{ $carrito['id'] }}" 	
-					      		>
-					      			<span  class="fa fa-refresh"></span>
-					      		</a>
-					      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['descuento_peso'], 2) }}</i></td>
-					      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['total'], 2) }}</i></td>
-					      		</td>
-					      		<td class="carrito_fila_borrar">
-					      			<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
-					      				<span class="fa fa-trash-o"></span>
-					      			</a>
-					      		</td>
-				  			</tr>
-				  		@endforeach
+						      			href="#"
+						      			class="btn btn-primary btn-sm btn_actualizar_carrito"
+						      			data-href="/cart/update/{{ $carrito['id'] }}"
+						      			data-id="{{ $carrito['id'] }}" 	
+						      		>
+						      			<span  class="fa fa-refresh"></span>
+						      		</a>
+						      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['descuento_peso'], 2) }}</i></td>
+						      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['total'], 2) }}</i></td>
+						      		</td>
+						      		<td class="carrito_fila_borrar">
+						      			<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
+						      				<span class="fa fa-trash-o"></span>
+						      			</a>
+						      		</td>
+					  			</tr>
+					  		@endforeach
+				  		@endisset
 				  	</tbody>
 				</table>
 			</section>
