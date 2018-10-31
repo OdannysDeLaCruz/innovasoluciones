@@ -214,12 +214,6 @@
 .table_opcion {
 	width: 300px;
 }
-
-
-
-
-
-
 .tables_admin_fila td {
 	font-size: 17px;	
 }
@@ -275,4 +269,100 @@
 }
 .paginacion_links p {
 	margin-right: 10px;
+}
+
+/*--ESTILOS DE PAGINA CREAR NUEVO PRODUCTO--*/
+.indicador_de_formulario {
+	text-align: center;
+	font-size: 20px;
+	background: #fff;
+	padding: 10px;
+	color: #333; 
+}
+.form_crear_producto {
+	width: 100%;
+}
+
+.form_crear_producto > .form-group {
+	max-width: 600px;
+	margin: 40px auto;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.form_crear_producto > .form-group > label.form_titulos {
+	margin: 0 10px 0 0;
+	color: #666;
+}
+.form_crear_producto > .form-group > input,
+.form_crear_producto > .form-group > select {
+	max-width: 350px;
+	height: 40px;
+	background: #fff;
+}
+.form_crear_producto > .section_subir_imagenes {
+	background: #fff;
+	padding: 20px;
+	width: 600px;
+	margin: 50px auto;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+.form_crear_producto > .section_subir_imagenes > .section_subir_imagenes_titulo {
+	font-size: 20px;
+	font-weight: bold;
+	color: #37abc8;
+	text-align: center;
+}
+.form_crear_producto > .section_subir_imagenes > .section_subir_imagenes_input {
+	text-align: center;
+	width: 450px;
+}
+.form_crear_producto > .section_subir_imagenes > .section_subir_imagenes_checkbox {
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+}
+.form_crear_producto > .section_subir_imagenes > .section_subir_imagenes_checkbox > p{
+	margin: 0 10px 0 0;
+}
+.form_crear_producto > .form_botones_accion {
+	background: #B5C9E7;
+	border: 1px solid #8DA8D0;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.form_crear_producto > .form_botones_accion > button {
+	width: 120px;
+	height: 80px;
+	border: none;
+	cursor: pointer;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	font-size: 15px;
+	font-weight: bold;
+}
+.form_crear_producto > .form_botones_accion > button > .fa {
+	font-size: 40px;
+}
+.form_crear_producto > .form_botones_accion > .btn_cancelar {
+	color: #EE7864;
+}
+.form_crear_producto > .form_botones_accion > .btn_cancelar:hover {
+	color: #F33E1E;
+}
+.form_crear_producto > .form_botones_accion > .btn_terminar {
+	color: #8CEA8E;
+}
+.form_crear_producto > .form_botones_accion > .btn_terminar:hover {
+	color: #2DD131;
 }

@@ -17,7 +17,7 @@ class ConfirmationController extends Controller
 		foreach($_GET as $id => $responseValue){
 		  fwrite($file, $id . " => " . $responseValue . "\n");
 		}
-		fclose($file);   	
+		fclose($file);
 	
 
 		$merchant_id   = $request['merchantId'];
@@ -119,13 +119,13 @@ class ConfirmationController extends Controller
 	     //        'fecha_pedido' => date('Y-n-j H:i:s')
 	    	// ]);
 
-    	$file = fopen("data.txt", "a");
-		fwrite($file, "# Confirmation\n");
-		fwrite($file, "#-------------------------------------------------------\n");
-		foreach($_POST as $id => $responseValue){
-		  fwrite($file, $id . " => " . $responseValue . "\n");
-		}
-		fclose($file); 
+  //   	$file = fopen("data.txt", "a");
+		// fwrite($file, "# Confirmation\n");
+		// fwrite($file, "#-------------------------------------------------------\n");
+		// foreach($_POST as $id => $responseValue){
+		//   fwrite($file, $id . " => " . $responseValue . "\n");
+		// }
+		// fclose($file); 
 
     // 	if($state_pol == 4) {
 	   //  	App\Producto::create([
@@ -144,5 +144,16 @@ class ConfirmationController extends Controller
 	   //          'fecha_creado' => 'PRUEBA'
 	   //  	]);
     // 	}
+
+    	$mensajeLog = print_r($_POST,true) . "\r\n";
+		if(strlen($mensajeLog)>0){
+			$filename = "pruebas.txt";
+			$fp = fopen($filename, "a");
+			if($fp) {
+				fwrite($fp, $mensajeLog, strlen($mensajeLog));
+			fclose($fp);
+
+			}
+		}
     }
 }

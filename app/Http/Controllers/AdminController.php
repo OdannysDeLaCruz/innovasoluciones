@@ -21,7 +21,52 @@ class AdminController extends Controller
         return view('admin.crear-productos');
     }
     public function createProductos(Request $request) {
-        
+        // $producto = new Producto;
+        // dd($producto);
+        $v = \Validator::make($request->all(), [
+            
+            "id_categoria"      => 'required|integer|min:1',
+            // "descripcion"       => 'required|string|unique|min:1',
+            "tags"              => 'required|string|min:1',
+            // "codigo-referencia" => 'required|string|unique|min:1',
+            "imagen_principal"  => 'required|image|min:1',
+            // "imagen"            => 'dimensions:min_width=100,min_height=200',
+            "precio-unitario"   => 'required|integer',
+            "descuento"         => 'integer',
+            "tallas"            => 'string|nullable',
+            "colores"           => 'string|nullable',
+            "tiempo_entrega"    => 'required|string',
+            "cantidades"        => 'nullable|integer',
+            "imgsReferencias"   => 'nullable|image',
+            "tieneImgDescripcion"   => 'boolean'
+        ]);
+
+        // dd($v);
+ 
+        if ($v->fails()) {
+            return redirect()->back()->withInput()->withErrors($v->errors());
+        }
+
+        // $client->create($request->all());
+        // $clients = Client::all();
+        // return \View::make('list', compact('clients'));
+
+        // App\Producto::create([
+           
+        //     'id_categoria'    => $id_categoria,
+        //     'descripcion'     => $faker->text(50),
+        //     'tags'            => $mis_tags,
+        //     'referencia'      => $faker->word . rand(0,100) . $faker->word,
+        //     'imagen'          => $faker->imageUrl($width = 200, $height = 200),
+        //     'precio'          => $precio,
+        //     'descuento'       => $desc,
+        //     'tallas'          => $faker->word,
+        //     'colores'         => $faker->word,
+        //     'tiempo_entrega'  => $faker->word,
+        //     'imagenDescripcion'  => rand(0,1),
+        //     'cant_disponible' => rand(0,10),
+        //     'fecha_creado'    => date('Y-n-j H:i:s')
+        // ]);
     }
 
     public function getPedidos() {
@@ -106,4 +151,3 @@ class AdminController extends Controller
         ]);
     }
 }
-

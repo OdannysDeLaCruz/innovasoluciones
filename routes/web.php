@@ -11,6 +11,11 @@
 |
 */
 
+Route::get('pruebas', function(){
+	return view('pruebas');
+});
+
+
 Route::get('/', 'PrincipalController@index')->name('home');
 
 // RUTAS PARA PRODUCTOS
@@ -65,7 +70,7 @@ Route::post('checkout/buying/payment', 'PaymentController@payment')->name('payme
 
 Route::get('/response', 'ConfirmationController@response');
 
-Route::post('/confirmation', 'ConfirmationController@confirmation');
+Route::post('/confirmation', 'ConfirmationController@confirmation')->name('confirmation');
 
 // RUTAS PARA AUTENTICACION DE USUARIOS
 Auth::routes();
@@ -95,7 +100,7 @@ Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function(){
 // Ruta para prueba de datos de la pagina confirmation
 Route::get('/datosconfirmation', function(){
 
-	$file = fopen("data.txt", "r") or exit("Unable to open file!");
+	$file = fopen("pruebas.txt", "r") or exit("Unable to open file!");
 	//Output a line of the file until the end is reached
 	while(!feof($file)) {
 		echo fgets($file). "<br />";
