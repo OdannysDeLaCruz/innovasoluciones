@@ -100,12 +100,7 @@ class ConfirmationController extends Controller
     	// $reference_pol = $request['reference_pol'];
     	// $transaction_id = $request['transaction_id'];
     	$state_pol = $request['state_pol'];
-    	$response_message_pol = $request['response_message_pol'];
-
-    	// $reference_sale = $_Request['reference_sale'];
-    	// $reference_pol  = $_Request['reference_pol'];
-    	// $transaction_id = $_Request['transaction_id'];
-    	// $state_pol      = $_Request['state_pol'];
+    	// $response_message_pol = $request['response_message_pol'];
     	
 
     		// App\Pedido::create([ 
@@ -120,7 +115,7 @@ class ConfirmationController extends Controller
 	     //        'fecha_pedido' => date('Y-n-j H:i:s')
 	    	// ]);
 
-  //   	$file = fopen("data.txt", "a");
+        //$file = fopen("data.txt", "a");
 		// fwrite($file, "# Confirmation\n");
 		// fwrite($file, "#-------------------------------------------------------\n");
 		// foreach($_POST as $id => $responseValue){
@@ -137,49 +132,21 @@ class ConfirmationController extends Controller
 	            'modo_pago' => 'PRUEBA',
 	            'codigo_descuento' => 'PRUEBA',
 	            'modo_envio' => 'PRUEBA',
-	            'estado_pedido' => $response_message_pol,
+	            'estado_pedido' => 'PRUEBA',
 	            'fecha_pedido' => 'PRUEBA'
 	    	]);
-	   //  	App\Producto::create([
-	   //          'id_categoria' => 1,
-	   //          'descripcion' => 'PRUEBA',
-	   //          'tags' => 'PRUEBA, PRUEBA',
-	   //          'referencia' => 'PRUEBA',
-	   //          'imagen' => 'PRUEBA',
-	   //       	'precio' => 0,
-	   //          'descuento' => 0,
-	   //          'tallas' => 'PRUEBA',
-	   //          'colores' => 'PRUEBA',
-	   //          'tiempo_entrega' => 'PRUEBA',
-				// 'imagenDescripcion' => 'PRUEBA',
-				// 'cant_disponible' => 0,
-	   //          'fecha_creado' => 'PRUEBA'
-	   //  	]);
     	}
 
 
-  //   	$mensajeLog = print_r($_POST,true) . "\r\n";
-		// if(strlen($mensajeLog)>0){
-		// 	$filename = "pruebas.txt";
-		// 	$fp = fopen($filename, "a");
-		// 	if($fp) {
-		// 		fwrite($fp, $mensajeLog, strlen($mensajeLog));
-		// 	fclose($fp);
+    	$mensajeLog = print_r($_POST,true) . "\r\n";
+		if(strlen($mensajeLog)>0){
+			$filename = "pruebas.txt";
+			$fp = fopen($filename, "a");
+			if($fp) {
+				fwrite($fp, $mensajeLog, strlen($mensajeLog));
+			fclose($fp);
 
-		// 	}
-		// }
-
-
-  //   	$response_message_pol = $request['response_message_pol'];
-
-		// if($response_message_pol){
-		// 	$fp = fopen("pruebas.txt", "a");
-		// 	if($fp) {
-		// 		fwrite($fp, $response_message_pol, strlen($response_message_pol));
-		// 	fclose($fp);
-
-		// 	}
-		// }
-
+			}
+		}
     }
 }

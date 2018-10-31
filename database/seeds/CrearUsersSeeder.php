@@ -27,6 +27,24 @@ class CrearUsersSeeder extends Seeder
             'password'         => bcrypt('odannys321'),
             'fecha_registro'   => date('Y-n-j H:i:s'),
             'remember_token'   => str_random(10),
+            
+        ]);
+
+        App\User::create([
+            'id_rol'           => 2,
+            'nombre'           => 'Jose',
+            'apellido'         => 'De La Cruz Calvo',
+            'num_cedula'       => '1065825573',
+            'telefono'         => '3107484079',
+            'email'            => 'josedelacruz321@hotmail.com',
+            'pais'             => 'Colombia',
+            'ciudad'           => 'Valledupar',
+            'barrio'           => 'La Nevada',
+            'direccion'        => 'Cll 6b # 41-36',
+            'password'         => bcrypt('jose321'),
+            'fecha_registro'   => date('Y-n-j H:i:s'),
+            'remember_token'   => str_random(10),
+
         ]);
         $users = factory(App\User::class, 5)->create();
     }
