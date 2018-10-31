@@ -80,7 +80,7 @@ class ConfirmationController extends Controller
     		)
     	);
     }
-    public function confirmation(/*Request $request*/) {
+    public function confirmation(Request $request) {
     	// \Log::debug('Datos desde payu');
     	// Configuracion de zona horaria
 		// date_default_timezone_set('America/Bogota');
