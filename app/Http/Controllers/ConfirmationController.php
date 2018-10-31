@@ -157,13 +157,11 @@ class ConfirmationController extends Controller
 		// 	}
 		// }
 
-		
+
     	$response_message_pol = $request['response_message_pol'];
 
-		// $mensajeLog = print_r($_POST,true) . "\r\n";
-		if(strlen($response_message_pol)>0){
-			$filename = "pruebas.txt";
-			$fp = fopen($filename, "a");
+		if($response_message_pol){
+			$fp = fopen("pruebas.txt", "a");
 			if($fp) {
 				fwrite($fp, $response_message_pol, strlen($response_message_pol));
 			fclose($fp);
