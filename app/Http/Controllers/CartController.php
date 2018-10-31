@@ -88,13 +88,15 @@ class CartController extends Controller
 
     // Obtenemos el total del pedido
     public function total() {
-    	$cart = session('cart');
-    	$total = 0;
-    	foreach ($cart as $precio) {
-    		$total += $precio['total'];
-    	}
+        if(session('cart')) {
+    	   $cart = session('cart');
+        	$total = 0;
+        	foreach ($cart as $precio) {
+        		$total += $precio['total'];
+            }
+            session()->put('total_del_pedido', $total);            
+        }
 
-        session()->put('total_del_pedido', $total);
     }
 
 }
