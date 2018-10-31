@@ -80,7 +80,7 @@ class ConfirmationController extends Controller
     		)
     	);
     }
-    public function confirmation(Request $request) {
+    public function confirmation(/*Request $request*/) {
     	// Configuracion de zona horaria
 		date_default_timezone_set('America/Bogota');
 
@@ -90,16 +90,55 @@ class ConfirmationController extends Controller
 
     	// $firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
 
-		$state_pol            = $request['state_pol'];
-		$response_message_pol = $request['response_message_pol'];
-		$response_code_pol    = $request['response_code_pol'];
+		// $state_pol            = $request['state_pol'];
+		// $response_message_pol = $request['response_message_pol'];
+		// $response_code_pol    = $request['response_code_pol'];
+
+		// $id_user   = Auth::user()->id;
+		// $comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
+		// $ref_venta = $request['reference_sale'];
+		// $direccion_envio = $request['shipping_address'];
+
+		// $payment_method_id = $request['payment_method_id'];
+		// switch ($payment_method_id) {
+		// 	case 2:
+		// 		$medio_pago = 'CREDIT_CARD';
+		// 		break;
+		// 	case 4:
+		// 		$medio_pago = '	PSE';
+		// 		break;
+		// 	case 5:
+		// 		$medio_pago = 'ACH';
+		// 		break;
+		// 	case 6:
+		// 		$medio_pago = 'DEBIT_CARD';
+		// 		break;
+		// 	case 7:
+		// 		$medio_pago = 'CASH';
+		// 		break;
+		// 	case 8:
+		// 		$medio_pago = 'REFERENCED';
+		// 		break;
+		// 	case 10:
+		// 		$medio_pago = 'BANK_REFERENCED';
+		// 		break;
+		// 	case 14:
+		// 		$medio_pago = 'SPEI';
+		// 		break;
+		// }
+		// $payment_method_name = $request['payment_method_name'];
+		// $date = $request['date'];
+
+		$state_pol            = $_Request['state_pol'];
+		$response_message_pol = $_Request['response_message_pol'];
+		$response_code_pol    = $_Request['response_code_pol'];
 
 		$id_user   = Auth::user()->id;
 		$comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
-		$ref_venta = $request['reference_sale'];
-		$direccion_envio = $request['shipping_address'];
+		$ref_venta = $_Request['reference_sale'];
+		$direccion_envio = $_Request['shipping_address'];
 
-		$payment_method_id = $request['payment_method_id'];
+		$payment_method_id = $_Request['payment_method_id'];
 		switch ($payment_method_id) {
 			case 2:
 				$medio_pago = 'CREDIT_CARD';
@@ -126,8 +165,8 @@ class ConfirmationController extends Controller
 				$medio_pago = 'SPEI';
 				break;
 		}
-		$payment_method_name = $request['payment_method_name'];
-		$date = $request['date'];
+		$payment_method_name = $_Request['payment_method_name'];
+		$date = $_Request['date'];
 
     	if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
     		App\Pedido::create([ 
@@ -145,7 +184,7 @@ class ConfirmationController extends Controller
     	else {
     		$fp = fopen('pruebas.txt', "a");
 			if($fp) {
-				fwrite($fp, 'No se ha podido crear el usuario');
+				fwrite($fp, 'No se ha podido crear el pedido');
 				fclose($fp);
 			}
 		}
