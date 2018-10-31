@@ -56,6 +56,10 @@ class ConfirmationController extends Controller
 			$estadoTx = $request['mensaje'];
 		}
 
+		$cart = session('cart');
+        $cart = '';
+        session()->put('cart', $cart);
+
     	return view('response',
     		compact(
     			'estadoTx',
@@ -82,9 +86,9 @@ class ConfirmationController extends Controller
     }
     public function confirmation(/*Request $request*/) {
 
-    	$cart = session('cart');
-        $cart = '';
-        session()->put('cart', $cart);
+    	// $cart = session('cart');
+     //    $cart = '';
+     //    session()->put('cart', $cart);
     	// Configuracion de zona horaria
 		// date_default_timezone_set('America/Bogota');
 
