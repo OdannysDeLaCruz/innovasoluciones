@@ -81,8 +81,12 @@ class ConfirmationController extends Controller
     	);
     }
     public function confirmation(/*Request $request*/) {
+
+    	$cart = session('cart');
+        $cart = '';
+        session()->put('cart', $cart);
     	// Configuracion de zona horaria
-		date_default_timezone_set('America/Bogota');
+		// date_default_timezone_set('America/Bogota');
 
     	// $sign = $request['sign'];
     	// $merchant_id = $request['merchant_id'];
@@ -129,64 +133,64 @@ class ConfirmationController extends Controller
 		// $payment_method_name = $request['payment_method_name'];
 		// $date = $request['date'];
 
-		$state_pol            = $_POST['state_pol'];
-		$response_message_pol = $_POST['response_message_pol'];
-		$response_code_pol    = $_POST['response_code_pol'];
+		// $state_pol            = $_POST['state_pol'];
+		// $response_message_pol = $_POST['response_message_pol'];
+		// $response_code_pol    = $_POST['response_code_pol'];
 
-		$id_user   = Auth::user()->id;
-		$comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
-		$ref_venta = $_POST['reference_sale'];
-		$direccion_envio = $_POST['shipping_address'];
+		// $id_user   = Auth::user()->id;
+		// $comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
+		// $ref_venta = $_POST['reference_sale'];
+		// $direccion_envio = $_POST['shipping_address'];
 
-		$payment_method_id = $_POST['payment_method_id'];
-		switch ($payment_method_id) {
-			case 2:
-				$medio_pago = 'CREDIT_CARD';
-				break;
-			case 4:
-				$medio_pago = '	PSE';
-				break;
-			case 5:
-				$medio_pago = 'ACH';
-				break;
-			case 6:
-				$medio_pago = 'DEBIT_CARD';
-				break;
-			case 7:
-				$medio_pago = 'CASH';
-				break;
-			case 8:
-				$medio_pago = 'REFERENCED';
-				break;
-			case 10:
-				$medio_pago = 'BANK_REFERENCED';
-				break;
-			case 14:
-				$medio_pago = 'SPEI';
-				break;
-		}
-		$payment_method_name = $_POST['payment_method_name'];
-		$date = $_POST['date'];
+		// $payment_method_id = $_POST['payment_method_id'];
+		// switch ($payment_method_id) {
+		// 	case 2:
+		// 		$medio_pago = 'CREDIT_CARD';
+		// 		break;
+		// 	case 4:
+		// 		$medio_pago = '	PSE';
+		// 		break;
+		// 	case 5:
+		// 		$medio_pago = 'ACH';
+		// 		break;
+		// 	case 6:
+		// 		$medio_pago = 'DEBIT_CARD';
+		// 		break;
+		// 	case 7:
+		// 		$medio_pago = 'CASH';
+		// 		break;
+		// 	case 8:
+		// 		$medio_pago = 'REFERENCED';
+		// 		break;
+		// 	case 10:
+		// 		$medio_pago = 'BANK_REFERENCED';
+		// 		break;
+		// 	case 14:
+		// 		$medio_pago = 'SPEI';
+		// 		break;
+		// }
+		// $payment_method_name = $_POST['payment_method_name'];
+		// $date = $_POST['date'];
 
-    	if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
-    		App\Pedido::create([ 
-		        'id_user'         => Auth::user()->id,
-	            'comprador'       => $comprador,
-	            'ref_venta'       => $ref_venta,
-	            'direccion_envio' => $direccion_envio,
-	            'modo_pago'       => $medio_pago . " - " . $payment_method_name,
-	            'codigo_descuento'=> session('codigos_usados'),
-	            'modo_envio'      => session('entrega_pedido'),
-	            'estado_pedido'   => $response_message_pol,
-	            'fecha_pedido'    => $date
-	    	]);
-    	}
-    	else {
-    		$fp = fopen('pruebas.txt', "a");
-			if($fp) {
-				fwrite($fp, 'No se ha podido crear el pedido');
-				fclose($fp);
-			}
-		}
+    	// if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
+    	// 	// App\Pedido::create([ 
+		   //  //     'id_user'         => Auth::user()->id,
+	    //  //        'comprador'       => $comprador,
+	    //  //        'ref_venta'       => $ref_venta,
+	    //  //        'direccion_envio' => $direccion_envio,
+	    //  //        'modo_pago'       => $medio_pago . " - " . $payment_method_name,
+	    //  //        'codigo_descuento'=> session('codigos_usados'),
+	    //  //        'modo_envio'      => session('entrega_pedido'),
+	    //  //        'estado_pedido'   => $response_message_pol,
+	    //  //        'fecha_pedido'    => $date
+	    // 	// ]);
+    	// }
+       //else {
+       //   $fp = fopen('pruebas.txt', "a");
+		// 	if($fp) {
+		// 		fwrite($fp, 'No se ha podido crear el pedido');
+		// 		fclose($fp);
+		// 	}
+		// }
     }
 }
