@@ -129,16 +129,16 @@ class ConfirmationController extends Controller
 		// $payment_method_name = $request['payment_method_name'];
 		// $date = $request['date'];
 
-		$state_pol            = $_Request['state_pol'];
-		$response_message_pol = $_Request['response_message_pol'];
-		$response_code_pol    = $_Request['response_code_pol'];
+		$state_pol            = $_POST['state_pol'];
+		$response_message_pol = $_POST['response_message_pol'];
+		$response_code_pol    = $_POST['response_code_pol'];
 
 		$id_user   = Auth::user()->id;
 		$comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
-		$ref_venta = $_Request['reference_sale'];
-		$direccion_envio = $_Request['shipping_address'];
+		$ref_venta = $_POST['reference_sale'];
+		$direccion_envio = $_POST['shipping_address'];
 
-		$payment_method_id = $_Request['payment_method_id'];
+		$payment_method_id = $_POST['payment_method_id'];
 		switch ($payment_method_id) {
 			case 2:
 				$medio_pago = 'CREDIT_CARD';
@@ -165,8 +165,8 @@ class ConfirmationController extends Controller
 				$medio_pago = 'SPEI';
 				break;
 		}
-		$payment_method_name = $_Request['payment_method_name'];
-		$date = $_Request['date'];
+		$payment_method_name = $_POST['payment_method_name'];
+		$date = $_POST['date'];
 
     	if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
     		App\Pedido::create([ 
