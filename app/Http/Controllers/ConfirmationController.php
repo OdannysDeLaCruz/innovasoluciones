@@ -56,9 +56,9 @@ class ConfirmationController extends Controller
 			$estadoTx = $request['mensaje'];
 		}
 
-		$cart = session('cart');
-        $cart = '';
-        session()->put('cart', $cart);
+
+        session()->put('cart', '');
+        session()->put('total_del_pedido', '');
 
     	return view('response',
     		compact(
