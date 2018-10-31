@@ -96,10 +96,11 @@ class ConfirmationController extends Controller
     	// $shipping_city = $request['shipping_city'];
     	// $payment_method_name = $request['payment_method_name'];
 
-    	/*$reference_sale = $request['reference_sale'];
-    	$reference_pol = $request['reference_pol'];
-    	$transaction_id = $request['transaction_id'];
-    	$state_pol = $request['state_pol'];*/
+    	// $reference_sale = $request['reference_sale'];
+    	// $reference_pol = $request['reference_pol'];
+    	// $transaction_id = $request['transaction_id'];
+    	$state_pol = $request['state_pol'];
+    	$response_message_pol = $request['response_message_pol'];
 
     	// $reference_sale = $_Request['reference_sale'];
     	// $reference_pol  = $_Request['reference_pol'];
@@ -127,7 +128,18 @@ class ConfirmationController extends Controller
 		// }
 		// fclose($file); 
 
-    // 	if($state_pol == 4) {
+    	if($state_pol == 4) {
+    		App\Pedido::create([ 
+		        'id_user' => Auth::user()->id,
+	            'comprador' => 'PRUEBA',
+	            'ref_venta' => 'PRUEBA',
+	            'direccion_envio' => 'PRUEBA',
+	            'modo_pago' => 'PRUEBA',
+	            'codigo_descuento' => 'PRUEBA',
+	            'modo_envio' => 'PRUEBA',
+	            'estado_pedido' => $response_message_pol,
+	            'fecha_pedido' => 'PRUEBA'
+	    	]);
 	   //  	App\Producto::create([
 	   //          'id_categoria' => 1,
 	   //          'descripcion' => 'PRUEBA',
@@ -143,7 +155,7 @@ class ConfirmationController extends Controller
 				// 'cant_disponible' => 0,
 	   //          'fecha_creado' => 'PRUEBA'
 	   //  	]);
-    // 	}
+    	}
 
 
   //   	$mensajeLog = print_r($_POST,true) . "\r\n";
@@ -158,16 +170,16 @@ class ConfirmationController extends Controller
 		// }
 
 
-    	$response_message_pol = $request['response_message_pol'];
+  //   	$response_message_pol = $request['response_message_pol'];
 
-		if($response_message_pol){
-			$fp = fopen("pruebas.txt", "a");
-			if($fp) {
-				fwrite($fp, $response_message_pol, strlen($response_message_pol));
-			fclose($fp);
+		// if($response_message_pol){
+		// 	$fp = fopen("pruebas.txt", "a");
+		// 	if($fp) {
+		// 		fwrite($fp, $response_message_pol, strlen($response_message_pol));
+		// 	fclose($fp);
 
-			}
-		}
+		// 	}
+		// }
 
     }
 }
