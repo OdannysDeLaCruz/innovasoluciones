@@ -30,9 +30,9 @@ class DatabaseSeeder extends Seeder
             CrearCategoriasSeeder::class,
         	CrearCodDescuentoSeeder::class,
             CrearModoPagoSeeder::class,
-            CrearPedidosSeeder::class,
+            // CrearPedidosSeeder::class,
             CrearProductosSeeder::class,
-            CrearDetallePedidosSeeder::class,
+            // CrearDetallePedidosSeeder::class,
             CrearImagenProductoSeeder::class,
         ]);
     }
