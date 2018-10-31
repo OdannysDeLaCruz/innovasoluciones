@@ -122,6 +122,16 @@ class ConfirmationController extends Controller
 		//   fwrite($file, $id . " => " . $responseValue . "\n");
 		// }
 		// fclose($file); 
+    	$mensajeLog = print_r($_POST,true) . "\r\n";
+		if(strlen($mensajeLog)>0){
+			$filename = "pruebas.txt";
+			$fp = fopen($filename, "a");
+			if($fp) {
+				fwrite($fp, $mensajeLog, strlen($mensajeLog));
+			fclose($fp);
+
+			}
+		}
 
     	if($state_pol == 4) {
     		App\Pedido::create([ 
@@ -138,15 +148,5 @@ class ConfirmationController extends Controller
     	}
 
 
-    	$mensajeLog = print_r($_POST,true) . "\r\n";
-		if(strlen($mensajeLog)>0){
-			$filename = "pruebas.txt";
-			$fp = fopen($filename, "a");
-			if($fp) {
-				fwrite($fp, $mensajeLog, strlen($mensajeLog));
-			fclose($fp);
-
-			}
-		}
     }
 }
