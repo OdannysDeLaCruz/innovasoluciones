@@ -82,11 +82,8 @@ class ConfirmationController extends Controller
     }
     public function confirmation(/*Request $request*/) {
 
-    	// Elimino todos los datos de session con respecto al carrito de compra
-        session()->forget('cart');
-        session()->forget('codigos_usados');				
-		session()->forget('descuento_peso');				
-		session()->forget('notificacion_codigo');
+		$mensajeLog = print_r($_POST,true) . "\r\n";
+		return view('confirmation', ['datos' => $mensajeLog]);
 
     	// Configuracion de zona horaria
 		// date_default_timezone_set('America/Bogota');
