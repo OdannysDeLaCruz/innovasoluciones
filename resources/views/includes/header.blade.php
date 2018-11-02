@@ -12,9 +12,9 @@
 	<nav class="nav_principal">
 		<span class="fa fa-times cerrar_menu" id="cerrar_menu"></span>
 		<ul>
-			<a href="/"><img class="nav_principal_logotipo" src="{{ asset('img/logos/LogoInnova.svg') }}"></a>
+			<a href="{{ route('home') }}"><img class="nav_principal_logotipo" src="{{ asset('img/logos/LogoInnova.svg') }}"></a>
 			<li><a href="/">Home</a></li>
-			<li><a href="/productos">Productos</a></li>
+			<li><a href="{{ route('productos') }}">Productos</a></li>
             <!-- Authentication Links -->
             @guest
                 <li><a href="{{ route('login') }}">Ingresar<i class="fa fa-user logo_user"></i></a></li>
