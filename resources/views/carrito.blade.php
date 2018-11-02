@@ -101,18 +101,19 @@
 				</div>
 			</span>
 		@else 
+			<!-- Elimino el las variables de session codigos_usados, descuento_peso y notificacion_codigo si no hay algo en el carrito-->
+			@php
+				session()->forget('codigos_usados');				
+				session()->forget('descuento_peso');				
+				session()->forget('notificacion_codigo');		
+			@endphp
+
 			<h1 class="msm_carrito_vacio">{{ "No hay productos en el carrito" }}</h1>
 			<label class="carrito_botones">
 				<div class="btn_seguir_comprando botones_innova">
 					<a href="{{ route('productos') }}"><span class="fa fa-arrow-left mr-2"> </span> Ver productos</a>
 				</div>
 			</label>
-			<!-- Elimino el las variables de session codigos_usados, descuento_peso y notificacion_codigo-->
-			@php
-				session()->forget('codigos_usados');				
-				session()->forget('descuento_peso');				
-				session()->forget('notificacion_codigo');		
-			@endphp
 		@endif
 	</section>
 

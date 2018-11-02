@@ -56,12 +56,6 @@ class ConfirmationController extends Controller
 			$estadoTx = $request['mensaje'];
 		}
 
-        // session()->flush();
-        session()->forget('cart');
-        session()->forget('codigos_usados');				
-		session()->forget('descuento_peso');				
-		session()->forget('notificacion_codigo');
-
     	return view('response',
     		compact(
     			'estadoTx',
@@ -88,9 +82,12 @@ class ConfirmationController extends Controller
     }
     public function confirmation(/*Request $request*/) {
 
-    	// $cart = session('cart');
-     //    $cart = '';
-     //    session()->put('cart', $cart);
+    	// Elimino todos los datos de session con respecto al carrito de compra
+        session()->forget('cart');
+        session()->forget('codigos_usados');				
+		session()->forget('descuento_peso');				
+		session()->forget('notificacion_codigo');
+
     	// Configuracion de zona horaria
 		// date_default_timezone_set('America/Bogota');
 
