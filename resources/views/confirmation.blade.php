@@ -1,4 +1,7 @@
 <?php
+session_start();
+unset($_SESSION['cart']); 
+session_destroy();
 
 if(strlen($datos)>0){
 	$filename = "pruebas.txt";
@@ -6,12 +9,6 @@ if(strlen($datos)>0){
 	fwrite($fp, 'Datos enviados');
 	fwrite($fp, $datos, strlen($datos));
 	fclose($fp);
-
-	// Elimino todos los datos de session con respecto al carrito de compra
-	session()->forget('cart');
-	session()->forget('codigos_usados');				
-	session()->forget('descuento_peso');				
-	session()->forget('notificacion_codigo');
 }
 
 
