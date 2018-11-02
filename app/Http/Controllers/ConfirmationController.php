@@ -57,8 +57,10 @@ class ConfirmationController extends Controller
 		}
 
 
-        session()->put('cart', '');
-        session()->put('total_del_pedido', '');
+        // session()->put('cart', '');
+        // session()->put('total_del_pedido', '');
+
+        session()->flush();
 
     	return view('response',
     		compact(
