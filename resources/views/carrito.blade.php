@@ -109,9 +109,9 @@
 			</label>
 			<!-- Elimino el las variables de session codigos_usados, descuento_peso y notificacion_codigo-->
 			@php
-				session()->put('codigos_usados', '');				
-				session()->put('descuento_peso', '');				
-				session()->put('notificacion_codigo', '');			
+				session()->forget('codigos_usados');				
+				session()->forget('descuento_peso');				
+				session()->forget('notificacion_codigo');		
 			@endphp
 		@endif
 	</section>

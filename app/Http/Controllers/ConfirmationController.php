@@ -58,6 +58,9 @@ class ConfirmationController extends Controller
 
         // session()->flush();
         session()->forget('cart');
+        session()->forget('codigos_usados');				
+		session()->forget('descuento_peso');				
+		session()->forget('notificacion_codigo');
 
     	return view('response',
     		compact(
