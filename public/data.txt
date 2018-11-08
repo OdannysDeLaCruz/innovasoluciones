@@ -40,13 +40,4 @@ pseReference2 =>
 pseReference3 => 
 authorizationCode => 00000000
 processingDate => 2018-10-29
-# Confirmation
-#-------------------------------------------------------
-_token => E87lZKMi11GhsCYIxJAsZd3E0XgUSZP1FogxsspY
-nombre => Odannys
-apellido => De La Cruz
-# Confirmation
-#-------------------------------------------------------
-_token => E87lZKMi11GhsCYIxJAsZd3E0XgUSZP1FogxsspY
-nombre => Odannys
-apellido => De La Cruz
+

@@ -81,7 +81,7 @@ class ConfirmationController extends Controller
     		)
     	);
     }
-    public function confirmation(/*Request $request*/) {
+    public function confirmation() {
     	// Prueba de que se esta ejecutando este controlador
     	$fp = fopen('pruebas.txt', "a");
 		if($fp) {
@@ -94,88 +94,59 @@ class ConfirmationController extends Controller
 
 		// Obtener datos de payu
 
-		// $sign = $request['sign'];
-  //   	$merchant_id = $request['merchant_id'];
-  //   	$reference_pol = $request['reference_pol'];
+		$sign = $_POST['sign'];
+    	$merchant_id = $_POST['merchant_id'];
+    	$reference_pol = $_POST['reference_pol'];
 
     	// $firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
 
-		// $state_pol            = $request['state_pol'];
-		// $response_message_pol = $request['response_message_pol'];
-		// $response_code_pol    = $request['response_code_pol'];
+		$state_pol            = $_POST['state_pol'];
+		$response_message_pol = $_POST['response_message_pol'];
+		$response_code_pol    = $_POST['response_code_pol'];
 
-		// $id_user   = Auth::user()->id;
-		// $comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
-		// $ref_venta = $request['reference_sale'];
-		// $direccion_envio = $request['shipping_address'];
+		$id_user   = Auth::user()->id;
+		$comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
+		$ref_venta = $_POST['reference_sale'];
+		$direccion_envio = $_POST['shipping_address'];
 
-		// $payment_method_id = $request['payment_method_id'];
-		// switch ($payment_method_id) {
-		// 	case 2: $medio_pago = 'CREDIT_CARD'; break;
-		// 	case 4: $medio_pago = '	PSE'; break;
-		// 	case 5: $medio_pago = 'ACH'; break;
-		// 	case 6: $medio_pago = 'DEBIT_CARD'; break;
-		// 	case 7: $medio_pago = 'CASH'; break;
-		// 	case 8: $medio_pago = 'REFERENCED'; break;
-		// 	case 10: $medio_pago = 'BANK_REFERENCED'; break;
-		// 	case 14: $medio_pago = 'SPEI'; break;
-		// }
+		$payment_method_id = $_POST['payment_method_id'];
+		switch ($payment_method_id) {
+			case 2:  $medio_pago = 'CREDIT_CARD'; break;
+			case 4:  $medio_pago = 'PSE'; break;
+			case 5:  $medio_pago = 'ACH'; break;
+			case 6:  $medio_pago = 'DEBIT_CARD'; break;
+			case 7:  $medio_pago = 'CASH'; break;
+			case 8:  $medio_pago = 'REFERENCED'; break;
+			case 10: $medio_pago = 'BANK_REFERENCED'; break;
+			case 14: $medio_pago = 'SPEI'; break;
+		}
+		$payment_method_name = $_POST['payment_method_name'];
+		$date = $_POST['date'];
 
-		// $payment_method_name = $request['payment_method_name'];
-		// $date = $request['date'];
+    	if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
 
-
-
-		// $state_pol            = $_POST['state_pol'];
-		$state_pol            = 4;
-		// $response_message_pol = $_POST['response_message_pol'];
-		// $response_code_pol    = $_POST['response_code_pol'];
-
-		// $id_user   = Auth::user()->id;
-		// $comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
-		// $ref_venta = $_POST['reference_sale'];
-		// $direccion_envio = $_POST['shipping_address'];
-
-		// $payment_method_id = $_POST['payment_method_id'];
-		// switch ($payment_method_id) {
-		// 	case 2:$medio_pago = 'CREDIT_CARD'; break;
-		// 	case 4: $medio_pago = '	PSE'; break;
-		// 	case 5: $medio_pago = 'ACH'; break;
-		// 	case 6: $medio_pago = 'DEBIT_CARD'; break;
-		// 	case 7: $medio_pago = 'CASH'; break;
-		// 	case 8: $medio_pago = 'REFERENCED'; break;
-		// 	case 10: $medio_pago = 'BANK_REFERENCED'; break;
-		// 	case 14: $medio_pago = 'SPEI'; break;
-		// }
-		// $payment_method_name = $_POST['payment_method_name'];
-		// $date = $_POST['date'];
-
-    	if($state_pol == 4) {
-			// App\Pedido::create([ 
-			//     'id_user'         => 1,
-		 //        'comprador'       => 'Innova test',
-		 //        'ref_venta'       => 'prueba',
-		 //        'direccion_envio' => 'prueba',
-		 //        'modo_pago'       => 'prueba',
-		 //        'codigo_descuento'=> 'prueba',
-		 //        'modo_envio'      => 'prueba',
-		 //        'estado_pedido'   => 'prueba',
-		 //        'fecha_pedido'    => $date,
-		 //    ]);
+    		// Créo el pedido nuevo
     		DB::table('pedidos')->insert(
 			    [
-			    	'id_user'         => 1,
-			        'comprador'       => 'Innova test',
-			        'ref_venta'       => 'prueba',
-			        'direccion_envio' => 'prueba',
-			        'modo_pago'       => 'prueba',
-			        'codigo_descuento'=> 'prueba',
-			        'modo_envio'      => 'prueba',
-			        'estado_pedido'   => 'prueba',
-			        'fecha_pedido'    => date('Y-n-j H:i:s')
+			    	'id_user'         => $id_user,
+			        'comprador'       => $comprador,
+			        'ref_venta'       => $ref_venta,
+			        'direccion_envio' => $direccion_envio,
+			        'modo_pago'       => $medio_pago,
+			        'codigo_descuento'=> session('descuento_peso'),
+			        'modo_envio'      => session('entrega_pedido'),
+			        'estado_pedido'   => $response_message_pol,
+			        'fecha_pedido'    => $date
 				]
 			);
 			
+			// Eliminar las variables de session asociadas al carrito
+			
+			session()->forget('cart');				
+			session()->forget('codigos_usados');				
+			session()->forget('descuento_peso');				
+			session()->forget('notificacion_codigo');
+
 			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
 		    $fp = fopen('pruebas.txt', "a");
 			if($fp) {
@@ -183,22 +154,5 @@ class ConfirmationController extends Controller
 				fclose($fp);
 			}
 		}
-		// 	catch (Exception $e) {
-		// 		// Si hay algun error al intentar crear el pedido, enviar un correo a soporte tecnico de Innova.
-		// 		$msm $e->getMessage();
-		// 		$fp = fopen('pruebas.txt', "a");
-		// 		if($fp) {
-		// 			fwrite($fp, 'Error al intentar crear pedido : ' . $msm);
-		// 			fclose($fp);
-		// 		}
-		// 	}
-  //   	}
-  //       else {
-  //       	$fp = fopen('pruebas.txt', "a");
-		// 	if($fp) {
-		// 		fwrite($fp, 'No se ha podido crear el pedido, estado de pedido rechazado');
-		// 		fclose($fp);
-		// 	}
-		// }
     }
 }

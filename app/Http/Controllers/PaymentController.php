@@ -29,7 +29,7 @@ class PaymentController extends Controller
     * 2 - Recogerlo en la tienda fisica del vendedor.
     */
 
-    public function costoEnvio($request) {
+    public function modoEnvio($request) {
 
         // Verifico que tipo de entrega se escogio.
         // Si $tipo_envio = 1, envar al domicilio
@@ -71,7 +71,7 @@ class PaymentController extends Controller
         // Obtener total a pagar
         $total_pagar = $this->calcularTotal();
         // Obtener metodo de entrega del pedido
-        $this->costoEnvio($request);
+        $this->modoEnvio($request);
 
         // Configurar los datos para la pasarela de Payu
         $dataPayu['merchantId'] = '508029';
