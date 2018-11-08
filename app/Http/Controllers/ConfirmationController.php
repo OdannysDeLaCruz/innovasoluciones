@@ -125,7 +125,7 @@ class ConfirmationController extends Controller
 
 
 
-		// $state_pol            = $_POST['state_pol'];
+		$state_pol            = $_POST['state_pol'];
 		// $response_message_pol = $_POST['response_message_pol'];
 		// $response_code_pol    = $_POST['response_code_pol'];
 
@@ -148,27 +148,25 @@ class ConfirmationController extends Controller
 		// $payment_method_name = $_POST['payment_method_name'];
 		// $date = $_POST['date'];
 
-  //   	if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
-  //   		try {
-		// 		App\Pedido::create([ 
-		// 		    'id_user'         => $id_user,
-		// 	        'comprador'       => $comprador,
-		// 	        'ref_venta'       => 'prueba',
-		// 	        'direccion_envio' => 'prueba',
-		// 	        'modo_pago'       => 'prueba',
-		// 	        'codigo_descuento'=> 'prueba',
-		// 	        'modo_envio'      => 'prueba',
-		// 	        'estado_pedido'   => 'prueba',
-		// 	        'fecha_pedido'    => $date,
-		// 	    ]);
-
-		// 		// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
-		// 	    $fp = fopen('pruebas.txt', "a");
-		// 		if($fp) {
-		// 			fwrite($fp, 'Pedido creado');
-		// 			fclose($fp);
-		// 		}
-		// 	}
+    	if($state_pol == 4) {
+			// App\Pedido::create([ 
+			//     'id_user'         => $id_user,
+		 //        'comprador'       => $comprador,
+		 //        'ref_venta'       => 'prueba',
+		 //        'direccion_envio' => 'prueba',
+		 //        'modo_pago'       => 'prueba',
+		 //        'codigo_descuento'=> 'prueba',
+		 //        'modo_envio'      => 'prueba',
+		 //        'estado_pedido'   => 'prueba',
+		 //        'fecha_pedido'    => $date,
+		 //    ]);
+			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
+		    $fp = fopen('pruebas.txt', "a");
+			if($fp) {
+				fwrite($fp, 'Pedido creado');
+				fclose($fp);
+			}
+		}
 		// 	catch (Exception $e) {
 		// 		// Si hay algun error al intentar crear el pedido, enviar un correo a soporte tecnico de Innova.
 		// 		$msm $e->getMessage();
