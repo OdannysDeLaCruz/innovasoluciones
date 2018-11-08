@@ -10,5 +10,3 @@ session_destroy();
 // 	fwrite($fp, $datos, strlen($datos));
 // 	fclose($fp);
 // }
-
-
