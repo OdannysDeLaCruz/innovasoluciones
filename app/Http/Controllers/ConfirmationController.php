@@ -142,10 +142,10 @@ class ConfirmationController extends Controller
 			
 			// Eliminar las variables de session asociadas al carrito
 			
-			session()->forget('cart');				
-			session()->forget('codigos_usados');				
-			session()->forget('descuento_peso');				
-			session()->forget('notificacion_codigo');
+			// session()->forget('cart');				
+			// session()->forget('codigos_usados');				
+			// session()->forget('descuento_peso');				
+			// session()->forget('notificacion_codigo');
 
 			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
 		    $fp = fopen('pruebas.txt', "a");
