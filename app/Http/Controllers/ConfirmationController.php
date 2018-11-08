@@ -84,7 +84,7 @@ class ConfirmationController extends Controller
     	// Prueba de que se esta ejecutando este controlador
     	$fp = fopen('pruebas.txt', "a");
 		if($fp) {
-			fwrite($fp, 'Se esta usuando este controlador');
+			fwrite($fp, 'Se esta usuando este controlador' . "\r\n");
 			fclose($fp);
 		}
 
@@ -149,21 +149,21 @@ class ConfirmationController extends Controller
 		// $date = $_POST['date'];
 
     	if($state_pol == 4) {
-			// App\Pedido::create([ 
-			//     'id_user'         => $id_user,
-		 //        'comprador'       => $comprador,
-		 //        'ref_venta'       => 'prueba',
-		 //        'direccion_envio' => 'prueba',
-		 //        'modo_pago'       => 'prueba',
-		 //        'codigo_descuento'=> 'prueba',
-		 //        'modo_envio'      => 'prueba',
-		 //        'estado_pedido'   => 'prueba',
-		 //        'fecha_pedido'    => $date,
-		 //    ]);
+			App\Pedido::create([ 
+			    'id_user'         => 1,
+		        'comprador'       => 'Innova test',
+		        'ref_venta'       => 'prueba',
+		        'direccion_envio' => 'prueba',
+		        'modo_pago'       => 'prueba',
+		        'codigo_descuento'=> 'prueba',
+		        'modo_envio'      => 'prueba',
+		        'estado_pedido'   => 'prueba',
+		        'fecha_pedido'    => $date,
+		    ]);
 			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
 		    $fp = fopen('pruebas.txt', "a");
 			if($fp) {
-				fwrite($fp, 'Pedido creado');
+				fwrite($fp, 'Pedido creado' . "\r\n");
 				fclose($fp);
 			}
 		}
