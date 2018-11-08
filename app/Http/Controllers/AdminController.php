@@ -73,20 +73,17 @@ class AdminController extends Controller
     	// Pedidos
         $misPedidos = App\Pedido::paginate(20);
         foreach ($misPedidos as $dato) {
-        	$pedido['id'] = $dato->id;
-        	$pedido['direccion'] = $dato->direccion_envio;
 
-        	// obtener usuario
-        	$nombre   = App\User::where('id', $dato->id_user)->value('nombre');
-        	$apellido = App\User::where('id', $dato->id_user)->value('apellido');
-        	$pedido['cliente'] = $nombre . ' ' . $apellido;
+            $nombre   = App\User::where('id', $dato->id_user)->value('nombre');
+            $apellido = App\User::where('id', $dato->id_user)->value('apellido');
+            $pedido['cliente'] = $nombre . ' ' . $apellido;
+            
+        	$pedido['id'] = $dato->id;
+            $pedido['direccion'] = $dato->direccion_envio;
+        	$pedido['entrega'] = $dato->modo_envio;
         	$pedido['codigo'] = $dato->codigo_descuento;
         	$pedido['envio'] = $dato->envio;
-
-        	// Obtener modo de pago
-        	$modo_pago = App\ModoPago::where('id', $dato->id_modo_pago)->value('nombre_pago');
-        	$pedido['modo_pago'] = $modo_pago;
-
+        	$pedido['modo_pago'] = $dato->modo_pago;
         	$pedido['estado'] = $dato->estado_pedido;
         	$pedido['fecha'] = $dato->fecha_pedido;
 

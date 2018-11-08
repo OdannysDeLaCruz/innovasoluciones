@@ -47,6 +47,7 @@
 						<tr>
 							<th class="table_id">ID</th>
 							<th class="table_direccion">Dirección</th>
+							<th class="table_direccion">Modo de entrega</th>
 							<th class="table_cliente">Cliente</th>
 							<th class="table_modo_pago">Pago</th>
 							<th class="table_estado">Estado</th>
@@ -63,6 +64,9 @@
 								<td>{{ $pedido['id'] }}</td>								
 								<td class="pedido_direccion">
 									{{ $pedido['direccion'] }}
+								</td>
+								<td>
+									{{ $pedido['entrega'] }}
 								</td>
 								<td>{{ $pedido['cliente'] }}</td>
 								<td>{{ $pedido['modo_pago'] }}</td>
