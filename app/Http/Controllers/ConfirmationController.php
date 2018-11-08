@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class ConfirmationController extends Controller
@@ -125,7 +126,8 @@ class ConfirmationController extends Controller
 
 
 
-		$state_pol            = $_POST['state_pol'];
+		// $state_pol            = $_POST['state_pol'];
+		$state_pol            = 4;
 		// $response_message_pol = $_POST['response_message_pol'];
 		// $response_code_pol    = $_POST['response_code_pol'];
 
@@ -149,17 +151,31 @@ class ConfirmationController extends Controller
 		// $date = $_POST['date'];
 
     	if($state_pol == 4) {
-			App\Pedido::create([ 
-			    'id_user'         => 1,
-		        'comprador'       => 'Innova test',
-		        'ref_venta'       => 'prueba',
-		        'direccion_envio' => 'prueba',
-		        'modo_pago'       => 'prueba',
-		        'codigo_descuento'=> 'prueba',
-		        'modo_envio'      => 'prueba',
-		        'estado_pedido'   => 'prueba',
-		        'fecha_pedido'    => $date,
-		    ]);
+			// App\Pedido::create([ 
+			//     'id_user'         => 1,
+		 //        'comprador'       => 'Innova test',
+		 //        'ref_venta'       => 'prueba',
+		 //        'direccion_envio' => 'prueba',
+		 //        'modo_pago'       => 'prueba',
+		 //        'codigo_descuento'=> 'prueba',
+		 //        'modo_envio'      => 'prueba',
+		 //        'estado_pedido'   => 'prueba',
+		 //        'fecha_pedido'    => $date,
+		 //    ]);
+    		DB::table('pedidos')->insert(
+			    [
+			    	'id_user'         => 1,
+			        'comprador'       => 'Innova test',
+			        'ref_venta'       => 'prueba',
+			        'direccion_envio' => 'prueba',
+			        'modo_pago'       => 'prueba',
+			        'codigo_descuento'=> 'prueba',
+			        'modo_envio'      => 'prueba',
+			        'estado_pedido'   => 'prueba',
+			        'fecha_pedido'    => date('Y-n-j H:i:s')
+				]
+			);
+			
 			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
 		    $fp = fopen('pruebas.txt', "a");
 			if($fp) {
