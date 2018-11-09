@@ -120,14 +120,7 @@ class ConfirmationController extends Controller
 
 		$fp = fopen('pruebas.txt', "a");
 		if($fp) {
-			fwrite($fp, 
-				"Reference_sale: " . $ref_venta . "\r\n" .
-				"Reference_pole: " . $reference_pole . "\r\n" . 
-				"transaction_id: " . $transaction_id . "\r\n" . 
-				"state_pol: " . $state_pol . "\r\n" . 
-				"User ID: " . $id_user . "\r\n" . 
-				"Comprador: " . $comprador . "\r\n" . 
-				"Fecha: " . $date . "\r\n");
+			fwrite($fp, "Reference_sale: " . $ref_venta . "\r\n" . "Reference_pole: " . $reference_pole . "\r\n" .  "transaction_id: " . $transaction_id . "\r\n" . "state_pol: " . $state_pol . "\r\n");
 			fclose($fp);
 		}
 		
