@@ -104,10 +104,10 @@ class ConfirmationController extends Controller
 		// $response_code_pol    = $_POST['response_code_pol'];
 
 
-		$ref_venta = $_POST['reference_sale'];
-		$reference_pole    = $_POST['reference_pole'];
-		$transaction_id    = $_POST['transaction_id'];
-		$state_pol            = $_POST['state_pol'];
+		$ref_venta      = $_POST['reference_sale'];
+		$reference_pole = $_POST['reference_pole'];
+		$transaction_id = $_POST['transaction_id'];
+		$state_pol      = $_POST['state_pol'];
 
 		// $direccion_envio = $_POST['shipping_address'];
 		// $date = $_POST['date'];
@@ -120,7 +120,14 @@ class ConfirmationController extends Controller
 
 		$fp = fopen('pruebas.txt', "a");
 		if($fp) {
-			fwrite($fp, "Reference_sale: " . $ref_venta . "Reference_pole: " . $reference_pole . "\r\n" . "transaction_id: " . $transaction_id . "\r\n" . "state_pol: " . $state_pol . "\r\n" . "User ID: " . $id_user . "\r\n" . "Comprador: " . $comprador . "\r\n" .  "response_message_pol: " . $response_message_pol . "\r\n" . "Fecha:  " . $date . "\r\n");
+			fwrite($fp, 
+				"Reference_sale: " . $ref_venta . "\r\n" .
+				"Reference_pole: " . $reference_pole . "\r\n" . 
+				"transaction_id: " . $transaction_id . "\r\n" . 
+				"state_pol: " . $state_pol . "\r\n" . 
+				"User ID: " . $id_user . "\r\n" . 
+				"Comprador: " . $comprador . "\r\n" . 
+				"Fecha: " . $date . "\r\n");
 			fclose($fp);
 		}
 		
