@@ -109,9 +109,9 @@ class ConfirmationController extends Controller
 		$direccion_envio = $_POST['shipping_address'];
 		$date = $_POST['date'];
 
-		$id_user   = Auth::user()->id;
-		$comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
-		
+		$id_user   = 1;
+		$comprador = 'Odannys De La Cruz';
+
 		$fp = fopen('pruebas.txt', "a");
 		if($fp) {
 			fwrite($fp,	"state_pol: " . $state_pol . "\r\n" . "response_message_pol: " . $response_message_pol . "\r\n" . "Fecha:  " . $date . "\r\n");
