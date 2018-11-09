@@ -94,9 +94,9 @@ class ConfirmationController extends Controller
 
 		// Obtener datos de payu
 
-		$sign = $_POST['sign'];
-    	$merchant_id = $_POST['merchant_id'];
-    	$reference_pol = $_POST['reference_pol'];
+		// $sign = $_POST['sign'];
+  //   	$merchant_id = $_POST['merchant_id'];
+  //   	$reference_pol = $_POST['reference_pol'];
 
     	// $firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
 
@@ -120,7 +120,7 @@ class ConfirmationController extends Controller
 
 		$fp = fopen('pruebas.txt', "a");
 		if($fp) {
-			fwrite($fp, "Reference_sale: " . $ref_venta . "\r\n" . "Reference_pole: " . $reference_pole . "\r\n" .  "transaction_id: " . $transaction_id . "\r\n" . "state_pol: " . $state_pol . "\r\n");
+			fwrite($fp, "Reference_sale: $ref_venta \r\n transaction_id: $transaction_id \r\n state_pol: $state_pol \r\n");
 			fclose($fp);
 		}
 		
