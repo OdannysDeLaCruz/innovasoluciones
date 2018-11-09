@@ -123,36 +123,60 @@ class ConfirmationController extends Controller
 		$payment_method_name = $_POST['payment_method_name'];
 		$date = $_POST['date'];
 
-    	if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
 
-    		// Créo el pedido nuevo
-    		DB::table('pedidos')->insert(
-			    [
-			    	'id_user'         => $id_user,
-			        'comprador'       => $comprador,
-			        'ref_venta'       => $ref_venta,
-			        'direccion_envio' => $direccion_envio,
-			        'modo_pago'       => $medio_pago,
-			        'codigo_descuento'=> session('descuento_peso'),
-			        'modo_envio'      => session('entrega_pedido'),
-			        'estado_pedido'   => $response_message_pol,
-			        'fecha_pedido'    => $date
-				]
+		$fp = fopen('pruebas.txt', "a");
+		if($fp) {
+			fwrite($fp, 
+				'Sign: ' . $sing "\r\n"
+				'merchant_id: ' . $merchant_id "\r\n"
+				'reference_pol: ' . $reference_pol "\r\n"
+				'id_user: ' . $id_user "\r\n"
+				'comprador: ' . $comprador "\r\n"
+				'ref_venta: ' . $ref_venta "\r\n"
+				'direccion_envio: ' . $direccion_envio "\r\n"
+				'payment_method_id: ' . $payment_method_id "\r\n"
+				'medio_pago: ' . $medio_pago "\r\n"
+				'payment_method_name: ' . $payment_method_name "\r\n"
+				'date: ' . $date "\r\n"
 			);
-			
-			// Eliminar las variables de session asociadas al carrito
-			
-			// session()->forget('cart');				
-			// session()->forget('codigos_usados');				
-			// session()->forget('descuento_peso');				
-			// session()->forget('notificacion_codigo');
 
-			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
-		    $fp = fopen('pruebas.txt', "a");
-			if($fp) {
-				fwrite($fp, 'Pedido creado' . "\r\n");
-				fclose($fp);
-			}
+			fclose($fp);
 		}
+
+  //   	if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
+
+  //   		// Créo el pedido nuevo
+  //   		DB::table('pedidos')->insert(
+		// 	    [
+		// 	    	'id_user'         => $id_user,
+		// 	        'comprador'       => $comprador,
+		// 	        'ref_venta'       => $ref_venta,
+		// 	        'direccion_envio' => $direccion_envio,
+		// 	        'modo_pago'       => $medio_pago,
+		// 	        'codigo_descuento'=> session('descuento_peso'),
+		// 	        'modo_envio'      => session('entrega_pedido'),
+		// 	        'estado_pedido'   => $response_message_pol,
+		// 	        'fecha_pedido'    => $date
+		// 		]
+		// 	);
+			
+		// 	// Eliminar las variables de session asociadas al carrito
+			
+		// 	// session()->forget('cart');				
+		// 	// session()->forget('codigos_usados');				
+		// 	// session()->forget('descuento_peso');				
+		// 	// session()->forget('notificacion_codigo');
+
+		// 	// session_start();
+		// 	// unset($_SESSION['cart']); 
+		// 	// session_destroy();
+
+		// 	// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
+		//  //    $fp = fopen('pruebas.txt', "a");
+		// 	// if($fp) {
+		// 	// 	fwrite($fp, 'Pedido creado' . "\r\n");
+		// 	// 	fclose($fp);
+		// 	// }
+		// }
     }
 }
