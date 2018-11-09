@@ -90,7 +90,7 @@ class ConfirmationController extends Controller
 		}
 
     	// Configurar zona horaria
-    	date_default_timezone_set('America/Bogota');
+    	// date_default_timezone_set('America/Bogota');
 
 		// Obtener datos de payu
 
@@ -100,28 +100,29 @@ class ConfirmationController extends Controller
 
     	// $firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
 
-		$response_message_pol = $_POST['response_message_pol'];
+		// $response_message_pol = $_POST['response_message_pol'];
 		// $response_code_pol    = $_POST['response_code_pol'];
 
 
-		$ref_venta      = $_POST['reference_sale'];
-		$reference_pole = $_POST['reference_pole'];
-		$transaction_id = $_POST['transaction_id'];
-		$state_pol      = $_POST['state_pol'];
+		// $ref_venta      = $_POST['reference_sale'];
+		// $reference_pole = $_POST['reference_pole'];
+		// $transaction_id = $_POST['transaction_id'];
+
 
 		// $direccion_envio = $_POST['shipping_address'];
-		$date = $_POST['date'];
+		// $date = $_POST['date'];
 
 		// $id_user   = Auth::user()->id;
 		// $comprador = Auth::user()->nombre;
 
-		$id_user   = 1;
-		$comprador = "Odannys De La Cruz";
+		// $id_user   = 1;
+		// $comprador = "Odannys De La Cruz";
+		// $state_pol      = $_POST['state_pol'];
 
+		$state_pol = isset($_POST['state_pol']) ? isset($_POST['state_pol']) : 'No hay estado';
 		$fp = fopen('pruebas.txt', "a");
 		if($fp) {
-			// fwrite($fp, "Reference_sale: $ref_venta \r\n transaction_id: $transaction_id \r\n state_pol: $state_pol \r\n");
-			fwrite($fp,	"state_pol: " . $state_pol . "\r\n" . "response_message_pol: " . $response_message_pol . "\r\n" . "Fecha:  " . $date . "\r\n");
+			fwrite($fp, $state_pol);
 			fclose($fp);
 		}
 		
