@@ -112,11 +112,11 @@ class ConfirmationController extends Controller
 		// $direccion_envio = $_POST['shipping_address'];
 		// $date = $_POST['date'];
 
-		$id_user   = Auth::user()->id;
-		$comprador = Auth::user()->nombre;
+		// $id_user   = Auth::user()->id;
+		// $comprador = Auth::user()->nombre;
 
-		// $id_user   = 1;
-		// $comprador = "Odannys De La Cruz";
+		$id_user   = 1;
+		$comprador = "Odannys De La Cruz";
 
 		$fp = fopen('pruebas.txt', "a");
 		if($fp) {
