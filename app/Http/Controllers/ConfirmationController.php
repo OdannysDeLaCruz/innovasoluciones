@@ -127,6 +127,9 @@ class ConfirmationController extends Controller
 		$fp = fopen('pruebas.txt', "a");
 		if($fp) {
 			fwrite($fp, 
+				'state_pol: ' . $state_pol "\r\n"
+				'response_message_pol: ' . $response_message_pol "\r\n"
+				'response_code_pol: ' . $response_code_pol "\r\n"
 				'Sign: ' . $sing "\r\n"
 				'merchant_id: ' . $merchant_id "\r\n"
 				'reference_pol: ' . $reference_pol "\r\n"
