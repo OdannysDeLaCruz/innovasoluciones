@@ -119,11 +119,19 @@ class ConfirmationController extends Controller
 		// $comprador = "Odannys De La Cruz";
 		// $state_pol      = $_POST['state_pol'];
 
-		$state_pol = isset($_POST['state_pol']) ? isset($_POST['state_pol']) : 'No hay estado';
+		$state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
+
 		$fp = fopen('pruebas.txt', "a");
-		if($fp) {
-			fwrite($fp, $state_pol);
-			fclose($fp);
+		if($state_pol == 4) {
+			if($fp) {
+				fwrite($fp, "state_pol: $state_pol \r\n");
+				fclose($fp);
+			}
+		}else {
+			if($fp) {
+				fwrite($fp, 'Error de estado');
+				fclose($fp);
+			}
 		}
 		
 		// $payment_method_id = $_POST['payment_method_id'];
