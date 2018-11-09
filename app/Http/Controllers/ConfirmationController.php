@@ -100,7 +100,7 @@ class ConfirmationController extends Controller
 
     	// $firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
 
-		// $response_message_pol = $_POST['response_message_pol'];
+		$response_message_pol = $_POST['response_message_pol'];
 		// $response_code_pol    = $_POST['response_code_pol'];
 
 
@@ -110,7 +110,7 @@ class ConfirmationController extends Controller
 		$state_pol      = $_POST['state_pol'];
 
 		// $direccion_envio = $_POST['shipping_address'];
-		// $date = $_POST['date'];
+		$date = $_POST['date'];
 
 		// $id_user   = Auth::user()->id;
 		// $comprador = Auth::user()->nombre;
@@ -120,7 +120,8 @@ class ConfirmationController extends Controller
 
 		$fp = fopen('pruebas.txt', "a");
 		if($fp) {
-			fwrite($fp, "Reference_sale: $ref_venta \r\n transaction_id: $transaction_id \r\n state_pol: $state_pol \r\n");
+			// fwrite($fp, "Reference_sale: $ref_venta \r\n transaction_id: $transaction_id \r\n state_pol: $state_pol \r\n");
+			fwrite($fp,	"state_pol: " . $state_pol . "\r\n" . "response_message_pol: " . $response_message_pol . "\r\n" . "Fecha:  " . $date . "\r\n");
 			fclose($fp);
 		}
 		
