@@ -109,14 +109,15 @@ class ConfirmationController extends Controller
 		$direccion_envio = $_POST['shipping_address'];
 		$date = $_POST['date'];
 
+		$id_user   = Auth::user()->id;
+		$comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
+		
 		$fp = fopen('pruebas.txt', "a");
 		if($fp) {
 			fwrite($fp,	"state_pol: " . $state_pol . "\r\n" . "response_message_pol: " . $response_message_pol . "\r\n" . "Fecha:  " . $date . "\r\n");
 			fclose($fp);
 		}
 		
-		// $id_user   = Auth::user()->id;
-		// $comprador = Auth::user()->nombre . " " . Auth::user()->apellido;
 		// $payment_method_id = $_POST['payment_method_id'];
 		// switch ($payment_method_id) {
 		// 	case 2:  $medio_pago = 'CREDIT_CARD'; break;
