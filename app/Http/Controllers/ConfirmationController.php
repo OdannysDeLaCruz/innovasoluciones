@@ -125,7 +125,12 @@ class ConfirmationController extends Controller
 		if($state_pol == 4) {
 			fwrite($fp, "state_pol: $state_pol \r\n");
 			fclose($fp);
-			session()->forget('cart');
+
+			session_start();
+			unset($_SESSION['cart']); 
+			session_destroy();
+
+			// session()->forget('cart');
 
 			// $cart = session('cart');
 			// unset($cart);
