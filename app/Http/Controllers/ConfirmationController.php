@@ -12,13 +12,13 @@ class ConfirmationController extends Controller
 	
     public function response(Request $request) {
 
-		$file = fopen("data.txt", "a");
-		fwrite($file, "# Response\n");
-		fwrite($file, "#-------------------------------------------------------\n");
-		foreach($_GET as $id => $responseValue){
-		  fwrite($file, $id . " => " . $responseValue . "\n");
-		}
-		fclose($file);
+		// $file = fopen("data.txt", "a");
+		// fwrite($file, "# Response\n");
+		// fwrite($file, "#-------------------------------------------------------\n");
+		// foreach($_GET as $id => $responseValue){
+		//   fwrite($file, $id . " => " . $responseValue . "\n");
+		// }
+		// fclose($file);
 	
 
 		$merchant_id   = $request['merchantId'];
@@ -129,7 +129,7 @@ class ConfirmationController extends Controller
 			}
 		}else {
 			if($fp) {
-				fwrite($fp, 'Error de estado');
+				fwrite($fp, "Error de estado \r\n");
 				fclose($fp);
 			}
 		}
@@ -169,14 +169,14 @@ class ConfirmationController extends Controller
 			
 		// 	// Eliminar las variables de session asociadas al carrito
 			
-		// 	// session()->forget('cart');				
-		// 	// session()->forget('codigos_usados');				
-		// 	// session()->forget('descuento_peso');				
-		// 	// session()->forget('notificacion_codigo');
+		// session()->forget('cart');
+		// session()->forget('codigos_usados');
+		// session()->forget('descuento_peso');
+		// session()->forget('notificacion_codigo');
 
-		// 	// session_start();
-		// 	// unset($_SESSION['cart']); 
-		// 	// session_destroy();
+		session_start();
+		unset($_SESSION['cart']); 
+		session_destroy();
 
 		// 	// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
 		//  //    $fp = fopen('pruebas.txt', "a");
