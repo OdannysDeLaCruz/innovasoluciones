@@ -174,10 +174,9 @@ class ConfirmationController extends Controller
 		// session()->forget('descuento_peso');
 		// session()->forget('notificacion_codigo');
 
-		// $cart = session('cart');
-		// unset($cart);
+		$cart = session('cart');
+		unset($cart);
 		// session_destroy();
-		session()->forget('cart');
 
 		// 	// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
 		//  //    $fp = fopen('pruebas.txt', "a");
