@@ -123,18 +123,21 @@ class ConfirmationController extends Controller
 
 		$fp = fopen('pruebas.txt', "a");
 		if($state_pol == 4) {
+			
+			$cart = session('cart');
+			$cart = [''];
+			session()->put('cart', $cart);
+
+
 			fwrite($fp, "state_pol: $state_pol \r\n");
 			fclose($fp);
 
-			session_start();
-			unset($_SESSION['cart']); 
-			session_destroy();
+			// session_start();
+			// unset($_SESSION['cart']); 
+			// session_destroy();
 
 			// session()->forget('cart');
 
-			// $cart = session('cart');
-			// unset($cart);
-			// session()->put('cart', $cart);
 			// session_destroy();
 		}else {
 			if($fp) {
