@@ -81,7 +81,7 @@ class ConfirmationController extends Controller
     		)
     	);
     }
-    public function confirmation() {
+    public function confirmation(Request $request) {
     	// Prueba de que se esta ejecutando este controlador
     	$fp = fopen('pruebas.txt', "a");
 		if($fp) {
