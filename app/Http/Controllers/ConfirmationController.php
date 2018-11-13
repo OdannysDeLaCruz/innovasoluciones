@@ -123,10 +123,14 @@ class ConfirmationController extends Controller
 
 		$fp = fopen('pruebas.txt', "a");
 		if($state_pol == 4) {
-			if($fp) {
-				fwrite($fp, "state_pol: $state_pol \r\n");
-				fclose($fp);
-			}
+			fwrite($fp, "state_pol: $state_pol \r\n");
+			fclose($fp);
+			session()->forget('cart');
+
+			// $cart = session('cart');
+			// unset($cart);
+			// session()->put('cart', $cart);
+			// session_destroy();
 		}else {
 			if($fp) {
 				fwrite($fp, "Error de estado \r\n");
@@ -174,9 +178,7 @@ class ConfirmationController extends Controller
 		// session()->forget('descuento_peso');
 		// session()->forget('notificacion_codigo');
 
-		$cart = session('cart');
-		unset($cart);
-		// session_destroy();
+		
 
 		// 	// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
 		//  //    $fp = fopen('pruebas.txt', "a");
