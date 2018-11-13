@@ -84,12 +84,31 @@ class ConfirmationController extends Controller
     public function confirmation(Request $request) {
     	// Prueba de que se esta ejecutando este controlador
     	$fp = fopen('pruebas.txt', "a");
-		if($fp) {
-			fwrite($fp, 'Se esta usuando este controlador' . "\r\n");
+		fwrite($fp, 'Se esta usuando este controlador' . "\r\n");
+		fclose($fp);
+
+		$state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
+
+		if($state_pol == 4) {
+
+			$cart = $request->session()->get('cart');			
+			$dato = $cart[1]['descripcion'];
+
+			if( $dato ) {
+				fwrite($fp, "Cart: $dato \r\n");
+				fclose($fp);
+			}
+			else {
+				fwrite($fp, "Algo anda mal \r\n");
+				fclose($fp);
+			}
+
+		}else {
+			fwrite($fp, "Error de estado \r\n");
 			fclose($fp);
 		}
 
-    	// Configurar zona horaria
+		// Configurar zona horaria
     	// date_default_timezone_set('America/Bogota');
 
 		// Obtener datos de payu
@@ -118,32 +137,6 @@ class ConfirmationController extends Controller
 		// $id_user   = 1;
 		// $comprador = "Odannys De La Cruz";
 		// $state_pol      = $_POST['state_pol'];
-
-		$state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
-
-		$fp = fopen('pruebas.txt', "a");
-		if($state_pol == 4) {
-
-			$d = $request->session()->get('cart');			
-			$d = $d[1]['descripcion'];
-
-			// $datos = print_r($d,true);
-
-			if(is_string($d)) {
-				fwrite($fp, "Cart: $d \r\n");
-				fclose($fp);
-			}
-			else {
-				fwrite($fp, "Algo anda mal \r\n");
-				fclose($fp);
-			}
-
-		}else {
-			if($fp) {
-				fwrite($fp, "Error de estado \r\n");
-				fclose($fp);
-			}
-		}
 		
 		// $payment_method_id = $_POST['payment_method_id'];
 		// switch ($payment_method_id) {
