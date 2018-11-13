@@ -5,7 +5,7 @@
 
 $c = session('cart');
 
-dd($c[1]['id']);
+echo is_array($c);
 
 
 ?>
