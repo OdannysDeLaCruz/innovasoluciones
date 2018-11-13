@@ -83,11 +83,11 @@ class ConfirmationController extends Controller
     }
     public function confirmation(Request $request) {
     	// Prueba de que se esta ejecutando este controlador
-    	$fp = fopen('pruebas.txt', "a");
-		if($fp) {
-			fwrite($fp, 'Se esta usuando este controlador' . "\r\n");
-			fclose($fp);
-		}
+  //   	$fp = fopen('pruebas.txt', "a");
+		// if($fp) {
+		// 	fwrite($fp, 'Se esta usuando este controlador' . "\r\n");
+		// 	fclose($fp);
+		// }
 
     	// Configurar zona horaria
     	// date_default_timezone_set('America/Bogota');
@@ -95,8 +95,8 @@ class ConfirmationController extends Controller
 		// Obtener datos de payu
 
 		// $sign = $_POST['sign'];
-  //   	$merchant_id = $_POST['merchant_id'];
-  //   	$reference_pol = $_POST['reference_pol'];
+  		// $merchant_id = $_POST['merchant_id'];
+  		// $reference_pol = $_POST['reference_pol'];
 
     	// $firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
 
@@ -119,37 +119,25 @@ class ConfirmationController extends Controller
 		// $comprador = "Odannys De La Cruz";
 		// $state_pol      = $_POST['state_pol'];
 
-		$state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
+		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 
 		$fp = fopen('pruebas.txt', "a");
 		if($state_pol == 4) {
-			
-			// $cart = session('cart');
-			// $cart = $_SESSION['cart'];
-			// $cart = [''];
-			// session()->put('cart', $cart);
 
-			// $c = session('cart');
-			$c = $request->session()->get('cart');
+			$d = $request->session()->get('cart');			
+			$d = $d[1]['descripcion'];
 
-			if(is_array($c)) {
-				fwrite($fp, "Cart:" . is_array($c)  . "\r\n");
+			// $datos = print_r($d,true);
+
+			if(is_string($d)) {
+				fwrite($fp, "Cart: $d \r\n");
 				fclose($fp);
 			}
 			else {
-				fwrite($fp, "Algo anda masl \r\n");
+				fwrite($fp, "Algo anda mal \r\n");
 				fclose($fp);
 			}
 
-
-
-			// session_start();
-			// unset($_SESSION['cart']); 
-			// session_destroy();
-
-			// session()->forget('cart');
-
-			// session_destroy();
 		}else {
 			if($fp) {
 				fwrite($fp, "Error de estado \r\n");

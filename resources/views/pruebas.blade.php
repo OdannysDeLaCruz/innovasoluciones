@@ -3,18 +3,18 @@
 // $c = $_SESSION['cart'];
 // $cart = session_name();
 
-$c = session('cart');
+// $c = session('cart');
 
-dd($c)
+// dd($c)
 
 
 ?>
-<!-- <form class="form_registro" method="POST" action="{{ route('confirmation') }}"> -->
+<form class="form_registro" method="POST" action="{{ route('confirmation') }}">
     <!-- @csrf -->
 
-    <!-- <label>Usuario</label> -->
-<!--     <input type="text" name="user">
+    <label>Usuario</label>
+	<input type="text" name="user">
 
     <input type="submit">
 
-</form> -->
+</form>
