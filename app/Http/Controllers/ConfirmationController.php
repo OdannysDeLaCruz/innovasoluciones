@@ -130,12 +130,14 @@ class ConfirmationController extends Controller
 			// session()->put('cart', $cart);
 
 			$c = session('cart');
-			$id = $c[1]['id'];
 
 			if(is_array($c)) {
 				fwrite($fp, "Cart:" . is_array($c)  . "\r\n");
 				fclose($fp);
-				
+			}
+			else {
+				fwrite($fp, "Algo anda masl \r\n");
+				fclose($fp);
 			}
 
 
