@@ -83,11 +83,11 @@ class ConfirmationController extends Controller
     }
     public function confirmation(Request $request) {
     	// Prueba de que se esta ejecutando este controlador
-  //   	$fp = fopen('pruebas.txt', "a");
-		// if($fp) {
-		// 	fwrite($fp, 'Se esta usuando este controlador' . "\r\n");
-		// 	fclose($fp);
-		// }
+    	$fp = fopen('pruebas.txt', "a");
+		if($fp) {
+			fwrite($fp, 'Se esta usuando este controlador' . "\r\n");
+			fclose($fp);
+		}
 
     	// Configurar zona horaria
     	// date_default_timezone_set('America/Bogota');
@@ -119,7 +119,7 @@ class ConfirmationController extends Controller
 		// $comprador = "Odannys De La Cruz";
 		// $state_pol      = $_POST['state_pol'];
 
-		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
+		$state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 
 		$fp = fopen('pruebas.txt', "a");
 		if($state_pol == 4) {
