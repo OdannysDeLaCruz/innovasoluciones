@@ -125,11 +125,11 @@ class ConfirmationController extends Controller
 		if($state_pol == 4) {
 			
 			$cart = session('cart');
-			$cart = [''];
-			session()->put('cart', $cart);
+			// $cart = [''];
+			// session()->put('cart', $cart);
 
 
-			fwrite($fp, "state_pol: $state_pol \r\n");
+			fwrite($fp, "Cart: $cart \r\n");
 			fclose($fp);
 
 			// session_start();
