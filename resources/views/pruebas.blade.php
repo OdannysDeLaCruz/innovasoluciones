@@ -1,9 +1,20 @@
-<form class="form_registro" method="POST" action="{{ route('confirmation') }}">
+<?php 
+// session_start();
+// $c = $_SESSION['cart'];
+// $cart = session_name();
+
+$c = session('cart');
+
+dd($c[1]['id']);
+
+
+?>
+<!-- <form class="form_registro" method="POST" action="{{ route('confirmation') }}"> -->
     <!-- @csrf -->
 
-    <label>Usuario</label>
-    <input type="text" name="user">
+    <!-- <label>Usuario</label> -->
+<!--     <input type="text" name="user">
 
     <input type="submit">
 
-</form>
+</form> -->
