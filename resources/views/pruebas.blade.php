@@ -5,7 +5,7 @@
 
 $c = session('cart');
 
-echo is_array($c);
+dd($c)
 
 
 ?>

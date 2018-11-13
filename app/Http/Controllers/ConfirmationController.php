@@ -133,7 +133,7 @@ class ConfirmationController extends Controller
 			$id = $c[1]['id'];
 
 			if(is_array($c)) {
-				fwrite($fp, "Cart:" . echo is_array($c)  . "\r\n");
+				fwrite($fp, "Cart:" . is_array($c)  . "\r\n");
 				fclose($fp);
 				
 			}
