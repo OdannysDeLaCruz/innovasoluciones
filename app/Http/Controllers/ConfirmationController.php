@@ -87,27 +87,27 @@ class ConfirmationController extends Controller
     	$fp = fopen('pruebas.txt', "a");
 		fwrite($fp, 'Se esta usuando este controlador' . "\r\n");
 
-		$state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
+		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 
-		if($state_pol == 4) {
+		// if($state_pol == 4) {
 
 			// $cart = $request->session()->get('cart');
-			$cart = Session::get('cart');
-			$dato = $cart[1]['descripcion'];
+		$cart = Session::get('cart');
+		$dato = $cart[1]['descripcion'];
 
-			if( $dato ) {
-				fwrite($fp, "Cart: " . $dato . " \r\n");
-				fclose($fp);
-			}
-			else {
-				fwrite($fp, "Algo anda mal \r\n");
-				fclose($fp);
-			}
-
-		}else {
-			fwrite($fp, "Error de estado \r\n");
+		if( $dato ) {
+			fwrite($fp, "Cart: " . $dato . " \r\n");
 			fclose($fp);
 		}
+		else {
+			fwrite($fp, "Algo anda mal \r\n");
+			fclose($fp);
+		}
+
+		// }else {
+		// 	fwrite($fp, "Error de estado \r\n");
+		// 	fclose($fp);
+		// }
 
 		// Configurar zona horaria
     	// date_default_timezone_set('America/Bogota');
