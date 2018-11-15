@@ -82,7 +82,7 @@ class ConfirmationController extends Controller
     		)
     	);
     }
-    public function confirmation(Request $request) {
+    public function confirmation() {
     	// Prueba de que se esta ejecutando este controlador
     	$fp = fopen('pruebas.txt', "a");
 		fwrite($fp, 'Se esta usuando este controlador' . "\r\n");
@@ -93,16 +93,23 @@ class ConfirmationController extends Controller
 
 			// $cart = $request->session()->get('cart');
 		$cart = Session::get('cart');
-		$dato = $cart[1]['descripcion'];
+		if( isset($cart) ) {
+			$dato = $cart[1]['descripcion'];
+			if( is_string($dato) ) {
+				fwrite($fp, "Cart: " . $dato . " \r\n");
+				fclose($fp);
+			}
+			else {
+				fwrite($fp, "Algo anda mal \r\n");
+				fclose($fp);
+			}
+		}elseif (empty($cart)) {
+			fwrite($fp, "Cart: Vacio \r\n");
+			fclose($fp);
+		}
 
-		if( $dato ) {
-			fwrite($fp, "Cart: " . $dato . " \r\n");
-			fclose($fp);
-		}
-		else {
-			fwrite($fp, "Algo anda mal \r\n");
-			fclose($fp);
-		}
+		
+		
 
 		// }else {
 		// 	fwrite($fp, "Error de estado \r\n");
