@@ -86,7 +86,7 @@ class ConfirmationController extends Controller
     	// Prueba de que se esta ejecutando este controlador
     	$fp = fopen('pruebas.txt', "a");
 		fwrite($fp, 'Se esta usuando este controlador' . "\r\n");
-
+		fclose($fp);
 		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 
 		// if($state_pol == 4) {
@@ -96,14 +96,17 @@ class ConfirmationController extends Controller
 		if( isset($cart) ) {
 			$dato = $cart[1]['descripcion'];
 			if( is_string($dato) ) {
+				$fp = fopen('pruebas.txt', "a");
 				fwrite($fp, "Cart: " . $dato . " \r\n");
 				fclose($fp);
 			}
 			else {
+				$fp = fopen('pruebas.txt', "a");
 				fwrite($fp, "Algo anda mal \r\n");
 				fclose($fp);
 			}
 		}elseif (empty($cart)) {
+			$fp = fopen('pruebas.txt', "a");
 			fwrite($fp, "Cart: Vacio \r\n");
 			fclose($fp);
 		}
