@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App;
+use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -90,11 +91,12 @@ class ConfirmationController extends Controller
 
 		if($state_pol == 4) {
 
-			$cart = $request->session()->get('cart');			
+			// $cart = $request->session()->get('cart');
+			$cart = Session::get('cart');
 			$dato = $cart[1]['descripcion'];
 
 			if( $dato ) {
-				fwrite($fp, "Cart:" . $dato . " \r\n");
+				fwrite($fp, "Cart: " . $dato . " \r\n");
 				fclose($fp);
 			}
 			else {
