@@ -12,10 +12,6 @@ class ConfirmationController extends Controller
     private $ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
 	
     public function response(Request $request) {
-    	$fp = fopen("pruebas.txt", "a");
-		fwrite($fp, "Se esta usuando este controlador \n");
-		fclose($fp);
-
 		// $file = fopen("data.txt", "a");
 		// fwrite($file, "# Response\n");
 		// fwrite($file, "#-------------------------------------------------------\n");
