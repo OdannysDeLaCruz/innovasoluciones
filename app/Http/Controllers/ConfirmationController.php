@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App;
-use Session;
+// use App;
+// use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,9 +84,11 @@ class ConfirmationController extends Controller
     }
     public function confirmation() {
     	// Prueba de que se esta ejecutando este controlador
-    	$fp = fopen('pruebas.txt', "a");
-		fwrite($fp, 'Se esta usuando este controlador' . "\r\n");
-		fclose($fp);
+		$fp = fopen("pruebas.txt", "a");
+		if($fp) {
+			fwrite($fp, "Se esta usuando este controlador" . "\r\n");
+			fclose($fp);
+		}
 		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 
 		// if($state_pol == 4) {
@@ -165,10 +167,10 @@ class ConfirmationController extends Controller
 
 		
 
-  //   	if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
+  		//if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
 
-  //   		// Créo el pedido nuevo
-  //   		DB::table('pedidos')->insert(
+  		// Créo el pedido nuevo
+  		//DB::table('pedidos')->insert(
 		// 	    [
 		// 	    	'id_user'         => $id_user,
 		// 	        'comprador'       => $comprador,
