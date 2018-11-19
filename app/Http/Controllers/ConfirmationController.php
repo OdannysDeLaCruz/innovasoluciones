@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-// use App;
+
+use App\Traits\TestTrait;
 use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class ConfirmationController extends Controller
 {
-	
+
     private $ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
 
     public function response(Request $request) {
@@ -84,11 +85,13 @@ class ConfirmationController extends Controller
     }
     public function confirmation(Request $request) {
     	// Prueba de que se esta ejecutando este controlador
-		$fp = fopen("pruebas.txt", "a");
-		if($fp) {
-			fwrite($fp, "Se esta usuando este controlador" . "\r\n");
-			fclose($fp);
-		}
+		// $fp = fopen("pruebas.txt", "a");
+		// if($fp) {
+		// 	fwrite($fp, "Se esta usuando este controlador" . "\r\n");
+		// 	fclose($fp);
+		// }
+
+
 		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 
     	// session_start();
@@ -96,19 +99,22 @@ class ConfirmationController extends Controller
     	// session_destroy();
     	// dd($_SESSION['cart']);
 		// if($state_pol == 4) {
-		if(session()->has('cart')) {
-			session()->forget('cart');
-			$fp = fopen('pruebas.txt', "a");
-			fwrite($fp, "Carrito eliminado \r\n");
-			fclose($fp);
-		}
-		else {
-			$fp = fopen('pruebas.txt', "a");
-			fwrite($fp, "Al parecer no hay carrito \r\n");
-			fclose($fp);
-		}
 
-    	// dd(Auth::user()->nombre);
+
+
+		// if(session()->has('cart')) {
+		// 	session()->forget('cart');
+		// 	$fp = fopen('pruebas.txt', "a");
+		// 	fwrite($fp, "Carrito eliminado \r\n");
+		// 	fclose($fp);
+		// }
+		// else {
+		// 	$fp = fopen('pruebas.txt', "a");
+		// 	fwrite($fp, "Al parecer no hay carrito \r\n");
+		// 	fclose($fp);
+		// }
+
+		TestTrait::getDatos();
 
 		// $cart = $request->session()->get('cart');
 		// $this->cart = Session::get('cart');
