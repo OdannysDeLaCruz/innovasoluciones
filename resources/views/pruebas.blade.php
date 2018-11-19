@@ -12,8 +12,10 @@
 // 	fwrite($fp, "Algo anda mal \r\n");
 // 	fclose($fp);
 // }
-
+// session_start();
+// dd($_SESSION['cart']);
 ?>
+
 <form class="form_registro" method="POST" action="{{ route('confirmation') }}">
     <!-- @csrf -->
 

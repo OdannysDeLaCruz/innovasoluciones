@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 class ConfirmationController extends Controller
 {
 	
-    private $ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
-	
+    private $ApiKey = "Vj8eK4rloUd272L48hsrarnUA";
+
     public function response(Request $request) {
 		// $file = fopen("data.txt", "a");
 		// fwrite($file, "# Response\n");
@@ -91,17 +91,22 @@ class ConfirmationController extends Controller
 		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 
 		// if($state_pol == 4) {
+    	// session_start();
+    	// $_SESSION['cart'] = $request->session()->get('cart');
+    	// session_destroy();
+    	session()->forget('cart');
+    	// dd($_SESSION['cart']);
 
 		// $cart = $request->session()->get('cart');
-		// $cart = Session::get('cart');
-		$cart = ["Dato" => "Algo"];
-		if( isset($cart) ) {
+		// $this->cart = Session::get('cart');
+
+		// if( isset($cart) ) {
 		// 	$dato = $cart[1]['descripcion'];
 		// 	if( is_string($dato) ) {
 				$fp = fopen('pruebas.txt', "a");
-				fwrite($fp, "Hay algo en cart \r\n");
+				fwrite($fp, "Carrito eliminado \r\n");
 				fclose($fp);
-		}
+		// }
 		// 	else {
 		// 		$fp = fopen('pruebas.txt', "a");
 		// 		fwrite($fp, "Algo anda mal \r\n");
