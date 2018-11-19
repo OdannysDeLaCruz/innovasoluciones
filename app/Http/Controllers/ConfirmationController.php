@@ -93,7 +93,8 @@ class ConfirmationController extends Controller
 		// if($state_pol == 4) {
 
 		// $cart = $request->session()->get('cart');
-		$cart = Session::get('cart');
+		// $cart = Session::get('cart');
+		$cart = ["Dato" => "Algo"];
 		if( isset($cart) ) {
 		// 	$dato = $cart[1]['descripcion'];
 		// 	if( is_string($dato) ) {
