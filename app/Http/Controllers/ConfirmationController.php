@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class ConfirmationController extends Controller
 {
 	
-    private $ApiKey = "Vj8eK4rloUd272L48hsrarnUA";
+    private $ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
 
     public function response(Request $request) {
 		// $file = fopen("data.txt", "a");
@@ -19,7 +19,8 @@ class ConfirmationController extends Controller
 		//   fwrite($file, $id . " => " . $responseValue . "\n");
 		// }
 		// fclose($file);
-	
+
+    	// session()->forget('cart');
 
 		$merchant_id   = $request['merchantId'];
 		$referenceCode = $request['referenceCode'];
@@ -90,12 +91,24 @@ class ConfirmationController extends Controller
 		}
 		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 
-		// if($state_pol == 4) {
     	// session_start();
     	// $_SESSION['cart'] = $request->session()->get('cart');
     	// session_destroy();
-    	session()->forget('cart');
     	// dd($_SESSION['cart']);
+		// if($state_pol == 4) {
+		if(session()->has('cart')) {
+			session()->forget('cart');
+			$fp = fopen('pruebas.txt', "a");
+			fwrite($fp, "Carrito eliminado \r\n");
+			fclose($fp);
+		}
+		else {
+			$fp = fopen('pruebas.txt', "a");
+			fwrite($fp, "Al parecer no hay carrito \r\n");
+			fclose($fp);
+		}
+
+    	// dd(Auth::user()->nombre);
 
 		// $cart = $request->session()->get('cart');
 		// $this->cart = Session::get('cart');
@@ -103,9 +116,9 @@ class ConfirmationController extends Controller
 		// if( isset($cart) ) {
 		// 	$dato = $cart[1]['descripcion'];
 		// 	if( is_string($dato) ) {
-				$fp = fopen('pruebas.txt', "a");
-				fwrite($fp, "Carrito eliminado \r\n");
-				fclose($fp);
+			// $fp = fopen('pruebas.txt', "a");
+			// fwrite($fp, "Carrito eliminado \r\n");
+			// fclose($fp);
 		// }
 		// 	else {
 		// 		$fp = fopen('pruebas.txt', "a");
