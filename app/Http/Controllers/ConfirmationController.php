@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 // use App;
-// use Session;
+use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -81,7 +81,7 @@ class ConfirmationController extends Controller
     		)
     	);
     }
-    public function confirmation() {
+    public function confirmation(Request $request) {
     	// Prueba de que se esta ejecutando este controlador
 		$fp = fopen("pruebas.txt", "a");
 		if($fp) {
