@@ -92,15 +92,15 @@ class ConfirmationController extends Controller
 
 		// if($state_pol == 4) {
 
-			// $cart = $request->session()->get('cart');
+		$cart = $request->session()->get('cart');
 		// $cart = Session::get('cart');
-		// if( isset($cart) ) {
+		if( isset($cart) ) {
 		// 	$dato = $cart[1]['descripcion'];
 		// 	if( is_string($dato) ) {
-		// 		$fp = fopen('pruebas.txt', "a");
-		// 		fwrite($fp, "Cart: " . $dato . " \r\n");
-		// 		fclose($fp);
-		// 	}
+				$fp = fopen('pruebas.txt', "a");
+				fwrite($fp, "Hay algo en cart \r\n");
+				fclose($fp);
+		}
 		// 	else {
 		// 		$fp = fopen('pruebas.txt', "a");
 		// 		fwrite($fp, "Algo anda mal \r\n");
