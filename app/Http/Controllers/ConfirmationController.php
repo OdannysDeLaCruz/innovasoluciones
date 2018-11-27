@@ -84,22 +84,23 @@ class ConfirmationController extends Controller
     	);
     }
     public function confirmation(Request $request) {
+    	
+    	// Prueba de que se esta ejecutando este controlador
+		$fp = fopen("pruebas.txt", "a");
+		if($fp) {
+			fwrite($fp, "Se esta usuando este controlador" . "\r\n");
+			fclose($fp);
+		}
+		
     	$mensajeLog .= print_r($_POST,true) . "\r\n";
 		if(strlen($mensajeLog)>0){
-			$filename = "pruebas.txt";
-			$fp = fopen($filename, "a");
+			$fp = fopen("pruebas.txt", "a");
 			if($fp) {
 				fwrite($fp, $mensajeLog, strlen($mensajeLog));
-			fclose($fp);
+				fclose($fp);
 
 			}
 		}
-    	// Prueba de que se esta ejecutando este controlador
-		// $fp = fopen("pruebas.txt", "a");
-		// if($fp) {
-		// 	fwrite($fp, "Se esta usuando este controlador" . "\r\n");
-		// 	fclose($fp);
-		// }
 
 
 		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
