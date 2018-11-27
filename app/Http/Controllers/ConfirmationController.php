@@ -120,26 +120,17 @@ class ConfirmationController extends Controller
 		$comprador = "Odannys De La Cruz";
 		$state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 
-		$fp = fopen("pruebas.txt", "a");
-		if($fp) {
-			fwrite($fp, $state_pol . "\r\n");
-			fclose($fp);
+		$payment_method_id = $_POST['payment_method_id'];
+		switch ($payment_method_id) {
+			case 2:  $medio_pago = 'CREDIT_CARD'; break;
+			case 4:  $medio_pago = 'PSE'; break;
+			case 5:  $medio_pago = 'ACH'; break;
+			case 6:  $medio_pago = 'DEBIT_CARD'; break;
+			case 7:  $medio_pago = 'CASH'; break;
+			case 8:  $medio_pago = 'REFERENCED'; break;
+			case 10: $medio_pago = 'BANK_REFERENCED'; break;
+			case 14: $medio_pago = 'SPEI'; break;
 		}
-
-		// dd($state_pol);
-
-		
-		// $payment_method_id = $_POST['payment_method_id'];
-		// switch ($payment_method_id) {
-		// 	case 2:  $medio_pago = 'CREDIT_CARD'; break;
-		// 	case 4:  $medio_pago = 'PSE'; break;
-		// 	case 5:  $medio_pago = 'ACH'; break;
-		// 	case 6:  $medio_pago = 'DEBIT_CARD'; break;
-		// 	case 7:  $medio_pago = 'CASH'; break;
-		// 	case 8:  $medio_pago = 'REFERENCED'; break;
-		// 	case 10: $medio_pago = 'BANK_REFERENCED'; break;
-		// 	case 14: $medio_pago = 'SPEI'; break;
-		// }
 		 // $medio_pago = 'PRUEBA';
 		// $payment_method_name = $_POST['payment_method_name'];
 
@@ -153,7 +144,7 @@ class ConfirmationController extends Controller
 			        'comprador'       => $comprador,
 			        'ref_venta'       => 'ref_venta',
 			        'direccion_envio' => 'direccion_envio',
-			        'modo_pago'       => 'medio_pago',
+			        'modo_pago'       => $medio_pago,
 			        'codigo_descuento'=> 'prueba',
 			        'modo_envio'      => 'prueba',
 			        'estado_pedido'   => 'Ok',
