@@ -65,6 +65,10 @@ class PaymentController extends Controller
         // Retornar total a pagar
         return number_format($total_pagar);
     }
+    private function description(){
+        $cart = session('cart');
+        dd($cart);
+    }
     
     public function payment(Request $request) {
 
@@ -76,7 +80,7 @@ class PaymentController extends Controller
         // Configurar los datos para la pasarela de Payu
         $dataPayu['merchantId'] = '508029';
         $dataPayu['accountId'] = '512321';
-        $dataPayu['description'] = "Test PAYU";
+        $dataPayu['description'] = $this->description();
         $dataPayu['referenceCode'] = 'INNOVA' . time();
         $dataPayu['amount'] = $total_pagar;
         $dataPayu['tax'] = 0;

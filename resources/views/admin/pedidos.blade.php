@@ -71,13 +71,13 @@
 								<td>{{ $pedido['cliente'] }}</td>
 								<td>{{ $pedido['modo_pago'] }}</td>
 								<td>
-									@if($pedido['estado'] == 1)
+									@if($pedido['estado'] == 'aprovado')
 										<div class="pedido_estado exitoso">
 											Pago exitoso
 										</div>
-									@else($pedido['estado'] == 0)
-										<div class="pedido_estado pendiente">
-											Pago pendiente
+									@else($pedido['estado'] == 'rechazado')
+										<div class="pedido_estado rechazado">
+											Pago rechazado
 										</div>
 									@endif
 								</td>

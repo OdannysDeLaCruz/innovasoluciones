@@ -138,7 +138,40 @@ class ConfirmationController extends Controller
   		// if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
   		if($state_pol == 4) {
 
-	  		// Créo el pedido nuevo
+	  		// Crear el pedido aprovado
+	  		$id_pedido = DB::table('pedidos')->insert([
+		    	'id_user'         => $id_user,
+		        'comprador'       => $comprador,
+		        'ref_venta'       => $ref_venta,
+		        'direccion_envio' => $direccion_envio,
+		        'modo_pago'       => $modo_pago,
+		        'codigo_descuento'=> 'prueba',
+		        'modo_envio'      => 'prueba',
+		        'estado_pedido'   => 'aprobado',
+		        'fecha_pedido'    => date('Y-n-j H:i:s')
+			]);
+			//Crear los detalles del pedido
+
+			DB::table('detalle_pedidos')->insert([
+				// 'id_producto' => //No poner id del producto, solo poner descripción
+				'id_pedido' => $id_pedido,
+				// Poner toda la información del pedido en descripcion
+				'descripcion' => 
+				'imagen' => 
+				'precio' => 
+				'cantidad' => 
+				'descuento_porcentual' => 
+				'tamaño' => 
+				'color' => 
+				'importe_total' => 
+			]);
+
+			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
+		    $fp = fopen('pruebas.txt', "a");
+			fwrite($fp, 'Pedido creado' . "\r\n");
+			fclose($fp);
+		}elseif($state_pol == 6) {
+			// Crear el pedido rechazado
 	  		DB::table('pedidos')->insert(
 				[
 			    	'id_user'         => $id_user,
@@ -148,15 +181,10 @@ class ConfirmationController extends Controller
 			        'modo_pago'       => $modo_pago,
 			        'codigo_descuento'=> 'prueba',
 			        'modo_envio'      => 'prueba',
-			        'estado_pedido'   => 'Aprobado',
+			        'estado_pedido'   => 'rechazado',
 			        'fecha_pedido'    => date('Y-n-j H:i:s')
 				]
 			);
-
-			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
-		    $fp = fopen('pruebas.txt', "a");
-			fwrite($fp, 'Pedido creado' . "\r\n");
-			fclose($fp);
 		}
 		else {
 			$fp = fopen('pruebas.txt', "a");
