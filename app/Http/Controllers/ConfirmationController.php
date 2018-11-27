@@ -84,6 +84,16 @@ class ConfirmationController extends Controller
     	);
     }
     public function confirmation(Request $request) {
+    	$mensajeLog .= print_r($_POST,true) . "\r\n";
+		if(strlen($mensajeLog)>0){
+			$filename = "pruebas.txt";
+			$fp = fopen($filename, "a");
+			if($fp) {
+				fwrite($fp, $mensajeLog, strlen($mensajeLog));
+			fclose($fp);
+
+			}
+		}
     	// Prueba de que se esta ejecutando este controlador
 		// $fp = fopen("pruebas.txt", "a");
 		// if($fp) {
@@ -93,7 +103,7 @@ class ConfirmationController extends Controller
 
 
 		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
-		$nickname_buyer = isset($_POST['nickname_buyer']) ? $_POST['nickname_buyer'] : false;
+		// $nickname_buyer = isset($_POST['nickname_buyer']) ? $_POST['nickname_buyer'] : false;
 
     	// session_start();
     	// $_SESSION['cart'] = $request->session()->get('cart');
@@ -105,9 +115,9 @@ class ConfirmationController extends Controller
 
 		// if(session()->has('cart')) {
 		// 	session()->forget('cart');
-			$fp = fopen('pruebas.txt', "a");
-			fwrite($fp, $nickname_buyer . "\r\n");
-			fclose($fp);
+			// $fp = fopen('pruebas.txt', "a");
+			// fwrite($fp, $nickname_buyer . "\r\n");
+			// fclose($fp);
 		// }
 		// else {
 		// 	$fp = fopen('pruebas.txt', "a");
