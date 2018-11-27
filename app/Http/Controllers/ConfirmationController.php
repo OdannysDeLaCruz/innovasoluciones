@@ -109,11 +109,11 @@ class ConfirmationController extends Controller
 		// $response_code_pol    = $_POST['response_code_pol'];
 
 
-		// $ref_venta      = $_POST['reference_sale'];
+		$ref_venta      = $_POST['reference_sale'];
 		// $reference_pole = $_POST['reference_pole'];
 		// $transaction_id = $_POST['transaction_id'];
 
-		// $direccion_envio = $_POST['shipping_address'];
+		$direccion_envio = $_POST['shipping_address'];
 		// $date = $_POST['date'];
 
 		$id_user   = 1;
@@ -131,8 +131,9 @@ class ConfirmationController extends Controller
 			case 10: $medio_pago = 'BANK_REFERENCED'; break;
 			case 14: $medio_pago = 'SPEI'; break;
 		}
-		 // $medio_pago = 'PRUEBA';
-		// $payment_method_name = $_POST['payment_method_name'];
+		$payment_method_name = $_POST['payment_method_name'];
+
+		$modo_pago = $medio_pago . ' - ' . $payment_method_name;
 
   		// if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
   		if($state_pol == 4) {
@@ -142,12 +143,12 @@ class ConfirmationController extends Controller
 				[
 			    	'id_user'         => $id_user,
 			        'comprador'       => $comprador,
-			        'ref_venta'       => 'ref_venta',
-			        'direccion_envio' => 'direccion_envio',
-			        'modo_pago'       => $medio_pago,
+			        'ref_venta'       => $ref_venta,
+			        'direccion_envio' => $direccion_envio,
+			        'modo_pago'       => $modo_pago,
 			        'codigo_descuento'=> 'prueba',
 			        'modo_envio'      => 'prueba',
-			        'estado_pedido'   => 'Ok',
+			        'estado_pedido'   => 'Aprobado',
 			        'fecha_pedido'    => date('Y-n-j H:i:s')
 				]
 			);
