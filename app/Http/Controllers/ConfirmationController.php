@@ -146,8 +146,8 @@ class ConfirmationController extends Controller
 			        'ref_venta'       => 'ref_venta',
 			        'direccion_envio' => 'direccion_envio',
 			        'modo_pago'       => $medio_pago,
-			        'codigo_descuento'=> session('descuento_peso'),
-			        'modo_envio'      => session('entrega_pedido'),
+			        'codigo_descuento'=> 'prueba',
+			        'modo_envio'      => 'prueba',
 			        'estado_pedido'   => 'Ok',
 			        'fecha_pedido'    => date()
 				]
