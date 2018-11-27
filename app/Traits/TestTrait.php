@@ -4,9 +4,9 @@ namespace App\Traits;
 trait TestTrait {
 
     static function getDatos() {
-       // $cart = session('cart');
+       $cart = session('cart');
 
-       if(session()->has('cart')) {
+       if($cart) {
 			session()->forget('cart');
 			$fp = fopen('pruebas.txt', "a");
 			fwrite($fp, "Carrito eliminado \r\n");

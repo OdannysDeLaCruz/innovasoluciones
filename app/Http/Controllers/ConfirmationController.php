@@ -93,6 +93,7 @@ class ConfirmationController extends Controller
 
 
 		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
+		$nickname_buyer = isset($_POST['nickname_buyer']) ? $_POST['nickname_buyer'] : false;
 
     	// session_start();
     	// $_SESSION['cart'] = $request->session()->get('cart');
@@ -104,9 +105,9 @@ class ConfirmationController extends Controller
 
 		// if(session()->has('cart')) {
 		// 	session()->forget('cart');
-		// 	$fp = fopen('pruebas.txt', "a");
-		// 	fwrite($fp, "Carrito eliminado \r\n");
-		// 	fclose($fp);
+			$fp = fopen('pruebas.txt', "a");
+			fwrite($fp, $nickname_buyer . "\r\n");
+			fclose($fp);
 		// }
 		// else {
 		// 	$fp = fopen('pruebas.txt', "a");
@@ -114,7 +115,7 @@ class ConfirmationController extends Controller
 		// 	fclose($fp);
 		// }
 
-		TestTrait::getDatos();
+		// TestTrait::getDatos();
 
 		// $cart = $request->session()->get('cart');
 		// $this->cart = Session::get('cart');
