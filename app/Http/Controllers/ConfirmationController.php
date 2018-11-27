@@ -157,7 +157,7 @@ class ConfirmationController extends Controller
 			        'codigo_descuento'=> 'prueba',
 			        'modo_envio'      => 'prueba',
 			        'estado_pedido'   => 'Ok',
-			        'fecha_pedido'    => date()
+			        'fecha_pedido'    => date('Y-n-j H:i:s')
 				]
 			);
 
