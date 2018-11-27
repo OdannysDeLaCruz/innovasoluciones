@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\TestTrait;
-use Session;
+// use App\Traits\TestTrait;
+// use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -83,8 +83,10 @@ class ConfirmationController extends Controller
     		)
     	);
     }
-    public function confirmation(Request $request) {
+    public function confirmation() {
 		// TestTrait::getDatos();
+		// Configurar zona horaria
+    	date_default_timezone_set('America/Bogota');
     	
     	// Prueba de que se esta ejecutando este controlador
 		$fp = fopen("pruebas.txt", "a");
@@ -93,10 +95,7 @@ class ConfirmationController extends Controller
 			fclose($fp);
 		}
 
-		$state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 
-		// Configurar zona horaria
-    	date_default_timezone_set('America/Bogota');
 
 		// Obtener datos de payu
 
@@ -106,20 +105,21 @@ class ConfirmationController extends Controller
 
     	// $firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
 
-		$response_message_pol = $_POST['response_message_pol'];
-		$response_code_pol    = $_POST['response_code_pol'];
+		// $response_message_pol = $_POST['response_message_pol'];
+		// $response_code_pol    = $_POST['response_code_pol'];
 
 
-		$ref_venta      = $_POST['reference_sale'];
+		// $ref_venta      = $_POST['reference_sale'];
 		// $reference_pole = $_POST['reference_pole'];
 		// $transaction_id = $_POST['transaction_id'];
 
-		$direccion_envio = $_POST['shipping_address'];
-		$date = $_POST['date'];
+		// $direccion_envio = $_POST['shipping_address'];
+		// $date = $_POST['date'];
 
 		$id_user   = 1;
 		$comprador = "Odannys De La Cruz";
-		$state_pol = $_POST['state_pol'];
+		$state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
+
 		
 		// $payment_method_id = $_POST['payment_method_id'];
 		// switch ($payment_method_id) {
@@ -135,9 +135,6 @@ class ConfirmationController extends Controller
 		 $medio_pago = 'PRUEBA';
 		// $payment_method_name = $_POST['payment_method_name'];
 
-
-		
-
   		// if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
   		if($state_pol == 4) {
 
@@ -146,13 +143,13 @@ class ConfirmationController extends Controller
 				[
 			    	'id_user'         => $id_user,
 			        'comprador'       => $comprador,
-			        'ref_venta'       => $ref_venta,
-			        'direccion_envio' => $direccion_envio,
+			        'ref_venta'       => 'ref_venta',
+			        'direccion_envio' => 'direccion_envio',
 			        'modo_pago'       => $medio_pago,
 			        'codigo_descuento'=> session('descuento_peso'),
 			        'modo_envio'      => session('entrega_pedido'),
-			        'estado_pedido'   => $response_message_pol,
-			        'fecha_pedido'    => $date
+			        'estado_pedido'   => 'Ok',
+			        'fecha_pedido'    => date()
 				]
 			);
 
