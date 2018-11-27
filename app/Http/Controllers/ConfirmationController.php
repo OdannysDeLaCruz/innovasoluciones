@@ -91,19 +91,9 @@ class ConfirmationController extends Controller
 			fwrite($fp, "Se esta usuando este controlador" . "\r\n");
 			fclose($fp);
 		}
-		
-    	$mensajeLog .= print_r($_POST,true) . "\r\n";
-		if(strlen($mensajeLog)>0){
-			$fp = fopen("pruebas.txt", "a");
-			if($fp) {
-				fwrite($fp, $mensajeLog, strlen($mensajeLog));
-				fclose($fp);
-
-			}
-		}
 
 
-		// $state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
+		$state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 		// $nickname_buyer = isset($_POST['nickname_buyer']) ? $_POST['nickname_buyer'] : false;
 
     	// session_start();
@@ -158,7 +148,7 @@ class ConfirmationController extends Controller
 		// }
 
 		// Configurar zona horaria
-    	// date_default_timezone_set('America/Bogota');
+    	date_default_timezone_set('America/Bogota');
 
 		// Obtener datos de payu
 
@@ -168,57 +158,57 @@ class ConfirmationController extends Controller
 
     	// $firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
 
-		// $response_message_pol = $_POST['response_message_pol'];
-		// $response_code_pol    = $_POST['response_code_pol'];
+		$response_message_pol = $_POST['response_message_pol'];
+		$response_code_pol    = $_POST['response_code_pol'];
 
 
-		// $ref_venta      = $_POST['reference_sale'];
+		$ref_venta      = $_POST['reference_sale'];
 		// $reference_pole = $_POST['reference_pole'];
 		// $transaction_id = $_POST['transaction_id'];
 
 
-		// $direccion_envio = $_POST['shipping_address'];
-		// $date = $_POST['date'];
+		$direccion_envio = $_POST['shipping_address'];
+		$date = $_POST['date'];
 
 		// $id_user   = Auth::user()->id;
 		// $comprador = Auth::user()->nombre;
 
-		// $id_user   = 1;
-		// $comprador = "Odannys De La Cruz";
-		// $state_pol      = $_POST['state_pol'];
+		$id_user   = 1;
+		$comprador = "Odannys De La Cruz";
+		$state_pol      = $_POST['state_pol'];
 		
-		// $payment_method_id = $_POST['payment_method_id'];
-		// switch ($payment_method_id) {
-		// 	case 2:  $medio_pago = 'CREDIT_CARD'; break;
-		// 	case 4:  $medio_pago = 'PSE'; break;
-		// 	case 5:  $medio_pago = 'ACH'; break;
-		// 	case 6:  $medio_pago = 'DEBIT_CARD'; break;
-		// 	case 7:  $medio_pago = 'CASH'; break;
-		// 	case 8:  $medio_pago = 'REFERENCED'; break;
-		// 	case 10: $medio_pago = 'BANK_REFERENCED'; break;
-		// 	case 14: $medio_pago = 'SPEI'; break;
-		// }
+		$payment_method_id = $_POST['payment_method_id'];
+		switch ($payment_method_id) {
+			case 2:  $medio_pago = 'CREDIT_CARD'; break;
+			case 4:  $medio_pago = 'PSE'; break;
+			case 5:  $medio_pago = 'ACH'; break;
+			case 6:  $medio_pago = 'DEBIT_CARD'; break;
+			case 7:  $medio_pago = 'CASH'; break;
+			case 8:  $medio_pago = 'REFERENCED'; break;
+			case 10: $medio_pago = 'BANK_REFERENCED'; break;
+			case 14: $medio_pago = 'SPEI'; break;
+		}
 		// $payment_method_name = $_POST['payment_method_name'];
 
 
 		
 
-  		//if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
+  		if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
 
   		// Créo el pedido nuevo
-  		//DB::table('pedidos')->insert(
-		// 	    [
-		// 	    	'id_user'         => $id_user,
-		// 	        'comprador'       => $comprador,
-		// 	        'ref_venta'       => $ref_venta,
-		// 	        'direccion_envio' => $direccion_envio,
-		// 	        'modo_pago'       => $medio_pago,
-		// 	        'codigo_descuento'=> session('descuento_peso'),
-		// 	        'modo_envio'      => session('entrega_pedido'),
-		// 	        'estado_pedido'   => $response_message_pol,
-		// 	        'fecha_pedido'    => $date
-		// 		]
-		// 	);
+  		DB::table('pedidos')->insert(
+			[
+		    	'id_user'         => $id_user,
+		        'comprador'       => $comprador,
+		        'ref_venta'       => $ref_venta,
+		        'direccion_envio' => $direccion_envio,
+		        'modo_pago'       => $medio_pago,
+		        'codigo_descuento'=> session('descuento_peso'),
+		        'modo_envio'      => session('entrega_pedido'),
+		        'estado_pedido'   => $response_message_pol,
+		        'fecha_pedido'    => $date
+			]
+		);
 			
 		// 	// Eliminar las variables de session asociadas al carrito
 			
@@ -229,12 +219,12 @@ class ConfirmationController extends Controller
 
 		
 
-		// 	// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
-		//  //    $fp = fopen('pruebas.txt', "a");
-		// 	// if($fp) {
-		// 	// 	fwrite($fp, 'Pedido creado' . "\r\n");
-		// 	// 	fclose($fp);
-		// 	// }
-		// }
+		}
+		// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
+	    $fp = fopen('pruebas.txt', "a");
+		if($fp) {
+			fwrite($fp, 'Pedido creado' . "\r\n");
+			fclose($fp);
+		}
     }
 }
