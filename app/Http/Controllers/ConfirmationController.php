@@ -120,6 +120,14 @@ class ConfirmationController extends Controller
 		$comprador = "Odannys De La Cruz";
 		$state_pol = isset($_POST['state_pol']) ? $_POST['state_pol'] : false;
 
+		$fp = fopen("pruebas.txt", "a");
+		if($fp) {
+			fwrite($fp, $state_pol . "\r\n");
+			fclose($fp);
+		}
+
+		// dd($state_pol);
+
 		
 		// $payment_method_id = $_POST['payment_method_id'];
 		// switch ($payment_method_id) {
@@ -132,7 +140,7 @@ class ConfirmationController extends Controller
 		// 	case 10: $medio_pago = 'BANK_REFERENCED'; break;
 		// 	case 14: $medio_pago = 'SPEI'; break;
 		// }
-		 $medio_pago = 'PRUEBA';
+		 // $medio_pago = 'PRUEBA';
 		// $payment_method_name = $_POST['payment_method_name'];
 
   		// if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
@@ -145,7 +153,7 @@ class ConfirmationController extends Controller
 			        'comprador'       => $comprador,
 			        'ref_venta'       => 'ref_venta',
 			        'direccion_envio' => 'direccion_envio',
-			        'modo_pago'       => $medio_pago,
+			        'modo_pago'       => 'medio_pago',
 			        'codigo_descuento'=> 'prueba',
 			        'modo_envio'      => 'prueba',
 			        'estado_pedido'   => 'Ok',
