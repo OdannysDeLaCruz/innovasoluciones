@@ -45,6 +45,16 @@ class ConfirmationController extends Controller
 		
 		if ($transactionState == 4 ) {
 			$estadoTx = "Transacción aprobada";
+
+			// $cart = session('cart');
+			session()->forget('cart');
+
+			// dd($cart);
+
+			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
+		    $fp = fopen('pruebas.txt', "a");
+			fwrite($fp, 'Pedido creado' . "\r\n");
+			fclose($fp);
 		}
 		else if ($transactionState == 6 ) {
 			$estadoTx = "Transacción rechazada";
@@ -145,32 +155,33 @@ class ConfirmationController extends Controller
 		        'ref_venta'       => $ref_venta,
 		        'direccion_envio' => $direccion_envio,
 		        'modo_pago'       => $modo_pago,
+		        // codigo_descuento y modo_envio se obtienen de la tabla cart
 		        'codigo_descuento'=> 'prueba',
 		        'modo_envio'      => 'prueba',
 		        'estado_pedido'   => 'aprobado',
 		        'fecha_pedido'    => date('Y-n-j H:i:s')
 			]);
-			//Crear los detalles del pedido
 
-			DB::table('detalle_pedidos')->insert([
-				// 'id_producto' => //No poner id del producto, solo poner descripción
-				'id_pedido' => $id_pedido,
-				// Poner toda la información del pedido en descripcion
-				'descripcion' => 
-				'imagen' => 
-				'precio' => 
-				'cantidad' => 
-				'descuento_porcentual' => 
-				'tamaño' => 
-				'color' => 
-				'importe_total' => 
-			]);
+			//Crear los detalles del pedido, estos datos se obtienen de la tabla cart
+			// DB::table('detalle_pedidos')->insert([
+			// 	'id_producto'   => ,
+			// 	'id_pedido'     => $id_pedido,
+			// 	'descripcion'   => ,
+			// 	'imagen'        => ,
+			// 	'precio'        => ,
+			// 	'cantidad'      => ,
+			// 	'descuento_porcentual' => 
+			// 	'tamaño'        => ,
+			// 	'color'         => ,
+			// 	'importe_total' => ,
+			// ]);
 
 			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
 		    $fp = fopen('pruebas.txt', "a");
 			fwrite($fp, 'Pedido creado' . "\r\n");
 			fclose($fp);
-		}elseif($state_pol == 6) {
+		}
+		elseif($state_pol == 6) {
 			// Crear el pedido rechazado
 	  		DB::table('pedidos')->insert(
 				[
