@@ -71,7 +71,7 @@
 								<td>{{ $pedido['cliente'] }}</td>
 								<td>{{ $pedido['modo_pago'] }}</td>
 								<td>
-									@if($pedido['estado'] == 'aprovado')
+									@if($pedido['estado'] == 'aprobado')
 										<div class="pedido_estado exitoso">
 											Pago exitoso
 										</div>

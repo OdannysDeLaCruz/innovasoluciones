@@ -45,16 +45,6 @@ class ConfirmationController extends Controller
 		
 		if ($transactionState == 4 ) {
 			$estadoTx = "Transacción aprobada";
-
-			// $cart = session('cart');
-			session()->forget('cart');
-
-			// dd($cart);
-
-			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
-		    $fp = fopen('pruebas.txt', "a");
-			fwrite($fp, 'Pedido creado' . "\r\n");
-			fclose($fp);
 		}
 		else if ($transactionState == 6 ) {
 			$estadoTx = "Transacción rechazada";
@@ -104,8 +94,6 @@ class ConfirmationController extends Controller
 			fwrite($fp, "Se esta usuando este controlador" . "\r\n");
 			fclose($fp);
 		}
-
-
 
 		// Obtener datos de payu
 
@@ -176,9 +164,17 @@ class ConfirmationController extends Controller
 			// 	'importe_total' => ,
 			// ]);
 
-			// Si se ha creado el pedido correctamente, enviar un correo de confirmacion al usuario
+			// Si se ha creado el pedido correctamente, informar en pruebas.txt
 		    $fp = fopen('pruebas.txt', "a");
-			fwrite($fp, 'Pedido creado' . "\r\n");
+			fwrite($fp, 'Pedido creado, aprobado' . "\r\n");
+			fclose($fp);
+
+			// Eliminar el carrito de compras
+
+			session()->forget('cart');
+
+			$fp = fopen('pruebas.txt', "a");
+			fwrite($fp, 'Carrito eliminado' . "\r\n");
 			fclose($fp);
 		}
 		elseif($state_pol == 6) {
@@ -196,6 +192,18 @@ class ConfirmationController extends Controller
 			        'fecha_pedido'    => date('Y-n-j H:i:s')
 				]
 			);
+
+			$fp = fopen('pruebas.txt', "a");
+			fwrite($fp, 'Pedido creado, rechazado' . "\r\n");
+			fclose($fp);
+
+			// Eliminar el carrito de compras
+
+			session()->forget('cart');
+
+			$fp = fopen('pruebas.txt', "a");
+			fwrite($fp, 'Carrito eliminado' . "\r\n");
+			fclose($fp);
 		}
 		else {
 			$fp = fopen('pruebas.txt', "a");
