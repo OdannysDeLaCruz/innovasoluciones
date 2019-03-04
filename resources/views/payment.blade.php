@@ -19,7 +19,7 @@
 	<!-- SECCION PRINCIPAL -->
 	<section class="contenedor_payment row">
 		<div class="col-md-8 seccion_metodo_pago">
-			<h1 class="payment_titulos">¡Casi terminas, utilizamos Payu para brindarte diferentes formas de pago</h1>
+			<h1 class="payment_titulos">¡Casi terminas!, utilizamos Payu para brindarte diferentes formas de pago</h1>
 			<ul class="payment_proceso_tarjeta seccion_metodo_pago_lista">
 				<li><span class="fa fa-credit-card-alt fa-lg"></span> Tarjeta de crédito</li>
 				<li><span class="fa fa-exchange fa-lg"></span> Debito bancario PSE</li>
@@ -29,6 +29,9 @@
 			<!-- Formulario de pago de PAYU -->
 			<div id="formulario_payu" class="contenedor_formulario_payu payment_datos_botones">
 				<form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+
+					<meta name="csrf-token" content="{{ csrf_token() }}">
+
 				  	<input name="merchantId"    type="hidden"  value="{{ $dataPayu['merchantId'] }}">
 				  	<input name="accountId"     type="hidden"  value="{{ $dataPayu['accountId'] }}" >
 				  	<input name="description"   type="hidden"  value="{{ $dataPayu['description'] }}">
@@ -52,7 +55,8 @@
 				  	<input name="confirmationUrl" type="hidden"  value="{{ $dataPayu['confirmationUrl'] }}" >
 
 					<section class="payment_proceso_tarjeta tarjeta_form_btn_payu">
-						<button type="submit" class="btn_datos_envio">
+						<!-- Este botón envia los datos a payu, pero antes elimina el carrito de compra desde app.js -->
+						<button type="submit" class="btn_datos_envio" id="eliminarCarrito">
 							Pagar con 
 							<img class="logo_payu" src="{{ asset('img/logos/payu.png')}}">
 						</button>
@@ -68,7 +72,8 @@
 				<table class="table table-bordered resumen_table">
 					<tr>
 				    	<th>Producto</th>
-				    	<td>${{ number_format( $total_pagar, 0, '', '.')  }}</td>
+				    	<td>${{ number_format( $total_pagar, 0, '', '.')  }}
+				    	</td>
 				  	</tr>
 				  	<tr>
 				    	<th style="font-weight: 400;">TOTAL A PAGAR</th>

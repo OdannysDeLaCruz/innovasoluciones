@@ -115,5 +115,44 @@ $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip()
     })
 
+    // Configurar las cabeceras para que el controlador de laravel PaymentController acepte la petición, aqui envio el token csrf
+    $.ajaxSetup({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }        
+    });
+    // Eliminar carrito de compra antes de enviar los datos a PayU
+    $('#eliminarCarrito').on('click', function(){
+
+        // e.preventDefault();
+            
+        // fetch('/checkout/buying/payment/eliminarcarrito')
+        // .then(function(response){
+        //     if(response.ok){
+        //         return response.text();                
+        //     }
+        //     else {
+        //         throw "Error en la llamada";
+        //     }
+        // })
+        // .then(function(data){
+        //     console.log(data)
+        // })
+        // .catch(function(error){
+        //     console.log(error);
+        // });
+
+        // Otra forma de eliminar el carrito desde ajax
+
+        $.ajax({
+            url: '/checkout/buying/payment/eliminarcarrito',
+            type: 'post',
+            success: function(result){
+                console.log(result);
+            },
+            error: function(){
+                console.log('Error');
+            }
+        });
+    });
+
 });
 

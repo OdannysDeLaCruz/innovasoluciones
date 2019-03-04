@@ -66,7 +66,9 @@ Route::get('/verificacion', 'VerificarPedidoController@verificar')->name('verifi
 
 Route::post('/verificarCodigo', 'VerificarPedidoController@verificarCodigo')->name('verificarCodigo');
 
-Route::post('checkout/buying/payment', 'PaymentController@payment')->name('payment');
+Route::post('checkout/buying/payment/', 'PaymentController@payment')->name('payment');
+
+Route::post('checkout/buying/payment/eliminarcarrito', 'PaymentController@eliminarcarrito');
 
 Route::get('/response', 'ConfirmationController@response');
 

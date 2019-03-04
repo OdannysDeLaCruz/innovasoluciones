@@ -58,25 +58,40 @@ class PaymentController extends Controller
             return redirect()->route('showCart');
         }
         // Hago descuento por el codigo ingresado por usuario, este codigo ya ha sido verificado por la funcion verificarCodigo
+        
         $total_del_pedido = session('total_del_pedido');
         $descuento_peso   = session('descuento_peso') != "" ? session('descuento_peso') : 0;
         $total_pagar      = $total_del_pedido - $descuento_peso;
         
         // Retornar total a pagar
-        return number_format($total_pagar);
+        // return number_format($total_pagar);
+        return $total_pagar;
     }
-    private function description(){
+    private function description() {
         $cart = session('cart');
         // foreach ($cart as $dato) {
             
         // }
         // dd($cart);
     }
+
+    public function eliminarcarrito(Request $request){
+        if($request->ajax()) {
+            session()->forget('cart');
+            echo "Eliminado";
+        }
+    }
     
     public function payment(Request $request) {
 
         // Obtener total a pagar
-        $total_pagar = $this->calcularTotal();
+        if(is_numeric($this->calcularTotal())) {
+
+            $total_pagar = $this->calcularTotal();
+        }
+        else {
+            $total_pagar = 0;
+        }
         // Obtener metodo de entrega del pedido
         $this->modoEnvio($request);
 

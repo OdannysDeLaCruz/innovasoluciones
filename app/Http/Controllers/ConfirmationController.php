@@ -168,14 +168,6 @@ class ConfirmationController extends Controller
 		    $fp = fopen('pruebas.txt', "a");
 			fwrite($fp, 'Pedido creado, aprobado' . "\r\n");
 			fclose($fp);
-
-			// Eliminar el carrito de compras
-
-			session()->forget('cart');
-
-			$fp = fopen('pruebas.txt', "a");
-			fwrite($fp, 'Carrito eliminado' . "\r\n");
-			fclose($fp);
 		}
 		elseif($state_pol == 6) {
 			// Crear el pedido rechazado
@@ -195,14 +187,6 @@ class ConfirmationController extends Controller
 
 			$fp = fopen('pruebas.txt', "a");
 			fwrite($fp, 'Pedido creado, rechazado' . "\r\n");
-			fclose($fp);
-
-			// Eliminar el carrito de compras
-
-			session()->forget('cart');
-
-			$fp = fopen('pruebas.txt', "a");
-			fwrite($fp, 'Carrito eliminado' . "\r\n");
 			fclose($fp);
 		}
 		else {
