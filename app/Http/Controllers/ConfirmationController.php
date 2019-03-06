@@ -1,27 +1,21 @@
 <?php
-
 namespace App\Http\Controllers;
-
-// use App\Traits\TestTrait;
-// use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class ConfirmationController extends Controller
 {
 
+	/* PASOS A DESARROLLAR
+	** Recibir los datos respectivos de las funciones response y confirmation
+	** Crear verificaciones de veracidad y autenticidad de datos en response y confirmation
+	** Actualizar la información de la tabla pedidos con los nuevos datos recibidos en confirmation
+	** Enviar mensaje de correo electronico al usuario informando de el estado de su pedido
+	*/ 
+
     private $ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
 
     public function response(Request $request) {
-		// $file = fopen("data.txt", "a");
-		// fwrite($file, "# Response\n");
-		// fwrite($file, "#-------------------------------------------------------\n");
-		// foreach($_GET as $id => $responseValue){
-		//   fwrite($file, $id . " => " . $responseValue . "\n");
-		// }
-		// fclose($file);
-
-    	// session()->forget('cart');
 
 		$merchant_id   = $request['merchantId'];
 		$referenceCode = $request['referenceCode'];
@@ -42,7 +36,7 @@ class ConfirmationController extends Controller
 
 		$direccion_envio = Auth::user()->direccion . ' - ' . Auth::user()->barrio;
 		$forma_entrega = session('entrega_pedido');
-		
+
 		if ($transactionState == 4 ) {
 			$estadoTx = "Transacción aprobada";
 		}
@@ -84,17 +78,8 @@ class ConfirmationController extends Controller
     	);
     }
     public function confirmation() {
-		// TestTrait::getDatos();
-		// Configurar zona horaria
     	date_default_timezone_set('America/Bogota');
     	
-    	// Prueba de que se esta ejecutando este controlador
-		$fp = fopen("pruebas.txt", "a");
-		if($fp) {
-			fwrite($fp, "Se esta usuando este controlador" . "\r\n");
-			fclose($fp);
-		}
-
 		// Obtener datos de payu
 
 		// $sign = $_POST['sign'];
@@ -164,10 +149,7 @@ class ConfirmationController extends Controller
 			// 	'importe_total' => ,
 			// ]);
 
-			// Si se ha creado el pedido correctamente, informar en pruebas.txt
-		    $fp = fopen('pruebas.txt', "a");
-			fwrite($fp, 'Pedido creado, aprobado' . "\r\n");
-			fclose($fp);
+			// Enviar correo de Confirmacion de compra al usuario
 		}
 		elseif($state_pol == 6) {
 			// Crear el pedido rechazado

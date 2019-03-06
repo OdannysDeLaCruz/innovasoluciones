@@ -56,7 +56,7 @@
 
 					<section class="payment_proceso_tarjeta tarjeta_form_btn_payu">
 						<!-- Este botón envia los datos a payu, pero antes elimina el carrito de compra desde app.js -->
-						<button type="submit" class="btn_datos_envio" id="eliminarCarrito">
+						<button type="submit" class="btn_datos_envio" id="crearPedido">
 							Pagar con 
 							<img class="logo_payu" src="{{ asset('img/logos/payu.png')}}">
 						</button>

@@ -73,15 +73,7 @@ class PaymentController extends Controller
             
         // }
         // dd($cart);
-    }
-
-    public function eliminarcarrito(Request $request){
-        if($request->ajax()) {
-            session()->forget('cart');
-            echo "Eliminado";
-        }
-    }
-    
+    }    
     public function payment(Request $request) {
 
         // Obtener total a pagar

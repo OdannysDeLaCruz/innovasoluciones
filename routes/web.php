@@ -68,7 +68,7 @@ Route::post('/verificarCodigo', 'VerificarPedidoController@verificarCodigo')->na
 
 Route::post('checkout/buying/payment/', 'PaymentController@payment')->name('payment');
 
-Route::post('checkout/buying/payment/eliminarcarrito', 'PaymentController@eliminarcarrito');
+Route::post('checkout/buying/payment/crearpedido', 'CrearPedidoController@crearPedido');
 
 Route::get('/response', 'ConfirmationController@response');
 

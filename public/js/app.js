@@ -116,11 +116,11 @@ $(document).ready(function(){
     })
 
     // Configurar las cabeceras para que el controlador de laravel PaymentController acepte la petición, aqui envio el token csrf
-    $.ajaxSetup({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }        
-    });
+    // $.ajaxSetup({
+    //     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }        
+    // });
     // Eliminar carrito de compra antes de enviar los datos a PayU
-    $('#eliminarCarrito').on('click', function(){
+    // $('#eliminarCarrito').on('click', function(){
 
         // e.preventDefault();
             
@@ -142,9 +142,34 @@ $(document).ready(function(){
 
         // Otra forma de eliminar el carrito desde ajax
 
+    //     $.ajax({
+    //         url: '/checkout/buying/payment/eliminarcarrito',
+    //         type: 'post',
+    //         success: function(result){
+    //             console.log(result);
+    //         },
+    //         error: function(){
+    //             console.log('Error');
+    //         }
+    //     });
+    // });
+
+    // Crear funcion que se encargue de enviar la confirmacion a CrearPedidoController para que cree el pedido cuando el usuario de click en el boton pagar con payu, este pedido se creará antes de enviar los datos a payu.
+
+    // Configurar las cabeceras para que el controlador de laravel CrearPedidoController acepte la petición ajax.
+    // Aquí envío el token csrf de laravel
+    $.ajaxSetup({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }        
+    });
+
+    $('#crearPedido').on('click', function(e){
+
+        e.preventDefault();
+
         $.ajax({
-            url: '/checkout/buying/payment/eliminarcarrito',
-            type: 'post',
+            url: '/checkout/buying/payment/crearpedido',
+            type: 'POST',
+            data: {crear : true},
             success: function(result){
                 console.log(result);
             },
