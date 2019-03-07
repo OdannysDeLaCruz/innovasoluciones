@@ -67,15 +67,9 @@ class PaymentController extends Controller
         // return number_format($total_pagar);
         return $total_pagar;
     }
-    private function description() {
-        $cart = session('cart');
-        // foreach ($cart as $dato) {
-            
-        // }
-        // dd($cart);
-    }    
+   
     public function payment(Request $request) {
-
+        
         // Obtener total a pagar
         if(is_numeric($this->calcularTotal())) {
 
@@ -90,7 +84,6 @@ class PaymentController extends Controller
         // Configurar los datos para la pasarela de Payu
         $dataPayu['merchantId'] = '508029';
         $dataPayu['accountId'] = '512321';
-        // $dataPayu['description'] = $this->description();
         $dataPayu['description'] = "Compra desde tienda online Innova Soluciones";
         $dataPayu['referenceCode'] = 'INNOVA' . time();
         $dataPayu['amount'] = $total_pagar;
