@@ -22,6 +22,8 @@ class CrearPedidoController extends Controller
 					$pedido = App\Pedido::create([
 			            'id_user'         => Auth::user()->id,
 				        'comprador'       => Auth::user()->nombre . ' ' . Auth::user()->apellido,
+				        'telefono'        => Auth::user()->telefono,
+				        'email'           => Auth::user()->email,
 				        'ref_venta'       => '',
 				        'direccion_envio' => Auth::user()->direccion,
 				        'modo_pago'       => '',

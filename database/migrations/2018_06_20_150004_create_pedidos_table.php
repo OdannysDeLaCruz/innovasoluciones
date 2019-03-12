@@ -18,6 +18,8 @@ class CreatePedidosTable extends Migration
             // almaceno el id del usuario, pero tambien el nombre completo del usuario comprador
             $table->integer('id_user');
             $table->string('comprador');
+            $table->string('telefono');
+            $table->string('email');
             // --------------------------------
             $table->string('ref_venta');
             $table->string('direccion_envio');

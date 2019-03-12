@@ -10,6 +10,8 @@ class Pedido extends Model
     protected $fillable = [
         'id_user',
         'comprador',
+        'telefono',
+        'email',
         'ref_venta',
         'direccion_envio',
         'modo_pago',

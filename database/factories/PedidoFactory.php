@@ -7,11 +7,15 @@ $factory->define(App\Pedido::class, function (Faker $faker) {
     
     $id_user = App\User::where('id',rand(1, 7))->value('id');    
     $nombre = App\User::where('id', $id_user)->value('nombre');    
-	$apellido = App\User::where('id', $id_user)->value('apellido');    
+    $apellido = App\User::where('id', $id_user)->value('apellido');    
+    $telefono = App\User::where('id', $id_user)->value('telefono');    
+	$email = App\User::where('id', $id_user)->value('email');    
 
     return [
         'id_user'          => $id_user,
         'comprador'        => $nombre . ' ' . $apellido,
+        'telefono'         => $telefono,
+        'email'            => $email,
         'ref_venta'        => 'Obtener de Payu',
         'direccion_envio'  => $faker->address,
         'modo_pago'        => 'Obtener de Payu',
