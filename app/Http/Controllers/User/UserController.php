@@ -56,8 +56,7 @@ class UserController extends Controller
                             'cantidad',
                             'descuento_porcentual',
                             'tamaño',
-                            'color',
-                            'importe_total'
+                            'color'
                         )
                         ->where('id_pedido', $idPedido)
                         ->get();
@@ -131,8 +130,7 @@ class UserController extends Controller
                             'cantidad',
                             'descuento_porcentual',
                             'tamaño',
-                            'color',
-                            'importe_total'
+                            'color'
                         )
                         ->where('id_pedido', $idFactura)
                         ->get();

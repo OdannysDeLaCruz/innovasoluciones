@@ -77,34 +77,6 @@ $(document).ready(function(){
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }        
     });
 
-
-    // $('#crearPedido').on('click', function(e){
-        
-    //     e.preventDefault();
-        
-    //     $.ajax({
-    //         url: '/checkout/buying/payment/crearpedido',
-    //         type: 'POST',
-    //         data: {crear : true},
-    //         success: function(result){
-    //             if (result) {
-    //                 alert("Esta siendo llevado a la Payu");
-    //                 // Añadir a la descripcion el id del pedido creado
-    //                 let valueDescripcion = document.getElementById('descripcionPedido').value;
-    //                 let nuevaDescripcion = document.getElementById('descripcionPedido').value = result + '-' + valueDescripcion;
-
-    //             }
-    //             else {
-    //                 alert("Error");
-    //             }
-    //         },
-    //         error: function(){
-    //             console.log('Error');
-    //         }
-    //     });
-
-    // });
-
     $('#crearPedido').on('click', function(e){
         
         e.preventDefault();
@@ -136,7 +108,8 @@ $(document).ready(function(){
                 if(data.status == 500){
                     e.preventDefault();
                     alert("Error: Recarga la página o contacta a soporte técnico");
-                     window.location.reload();                 
+                    console.log(data.responseText);
+                     // window.location.reload();                 
                 }
             }
         });

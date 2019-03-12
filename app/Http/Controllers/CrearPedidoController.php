@@ -49,8 +49,7 @@ class CrearPedidoController extends Controller
 						        'cantidad'              => $producto['cantidad'],
 						        'descuento_porcentual'  => $producto['descuento_%'],
 						        'tamaño'                => $producto['talla'],
-						        'color'                 => $producto['color'],
-						        'importe_total'         => 0
+						        'color'                 => $producto['color']
 		    				]);
 				        }
 				        

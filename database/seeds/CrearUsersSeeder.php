@@ -36,7 +36,7 @@ class CrearUsersSeeder extends Seeder
             'apellido'         => 'De La Cruz Calvo',
             'num_cedula'       => '1065825573',
             'telefono'         => '3107484079',
-            'email'            => 'josedelacruz321@hotmail.com',
+            'email'            => 'jose321@hotmail.com',
             'pais'             => 'Colombia',
             'ciudad'           => 'Valledupar',
             'barrio'           => 'La Nevada',
@@ -46,6 +46,38 @@ class CrearUsersSeeder extends Seeder
             'remember_token'   => str_random(10),
 
         ]);
-        $users = factory(App\User::class, 5)->create();
+        App\User::create([
+            'id_rol'           => 2,
+            'nombre'           => 'Carlos',
+            'apellido'         => 'De La Cruz Calvo',
+            'num_cedula'       => '1065810220',
+            'telefono'         => '3107484079',
+            'email'            => 'carlos321@hotmail.com',
+            'pais'             => 'Colombia',
+            'ciudad'           => 'Valledupar',
+            'barrio'           => 'La Nevada',
+            'direccion'        => 'Cll 6b # 41-36',
+            'password'         => bcrypt('carlos321'),
+            'fecha_registro'   => date('Y-n-j H:i:s'),
+            'remember_token'   => str_random(10),
+
+        ]);
+        App\User::create([
+            'id_rol'           => 2,
+            'nombre'           => 'Daris',
+            'apellido'         => 'Calvo Meriño',
+            'num_cedula'       => '1065825573',
+            'telefono'         => '3107484079',
+            'email'            => 'daris321@hotmail.com',
+            'pais'             => 'Colombia',
+            'ciudad'           => 'Valledupar',
+            'barrio'           => 'La Nevada',
+            'direccion'        => 'Cll 6b # 41-36',
+            'password'         => bcrypt('daris321'),
+            'fecha_registro'   => date('Y-n-j H:i:s'),
+            'remember_token'   => str_random(10),
+
+        ]);
+        // $users = factory(App\User::class, 5)->create();
     }
 }

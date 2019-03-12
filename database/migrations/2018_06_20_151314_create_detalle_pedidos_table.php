@@ -24,7 +24,7 @@ class CreateDetallePedidosTable extends Migration
             $table->integer('descuento_porcentual');
             $table->string('tamaño')->nullable(); //Tamaño de articulos (46cm X 30cm), tallas de zapatos (26, 27, 28) etc...
             $table->string('color')->nullable(); //Colores disponibles del articulo separados por comas (verde, rojo, negro) etc...
-            $table->integer('importe_total');
+            // $table->integer('importe_total');
 
             // $table->timestamps();
 
