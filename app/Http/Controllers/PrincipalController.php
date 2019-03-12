@@ -101,7 +101,7 @@ class PrincipalController extends Controller
         }
 
         // SI EL PRODUCTOS TIENE imagenDescripcion == true
-        if ($producto[0]->imagenDescripcion == true) {
+        if ($producto[0]->tieneImgDescripcion == 1) {
             $producto['id'] = $producto[0]->id;
             $producto['descripcion'] = $producto[0]->descripcion;
             $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
@@ -109,7 +109,7 @@ class PrincipalController extends Controller
             return view('referencias', compact('producto', 'imagenes'));
         }
 
-        // SI EL PRODUCTOS TIENE imagenDescripcion == false
+        // SI EL PRODUCTOS TIENE tieneImgDescripcion == 0
         else {
            
             $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();

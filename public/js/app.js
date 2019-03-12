@@ -78,25 +78,69 @@ $(document).ready(function(){
     });
 
 
+    // $('#crearPedido').on('click', function(e){
+        
+    //     e.preventDefault();
+        
+    //     $.ajax({
+    //         url: '/checkout/buying/payment/crearpedido',
+    //         type: 'POST',
+    //         data: {crear : true},
+    //         success: function(result){
+    //             if (result) {
+    //                 alert("Esta siendo llevado a la Payu");
+    //                 // Añadir a la descripcion el id del pedido creado
+    //                 let valueDescripcion = document.getElementById('descripcionPedido').value;
+    //                 let nuevaDescripcion = document.getElementById('descripcionPedido').value = result + '-' + valueDescripcion;
+
+    //             }
+    //             else {
+    //                 alert("Error");
+    //             }
+    //         },
+    //         error: function(){
+    //             console.log('Error');
+    //         }
+    //     });
+
+    // });
+
     $('#crearPedido').on('click', function(e){
         
         e.preventDefault();
+        
         $.ajax({
             url: '/checkout/buying/payment/crearpedido',
             type: 'POST',
             data: {crear : true},
-            success: function(result){
-                if (result) {
-                    alert("Esta siendo llevado a la Payu");
+            dataType: 'json',
+            success: function(data){
+                if (data.status == 'Success') {
+                    alert(data.status + ': ' + data.message);
+                    // Despues de que se crea el pedido y sus detalles, se obtiene el id que returna crearPedidoController.php de ese pedido se añade a la descripcion que se envía a payu
+
+                    let valueDescripcion = document.getElementById('descripcionPedido').value;
+                    let nuevaDescripcion = document.getElementById('descripcionPedido').value = valueDescripcion + '-' + data.id_pedido;
+
+                    // Enviar formulario despues de añadir el id a la descrición
+                    $('#enviar-formulario-payu').submit();
+
                 }
                 else {
-                    alert("Error");
+                    e.preventDefault();
+                    alert(data.status + ': ' + data.message);
+                    window.location.reload(); 
                 }
             },
-            error: function(){
-                console.log('Error');
+            error: function(data){
+                if(data.status == 500){
+                    e.preventDefault();
+                    alert("Error: Recarga la página o contacta a soporte técnico");
+                     window.location.reload();                 
+                }
             }
         });
+
     });
 });
 

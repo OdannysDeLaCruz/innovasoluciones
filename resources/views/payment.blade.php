@@ -28,13 +28,13 @@
 			</ul>
 			<!-- Formulario de pago de PAYU -->
 			<div id="formulario_payu" class="contenedor_formulario_payu payment_datos_botones">
-				<form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+				<form method="post" id="enviar-formulario-payu" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
 
 					<meta name="csrf-token" content="{{ csrf_token() }}">
 
 				  	<input name="merchantId"    type="hidden"  value="{{ $dataPayu['merchantId'] }}">
 				  	<input name="accountId"     type="hidden"  value="{{ $dataPayu['accountId'] }}" >
-				  	<input name="description"   type="hidden"  value="{{ $dataPayu['description'] }}">
+				  	<input name="description" id="descripcionPedido"   type="hidden"  value="{{ $dataPayu['description'] }}">
 				  	<input name="referenceCode" type="hidden"  value="{{ $dataPayu['referenceCode'] }}" >
 				  	<input name="amount"        type="hidden"  value="{{ $dataPayu['amount'] }}"   >
 				  	<input name="tax"           type="hidden"  value="{{ $dataPayu['tax'] }}"  >
