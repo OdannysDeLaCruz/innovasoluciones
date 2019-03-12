@@ -62,7 +62,7 @@ class CrearPedidoController extends Controller
 			        	echo json_encode(array(
 							'status' => 'Success',
 							'id_pedido' => $id_pedido,
-							'message' => 'Redirigiendo a payu'
+							'message' => 'Será llevado a la plataforma de payu para finalizar la compra'
 						));
 			        }
 			        else { 
