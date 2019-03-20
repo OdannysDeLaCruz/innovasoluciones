@@ -28,7 +28,7 @@ class CartController extends Controller
     public function add(Request $request) {
 
         $id = $request->input('id');
-        $descripcion = $request->input('descripcion');
+        // $descripcion = $request->input('descripcion');
         $colorEscogido = $request->input('colores');
         $tallaEscogido = $request->input('tallas');
 

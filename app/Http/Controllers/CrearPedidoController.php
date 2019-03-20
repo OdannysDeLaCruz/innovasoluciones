@@ -20,38 +20,36 @@ class CrearPedidoController extends Controller
 				// Si hay productos en el carrito, crear pedido
 				if($cart = session('cart')) {
 					$pedido = App\Pedido::create([
-			            'id_user'         => Auth::user()->id,
-				        'comprador'       => Auth::user()->nombre . ' ' . Auth::user()->apellido,
-				        'telefono'        => Auth::user()->telefono,
-				        'email'           => Auth::user()->email,
-				        'ref_venta'       => '',
-				        'direccion_envio' => Auth::user()->direccion,
-				        'modo_pago'       => '',
-				        // codigo_descuento y modo_envio se obtienen de la tabla cart
-				        'codigo_descuento'=> session('codigos_usados') ? session('codigos_usados') : 'No',
-				        'modo_envio'      => session('entrega_pedido'),
-				        'estado_pedido'   => 'en espera',
-				        'fecha_pedido'    => date('Y-n-j H:i:s')
+				        'user_id'             => Auth::user()->id,
+				        'pedido_dir'          => Auth::user()->direccion,
+				        'pedido_ref_venta'    => '',
+				        'codigo_utilizado_id' => session('codigos_usados') ? session('codigos_usados') : 'No',
+				        'envio_id'            => '', //Organizar
+				        'metodo_pago_id'      => '', //Organizar
+				        'pedido_estado'       => 'en espera',
+				        'fecha_creado'        => date('Y-n-j H:i:s')
 			        ]);
 
 			        if($pedido !== "") {
 			        	$id_pedido = $pedido->id; 
 
 	    				// Crear detalles del pedido
-
 	    				$cart = session('cart');
+	    				foreach ($cart as $detalle) {
 
-	    				foreach ($cart as $producto) {
+	    					$precio = $detalle['precio'] * $detalle['cantidad'];
+	    					$descuento_peso = $precio * ($detalle['descuento_%'] / 100);
+	    					$precio_final = $precio - $descuento_peso;
+
 				            App\DetallePedido::create([
-		    					'id_producto'           => $producto['id'],
-						        'id_pedido'             => $id_pedido,
-						        'descripcion'           => $producto['descripcion'],
-						        'imagen'                => $producto['imagen'],
-						        'precio'                => $producto['precio'],
-						        'cantidad'              => $producto['cantidad'],
-						        'descuento_porcentual'  => $producto['descuento_%'],
-						        'tamaño'                => $producto['talla'],
-						        'color'                 => $producto['color']
+						        'pedido_id'            => $id_pedido,
+						        'detalle_descripcion'  => $detalle['descripcion'],
+						        'detalle_imagen'       => $detalle['imagen'],
+						        'detalle_precio'       => $detalle['precio'],
+						        'detalle_cantidad'     => $detalle['cantidad'],
+						        'detalle_precio_final' => $precio_final,
+						        'detalle_talla'        => $detalle['talla'],
+						        'detalle_color'        => $detalle['color']
 		    				]);
 				        }
 				        
