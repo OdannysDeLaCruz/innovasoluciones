@@ -16,22 +16,24 @@ class DatabaseSeeder extends Seeder
             'secciones',
             'users',
             'categorias',
-            'cod_descuentos',
+            'codigos',
+            'envios',
             'pedidos',
             'productos',
             'detalle_pedidos',
-            'imagenes_productos'
+            'imagenes'
         ]);
         $this->call([
         	CrearRolesSeeder::class,
         	CrearSeccionesSeeder::class,
         	CrearUsersSeeder::class,
             CrearCategoriasSeeder::class,
-        	CrearCodDescuentoSeeder::class,
-            // CrearPedidosSeeder::class,
+            CrearCodigosSeeder::class,
+        	CrearEnviosSeeder::class,
+            CrearPedidosSeeder::class,
             CrearProductosSeeder::class,
-            // CrearDetallePedidosSeeder::class,
-            CrearImagenProductoSeeder::class,
+            CrearDetallePedidosSeeder::class,
+            CrearImagenesSeeder::class,
         ]);
     }
 

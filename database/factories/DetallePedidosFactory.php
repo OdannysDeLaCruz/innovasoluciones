@@ -4,30 +4,16 @@ use Faker\Generator as Faker;
 
 $factory->define(App\DetallePedido::class, function (Faker $faker) {
    
-    $producto  = App\Producto::where('id', rand(1,30))->get();
-    $id_pedido = App\Pedido::where('id', rand(1,5))->value('id');
-    $cantidad     = rand(1, 5);
-    $precio       = $producto[0]->precio;
-
-    $precio_neto   = ($precio * $cantidad);
-    $descuento     = $producto[0]->descuento / 100;
-    $a_descontar   = $precio_neto * $descuento;
-    $importe_total = $precio_neto - $a_descontar;
-
-
-    $tallas = [ '20x20', '45x60', '26', '28', '30', '30', '22' ];
-    $colores = ['rojo', 'azul', 'negro', 'marron', 'blanco'];
+    $pedido_id = App\Pedido::where('id', rand(1,10))->value('id');
    
     return [
-        'id_producto'           => $producto[0]->id,
-        'id_pedido'             => $id_pedido,
-        'descripcion'           => $producto[0]->descripcion,
-        'imagen'                => $producto[0]->imagen,
-        'precio'                => $precio,
-        'cantidad'              => $cantidad,
-        'descuento_porcentual'  => $producto[0]->descuento,
-        'tamaño'                => $tallas[rand(0, 6)],
-        'color'                 => $colores[rand(0, 4)],
-        'importe_total'         => number_format($importe_total), //eliminar esta fila, no se va a utilizar mas
+        'pedido_id'  => $pedido_id,
+        'detalle_descripcion' => 'Descripcion de ejemplo',
+        'detalle_imagen' => $faker->imageUrl($width = 200, $height = 200),
+        'detalle_precio' => 30000,
+        'detalle_cantidad' => 1,
+        'detalle_precio_final' => 40000,
+        'detalle_talla' => '20x20',
+        'detalle_color' => 'negro'
     ];
 });

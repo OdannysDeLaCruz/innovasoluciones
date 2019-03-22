@@ -3,11 +3,12 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Categoria::class, function (Faker $faker) {
-
-	$id_seccion = App\Seccion::where('id', rand(1,3))->value('id');
+	date_default_timezone_set('America/Bogota');
+	
+	$seccion_id = App\Seccion::where('id', rand(1,3))->value('id');
     return [
-        'id_seccion'  => $id_seccion,
-        'nombre'      => $faker->unique->word,
-        'descripcion' => $faker->text(50)
+        'seccion_id'     => $seccion_id,
+        'categoria_nombre' => $faker->unique->word,
+        'categoria_descripcion' => $faker->text(50), 
     ];
 });

@@ -15,18 +15,19 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id_rol', 
-        'nombre', 
-        'apellido', 
-        'num_cedula',
-        'telefono', 
-        'email',
-        'pais',
-        'ciudad',
-        'barrio',
-        'direccion',
-        'password',
-        'fecha_registro'
+        'rol_id',
+        'usuario_nombre',
+        'usuario_apellido',
+        'usuario_cedula',
+        'usuario_telefono',
+        'usuario_email',
+        'usuario_pais',
+        'usuario_ciudad',
+        'usuario_barrio',
+        'usuario_direccion',
+        'usuario_password',
+        'usuario_estado',
+        'remember_token'
     ];
 
     /**
@@ -35,7 +36,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'usuario_password', 'remember_token',
     ];
 
     public $timestamps = false;

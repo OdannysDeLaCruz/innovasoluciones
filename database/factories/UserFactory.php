@@ -17,18 +17,18 @@ $factory->define(App\User::class, function (Faker $faker) {
     date_default_timezone_set('America/Bogota');
     static $password;
 	return [
-	    'id_rol'           => 2,
-	    'nombre'           => $faker->firstName,
-	    'apellido'         => $faker->lastName,
-	    'num_cedula'       => rand(000000000, 999999999),
-	    'telefono'         => $faker->phoneNumber,
-	    'email'            => $faker->unique()->safeEmail,
-	    'pais'             => $faker->country,
-	    'ciudad'           => $faker->city,
-	    'barrio'           => $faker->streetName,
-	    'direccion'        => $faker->address,
-	    'password'         => $password ?: $password = bcrypt('secret'),
-	    'fecha_registro'   => date('Y-n-j H:i:s'),
-	    'remember_token'   => str_random(10)
+	    'rol_id' => 2,
+	    'usuario_nombre' => $faker->firstName,
+	    'usuario_apellido' => $faker->lastName,
+	    'usuario_cedula' => rand(000000000, 999999999),
+	    'usuario_telefono' => $faker->phoneNumber,
+	    'usuario_email' => $faker->unique()->safeEmail,
+	    'usuario_pais' => $faker->country,
+	    'usuario_ciudad' => $faker->city,
+	    'usuario_barrio' => $faker->streetName,
+	    'usuario_direccion' => $faker->address,
+	    'usuario_password' => $password ?: $password = bcrypt('secret'),
+	    'usuario_estado' => rand(0, 1)
+	    // 'remember_token'   => str_random(10)
 	];
 });

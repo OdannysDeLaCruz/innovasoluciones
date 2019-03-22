@@ -12,21 +12,21 @@ class CrearSeccionesSeeder extends Seeder
     public function run()
     {
         App\Seccion::create([
-            'nombre' => 'tecnologias',
-            'descripcion' => 'Sección de articulos tecnologicos',
-            'imagen' => 'celular.svg',
+            'seccion_nombre' => 'tecnologias',
+            'seccion_descripcion' => 'Sección de articulos tecnologicos',
+            'seccion_imagen' => 'celular.svg',
         ]);
 
         App\Seccion::create([
-            'nombre' => 'zapatos',
-            'descripcion' => 'Sección de venta de calzado',
-            'imagen' => 'zapatos.svg',
+            'seccion_nombre' => 'zapatos',
+            'seccion_descripcion' => 'Sección de venta de calzado',
+            'seccion_imagen' => 'zapatos.svg',
         ]);
 
         App\Seccion::create([
-            'nombre' => 'joyas',
-            'descripcion' => 'Sección de venta de joyas',
-            'imagen' => 'joyas.svg',
+            'seccion_nombre' => 'joyas',
+            'seccion_descripcion' => 'Sección de venta de joyas',
+            'seccion_imagen' => 'joyas.svg',
         ]);
     }
 }

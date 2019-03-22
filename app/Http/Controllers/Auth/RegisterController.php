@@ -49,11 +49,16 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'nombre'         => 'required|string|max:255',
-            'apellido'       => 'required|string|max:255',
-            'num_documento'  => 'required|string|max:255',
-            'email'          => 'required|string|email|max:255|unique:users',
-            'password'       => 'required|string|min:6|confirmed',
+            'usuario_nombre'   => 'required|string|max:45',
+            'usuario_apellido' => 'required|string|max:45',
+            'usuario_cedula'   => 'required|string|max:15',
+            'usuario_telefono' => 'required|string|max:15',
+            'usuario_email'    => 'required|string|email|max:100|unique:users',
+            'usuario_pais'     => 'required|string|max:100',
+            'usuario_ciudad'   => 'required|string|max:100|',
+            'usuario_barrio'   => 'required|string|max:100|',
+            'usuario_direccion'=> 'required|string|max:100|',
+            'usuario_password' => 'required|string|min:6|confirmed',
         ]);
     }
 
@@ -65,15 +70,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        date_default_timezone_set('America/Bogota');
         return User::create([
-            'id_rol'         => 2,
-            'nombre'         => $data['nombre'],
-            'apellido'       => $data['apellido'],
-            'num_documento'  => $data['num_documento'],
-            'email'          => $data['email'],
-            'password'       => Hash::make($data['password']),
-            'fecha_registro' => date('l, jS F Y h:i:s A'),
+            'rol_id'            => 2,
+            'usuario_nombre'    => $data['nombre'],
+            'usuario_apellido'  => $data['apellido'],
+            'usuario_cedula'    => $data['cedula'],
+            'usuario_telefono'  => $data['telefono'],
+            'usuario_email'     => $data['email'],            
+            // Datos de envios
+            'usuario_pais'      => $data['pais'],
+            'usuario_ciudad'    => $data['ciudad'],
+            'usuario_barrio'    => $data['barrio'],
+            'usuario_direccion' => $data['direccion'],
+
+            'usuario_password'  => Hash::make($data['password']),
+            'usuario_estado'    => 1
         ]);
     }
 }

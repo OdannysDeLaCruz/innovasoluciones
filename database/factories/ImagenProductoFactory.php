@@ -2,12 +2,12 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\ImagenProducto::class, function (Faker $faker) {
+$factory->define(App\Imagen::class, function (Faker $faker) {
 
-	$id_producto = App\Producto::where('id', rand(1,50))->value('id');
+	$producto_id = App\Producto::where('id', rand(1,50))->value('id');
 
     return [
-        'id_producto'   => $id_producto,
-        'nombre_imagen' => $faker->imageUrl($width = 200, $height = 200, 'cats') 
+        'producto_id' => $producto_id,
+        'imagen_url'  => $faker->imageUrl($width = 200, $height = 200, 'cats') 
     ];
 });

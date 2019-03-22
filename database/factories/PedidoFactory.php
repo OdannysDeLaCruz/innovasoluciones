@@ -5,23 +5,19 @@ use Faker\Generator as Faker;
 $factory->define(App\Pedido::class, function (Faker $faker) {
     date_default_timezone_set('America/Bogota');
     
-    $id_user = App\User::where('id',rand(1, 7))->value('id');    
-    $nombre = App\User::where('id', $id_user)->value('nombre');    
-    $apellido = App\User::where('id', $id_user)->value('apellido');    
-    $telefono = App\User::where('id', $id_user)->value('telefono');    
-	$email = App\User::where('id', $id_user)->value('email');    
+    $user_id = App\User::where('id', rand(1, 7))->value('id');
+    $pedido_dir = App\User::where('id', $user_id)->value('usuario_direccion');   
 
     return [
-        'id_user'          => $id_user,
-        'comprador'        => $nombre . ' ' . $apellido,
-        'telefono'         => $telefono,
-        'email'            => $email,
-        'ref_venta'        => 'Obtener de Payu',
-        'direccion_envio'  => $faker->address,
-        'modo_pago'        => 'Obtener de Payu',
-        'codigo_descuento' => 'Obtener de session',
-        'modo_envio'       => 'Obtener de session',
-        'estado_pedido'    => 'Obtener de Payu',
-        'fecha_pedido'     => date('Y-n-j H:i:s'),
+        'user_id'             => $user_id,
+        'pedido_dir'          => $pedido_dir,
+        'pedido_ref_venta'    => '',
+        'codigo_utilizado_id' => rand(1,2),
+        'envio_id'            => rand(1,2),
+        'pedido_nombre_metodo_pago'  => '',
+        'pedido_metodo_pago'  => '',
+        'pedido_estado'       => '',
+        'pedido_transaccion_id'  => '',
+        'pedido_moneda_pago'     => ''
     ];
 });

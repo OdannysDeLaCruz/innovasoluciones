@@ -8,17 +8,14 @@ class Pedido extends Model
 {
     protected $table = "pedidos";
     protected $fillable = [
-        'id_user',
-        'comprador',
-        'telefono',
-        'email',
-        'ref_venta',
-        'direccion_envio',
-        'modo_pago',
-        'codigo_descuento',
-        'modo_envio',
-        'estado_pedido',
-        'fecha_pedido'
+
+        'user_id',
+        'pedido_dir',
+        'pedido_ref_venta',
+        'codigo_utilizado_id',
+        'envio_id',
+        'metodo_pago_id',
+        'pedido_estado'
     ];
 
     public $timestamps = false;

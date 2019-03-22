@@ -8,9 +8,9 @@ class Seccion extends Model
 {
     protected $table = "secciones";
     protected $fillable = [
-    	'nombre',
-    	'descripcion',
-    	'imagen'
+    	'seccion_nombre',
+    	'seccion_descripcion',
+    	'seccion_imagen'
     ];
 
     public $timestamps = false;

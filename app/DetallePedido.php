@@ -8,16 +8,14 @@ class DetallePedido extends Model
 {
     protected $table = 'detalle_pedidos';
     protected $fillable = [
-    	'id_producto',
-    	'id_pedido',
-    	'descripcion',
-    	'imagen',
-    	'precio',
-    	'descuento_porcentual',
-    	'tamaño',
-		'color',
-		'cantidad',
-		'importe_total'
+    	'pedido_id',
+        'detalle_descripcion',
+        'detalle_imagen',
+        'detalle_precio',
+        'detalle_cantidad',
+        'detalle_precio_final',
+        'detalle_talla',
+        'detalle_color'
     ];
 
     public $timestamps = false;

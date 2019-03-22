@@ -8,9 +8,10 @@ class Categoria extends Model
 {
     protected $table = 'categorias';
     protected $fillable = [
-    	'id_seccion',
-    	'nombre',
-    	'descripcion'
+    	'seccion_id',
+    	'categoria_nombre',
+    	'categoria_descripcion',
+    	'fecha_creado'
     ];
     public $timestamps = false;
 }

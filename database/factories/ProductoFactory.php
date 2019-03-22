@@ -5,31 +5,33 @@ use Faker\Generator as Faker;
 $factory->define(App\Producto::class, function (Faker $faker) {
     date_default_timezone_set('America/Bogota');
     
-	$id_categoria = App\Categoria::where('id', rand(1,15))->value('id');
+	$categoria_id = App\Categoria::where('id', rand(1,15))->value('id');
 
-    $precio_productos = [10,20,30,40,50,60,70,80,90];
-    $precio = $precio_productos[rand(0, 8)];
+    $productos_precios = [10000,20000,30000,40000,50000];
+    $producto_precio = $productos_precios[rand(0, 4)];
 
     $descuentos = [0,20,40,60,70,80];
-    $desc = $descuentos[ rand(0,5) ];
+    $descuento = $descuentos[ rand(0,5) ];
 
     $tags = ['celular', 'cel', 'zapatos', 'joyas', 'ruedas', 'tv', 'televisor', 'tennis', 'pc', 'computadores', 'tablets', 'portatiles', 'smartphones', 'phone', 'cadenas', 'perlas', 'mause', 'cargador', 'reloj', 'plasma'];
 
     $mis_tags = $tags[rand(0, count($tags) - 1)] . ',' . $tags[rand(0, count($tags) - 1)] . ',' . $tags[rand(0, count($tags) - 1)] . ',' . $tags[rand(0, count($tags) - 1)] . ',' . $tags[rand(0, count($tags) - 1)];
 
+    $cant = rand(0,10);
+    $estado = $cant != 0 ? 1 : 0;
+
     return [
-        'id_categoria'    => $id_categoria,
-        'descripcion'     => $faker->text(50),
-        'tags'            => $mis_tags,
-        'referencia'      => $faker->word . rand(0,100) . $faker->word,
-        'imagen'          => $faker->imageUrl($width = 200, $height = 200),
-        'precio'          => $precio,
-        'descuento'       => $desc,
-        'tallas'          => $faker->word,
-        'colores'         => $faker->word,
-        'tiempo_entrega'  => $faker->word,
-        'tieneImgDescripcion'  => rand(0,1),
-        'cant_disponible' => rand(0,10),
-        'fecha_creado'    => date('Y-n-j H:i:s')
+        'categoria_id'          => $categoria_id,
+        'producto_descripcion'  => $faker->text(50),
+        'producto_tags'         => $mis_tags,
+        'producto_ref'          => strtoupper($faker->word) . rand(rand(0, 999), rand(1000,9999)),
+        'producto_imagen'       => $faker->imageUrl($width = 200, $height = 200),
+        'producto_precio'       => $producto_precio,
+        'producto_descuento'    => $descuento,
+        'producto_tallas'       => '28, 30, 32, 50X20, 160X100',
+        'producto_colores'      => 'verdes, rojos, negros, azules',
+        'producto_tieneImgDescripcion' => rand(0,1),
+        'producto_cant'         => $cant,
+        'producto_estado'       => $estado,
     ];
 });
