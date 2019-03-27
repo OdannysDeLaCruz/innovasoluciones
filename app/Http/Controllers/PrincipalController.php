@@ -66,7 +66,7 @@ class PrincipalController extends Controller
 
     // Muestra los productos de la categoria seleccionada
     public function showCategoriaProductos($seccion) {
-        $id_seccion = App\Seccion::where('nombre', $seccion)->value('id');
+        $seccion_id = App\Seccion::where('seccion_nombre', $seccion)->value('id');
 
         if($id_seccion === null){
             //Si sección no existe
@@ -116,30 +116,33 @@ class PrincipalController extends Controller
 
     public function seleccionarDescripcion($id, $descripcion) {
         // Si $id y $descripcion no estan vacios o no son null, hacer la consulta de ese producto
-        $producto = App\Producto::where('id', $id)->where('descripcion', $descripcion)->get();
-        
+        $producto = App\Producto::select('productos.*','promociones.promo_tipo', 'promociones.promo_costo', 'promociones.promo_publicidad')
+                                ->join('promociones', 'productos.promocion_id', '=', 'promociones.id')
+                                ->where('productos.id', $id)
+                                ->where('productos.producto_descripcion', $descripcion)
+                                ->get();
+
         // Si producto no existe, mandar un error 404
         if($producto->isEmpty() === true){
             return response()->view('error.404',['response' => 'Lo sentimos, no esta disponible este producto en este momento'],404);
         }
 
-        // SI EL PRODUCTOS TIENE imagenDescripcion == true
-        if ($producto[0]->tieneImgDescripcion == 1) {
+        // SI EL PRODUCTO TIENE producto_tieneImgDescripcion == true
+        if ($producto[0]->producto_tieneImgDescripcion == 1) {
             $producto['id'] = $producto[0]->id;
-            $producto['descripcion'] = $producto[0]->descripcion;
-            $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
+            $producto['producto_descripcion'] = $producto[0]->producto_descripcion;
+            $imagenes = App\Imagen::select('id', 'producto_id', 'imagen_url')->where('producto_id', $id)->get();
 
             return view('referencias', compact('producto', 'imagenes'));
         }
 
-        // SI EL PRODUCTOS TIENE tieneImgDescripcion == 0
-        else {
-           
-            $imagenes = App\ImagenProducto::select('id', 'id_producto', 'nombre_imagen')->where('id_producto', $id)->get();
+        // SI EL PRODUCTOS TIENE producto_tieneImgDescripcion == 0
+        else {           
+            $imagenes = App\Imagen::select('id', 'producto_id', 'imagen_url')->where('producto_id', $id)->get();
 
             // Formatear los tags
             foreach ($producto as $product) {
-                $tags = explode( ',', $product->tags );
+                $tags = explode( ',', $product->producto_tags );
             }
             return view('detalles', compact('producto', 'imagenes', 'tags'));
         }
@@ -147,10 +150,14 @@ class PrincipalController extends Controller
 
     public function showDetallesCompra($id, $descripcion) {
         // dd($id, $descripcion);
-        $producto = App\Producto::where('id', $id)->where('descripcion', $descripcion)->get();
+        $producto = App\Producto::select('productos.*','promociones.promo_tipo', 'promociones.promo_costo', 'promociones.promo_publicidad')
+                                ->join('promociones', 'productos.promocion_id', '=', 'promociones.id')
+                                ->where('productos.id', $id)
+                                ->where('productos.producto_descripcion', $descripcion)
+                                ->get();
         // Formatear los tags
         foreach ($producto as $product) {
-            $tags = explode( ',', $product->tags );
+            $tags = explode( ',', $product->producto_tags );
         }
 
         return view('detalles_referencia', compact('producto', 'tags'));

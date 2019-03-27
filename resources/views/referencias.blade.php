@@ -22,9 +22,9 @@
 		<section class="section_principal">
 			<span class="section_principal_titulo"> 
 				<a href=""> < </a>
-				<h1> {{ $producto['descripcion'] }} </h1>
+				<h1> {{ $producto['producto_descripcion'] }} </h1>
 			</span>
-			<a href="{{ route('showDetallesCompra', [ $producto['id'], $producto['descripcion'] ]) }}">
+			<a href="{{ route('showDetallesCompra', [ $producto['id'], $producto['producto_descripcion'] ]) }}">
 				<button class="section_principal_btncomprar">Información de compra</button>				
 			</a>
 		</section>

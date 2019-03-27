@@ -30,7 +30,7 @@
 							<p class="descuento">
 								-{{ $nuevos['promo_costo'] }}%
 							</p>
-							<p class="precio_anterior"> ${{ number_format($nuevos['producto_precio'], 2) }} </p>
+							<p class="precio_anterior"> ${{ number_format($nuevos['producto_precio'], 0, ',', '.') }} </p>
 						</span>
 
 					@elseif($nuevos['promo_tipo'] == 'peso')
@@ -38,7 +38,7 @@
 							<p class="descuento">
 								-${{ $nuevos['promo_costo'] }} COP							
 							</p>
-							<p class="precio_anterior"> ${{ number_format($nuevos['producto_precio'], 2) }} </p>
+							<p class="precio_anterior"> ${{ number_format($nuevos['producto_precio'], 0, ',', '.') }} </p>
 						</span>
 					@endif
 
@@ -54,7 +54,7 @@
 							$total = $nuevos['producto_precio'] - $nuevos['promo_costo'];
 						}
 						@endphp
-						<p>${{ number_format($total, 2) }} <small>COP</small></p>
+						<p>${{ number_format($total, 0, ',', '.') }} <small>COP</small></p>
 					</label>					
 				</div>
 				
