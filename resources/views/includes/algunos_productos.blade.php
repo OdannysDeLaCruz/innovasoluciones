@@ -5,9 +5,10 @@
 		@foreach($algunos_productos as $algunos)
 			<section class="producto">
 				<figure>
-					<a href="/productos/{{ $algunos['id'] }}-{{ $algunos['descripcion'] }}">
+					<a href="/productos/{{ $algunos['id'] }}-{{ $algunos['producto_descripcion'] }}">
 						<!-- <img src="{{ $algunos['imagen'] }}" class="producto_img" alt="{{ $algunos['descripcion'] }}"> -->
-						<img src="img/zapatos.jpg" class="producto_img">
+						<!-- <img src="img/zapatos.jpg" class="producto_img"> -->
+						<img src="{{ $algunos['producto_imagen'] }}" class="producto_img">
 					</a>
 				</figure>
 				<!-- <div class="producto_info">

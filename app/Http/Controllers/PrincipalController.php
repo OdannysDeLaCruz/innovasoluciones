@@ -9,19 +9,19 @@ class PrincipalController extends Controller
     public function index() {
 
     	// Productos nuevos, los que sean del mes actual
-        $productos_nuevos = App\Producto::select('id','id_categoria','descripcion','precio','descuento','imagen')
+        $productos_nuevos = App\Producto::select('id','categoria_id','producto_descripcion','producto_imagen','producto_precio','producto_descuento')
                                         ->latest('fecha_creado')
                                         ->limit(10)
                                         ->orderBy('id','desc')
                                         ->get();
 
     	// Algunos productos, los que sean del mes actual
-        $algunos_productos = App\Producto::select('id','id_categoria','descripcion','precio','descuento','imagen')
+        $algunos_productos = App\Producto::select('id','categoria_id','producto_descripcion','producto_imagen','producto_precio','producto_descuento')
                                          ->limit(20)
                                          ->get();
 
     	// Publicidad, algun producto en promosion
-    	$publicidad = App\Producto::select('id','id_categoria','descripcion','precio','descuento','imagen')
+    	$publicidad = App\Producto::select('id','categoria_id','producto_descripcion','producto_imagen','producto_precio','producto_descuento')
                                   ->first()
                                   ->where('id', 1)
                                   ->get();
