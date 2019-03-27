@@ -12,10 +12,10 @@
 
     		<div class="item">
 				<label class="item_img" style="background: linear-gradient(to right, {{  $c[rand(0,11)] }}, {{ $c[rand(0,11)] }});">
-					<img src="img/logos/svg/{{ $seccion['imagen'] }}">
+					<img src="img/logos/svg/{{ $seccion['seccion_imagen'] }}">
 				</label>
-				<h1 class="item_titulo">{{ $seccion['nombre'] }} </h1>
-				<a class="item_link" href="/productos/{{ $seccion['nombre'] }}"></a>
+				<h1 class="item_titulo">{{ $seccion['seccion_nombre'] }} </h1>
+				<a class="item_link" href="/productos/{{ $seccion['seccion_nombre'] }}"></a>
 			</div>
 
 		@endforeach

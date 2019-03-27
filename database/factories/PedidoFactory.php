@@ -12,7 +12,7 @@ $factory->define(App\Pedido::class, function (Faker $faker) {
         'user_id'             => $user_id,
         'pedido_dir'          => $pedido_dir,
         'pedido_ref_venta'    => '',
-        'codigo_utilizado_id' => rand(1,2),
+        'promocion_id'        => rand(1,3),
         'envio_id'            => rand(1,2),
         'pedido_nombre_metodo_pago'  => '',
         'pedido_metodo_pago'  => '',

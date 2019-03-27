@@ -18,7 +18,7 @@ class CreatePedidosTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('pedido_dir');
             $table->string('pedido_ref_venta');
-            $table->integer('codigo_utilizado_id')->unsigned()->nullable();
+            $table->integer('promocion_id')->unsigned()->nullable();
             $table->integer('envio_id')->unsigned();
             $table->string('pedido_nombre_metodo_pago');
             $table->string('pedido_metodo_pago'); // Forma de pago y metodo Ej: CREDIT_CARD - tal cosa
@@ -30,7 +30,7 @@ class CreatePedidosTable extends Migration
             $table->timestamp('fecha_actualizado')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('codigo_utilizado_id')->references('id')->on('codigos')->onDelete('cascade');
+            $table->foreign('promocion_id')->references('id')->on('promociones')->onDelete('cascade');
             $table->foreign('envio_id')->references('id')->on('envios')->onDelete('cascade');
         });
     }

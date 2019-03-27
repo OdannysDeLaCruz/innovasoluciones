@@ -16,27 +16,43 @@
 		@foreach($productos_nuevos as $nuevos)
 			<section class="producto">
 				<figure>
-					<a href="/productos/{{ $nuevos['id'] }}-{{ $nuevos['descripcion'] }}">
-						<img src="{{ $nuevos['imagen'] }}" class="producto_img" alt="{{ $nuevos['descripcion'] }}">							
+					<a href="/productos/{{ $nuevos['id'] }}-{{ $nuevos['producto_descripcion'] }}">
+						<img src="{{ $nuevos['producto_imagen'] }}" class="producto_img" alt="{{ $nuevos['producto_descripcion'] }}">
 					</a>
 				</figure>
 
 				<div class="producto_info">
-					<a href="/productos/{{ $nuevos['id'] }}-{{ $nuevos['descripcion'] }}">
-						<h1 class="producto_titulo"> {{ $nuevos['descripcion'] }}</h1>
+					<a href="/productos/{{ $nuevos['id'] }}-{{ $nuevos['producto_descripcion'] }}">
+						<h1 class="producto_titulo"> {{ $nuevos['producto_descripcion'] }}</h1>
 					</a>
-					@if($nuevos['descuento'] != 0)
+					@if($nuevos['promo_tipo'] == 'descuento%')
 						<span class="producto_precio_anterior">
-							<p class="precio_anterior"> ${{ number_format($nuevos['precio'], 2) }} </p>
 							<p class="descuento">
-							-{{ $nuevos['descuento'] }}%
+								-{{ $nuevos['promo_costo'] }}%
 							</p>
+							<p class="precio_anterior"> ${{ number_format($nuevos['producto_precio'], 2) }} </p>
+						</span>
+
+					@elseif($nuevos['promo_tipo'] == 'peso')
+						<span class="producto_precio_anterior">
+							<p class="descuento">
+								-${{ $nuevos['promo_costo'] }} COP							
+							</p>
+							<p class="precio_anterior"> ${{ number_format($nuevos['producto_precio'], 2) }} </p>
 						</span>
 					@endif
+
+
+
 					<label class="producto_precio">
 						@php
-							$descuento = $nuevos['precio'] * ($nuevos['descuento'] / 100);
-							$total = $nuevos['precio'] - $descuento;
+						if($nuevos['promo_tipo'] == 'descuento%') {
+							$descuento = $nuevos['producto_precio'] * ($nuevos['promo_costo'] / 100);
+							$total = $nuevos['producto_precio'] - $descuento;
+						}
+						elseif($nuevos['promo_tipo'] == 'peso'){
+							$total = $nuevos['producto_precio'] - $nuevos['promo_costo'];
+						}
 						@endphp
 						<p>${{ number_format($total, 2) }} <small>COP</small></p>
 					</label>					

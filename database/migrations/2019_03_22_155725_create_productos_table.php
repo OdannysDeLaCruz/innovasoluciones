@@ -14,14 +14,15 @@ class CreateProductosTable extends Migration
     public function up()
     {
         Schema::create('productos', function (Blueprint $table) {
-           $table->increments('id');
+            $table->increments('id');
             $table->integer('categoria_id')->unsigned(); //Dependiendo de la categoria se rellenan los campos tamaño y color
             $table->string('producto_descripcion')->unique()->required();
             $table->string('producto_tags')->required();
             $table->string('producto_ref')->unique()->required();
             $table->string('producto_imagen')->required();
             $table->decimal('producto_precio', 10, 2)->required();
-            $table->integer('producto_descuento')->default(0);
+            $table->integer('promocion_id')->unsigned();
+            // $table->integer('producto_descuento')->default(0);
 
             //Dimensiones de articulos (46cm X 30cm), tallas de zapatos (26, 27, 28) etc...
             $table->string('producto_tallas')->nullable(); 
@@ -39,6 +40,7 @@ class CreateProductosTable extends Migration
             $table->timestamp('fecha_actualizado')->nullable();
 
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
+            $table->foreign('promocion_id')->references('id')->on('promociones')->onDelete('cascade');
         });
     }
 

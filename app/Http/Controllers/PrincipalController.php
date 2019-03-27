@@ -9,23 +9,39 @@ class PrincipalController extends Controller
     public function index() {
 
     	// Productos nuevos, los que sean del mes actual
-        $productos_nuevos = App\Producto::select('id','categoria_id','producto_descripcion','producto_imagen','producto_precio','producto_descuento')
+        $productos_nuevos = App\Producto::select('productos.id','productos.categoria_id','productos.producto_descripcion','productos.producto_imagen','productos.producto_precio','productos.promocion_id', 'productos.fecha_creado', 'promociones.promo_tipo', 'promociones.promo_costo')
+                                        ->join('promociones', 'productos.promocion_id', '=', 'promociones.id')
                                         ->latest('fecha_creado')
                                         ->limit(10)
-                                        ->orderBy('id','desc')
+                                        ->where([
+                                            ['producto_estado', '=', 1],
+                                            ['producto_cant', '>', 0]
+                                        ])
                                         ->get();
 
     	// Algunos productos, los que sean del mes actual
-        $algunos_productos = App\Producto::select('id','categoria_id','producto_descripcion','producto_imagen','producto_precio','producto_descuento')
-                                         ->limit(20)
+        $algunos_productos = App\Producto::select('productos.id','productos.categoria_id','productos.producto_descripcion','productos.producto_imagen','productos.producto_precio','productos.promocion_id', 'productos.fecha_creado', 'promociones.promo_tipo', 'promociones.promo_costo')
+                                        ->join('promociones', 'productos.promocion_id', '=', 'promociones.id')
+                                        ->limit(20)
+                                        ->where([
+                                            ['producto_estado', '=', 1],
+                                            ['producto_cant', '>', 0]
+                                        ])
                                          ->get();
 
-    	// Publicidad, algun producto en promosion
-    	$publicidad = App\Producto::select('id','categoria_id','producto_descripcion','producto_imagen','producto_precio','producto_descuento')
-                                  ->first()
-                                  ->where('id', 1)
-                                  ->get();
-    	
+    	// Publicidad, algun producto en descuento
+    	$publicidad = App\Producto::select('productos.id','productos.categoria_id','productos.producto_descripcion','productos.producto_imagen','productos.producto_precio','productos.promocion_id', 'productos.fecha_creado', 'promociones.promo_tipo', 'promociones.promo_costo', 'promociones.promo_publicidad')
+                                ->join('promociones', 'productos.promocion_id', '=', 'promociones.id')
+                                ->limit(1)
+                                ->where([
+                                        ['promociones.promo_publicidad', '=', 1],
+                                        ['producto_estado', '=', 1],
+                                        ['producto_cant', '>', 0]
+                                    ])
+                                ->get();
+
+    	$publicidad = $publicidad->isEmpty() ? '' : $publicidad;
+
     	return view('index',
     		compact(
                 'productos_nuevos',
