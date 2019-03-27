@@ -52,8 +52,15 @@ class PrincipalController extends Controller
     }
 
     public function showProductos() {
-        // Productos
-        $productos = App\Producto::all();
+
+        $productos = App\Producto::select('productos.*', 'promociones.promo_tipo', 'promociones.promo_costo')
+                                    ->join('promociones', 'productos.promocion_id', '=', 'promociones.id')
+                                    ->where([
+                                        ['producto_estado', '=', 1],
+                                        ['producto_cant', '>', 0]
+                                    ])
+                                    ->get();
+
         return view('productos', compact('productos'));        
     }
 

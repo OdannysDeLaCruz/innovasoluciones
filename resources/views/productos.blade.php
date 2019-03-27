@@ -47,39 +47,63 @@
 				@foreach($productos as $producto)
 					<section class="producto">
 						<figure>
-							<a href="/productos/{{ $producto['id'] }}-{{ $producto['descripcion'] }}">
-								<!-- <img src="{{ $producto['imagen'] }}" class="producto_img" alt="{{ $producto['descripcion'] }}"> -->
+							<a href="/productos/{{ $producto['id'] }}-{{ $producto['producto_descripcion'] }}">
+								<!-- <img src="{{ $producto['producto_imagen'] }}" class="producto_img" alt="{{ $producto['producto_descripcion'] }}"> -->
 								<img src="img/zapatos.jpg" class="producto_img">							
 							</a>
 						</figure>
 						<div class="producto_info">
-							<a href="/productos/{{ $producto['id'] }}-{{ $producto['descripcion'] }}">
-								<h1 class="producto_titulo"> {{ $producto['descripcion'] }}</h1>
+							<a href="/productos/{{ $producto['id'] }}-{{ $producto['producto_descripcion'] }}">
+								<h1 class="producto_titulo"> {{ $producto['producto_descripcion'] }}</h1>
 							</a>
-							@if($producto['descuento'] != 0)
+							<!-- @if($producto['descuento'] != 0)
 								<span class="producto_precio_anterior">
-									<p class="precio_anterior"> ${{ number_format($producto['precio'], 2) }} </p>
 									<p class="descuento">
-									-{{ $producto['descuento'] }}%
+									-{{ $producto['producto_descuento'] }}%
 									</p>
+									<p class="precio_anterior"> ${{ number_format($producto['producto_precio'], 2) }} </p>
+								</span>
+							@endif -->
+							
+
+
+							@if($producto['promo_tipo'] == 'descuento%')
+								<span class="producto_precio_anterior">
+									<p class="descuento">
+										-{{ $producto['promo_costo'] }}%
+									</p>
+									<p class="precio_anterior"> ${{ number_format($producto['producto_precio'], 0, ',', '.') }} </p>
+								</span>
+
+							@elseif($producto['promo_tipo'] == 'peso')
+								<span class="producto_precio_anterior">
+									<p class="descuento">
+										-${{ number_format($producto['promo_costo'],  0, ',', '.') }} <small>COP</small>							
+									</p>
+									<p class="precio_anterior"> ${{ number_format($producto['producto_precio'], 0, ',', '.') }} </p>
 								</span>
 							@endif
-							<label class="producto_precio">
-								@php 
-									$descuento = $producto['precio'] * ($producto['descuento'] / 100);
-									$total = $producto['precio'] - $descuento;
-								@endphp
-								<p>${{ number_format($total, 2) }} <small>COP</small></p>			
-							</label>
 						</div>
-						<!-- <label class="producto_botones"> -->
-							<!-- <div class="botones_innova btn_producto">
-								<a href="/productos/{{ $producto['id'] }}-{{ $producto['descripcion'] }}">Detalles</a>
-							</div> -->
-							<!-- <div class="botones_innova btn_producto">
-								<a href="">Comprar</a>
-							</div> -->
-						<!-- </label> -->
+
+						<label class="producto_precio">
+								<!-- @php 
+									$descuento = $producto['producto_precio'] * ($producto['producto_descuento'] / 100);
+									$total = $producto['producto_precio'] - $descuento;
+								@endphp
+								<p>${{ number_format($total, 2) }} <small>COP</small></p> -->
+
+								@php
+								if($producto['promo_tipo'] == 'descuento%') {
+									$descuento = $producto['producto_precio'] * ($producto['promo_costo'] / 100);
+									$total = $producto['producto_precio'] - $descuento;
+								}
+								elseif($producto['promo_tipo'] == 'peso'){
+									$total = $producto['producto_precio'] - $producto['promo_costo'];
+								}
+								@endphp
+								<p>${{ number_format($total, 0, ',', '.') }} <small>COP</small></p>		
+						</label>
+						
 					</section>	
 				@endforeach
 		</div>
