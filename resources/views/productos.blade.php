@@ -56,16 +56,6 @@
 							<a href="/productos/{{ $producto['id'] }}-{{ $producto['producto_descripcion'] }}">
 								<h1 class="producto_titulo"> {{ $producto['producto_descripcion'] }}</h1>
 							</a>
-							<!-- @if($producto['descuento'] != 0)
-								<span class="producto_precio_anterior">
-									<p class="descuento">
-									-{{ $producto['producto_descuento'] }}%
-									</p>
-									<p class="precio_anterior"> ${{ number_format($producto['producto_precio'], 2) }} </p>
-								</span>
-							@endif -->
-							
-
 
 							@if($producto['promo_tipo'] == 'descuento%')
 								<span class="producto_precio_anterior">
@@ -78,19 +68,20 @@
 							@elseif($producto['promo_tipo'] == 'peso')
 								<span class="producto_precio_anterior">
 									<p class="descuento">
-										-${{ number_format($producto['promo_costo'],  0, ',', '.') }} <small>COP</small>							
+										-${{ number_format($producto['promo_costo'], 0, ',', '.') }}							
 									</p>
 									<p class="precio_anterior"> ${{ number_format($producto['producto_precio'], 0, ',', '.') }} </p>
+								</span>
+							@else
+								<span class="producto_precio_anterior">
+									<p class="descuento">
+										{{ $producto['promo_tipo'] }}					
+									</p>
 								</span>
 							@endif
 						</div>
 
 						<label class="producto_precio">
-								<!-- @php 
-									$descuento = $producto['producto_precio'] * ($producto['producto_descuento'] / 100);
-									$total = $producto['producto_precio'] - $descuento;
-								@endphp
-								<p>${{ number_format($total, 2) }} <small>COP</small></p> -->
 
 								@php
 								if($producto['promo_tipo'] == 'descuento%') {
@@ -100,8 +91,11 @@
 								elseif($producto['promo_tipo'] == 'peso'){
 									$total = $producto['producto_precio'] - $producto['promo_costo'];
 								}
+								else {
+									$total = $producto['producto_precio'];
+								}
 								@endphp
-								<p>${{ number_format($total, 0, ',', '.') }} <small>COP</small></p>		
+								<p>${{ number_format($total, 0, ',', '.') }} </p>		
 						</label>
 						
 					</section>	

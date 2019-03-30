@@ -50,7 +50,6 @@
 			</div>
 			<section class="detalle_info col-12 col-md-3 pt-4 pt-md-0"">
 				<h1 class="detalle_info_titulo ">{{ $detalle['producto_descripcion'] }}</h1>
-				<!-- <h1 class="detalle_info_opinion">{{ 'Buen producto' }}</h1> -->
 				<span class="detalle_info_tags">
 					@foreach($tags as $tag)
 						<a href="{{ route('productoTag', $tag) }}">
@@ -59,39 +58,48 @@
 					@endforeach
 				</span>
 				<span class="detalle_info_precio_anterior">
-					@if($detalle['producto_precio'] != 0)
-						<p> Antes ${{ number_format($detalle['producto_precio'], 0, ',', '.') }}</p> 
-						<p class="descuento">
-						-{{ $detalle['promo_costo'] }}% DESCUENTO
-						</p>
+
+					@if($detalle['promo_tipo'] == 'descuento%')
+						<p class="antes"> Antes ${{ number_format($detalle['producto_precio'], 0, ',', '.') }}</p>
+						<span class="promo">
+							-{{ $detalle['promo_costo'] }}% DESCUENTO
+						</span>
+					@elseif($detalle['promo_tipo'] == 'peso')
+						<span class="promo">
+							Cupón de ${{ number_format($detalle['promo_costo'], 0, ',', '.') }} <small>COP</small>
+						</span>
+					@else
+						<span class="promo">{{$detalle['promo_tipo']}}</span>
 					@endif
 					
 				</span>
-				<span class="detalle_info_precio"> 
+				<span class="detalle_info_precio detalle_info_item"> 
 					<?php 
 						if ($detalle['promo_tipo'] == 'descuento%') {
 							$descuento = $detalle['producto_precio'] * ($detalle['promo_costo'] / 100);
 							$total = $detalle['producto_precio'] - $descuento;
+							$total = "Ahora $" . number_format($total, 0, ',', '.');
 						}
-						elseif($nuevos['promo_tipo'] == 'peso'){
+						elseif($detalle['promo_tipo'] == 'peso'){
 							$total = $detalle['producto_precio'] - $detalle['promo_costo'];
+							$total = "$" . number_format($total, 0, ',', '.');
+						}
+						else {
+							$total = "$" . number_format($detalle['producto_precio'], 0, ',', '.');
 						}
 					 ?>
-					Ahora <p>${{ number_format($total, 0, ',', '.') }}</p>
+					<i class="fa fa-money icon_envio" title="Envio gratis"></i>{{ $total }}
 				</span>
-				<span class="detalle_info_costo_envio">
-					<i class="fa fa-truck icon_envio"></i>Envío gratis a todo Colombia
+				<span class="detalle_info_costo_envio detalle_info_item">
+					<i class="fa fa-truck icon_envio" title="Envio gratis"></i>Envío gratis a todo Colombia
 				</span>
-				<span class="detalle_info_costo_envio">
-					<i class="fa fa-hourglass-half icon_envio"></i>Tiempo de entrega: {{ $detalle['tiempo_entrega'] }}
+				<span class="detalle_info_costo_envio detalle_info_item">
+					<i class="fa fa-hourglass-half icon_envio" title="Tiempo de entrega"></i>Tiempo de entrega: 20 días
 				</span>
 				
-				<!-- <div class="detalle_info_btn_comprar botones_innova">
-					<a href="/cart/add/{{ $detalle['id'] }}-{{ $detalle['descripcion'] }}">Agregar al carro</a>
-				</div> -->
 
 				<!-- OPCIONAL SI ES ALGUN ARTICULO QUE REQUIERA DE TALLAS, COMO ZAPATOS, CAMISAS ETC -->
-				<form id="datos-agregar-producto" action="{{ route('addItem') }}" method="post">
+				<form class="detalle_info_form" id="datos-agregar-producto" action="{{ route('addItem') }}" method="post">
 
 					{{ csrf_field() }}
 					<input type="hidden" class="inputs" id="id" name="id" value="{{ $detalle['id'] }}">

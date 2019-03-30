@@ -7,7 +7,7 @@
 			@foreach($publicidad as $producto)
 				<div class="col-12 col-md-6 seccion_publicidad_mensaje">
 					<span class="seccion_publicidad_titulo">{{$producto['producto_descripcion']}}</span>
-					<span class="seccion_publicidad_precio"> ${{ number_format($producto['producto_precio'], 2) }} COP </span>
+					<span class="seccion_publicidad_precio"> ${{ number_format($producto['producto_precio'], 0, ',', '.') }}</span>
 						
 					<div class="btn_publicidad botones_innova">
 						<a href="productos/{{ $producto['id'] }}-{{ $producto['producto_descripcion'] }}">Ver detalles</a>
