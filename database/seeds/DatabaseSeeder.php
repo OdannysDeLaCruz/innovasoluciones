@@ -11,19 +11,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->truncateTables([
-            'roles',
-            'secciones',
-            'users',
-            'categorias',
-            'promociones',
-            'envios',
-            'transacciones',
-            'pedidos',
-            'productos',
-            'detalle_pedidos',
-            'imagenes'
-        ]);
+        $app_url = env('APP_URL');
+
+        if($app_url == 'http://www.innovasoluciones.com'){  
+            $this->truncateTables([
+                'roles',
+                'secciones',
+                'users',
+                'categorias',
+                'promociones',
+                'envios',
+                'transacciones',
+                'pedidos',
+                'productos',
+                'detalle_pedidos',
+                'imagenes'
+            ]);
+        }
         $this->call([
         	CrearRolesSeeder::class,
         	CrearSeccionesSeeder::class,
