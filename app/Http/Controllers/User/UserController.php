@@ -25,15 +25,15 @@ class UserController extends Controller
 
     public function showPedidos() {
 
-        $id_user = Auth::user()->id;
+        $user_id = Auth::user()->id;
         $mis_pedidos = App\Pedido::select(
-                            'pedidos.id', 
-                            'pedidos.fecha_pedido',
-                            'pedidos.estado_pedido', 
-                            'pedidos.direccion_envio', 
-                            'pedidos.codigo_descuento',
-                            'pedidos.modo_pago')
-                        ->where('pedidos.id_user', $id_user)
+                            'id', 
+                            'pedido_dir', 
+                            'pedido_ref_venta',
+                            'promocion_id',
+                            'envio_id',
+                            'transaccion_id')
+                        ->where('user_id', $user_id)
                         ->get();
         return view('users.pedidos', compact('mis_pedidos'));
     }

@@ -26,7 +26,7 @@
 				@if(isset($mis_pedidos))
 					@foreach($mis_pedidos as $pedidos)
 						<div class="compras_pedido">
-						<label class="compras_pedido_fecha">Fecha del pedido: {{ $pedidos['fecha_pedido'] }}</label>
+						<label class="compras_pedido_fecha">Fecha del pedido: {{ $pedidos['fecha_creado'] }}</label>
 						<!-- <label class="compras_pedido_estado">Pedido facturado <i class="fa fa-check-circle"></i></label> -->
 
 						<label class="compras_pedido_info">
@@ -36,15 +36,19 @@
 								</label>
 								<label class="compras_pedido_info_direccion">
 									<strong> Dirección de envio: </strong> 
-									{{ $pedidos['direccion_envio'] }}
+									{{ $pedidos['pedido_dir'] }}
 								</label>
 								<label class="compras_pedido_info_metodo">
-									<strong> Metodo de pago: </strong>
-									 {{ $pedidos['id_modo_pago'] }}
+									<strong> Referencia de venta: </strong>
+									 {{ $pedidos['pedido_ref_venta'] }}
 								</label>
 								<label class="compras_pedido_info_codigo">
-									<strong> Codigos de descuento : </strong>
-									{{ $pedidos['codigo_descuento'] }}
+									<strong> Id códfigo promoción: </strong>
+									{{ $pedidos['promocion_id'] }}
+								</label>
+								<label class="compras_pedido_info_metodo">
+									<strong> Tipo de envío: </strong>
+									 {{ $pedidos['envio_id'] }}
 								</label>
 								<!-- <label class="compras_pedido_info_total">
 									<strong> Total pago: </strong>
