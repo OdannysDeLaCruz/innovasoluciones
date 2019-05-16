@@ -58,13 +58,13 @@ body {
 	border-radius: 5px;
 }
 .suma_total_carrito {
-	background: #fff;
-	width: 200px;
+	background: linear-gradient(to right, #F7898A, #5860B9);
+	width: 300px;
 	padding: 10px;
 	margin: 30px auto;
 	border-radius: 5px;
 	text-align: center;
-	color: #333;
+	color: #fff;
 	font-size: 20px;
 	font-weight: 600;
 }
@@ -1452,6 +1452,49 @@ footer {
 .btn_opcion_envio > .text_opcion_envio {
 	text-align: left;
 }
+.ajs-modal > .ajs-dialog > .ajs-header {
+	text-align: center;	
+}
+.ajs-modal > .ajs-dialog > .ajs-body > .ajs-content {
+	text-align: center;
+}
+.ajs-modal > .ajs-dialog > .ajs-footer > .ajs-buttons {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.ajs-modal > .ajs-dialog > .ajs-footer > .ajs-buttons > .ajs-button {
+	border: none;
+	color: #fff;
+	font-size: 17px;
+	font-weight: 400;
+	cursor: pointer;
+}
+.ajs-modal > .ajs-dialog > .ajs-footer > .ajs-buttons > .ajs-ok {
+	background: #0066ff;
+	border: none;
+	color: #fff;
+	font-size: 17px;
+	font-weight: 400;
+}
+.ajs-modal > .ajs-dialog > .ajs-footer > .ajs-buttons > .ajs-cancel {
+	background: none;
+	border: none;
+	color: blue;
+	font-size: 16px;
+	font-weight: 400;
+	content: "Cancelar";
+}
+
+/*.alertify-notifier > .ajs-message > .ajs-error {
+	background: orange;
+}*/
+.alertify-notifier .ajs-message.ajs-error {
+	background: tomato;
+	color: #fff;
+	text-shadow: none;
+}
+
 /*--FIN ESTILOS DE PAGINA VERIFICACIÓN--*/
 
 /*--ESTILOS DE PAGINA PERFIL DE USUARIOS--*/

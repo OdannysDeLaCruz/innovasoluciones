@@ -21,7 +21,7 @@ class CreateProductosTable extends Migration
             $table->string('producto_ref')->unique()->required();
             $table->string('producto_imagen')->required();
             $table->decimal('producto_precio', 10, 2)->required();
-            $table->integer('promocion_id')->unsigned();
+            $table->integer('promocion_id')->unsigned()->nullable();
             // $table->integer('producto_descuento')->default(0);
 
             //Dimensiones de articulos (46cm X 30cm), tallas de zapatos (26, 27, 28) etc...
@@ -36,8 +36,8 @@ class CreateProductosTable extends Migration
             $table->integer('producto_cant');
             $table->boolean('producto_estado'); // 1 ó 0
 
-            $table->timestamp('fecha_creado');
-            $table->timestamp('fecha_actualizado')->nullable();
+            $table->timestamp('fecha_creado')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_actualizado')->default(\DB::raw('CURRENT_TIMESTAMP'));
 
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->foreign('promocion_id')->references('id')->on('promociones')->onDelete('cascade');

@@ -48,7 +48,7 @@
 		        @endforeach
 
 			</div>
-			<section class="detalle_info col-12 col-md-3 pt-4 pt-md-0"">
+			<section class="detalle_info col-12 col-md-3 pt-4 pt-md-0">
 				<h1 class="detalle_info_titulo ">{{ $detalle['producto_descripcion'] }}</h1>
 				<span class="detalle_info_tags">
 					@foreach($tags as $tag)
@@ -68,7 +68,7 @@
 						<span class="promo">
 							Cupón de ${{ number_format($detalle['promo_costo'], 0, ',', '.') }} <small>COP</small>
 						</span>
-					@else
+					@elseif($detalle['promo_tipo'] == '2x1')
 						<span class="promo">{{$detalle['promo_tipo']}}</span>
 					@endif
 					
@@ -103,7 +103,8 @@
 
 					{{ csrf_field() }}
 					<input type="hidden" class="inputs" id="id" name="id" value="{{ $detalle['id'] }}">
-					<input type="hidden" class="inputs" id="descripcion" name="descripcion" value="{{ $detalle['producto_descripcion'] }}">
+					<!-- <input type="hidden" class="inputs" id="descripcion" name="descripcion" value="{{ $detalle['producto_descripcion'] }}"> -->
+					<input type="text" class="inputs" id="producto_ref" name="producto_ref" value="{{ $detalle['producto_ref'] }}">
 					@empty(!$detalle['producto_colores'])
 						<label for="colores">Colores</label>
 						<select id="colores" name="colores" class="detalle_info_color" required>
@@ -122,7 +123,7 @@
 							@endforeach
 						</select>
 					@endempty
-					<button type="submit" id="btn-agregar-producto" class="btn btn-primary detalle_info_btn_comprar">Comprar</button>
+					<button type="submit" id="btn-agregar-producto" class="btn btn-primary detalle_info_btn_comprar">Realizar compra</button>
 				</form>
 			</section>
 		@endforeach

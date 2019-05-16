@@ -95,32 +95,44 @@ class ConfirmationController extends Controller
 	// Actualizar la información de la tabla pedidos con los nuevos datos recibidos en confirmation
 	// Enviar mensaje de correo electronico al usuario informando de el estado de su pedido
  
-
-
     public function confirmation() {
     	date_default_timezone_set('America/Bogota');
     	
 		// Obtener datos de payu
 
-		$sign = $_POST['sign'];
-  		$merchant_id = $_POST['merchant_id'];
-  		$reference_pol = $_POST['reference_pol'];
+    	// Es el número identificador del comercio en el sistema de PayU
+		$merchant_id = $_POST['merchant_id'];
 
-    	$firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
-
-		$response_message_pol = $_POST['response_message_pol'];
-		$response_code_pol    = $_POST['response_code_pol'];
-
-
-		$ref_venta      = $_POST['reference_sale'];
-		$reference_pole = $_POST['reference_pole'];
-		$transaction_id = $_POST['transaction_id'];
-
-		$date = $_POST['date'];
-
+		// 4 = aprovada, 6 = declinada, 5 = expirada
 		$state_pol = $_POST['state_pol'];
 
+		/* ENTITY_DECLINED  APPROVED, PAYMENT_NETWORK_REJECTED, INVALID_CARD, INSUFFICIENT_FUNDS, CONTACT_THE_ENTITY, EXPIRED_CARD, RESTRICTED_CARD, INVALID_EXPIRATION_DATE_OR_SECURITY_CODE, INVALID_TRANSACTION, EXCEEDED_AMOUNT, ABANDONED_TRANSACTION, PAYMENT_NETWORK_NO_CONNECTION, NOT_ACCEPTED_TRANSACTION, ERROR, EXPIRED_TRANSACTION */
+		$response_message_pol = $_POST['response_message_pol'];
+
+		// El código de respuesta de PayU, Alfa numerico.
+		$response_code_pol = $_POST['response_code_pol'];
+
+		// Fecha de tansaccion de la compra, diferente a fecha_creado de realizado el pedido
+		$transaction_date = $_POST['transaction_date'];
+
+		$value = $_POST['value']; // 1000.00 , 1000
+		$new_value = number_format($value, 1, '.', ''); // 1000.0
+
+		// Puedo utilizar cualquiera de los dos para identificar el medio de pago
+		// El tipo de medio de pago utilizado para el pago, Numérico.
+		$payment_method_type = $_POST['payment_method_type'];
+		// Identificador del medio de pago.
 		$payment_method_id = $_POST['payment_method_id'];
+
+		// 2  |  CREDIT_CARD	  |   Tarjetas de Crédito
+		// 4  |  PSE 			  |   Transferencias bancarias PSE
+		// 5  |  ACH			  |   Débitos ACH
+		// 6  |  DEBIT_CARD		  |   Tarjetas débito
+		// 7  |  CASH			  |   Pago en efectivo
+		// 8  |  REFERENCED		  |   Pago referenciado
+		// 10 |  BANK_REFERENCED  |   Pago en bancos
+		// 14 |  SPEI			  |   Transferencias bancarias SPEI
+
 		switch ($payment_method_id) {
 			case 2:  $medio_pago = 'CREDIT_CARD'; break;
 			case 4:  $medio_pago = 'PSE'; break;
@@ -131,19 +143,89 @@ class ConfirmationController extends Controller
 			case 10: $medio_pago = 'BANK_REFERENCED'; break;
 			case 14: $medio_pago = 'SPEI'; break;
 		}
-		$payment_method_name = $_POST['payment_method_name'];
 
+		// id de la transacción hecha en payu
+		$transaction_id = $_POST['transaction_id']; //f5e668f1-7ecc-4b83-a4d1-0aaa68260862
+
+		// Firma digital de la transacción que viene de Payu
+		$sign = $_POST['sign']; //e1b0939bbdc99ea84387bee9b90e4f5c
+
+		$payment_method_name = $_POST['payment_method_name']; //VISA
+
+		// Referencia del pedido en payu
+		$reference_pol = $_POST['reference_pol']; //7069375
+
+		$currency = $_POST['currency']; //USD, COP
+
+		// Número de cuotas en las cuales se difirió el pago con tarjeta crédito.
+		$installments_number = $_POST['installments_number']; //1
+
+		// Id del pedido a actualizar
+		$pedido_id = $_POST['extra2']; // 10
+
+		// Dirección ip desde donde se realizó la transacción.
+		$ip = $_POST['ip']; //190.242.116.98
+
+		// Es la referencia de la venta o pedido. Deber ser único por cada transacción que se envía al sistema.
+		// Esta es la que se envió a payu desde el formulario en el input referenceCode
+		$reference_sale = $_POST['reference_sale']; //2015-05-27 13:04:37
+
+		// Para pagos con pse
+		$pse_cus        = $_POST['cus'];
+		$pse_bank       = $_POST['pse_bank'];
+		$pse_reference1 = $_POST['pse_reference1'];
+		$pse_reference2 = $_POST['pse_reference2'];
+		$pse_reference3 = $_POST['pse_reference3'];
+
+
+		// VERIFICAR LA FIRMA QUE VIENE DE PAYU
+
+    	// Esquema de la firma : "ApiKey~merchant_id~reference_sale~new_value~currency~state_pol"
+    	$firma_cadena  = md5("$this->ApiKey~$merchant_id~$reference_sale~$new_value~$currency~$state_pol");
+
+    	if ($sign === $firma_cadena) {
+
+    		// Verificar el estado de la transacción
+	  		if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {
+	  			$pedido_id = (int)$pedido_id;
+		        $pedido = App\Pedido::find($pedido_id);
+		        $pedido->pedido_ref_venta = $reference_sale;
+		        $transaccion_id = $pedido->transaccion_id;
+		        $pedido->save();
+		        
+		        // Actualizar la transaccion
+		        $transaccion = App\Transaccion::find($transaccion_id);
+
+		        $transaccion->estado                = $state_pol;
+		        $transaccion->mensaje_respuesta     = $response_message_pol;
+		        $transaccion->codigo_respuesta      = $response_code_pol;
+		        $transaccion->valor_transaccion     = $value;
+		        $transaccion->metodo_pago_tipo      = $payment_method_type;
+		        $transaccion->metodo_pago_nombre    = $payment_method_name;
+		        $transaccion->metodo_pago_id        = $payment_method_id;
+		        $transaccion->id_transaccion        = $transaction_id;
+		        $transaccion->referencia_venta_payu = $reference_pol;
+		        $transaccion->tipo_moneda_transaccion = $currency;
+		        $transaccion->numero_cuotas_pago    = $installments_number;
+		        $transaccion->ip_transaccion        = $ip;
+		        $transaccion->pse_cus               = $pse_cus ;
+		        $transaccion->pse_bank              = $pse_bank;
+		        $transaccion->pse_references        = $pse_reference1 . ',' . $pse_reference2 . ', ' . $pse_reference3;
+		        $transaccion->fecha_transaccion     = $transaction_date;
+		        $transaccion->fecha_actualizado     = $transaction_date;
+		        $transaccion->save();
+
+			}
+			elseif($state_pol == 6) {
+				if ($response_message_pol == 'APPROVED' && $response_code_pol == 1) {
+					$mensaje_transaccion = '';
+				}
+    		
+    		}else {
+
+    		}
+    	}
 		$modo_pago = $medio_pago . ' - ' . $payment_method_name;
 
-  		// if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {}
-  		if($state_pol == 4) {
-			// Enviar correo de Confirmacion de compra al usuario
-		}
-		elseif($state_pol == 6) {
-			
-		}
-		else {
-
-		}
     }
 }

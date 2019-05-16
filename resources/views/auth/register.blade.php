@@ -19,7 +19,7 @@
 	<!-- SECCION DE FORMULARIO DE REGISTRO -->
 	<div class="contenedor_registro">
 		<form class="form_registro" method="POST" action="{{ route('register') }}">
-			@csrf
+			{{ csrf_field() }} 
 			<figure>
 				<img class="form_registro_logo" src="img/logos/LogoInnova.svg">
 			</figure>
@@ -29,11 +29,11 @@
 					<div class="user col-xs-12 col-md-6">
 						<!-- NOMBRE -->
 						<label for="nombre" class="texto mt-4 mt-md-0">Nombre</label>
-						<input id="nombre" type="text" class="nombre {{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ old('nombre') }}" required placeholder="Primer nombre">
+						<input id="nombre" type="text" class="nombre {{ $errors->has('usuario_nombre') ? ' is-invalid' : '' }}" name="usuario_nombre" value="{{ old('usuario_nombre') }}" required placeholder="Digite su nombre">
 
-		                @if ($errors->has('nombre'))
+		                @if ($errors->has('usuario_nombre'))
 		                    <span class="invalid-feedback" role="alert">
-		                        <strong>{{ $errors->first('nombre') }}</strong>
+		                        <strong>{{ $errors->first('usuario_nombre') }}</strong>
 		                    </span>
 		                @endif
 					</div>
@@ -41,36 +41,38 @@
 	                <div class="user col-xs-12 col-md-6 pl-md-2">
 		                <!-- APELLIDO -->
 						<label for="apellido" class="texto mt-4 mt-md-0">Apellido</label>
-						<input id="apellido" type="text" class="apellido {{ $errors->has('apellido') ? ' is-invalid' : '' }}" name="apellido" value="{{ old('apellido') }}" required placeholder="Primer apellido">
+						<input id="apellido" type="text" class="apellido {{ $errors->has('usuario_apellido') ? ' is-invalid' : '' }}" name="usuario_apellido" value="{{ old('usuario_apellido') }}" required placeholder="Digite su apellido">
 
-		                @if ($errors->has('apellido'))
+		                @if ($errors->has('usuario_apellido'))
 		                    <span class="invalid-feedback" role="alert">
-		                        <strong>{{ $errors->first('apellido') }}</strong>
+		                        <strong>{{ $errors->first('usuario_apellido') }}</strong>
 		                    </span>
 		                @endif	                	
 	                </div>
 				</div>
 
-				 <!-- TIPO DE DOCUMENTO -->
-				<label class="texto"></label> <!-- Para dar magin-top -->
-				<select id="" class="tipo_documento" required>
-					<option>Tipo de documento</option>
-					<option value="CC">Cédula de ciudadanía</option>
-					<option value="CE">Cédula de extranjería</option>
-				</select>
-
 				<!-- Nº DOCUMENTO -->
-				<label class="texto"></label> <!-- Para dar magin-top -->
-				<input id="num_documento" type="number" class="num_documento {{ $errors->has('num_documento') ? ' is-invalid' : '' }}" name="num_documento" value="{{ old('num_documento') }}" required placeholder="Nº de documento">
+				<label class="texto"></label>
+				<input id="usuario_cedula" type="number" class="num_documento {{ $errors->has('usuario_cedula') ? ' is-invalid' : '' }}" name="usuario_cedula" value="{{ old('usuario_cedula') }}" required placeholder="Nº de documento">
 
-                @if ($errors->has('num_documento'))
+                @if ($errors->has('usuario_cedula'))
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('num_documento') }}</strong>
+                        <strong>{{ $errors->first('usuario_cedula') }}</strong>
+                    </span>
+                @endif
+
+                <!-- TELEFONO -->
+				<label class="texto"></label>
+				<input id="usuario_telefono" type="number" class="num_documento {{ $errors->has('usuario_telefono') ? ' is-invalid' : '' }}" name="usuario_telefono" value="{{ old('usuario_telefono') }}" required placeholder="Digite su número de teléfono ó celular">
+
+                @if ($errors->has('usuario_telefono'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('usuario_telefono') }}</strong>
                     </span>
                 @endif
 
 				<!-- EMAIL -->
-				<label for="email" class="texto">Email <small>(Este será su usuario de ingreso)</small></label>
+				<label for="email" class="texto">E-mail</label>
 				<input id="email" type="email" class="email {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}" required placeholder="Correo electrónico">
 				<small class="msm_email">No compartiremos este email con nadie mas</small>
 
@@ -89,7 +91,8 @@
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                 @endif
-
+				
+				<!-- PASSWORD CONFIRMED -->
                 <label for="password" class="texto">Confirmar contraseña</label>
 				<input id="password-confirm" type="password" class="password" name="password_confirmation" placeholder="Repita su contraseña">
 
@@ -98,13 +101,12 @@
 				</label>
 				<button type="submit" class="btn_registrarse">Registrarme</button>
 				<label class="ya_tengo_cuenta">
-					<p>Ya tengo una cuenta <a href="{{ route('login') }}">Iniciar sesión</a></p>
-					
+					<p>Ya tengo una cuenta <a href="{{ route('login') }}">Iniciar sesión</a></p>					
 				</label>
 			</div>
 		</form>
 	</div>
-	<!-- FIN SECCION DE FORMULARIO DE REGISTRO -->
+	<!-- FIN SECCION DE FORMULARIO DE REGISTRO
 
 	
 	<!-- SECCION FOOTER -->

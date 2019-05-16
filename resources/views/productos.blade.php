@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,15 +44,19 @@
 		<div class="seccion_productos_content">
 			@if(isset($productos))
 				@foreach($productos as $producto)
+					<?php 
+						$ref  = $producto['producto_ref'];
+						$desc = str_replace(" ", "-", $producto['producto_descripcion']);
+					?>
 					<section class="producto">
 						<figure>
-							<a href="/productos/{{ $producto['id'] }}-{{ $producto['producto_descripcion'] }}">
+							<a href="/productos/{{ $ref }}-{{ $desc }}">
 								<!-- <img src="{{ $producto['producto_imagen'] }}" class="producto_img" alt="{{ $producto['producto_descripcion'] }}"> -->
-								<img src="img/zapatos.jpg" class="producto_img">							
+								<img src="{{asset('img/zapatos.jpg')}}" class="producto_img">							
 							</a>
 						</figure>
 						<div class="producto_info">
-							<a href="/productos/{{ $producto['id'] }}-{{ $producto['producto_descripcion'] }}">
+							<a href="/productos/{{ $ref }}-{{ $desc }}">
 								<h1 class="producto_titulo"> {{ $producto['producto_descripcion'] }}</h1>
 							</a>
 
@@ -72,7 +75,7 @@
 									</p>
 									<p class="precio_anterior"> ${{ number_format($producto['producto_precio'], 0, ',', '.') }} </p>
 								</span>
-							@else
+							@elseif($producto['promo_tipo'] == '2x1')
 								<span class="producto_precio_anterior">
 									<p class="descuento">
 										{{ $producto['promo_tipo'] }}					
@@ -101,18 +104,18 @@
 					</section>	
 				@endforeach
 		</div>
-			@else 
-				<div class="respuesta">
-					<img src="{{asset('img/logos/svg/box.svg')}}">
-					<p>
-						@isset($response)
-							{{ $response }} 
-								@isset($search) <b>  {{ $search }} </b> @endisset<br>
+		@else 
+			<div class="respuesta">
+				<img src="{{asset('img/logos/svg/box.svg')}}">
+				<p>
+					@isset($response)
+						{{ $response }} 
+							@isset($search) <b>  {{ $search }} </b> @endisset<br>
 							Ver otras categorias de <a href="/productos">productos</a>
-						@endisset
-					</p>
-				</div>
-			@endif
+					@endisset
+				</p>
+			</div>
+		@endif
 	</section>
 	<!-- FIN SECCION PRODUCTOS -->
 	

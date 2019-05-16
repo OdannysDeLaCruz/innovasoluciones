@@ -12,82 +12,52 @@ class PaymentController extends Controller
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		$this->middleware('auth');
-
-		// Crear variable para almacenar los datos que el usuario dio para el envio.
-		if (!session()->has('datos_envio')) {
-			session()->put('datos_envio', []);
-		}
-	}
-
-	/*
-	* VERIFICAR COSTO DE ENVÍO
-	* Existen dos formas de entregar el pedido al cliente.
-	* 1 - Envío a su domicilio (Se cobra el valor del envío).
-	* 2 - Recogerlo en la tienda fisica del vendedor.
-	*/
-
-	public function modoEnvio($request) {
-
-		// Verifico que tipo de entrega se escogio.
-		// Si $tipo_envio = 1, envar al domicilio
-		// Si $tipo_envio = 2, recoger en tienda
-		$tipo_envio = $request->input('tipo_envio');
-		session()->put('entrega_pedido', '');
-
-		if ($tipo_envio == '1') {
-			// Crear una variable de session para guardar el tipo de entrega del pedido
-			$entrega = session('entrega_pedido');
-			$entrega = 'Enviar a domicilio';
-			session()->put('entrega_pedido', $entrega);
-		}
-		else {
-			$entrega = session('entrega_pedido');
-			$entrega = 'Recoger en tienda fisica';
-			session()->put('entrega_pedido', $entrega);
-		}
-
-	}
-	public function calcularTotal() {
 		$cart = session('cart');
 		if (count($cart) == 0) {
-			//Si no hay productos, se redirige a cart con la variable responses en true
 			session()->flash('response', true);
 			return redirect()->route('showCart');
 		}
+	}
+
+	public function modoEnvio($request) {
+		// Verifico que tipo de entrega se escogio.
+		$envio_id = intval($request->input('tipo_entrega'));
+		session()->put('tipo_envio', $envio_id);
+	}
+
+	public function calcularTotal() {
+		$cart = session('cart');
+		// if (count($cart) == 0) {
+		// 	//Si no hay productos, se redirige a cart con la variable responses en true
+		// 	session()->flash('response', true);
+		// 	return redirect()->route('showCart');
+		// }
 		// Hago descuento por el codigo ingresado por usuario, este codigo ya ha sido verificado por la funcion verificarCodigo
 		
 		$total_del_pedido = session('total_del_pedido');
-		$descuento_peso   = session('descuento_peso') != "" ? session('descuento_peso') : 0;
-		$total_pagar      = $total_del_pedido - $descuento_peso;
-		
-		// Retornar total a pagar
-		// return number_format($total_pagar);
+		$descuento_peso   = session('descuento_peso');
+		$total_pagar      = session('total_pagar');
 		return $total_pagar;
 	}
    
 	public function payment(Request $request) {
 		 // Verificar si existen datos en el carrito, si no, redireccionar a /cart
-		if(session('cart') == '' || session('cart') == null ) {
-			return redirect('/cart');
-		}
-		
-		// Obtener total a pagar
-		if(is_numeric($this->calcularTotal())) {
+		// if(session('cart') == '' || session('cart') == null ) {
+		// 	return redirect('/cart');
+		// }
 
-			$total_pagar = $this->calcularTotal();
-		}
-		else {
-			$total_pagar = 0;
-		}
+		// Obtener total a pagar
+		$total_pagar = $this->calcularTotal();
+		
 		// Obtener metodo de entrega del pedido
 		$this->modoEnvio($request);
 
 		// Configurar los datos para la pasarela de Payu
 		$dataPayu['merchantId'] = '508029';
 		$dataPayu['accountId'] = '512321';
+		$dataPayu['extra2'] = 0; // id del pedido para actualizarlo luego
 		$dataPayu['description'] = "Compra desde tienda online Innova Soluciones";
 		$dataPayu['referenceCode'] = 'INNOVA' . time();
 		$dataPayu['amount'] = $total_pagar;
@@ -116,6 +86,8 @@ class PaymentController extends Controller
 
 		return view('payment', 
 			compact(
+				'total_del_pedido',
+				'descuento_peso',
 				'total_pagar',
 				'dataPayu'
 			)

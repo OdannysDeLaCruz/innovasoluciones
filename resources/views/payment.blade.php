@@ -5,6 +5,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/alertify.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/themes/semantic.min.css"/>
+
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/estilos.css') }}" >
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/media-query.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
@@ -19,7 +25,7 @@
 	<!-- SECCION PRINCIPAL -->
 	<section class="contenedor_payment row">
 		<div class="col-md-8 seccion_metodo_pago">
-			<h1 class="payment_titulos">¡Casi terminas!, utilizamos Payu para brindarte diferentes formas de pago</h1>
+			<h1 class="payment_titulos">¡Casi terminas! <br> Utilizámos Payu para brindarte diferentes formas de pago.</h1>
 			<ul class="payment_proceso_tarjeta seccion_metodo_pago_lista">
 				<li><span class="fa fa-credit-card-alt fa-lg"></span> Tarjeta de crédito</li>
 				<li><span class="fa fa-exchange fa-lg"></span> Debito bancario PSE</li>
@@ -34,7 +40,8 @@
 
 				  	<input name="merchantId"    type="hidden"  value="{{ $dataPayu['merchantId'] }}">
 				  	<input name="accountId"     type="hidden"  value="{{ $dataPayu['accountId'] }}" >
-				  	<input name="description" id="descripcionPedido"   type="hidden"  value="{{ $dataPayu['description'] }}">
+				  	<input name="description"   type="hidden"  value="{{ $dataPayu['description'] }}">
+				  	<input name="extra2" id="pedido_id" type="hidden"  value="{{ $dataPayu['extra2'] }}">
 				  	<input name="referenceCode" type="hidden"  value="{{ $dataPayu['referenceCode'] }}" >
 				  	<input name="amount"        type="hidden"  value="{{ $dataPayu['amount'] }}"   >
 				  	<input name="tax"           type="hidden"  value="{{ $dataPayu['tax'] }}"  >
@@ -70,14 +77,9 @@
 					<strong>Resumen de la pedido</strong>
 				</span>
 				<table class="table table-bordered resumen_table">
-					<tr>
-				    	<th>Producto</th>
-				    	<td>${{ number_format( $total_pagar, 0, '', '.')  }}
-				    	</td>
-				  	</tr>
 				  	<tr>
 				    	<th style="font-weight: 400;">TOTAL A PAGAR</th>
-				    	<td>${{  number_format($total_pagar, 0, '', '.') }}</td>
+				    	<td>${{  number_format($total_pagar, 0, ',', '.') }}</td>
 				  	</tr>
 				</table>
 			</section>

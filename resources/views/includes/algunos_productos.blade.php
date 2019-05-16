@@ -3,16 +3,20 @@
 	<div class="seccion_algunos_productos_content">
 
 		@foreach($algunos_productos as $algunos)
+			<?php 
+				$ref  = $algunos['producto_ref'];
+				$desc = str_replace(" ", "-", $algunos['producto_descripcion']);
+			?>
 			<section class="producto">
 				<figure>
-					<a href="/productos/{{ $algunos['id'] }}-{{ $algunos['producto_descripcion'] }}">
+					<a href="/productos/{{ $ref }}-{{ $desc }}">
 						<!-- <img src="{{ $algunos['imagen'] }}" class="producto_img" alt="{{ $algunos['descripcion'] }}"> -->
 						<!-- <img src="img/zapatos.jpg" class="producto_img"> -->
 						<img src="{{ $algunos['producto_imagen'] }}" class="producto_img">
 					</a>
 				</figure>
 				<!-- <div class="producto_info">
-					<a href="/productos/{{ $algunos['id'] }}-{{ $algunos['descripcion'] }}">
+					<a href="/productos/{{ $ref }}-{{ $desc }}">
 						<h1 class="producto_titulo"> {{ $algunos['descripcion'] }}</h1>
 					</a>
 					@if($algunos['descuento'] != 0)

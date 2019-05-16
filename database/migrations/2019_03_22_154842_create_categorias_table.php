@@ -19,8 +19,8 @@ class CreateCategoriasTable extends Migration
             $table->string('categoria_nombre', 100)->unique();
             $table->string('categoria_descripcion');
             
-            $table->timestamp('fecha_creado');
-            $table->timestamp('fecha_actualizado')->nullable();
+            $table->timestamp('fecha_creado')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_actualizado')->default(\DB::raw('CURRENT_TIMESTAMP'));
 
             $table->foreign('seccion_id')->references('id')->on('secciones')->onDelete('cascade');
         });

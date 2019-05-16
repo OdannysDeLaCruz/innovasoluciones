@@ -46,7 +46,7 @@
 							<span class="promo">
 								Cupón de ${{ number_format($detalle['promo_costo'], 0, ',', '.') }} <small>COP</small>
 							</span>
-						@else
+						@elseif($detalle['promo_tipo'] == '2x1')
 							<span class="promo">{{$detalle['promo_tipo']}}</span>
 						@endif
 						
@@ -80,7 +80,8 @@
 
 						{{ csrf_field() }}
 						<input type="hidden" class="inputs" id="id" name="id" value="{{ $detalle['id'] }}">
-						<input type="hidden" class="inputs" id="descripcion" name="descripcion" value="{{ $detalle['descripcion'] }}">
+						<!-- <input type="hidden" class="inputs" id="descripcion" name="descripcion" value="{{ $detalle['descripcion'] }}"> -->
+						<input type="text" class="inputs" id="producto_ref" name="producto_ref" value="{{ $detalle['producto_ref'] }}">
 						@empty(!$detalle['producto_colores'])
 							<label for="colores">Colores</label>
 							<select id="colores" name="colores" class="detalle_info_color" required>

@@ -8,10 +8,12 @@ $factory->define(App\DetallePedido::class, function (Faker $faker) {
    
     return [
         'pedido_id'  => $pedido_id,
+        'detalle_producto_ref' => 'Referencia del producto',
         'detalle_descripcion' => 'Descripcion de ejemplo',
         'detalle_imagen' => $faker->imageUrl($width = 200, $height = 200),
         'detalle_precio' => 30000,
         'detalle_cantidad' => 1,
+        'detalle_promo_info' => 'promo_tipo - promo_costo',
         'detalle_precio_final' => 40000,
         'detalle_talla' => '20x20',
         'detalle_color' => 'negro'

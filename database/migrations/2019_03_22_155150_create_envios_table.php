@@ -17,8 +17,8 @@ class CreateEnviosTable extends Migration
             $table->increments('id');
             $table->string('envio_metodo');
             
-            $table->timestamp('fecha_creado');
-            $table->timestamp('fecha_actualizado')->nullable();
+            $table->timestamp('fecha_creado')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_actualizado')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

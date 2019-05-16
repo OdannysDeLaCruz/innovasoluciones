@@ -26,17 +26,19 @@
 			<h1 class="form_registro_titulo">Hola bienvenido, es un gusto tenerte aquí nuevamente.</h1>
 			<div class="form_registro_grupo">
 
-				<label for="email" class="texto">Email</label>
-				<input id="email" type="email" class="email {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Digite su correo electrónico" required>
+				<!-- USUARIO -->
+				<label for="email" class="texto">E-mail</label>
+				<input id="email" type="email" class="email {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Introduce tu Email" required>
 
 				@if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
                 @endif
-
-				<label for="password" class="texto">Clave</label>
-				<input id="password" type="password" class="password {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Digite su contraseña" required>
+				
+				<!-- CONTRASEÑA -->
+				<label for="password" class="texto">Contraseña</label>
+				<input id="password" type="password" class="password {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="{{ old('password') }}" placeholder="Digite su contraseña" required>
 
                 @if ($errors->has('password'))
                     <span class="invalid-feedback" role="alert">
@@ -45,7 +47,7 @@
                 @endif
 
                 <label class="recordar_password">
-                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Recordar clave') }}
+                    <input type="checkbox" name="remember" class="{{ old('remember') ? 'checked' : '' }}"> {{ __('Recordar clave') }}
 				</label>
 
 				<button type="submit" class="btn_registrarse">Ingresar</button>

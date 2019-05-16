@@ -15,15 +15,7 @@
 	<!-- SECCION HEADER -->
 	@include('includes/header')
 	<!-- FIN HEADER -->
-	
-	<!-- SECCION MENU PROCESO DE PAGO -->
-	<!-- <nav class="menu_proceso_pago">
-		<ul>
-			<li id="indicador_detalle" class="items active">Detalles</li>
-			<li id="indicador_envio" class="items datos_envio">Enviar a</li>
-		</ul>
-	</nav> -->
-	<!-- FIN SECCION MENU PROCESO DE PAGO -->
+
 	<!-- SECCION DE PAYMENT -->
 	<section class="contenedor_payment row">
 		<!-- Div para hacer un layout -->
@@ -46,9 +38,11 @@
 								<label class="pedido_info_cantidad">
 									Cantidad: <b>{{ $carrito['cantidad'] }}</b>
 								</label>
-								<label class="pedido_info_precio">
-									Descuento: <b>${{ number_format($carrito['descuento_peso'], 2) }} </b>
-								</label>
+								@if($carrito['promocion'] != '')
+									<label class="pedido_info_precio">
+										Descuento x unidad: <b> {{ $carrito['promocion'] }} </b>
+									</label>								
+								@endif
 								<label class="pedido_info_precio">
 									Total: <b>${{ number_format($carrito['total'], 2) }} </b>
 								</label>
@@ -95,7 +89,7 @@
 						</form>
 					</div>			
 					<!-- Si el descuento se realiza correctamente, envio un msm y oculto el bloque codigo_descuento -->
-					@if(session('notificacion_codigo') == true)
+					@if(session('descuento_realizado') == true)
 						@if(session('noticia_descuento'))
 							<script>
 								alert(" {{ session('noticia_descuento') }} ");
@@ -135,9 +129,9 @@
 					<div class="direccion_envio">
 						<span class="fa fa-map-marker direccion_envio_icono"></span>
 						<span class="direccion_envio_texto">
-							<b> {{ Auth::user()->direccion }} </b>
+							<b> {{ Auth::user()->usuario_direccion }} </b>
 							<small>
-								{{ Auth::user()->barrio }} - {{ Auth::user()->ciudad }} - {{ Auth::user()->pais }}							
+								{{ Auth::user()->usuario_barrio }} - {{ Auth::user()->usuario_ciudad }} - {{ Auth::user()->usuario_pais }}							
 							</small>
 						</span>
 					</div>
@@ -147,33 +141,25 @@
 				<h1 class="payment_titulos">¿Como desea recibir el pedido?</h1>
 
 				<section class="payment_proceso_tarjeta tarjeta_tipo_envio">
-					<section class="tarjeta_envio_domicilio">
-						<form class="form_opcion_envio" action="{{ route('payment') }}" method="POST">
-							{{ csrf_field() }} 
-							<input type="hidden" name="tipo_envio" value="1">
-							<button class="btn_opcion_envio">
-								<span class="text_opcion_envio">
-									Normal a domicilio <br>
-									<!-- <small>Llega dentro de 0 días despues de efectuarse el pago</small> -->
-								</span>
-								<!-- <span class="tarjeta_envio_domicilio_valor">
-									$16.000
-								</span> -->
-							</button>
-						</form>
-					</section>
-					<section class="tarjeta_retiro_tienda">
-						<form class="form_opcion_envio" action="{{ route('payment') }}" method="POST">
-							{{ csrf_field() }}
-							<input type="hidden" name="tipo_envio" value="2">
-							<button class="btn_opcion_envio">
-								<span class="text_opcion_envio">
-									Retirar en tienda fisica. <br>
-									<small>Dirección de la tienda</small>
-								</span>
-							</button>
-						</form>
-					</section>					
+					@if($tipo_entregas)
+						@foreach($tipo_entregas as $tipo)
+							<section class="tarjeta_envio_domicilio">
+								<form class="form_opcion_envio" action="{{ route('payment') }}" method="POST">
+									{{ csrf_field() }} 
+									<input type="hidden" name="tipo_entrega" value="{{ $tipo->id }}">
+									<button class="btn_opcion_envio">
+										<span class="text_opcion_envio">
+											{{ $tipo->envio_metodo }} <br>
+
+											@if($tipo->envio_metodo == 'Tienda fisica')
+												<small style="color: #333;">Calle 6 # 42-90 Valledupar - Colombia</small>												
+											@endif
+										</span>
+									</button>
+								</form>
+							</section>
+						@endforeach
+					@endif				
 				</section>
 
 				<section class="payment_proceso_tarjeta tarjeta_ver_detalle_pedido">
@@ -193,12 +179,18 @@
 				</span>
 				<table class="table table-bordered resumen_table">
 					<tr>
-				    	<th>Producto</th>
-				    	<td>${{ number_format( $total_pagar, 0, '', '.')  }}</td>
+				    	<th>Productos ({{ $cantidad_productos }})</th>
+				    	<td>${{ number_format( $total_del_pedido, 0, ',', '.')  }}</td>
 				  	</tr>
+				  	@if($descuento_peso > 0)
+				  	<tr>
+				    	<th>Descuento por código</th>
+				    	<td>${{ number_format( $descuento_peso, 0, ',', '.')  }}</td>
+				  	</tr>
+				  	@endif
 				  	<tr>
 				    	<th style="font-weight: 400;">TOTAL A PAGAR</th>
-				    	<td>${{  number_format($total_pagar, 0, '', '.') }}</td>
+				    	<td>${{  number_format($total_pagar, 0, ',', '.') }}</td>
 				  	</tr>
 				</table>
 			</section>

@@ -18,7 +18,7 @@ class CreateSeccionesTable extends Migration
             $table->string('seccion_nombre')->unique();
             $table->string('seccion_descripcion');
             $table->string('seccion_imagen');
-            $table->timestamp('fecha_creado');
+            $table->timestamp('fecha_creado')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

@@ -21,16 +21,16 @@ class CreateUsersTable extends Migration
             $table->string('usuario_apellido');
             $table->string('usuario_cedula', 15)->nullable()->unique();
             $table->string('usuario_telefono')->nullable();
-            $table->string('usuario_email', 60)->unique();
+            $table->string('email', 60)->unique();
             $table->string('usuario_pais')->nullable();
             $table->string('usuario_ciudad')->nullable();
             $table->string('usuario_barrio')->nullable();
             $table->string('usuario_direccion')->nullable();
-            $table->string('usuario_password');
+            $table->string('password');
             $table->boolean('usuario_estado');
 
-            $table->timestamp('fecha_creado');
-            $table->timestamp('fecha_actualizado')->nullable();
+            $table->timestamp('fecha_creado')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_actualizado')->default(\DB::raw('CURRENT_TIMESTAMP'));
 
             $table->rememberToken();
 

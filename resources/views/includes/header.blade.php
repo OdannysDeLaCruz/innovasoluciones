@@ -26,12 +26,15 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     	<a class="dropdown-item" style="font-size: 16px;">
-                        	<strong>{{ Auth::user()->nombre }} {{ Auth::user()->apellido }}</strong>
+                        	<strong>{{ Auth::user()->usuario_nombre }} {{ Auth::user()->usuario_apellido }}</strong>
                     	</a>
-                        @if(Auth::user()->id_rol == 1)
+                        @if(Auth::user()->rol_id == 1)
                         	<a target="blank" class="dropdown-item" style="font-size: 14px;" href="{{ route('admin') }}">
                             	{{ __('Panel de administración') }}
                         	</a>
+                            <a class="dropdown-item" style="font-size: 14px;" href="{{ route('perfil') }}">
+                                {{ __('Mi cuenta') }}
+                            </a>
                         @else
                             <a class="dropdown-item" style="font-size: 14px;" href="{{ route('perfil') }}">
                                 {{ __('Mi cuenta') }}
@@ -52,10 +55,22 @@
         </ul>
 	</nav>
     <a href="/cart">
-        <?php $cart = session('cart') ?>
+    <?php 
+        $cantidad_productos = 0;
+        $cart = session('cart');
+        
+        if($cart === null) {
+            $cantidad_productos = 0;
+        }
+        else {
+            foreach ($cart as $producto) {
+                $cantidad_productos += $producto['cantidad'];
+            }
+        }     
+    ?>
             
         <span id="carrito_icono" class="fa fa-cart-plus carrito_icono">
-            <span class="notificacion_carrito">{{ count($cart) }}</span>
+            <span class="notificacion_carrito">{{ $cantidad_productos }}</span>
         </span>
     </a>
 	<span class="fa fa-bars abrir_menu"></span>

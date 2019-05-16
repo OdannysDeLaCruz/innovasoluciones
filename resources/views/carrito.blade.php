@@ -5,18 +5,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/alertify.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/css/themes/semantic.min.css"/>
+
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/estilos.css') }}" >
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/media-query.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
 	<title>Innova Soluciones | Cart </title>
 </head>
 <body>
-	@if(session('response'))
-		<script>
-			alert('Para ver los detalles del pedido, por favor añada productos al carrito');
-		</script>
-	@endif
-
 	<!-- SECCION HEADER -->
 	@include('includes/header')
 	<!-- FIN HEADER -->	
@@ -31,8 +31,8 @@
 							<th>Descripción</th>
 							<th>Precio Unitario ($)</th>
 					      	<th>Cant</th>
-							<th>Descuento ($)</th>
-							<th>Total a pagar ($)</th>
+							<th>Promoción <br> (Descuento)</th>
+							<th>Total ($)</th>
 					      	<th>*</th>
 					    </tr>
 				  	</thead>
@@ -41,13 +41,13 @@
 					  		@foreach($cart as $carrito)
 					  			<tr class="carrito_fila">
 					  				<td scope="row">
-					  					<a target="_blank" href="/productos/{{ $carrito['id'] }}-{{ $carrito['descripcion'] }}">
+					  					<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['descripcion'] }}">
 					  						<img class="carrito_fila_img" src="{{ $carrito['imagen'] }}" alt="{{ $carrito['descripcion'] }}">			
 					  					</a>
 						      		</td>
 						      		<td class="carrito_fila_titulo">
 						      			<p>
-						      				<a target="_blank" href="/productos/{{ $carrito['id'] }}-{{ $carrito['descripcion'] }}">
+						      				<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['descripcion'] }}">
 						      					{{ $carrito['descripcion'] }}
 						      				</a>
 						      				<br>
@@ -55,7 +55,7 @@
 						      				Talla: {{ $carrito['talla'] }} 
 								      	</p>					      					
 						      		</td>
-						      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['precio'], 2) }}</i></td>
+						      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['precio'], 0, ',', '.') }}</i></td>
 						      		<td class="carrito_fila_cantidad">
 						      		<input 
 						      			type="number" 
@@ -76,8 +76,8 @@
 						      		>
 						      			<span  class="fa fa-refresh"></span>
 						      		</a>
-						      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['descuento_peso'], 2) }}</i></td>
-						      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['total'], 2) }}</i></td>
+						      		<td class="carrito_fila_precio"><i>{{ $carrito['promocion'] }}</i></td>
+						      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['total'], 0, ',', '.') }}</i></td>
 						      		</td>
 						      		<td class="carrito_fila_borrar">
 						      			<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
@@ -90,7 +90,14 @@
 				  	</tbody>
 				</table>
 			</section>
-			<div class="suma_total_carrito">Total: ${{ number_format( session('total_del_pedido'), 2 ) }}</div>
+			<div class="suma_total_carrito">
+				<small>Total a pagar:</small>
+				${{ number_format( session('total_del_pedido'), 0, ',', '.') }} <br>
+				@if(session('codigos_usados'))
+					<small style="font-size: 13px;">Usted utilizó el código {{ session('codigos_usados') }}</small>
+					
+				@endif
+			</div>
 			
 			<span class="carrito_botones">
 				<div class="btn_carrito_vaciar botones_innova">
@@ -126,5 +133,11 @@
 	<!-- SECCION SCRIPTS JS -->
 	@include('includes/scripts')
 	<!-- FIN SCRIPTS JS -->
+
+	@if(session('response'))
+		<script>
+			alertify.alert('Para ver los detalles del pedido, por favor añada productos al carrito');
+		</script>
+	@endif
 </body>
 </html>

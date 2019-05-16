@@ -16,10 +16,14 @@ class CreateDetallePedidosTable extends Migration
         Schema::create('detalle_pedidos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('pedido_id')->unsigned();
+            $table->string('detalle_producto_ref');
             $table->string('detalle_descripcion');
             $table->string('detalle_imagen');
             $table->decimal('detalle_precio', 10, 2);
             $table->integer('detalle_cantidad');
+
+            // detalle_promo_info contendra los datos de promo_tipo y promo_costo en caso de que hayan sido aplicados a este producto, esto servira para dar mas información al administrador
+            $table->string('detalle_promo_info')->nullable(); 
 
             // Precio final = (detalle_precio * detalle_cantidad) - (descuento * detalle_precio)
             // El descuento se aplica a la hora de crear el detalle_pedido

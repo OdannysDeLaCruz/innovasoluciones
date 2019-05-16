@@ -161,6 +161,8 @@ return [
 
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        Jenssegers\Agent\AgentServiceProvider::class,
+
     ],
 
     /*
@@ -210,6 +212,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
 
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
 
     ],
 

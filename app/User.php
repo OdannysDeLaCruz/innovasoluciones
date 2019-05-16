@@ -20,12 +20,12 @@ class User extends Authenticatable
         'usuario_apellido',
         'usuario_cedula',
         'usuario_telefono',
-        'usuario_email',
+        'email',
         'usuario_pais',
         'usuario_ciudad',
         'usuario_barrio',
         'usuario_direccion',
-        'usuario_password',
+        'password',
         'usuario_estado',
         'remember_token'
     ];

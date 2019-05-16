@@ -57,14 +57,6 @@ $(document).ready(function(){
         $('#' + ele + ' + .menu_opcion_items').toggleClass('menu_visible');        
     });
 
-
-    // function confirmar() {
-    //     const res = confirm('Seguro desea abrir esto?');
-    //     if (res == true) {
-    //        $('.producto_menu_accion').toggleClass('menu_visible');        
-    //     }
-    // }
-
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
@@ -80,40 +72,47 @@ $(document).ready(function(){
     $('#crearPedido').on('click', function(e){
         
         e.preventDefault();
-        
-        $.ajax({
-            url: '/checkout/buying/payment/crearpedido',
-            type: 'POST',
-            data: {crear : true},
-            dataType: 'json',
-            success: function(data){
-                if (data.status == 'Success') {
-                    alert(data.status + ': ' + data.message);
-                    // Despues de que se crea el pedido y sus detalles, se obtiene el id que returna crearPedidoController.php de ese pedido se añade a la descripcion que se envía a payu
+        alertify.confirm('Comfirma tu pedido', 'Al confirmar tu pedido seras llevado a Payu para finalizar el pago', 
+            function() { 
+                $.ajax({
+                    url: '/checkout/buying/payment/crearpedido',
+                    type: 'POST',
+                    data: {crear : true},
+                    dataType: 'json',
+                    success: function(data){
+                        if (data.status == 'Success') {
+                            // alert(data.message);
+                            alertify.notify(data.message, 'success', 10);
+                            alertify.notify('Será redireccionado a Payu', 'success', 10);
+                            // Despues de que se crea el pedido y sus detalles, se obtiene el id que returna crearPedidoController.php de ese pedido se añade a la descripcion que se envía a payu
 
-                    let valueDescripcion = document.getElementById('descripcionPedido').value;
-                    let nuevaDescripcion = document.getElementById('descripcionPedido').value = valueDescripcion + '-' + data.id_pedido;
+                            document.getElementById('pedido_id').value = data.pedido_id;
+                            
+                            // Enviar formulario despues de añadir el id a la descrición
+                            $('#enviar-formulario-payu').submit();
 
-                    // Enviar formulario despues de añadir el id a la descrición
-                    $('#enviar-formulario-payu').submit();
-
-                }
-                else {
-                    e.preventDefault();
-                    alert(data.status + ': ' + data.message);
-                    window.location.reload(); 
-                }
-            },
-            error: function(data){
-                if(data.status == 500){
-                    e.preventDefault();
-                    alert("Error: Recarga la página o contacta a soporte técnico");
-                    console.log(data.responseText);
-                     // window.location.reload();                 
-                }
+                        }
+                        else {
+                            e.preventDefault();
+                            alertify.alert(data.status + ': ' + data.message, function() {
+                                window.location.href = '/cart';
+                            });
+                        }
+                    },
+                    error: function(data){
+                        if(data.status == 500){
+                            e.preventDefault();
+                            alertify.alert("Ha ocurrido un error, recarga la página o contácta a soporte técnico", function() {
+                                window.location.reload();                 
+                            });
+                        }
+                    }
+                });
+            }, 
+            function() { 
+                alertify.error('Pedido cancelado', 10);
             }
-        });
-
+        );
     });
 });
 

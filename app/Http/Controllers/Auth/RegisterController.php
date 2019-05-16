@@ -51,15 +51,16 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'usuario_nombre'   => 'required|string|max:45',
             'usuario_apellido' => 'required|string|max:45',
-            'usuario_cedula'   => 'required|string|max:15',
+            'usuario_cedula'   => 'required|string|max:15|unique:users',
             'usuario_telefono' => 'required|string|max:15',
-            'usuario_email'    => 'required|string|email|max:100|unique:users',
-            'usuario_pais'     => 'required|string|max:100',
-            'usuario_ciudad'   => 'required|string|max:100|',
-            'usuario_barrio'   => 'required|string|max:100|',
-            'usuario_direccion'=> 'required|string|max:100|',
-            'usuario_password' => 'required|string|min:6|confirmed',
+            'email'            => 'required|string|email|max:100|unique:users',
+            'usuario_pais'     => 'string|max:100',
+            'usuario_ciudad'   => 'string|max:100|',
+            'usuario_barrio'   => 'string|max:100|',
+            'usuario_direccion'=> 'string|max:100|',
+            'password'         => 'required|string|min:6|max:15|confirmed',
         ]);
+        
     }
 
     /**
@@ -72,19 +73,25 @@ class RegisterController extends Controller
     {
         return User::create([
             'rol_id'            => 2,
-            'usuario_nombre'    => $data['nombre'],
-            'usuario_apellido'  => $data['apellido'],
-            'usuario_cedula'    => $data['cedula'],
-            'usuario_telefono'  => $data['telefono'],
-            'usuario_email'     => $data['email'],            
-            // Datos de envios
-            'usuario_pais'      => $data['pais'],
-            'usuario_ciudad'    => $data['ciudad'],
-            'usuario_barrio'    => $data['barrio'],
-            'usuario_direccion' => $data['direccion'],
-
-            'usuario_password'  => Hash::make($data['password']),
+            'usuario_nombre'    => $data['usuario_nombre'],
+            'usuario_apellido'  => $data['usuario_apellido'],
+            'usuario_cedula'    => $data['usuario_cedula'],
+            'usuario_telefono'  => $data['usuario_telefono'],
+            'email'             => $data['email'],            
+            'usuario_pais'      => $this->verificarExistenciaCampo('usuario_pais', $data),
+            'usuario_ciudad'    => $this->verificarExistenciaCampo('usuario_ciuda', $data),
+            'usuario_barrio'    => $this->verificarExistenciaCampo('usuario_barrio', $data),
+            'usuario_direccion' => $this->verificarExistenciaCampo('usuario_direccion', $data),
+            'password'          => bcrypt($data['password']),
             'usuario_estado'    => 1
-        ]);
+        ]);        
+    }
+
+    protected function verificarExistenciaCampo($key, $data) {
+        if (array_key_exists('usuario_pais', $data)) {
+            return $data;
+        }else {
+            return "Vacio";
+        }
     }
 }

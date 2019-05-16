@@ -22,15 +22,14 @@ Route::get('/', 'PrincipalController@index')->name('home');
 Route::get('/productos', 'PrincipalController@showProductos')->name('productos');
 
 // Seleccinoador de pagina de descripcion, se mostrará la vista referencias (Donde esta el boton que lleva a la vista detalles_referencias (opción de comprar) ) ó mostrará directamente la vista detalles (donde esta la información del producto completa, incluida la opcion de comprar).
-Route::get('/productos/{id}-{descripcion}', 'PrincipalController@seleccionarDescripcion')->name('seleccionarDescripcion');
-
-// Esta ruta mostrará la vista de opción de comprar de los productos que vengan de la vista referencias
-Route::get('detalle-compra/{id}-{descripcion}', 'PrincipalController@showDetallesCompra')->name('showDetallesCompra');
+Route::get('/productos/{ref}-{descripcion}', 'PrincipalController@seleccionarDescripcion')->name('seleccionarDescripcion');
 
 Route::get('/productos/{seccion?}', 'PrincipalController@showCategoriaProductos');
 
-Route::get('/search/{tag?}', 'SearchProductsController@showProductosTag')->name('productoTag');
+// Esta ruta mostrará la vista de opción de comprar de los productos que vengan de la vista referencias
+Route::get('detalle-compra/{ref}-{descripcion}', 'PrincipalController@showDetallesCompra')->name('showDetallesCompra');
 
+Route::get('/search/{tag?}', 'SearchProductsController@showProductosTag')->name('productoTag');
 Route::post('/searchtags', 'SearchProductsController@index')->name('searchtags');
 
 

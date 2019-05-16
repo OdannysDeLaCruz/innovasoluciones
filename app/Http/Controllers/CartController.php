@@ -19,6 +19,7 @@ class CartController extends Controller
 	// Mostrar carrito
     public function show() {
         $cart = session('cart');
+        // dd($cart);
         // Sacar total del pedido
         $this->total();
         return view('carrito', compact('cart'));
@@ -28,30 +29,61 @@ class CartController extends Controller
     public function add(Request $request) {
 
         $id = $request->input('id');
-        // $descripcion = $request->input('descripcion');
+        $producto_ref  = $request->input('producto_ref');
+        // Color y Talla escogidos por el usuario
         $colorEscogido = $request->input('colores');
         $tallaEscogido = $request->input('tallas');
 
-        $producto = App\Producto::select('id', 'descripcion', 'imagen', 'precio', 'tiempo_entrega', 'descuento')->where('id', $id)->where('descripcion', $descripcion)->get();
-
+        $producto = App\Producto::select('id', 'producto_descripcion', 'producto_ref', 'producto_imagen', 'producto_precio', 'promocion_id')
+                                ->where('id', $id)
+                                ->where('producto_ref', $producto_ref)
+                                ->get();                    
         foreach ($producto as $prod) {
             $dato['id']           = $prod->id;
-            $dato['descripcion']  = $prod->descripcion;
-            $dato['imagen']       = $prod->imagen;
-            $dato['precio']       = $prod->precio;
+            $dato['producto_ref'] = $prod->producto_ref;
+            $dato['descripcion']  = $prod->producto_descripcion;
+            $dato['referencia']   = $prod->producto_ref;
+            $dato['imagen']       = $prod->producto_imagen;
+            $dato['precio']       = floatval($prod->producto_precio);
             $dato['cantidad']     = 1;
-            $dato['descuento_%']  = $prod->descuento;
-            $dato['tiempo_entrega']  = $prod->tiempo_entrega;
+            $dato['color']        = $colorEscogido;
+            $dato['talla']        = $tallaEscogido;
+            $total                = $dato['precio'] * $dato['cantidad'];
 
-            $total                  = $dato['precio'] * $dato['cantidad'];
-            $dato['descuento_peso'] = $total * ($dato['descuento_%'] / 100);
-            $dato['total']          = $total - $dato['descuento_peso'];
+            // Verificar si tiene algún tipo de promoción
+            $promocion_id = $prod->promocion_id;
+            if($promocion_id != null){
+                $promo = App\Promocion::select('promo_costo', 'promo_tipo', 'promo_inicio', 'promo_final', 'promo_numero_canjeo', 'promo_minimo_pedido')
+                                      ->where('id', $promocion_id)
+                                      ->get();
 
-            // Para cuando se verifique el codigo de descuento
-            $dato['descuento_codigo'] = 0;
+                // Verificar que tipo de descuento tiene
+                // Hay tres tipo de descuentos, descuento%, peso, 2x1
+               
+                $dato['promo_costo'] = $promo[0]->promo_costo;
+                $dato['promo_tipo'] = $promo[0]->promo_tipo;
 
-            $dato['color'] = $colorEscogido;
-            $dato['talla'] = $tallaEscogido;
+                switch ($dato['promo_tipo']) {
+                    case 'descuento%':
+                        $dato['promocion'] = $dato['promo_costo'] . '%';
+                        $descuento = $total * ($dato['promo_costo'] / 100);
+                        $dato['total'] = $total - $descuento;
+                        break; 
+                    case 'peso':
+                        $dato['promocion'] = '$' . number_format($dato['promo_costo'], 0, ',', '.');
+                        $descuento = $dato['promo_costo'] * $dato['cantidad']; 
+                        $dato['total'] = $total - $descuento;
+                        break;
+                    case '2x1':
+                        $dato['promocion'] = '2x1';
+                        $dato['total'] = $total;
+                        break;
+                }
+            }
+            else {
+                $dato['promocion']   = '';
+                $dato['total'] = $total;
+            }           
         }
 
         $cart = session('cart');
@@ -67,6 +99,17 @@ class CartController extends Controller
     	$cart = session('cart');
     	unset($cart[$id]);
     	session()->put('cart', $cart);
+
+        // Verificar si no hay producto en en cart, si no hay eliminar todas variables de session creadas
+        if (count(session('cart')) == 0 ) {
+            $datos_session = ['cart', 'codigos_usados', 'descuento_realizado', 'descuento_peso', 'total_pagar','total_del_pedido','tipo_envio', 'promocion_id'];
+            foreach ($datos_session as $session) {
+                if (session()->has($session)) {
+                    session()->forget($session);
+                }                
+            }
+        }
+
     	return redirect()->route('showCart');
     }
 
@@ -74,13 +117,30 @@ class CartController extends Controller
     public function update($id, $cantidad_nueva) {
     	$cart = session('cart');
     	// Asignamos cantidad_nueva a la cantidad anterior para actualizar
-    	$cart[$id]['cantidad'] = $cantidad_nueva;
+    	$cart[$id]['cantidad'] = intval($cantidad_nueva);
     	// Calculo el precio_nuevo multiplicando el precio normal del producto por la cantidad_nueva
     	$precio_nuevo  = $cart[$id]['precio'] * $cart[$id]['cantidad'];
-    	// Calculo el descuento_peso 
-    	$cart[$id]['descuento_peso'] = $precio_nuevo * ( $cart[$id]['descuento_%'] / 100 );
-    	// total_nuevo
-    	$cart[$id]['total'] = $precio_nuevo - $cart[$id]['descuento_peso'];
+        // Calculo el precio nuevo total
+        // Verificao si promo_tipo existe en el array del producto a actualizar
+        if(array_key_exists('promo_tipo', $cart[$id])){            
+            switch ($cart[$id]['promo_tipo']) {
+                case 'descuento%':
+                    $descuento = $precio_nuevo * ($cart[$id]['promo_costo'] / 100);
+                    $cart[$id]['total'] = $precio_nuevo - $descuento;
+                    break; 
+                case 'peso':
+                    $descuento = $cart[$id]['promo_costo']; 
+                    $cart[$id]['total'] = $precio_nuevo - ( $descuento * $cart[$id]['cantidad']);
+                    break;
+                case '2x1':
+                    $cart[$id]['total'] = $precio_nuevo;
+                    break;
+            }
+        }
+        else {
+             $cart[$id]['total'] = $precio_nuevo;
+        }
+
     	session()->put('cart', $cart);
     	
     	return redirect()->route('showCart');
@@ -91,12 +151,11 @@ class CartController extends Controller
         if(session('cart')) {
     	    $cart = session('cart');
         	$total = 0;
-        	foreach ($cart as $precio) {
-        		$total += $precio['total'];
+        	foreach ($cart as $producto) {
+        		$total += $producto['total'];
             }
             session()->put('total_del_pedido', $total);            
         }
-
     }
 
 }

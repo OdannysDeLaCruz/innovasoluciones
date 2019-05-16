@@ -25,9 +25,13 @@ class CreatePromocionesTable extends Migration
             $table->integer('promo_numero_canjeo');
             // es null por que puede que sea cualquier valor de pedido
             $table->integer('promo_minimo_pedido')->nullable();
+            // Categoria a aplicar codigo promocional, no es obligatorio para todos, solo para los codigos que no esten aplicados a productos particulares
+            $table->integer('categoria_id')->unsigned()->nullable();
 
-            $table->timestamp('fecha_creado');
-            $table->timestamp('fecha_actualizado')->nullable();
+            $table->timestamp('fecha_creado')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('fecha_actualizado')->default(\DB::raw('CURRENT_TIMESTAMP'));
+
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
         });
     }
 
