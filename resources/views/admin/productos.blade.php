@@ -26,7 +26,7 @@
 						<option>Categorias</option>
 						@if(isset($categorias))
 							@foreach($categorias as $categoria)
-								<option value="">{{ $categoria->nombre }}</option>
+								<option value="">{{ $categoria->seccion_nombre }}</option>
 							@endforeach
 						@else
 						@endif
@@ -73,23 +73,23 @@
 							<tr class="tables_admin_fila">
 								<td>{{ $producto['id'] }}</td>
 								<td>
-									<img class="producto_img" src="{{ $producto['imagen'] }}">
+									<img class="producto_img" src="{{ $producto['producto_imagen'] }}">
 								</td>
 								<td class="producto_descripcion">
-									{{ $producto['descripcion'] }}
+									{{ $producto['producto_descripcion'] }}
 								</td>
 								<td>Lorem</td>
-								<td>{{ $producto['referencia'] }}</td>
-								<td>${{  number_format($producto['precio'], 2)}} </td>
-								<td>{{ $producto['descuento'] }} %</td>
+								<td>{{ $producto['producto_ref'] }}</td>
+								<td>${{  number_format($producto['producto_precio'], 2)}} </td>
+								<td>{{ $producto['producto_descuento'] }} %</td>
 								<td>
 									@php 
-										$descuento = $producto['precio'] * ($producto['descuento'] / 100);
-										$total = $producto['precio'] - $descuento;
+										$descuento = $producto['producto_precio'] * ($producto['producto_descuento'] / 100);
+										$total = $producto['producto_precio'] - $descuento;
 									@endphp
 									${{ number_format($total, 2) }} 
 								</td>
-								<td>{{ $producto['tallas'] }} - {{ $producto['colores'] }}</td>
+								<td>{{ $producto['tallas'] }} - {{ $producto['producto_colores'] }}</td>
 								<td>{{ $producto['fecha_creado'] }}</td>
 								<td class="menu_opcion">
 									<i class="fa fa-ellipsis-h menu_opcion_logo" id="menu_opcion_logo_{{ $producto['id'] }}" aria-hidden="true"></i>

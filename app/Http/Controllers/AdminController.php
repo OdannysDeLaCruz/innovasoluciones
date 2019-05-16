@@ -12,7 +12,7 @@ class AdminController extends Controller
     }
     public function getProductos() {
         // Obtener el listado de categorias para el forulario de filtrado
-        $categorias = App\Categoria::select('id', 'nombre')->orderBy('nombre')->get();
+        $categorias = App\Categoria::select('seccion_id', 'categoria_nombre')->orderBy('categoria_nombre')->get();
         // Productos
         $productos = App\Producto::paginate(20);
         return view('admin.productos', compact('categorias','productos'));
@@ -71,29 +71,29 @@ class AdminController extends Controller
 
     public function getPedidos() {
     	// Pedidos
-        $misPedidos = App\Pedido::paginate(20);
+        $misPedidos = App\Pedido::orderBy('fecha_creado', 'asc')->paginate(10);
         foreach ($misPedidos as $dato) {
 
-            $nombre   = App\User::where('id', $dato->id_user)->value('nombre');
-            $apellido = App\User::where('id', $dato->id_user)->value('apellido');
-            $pedido['cliente'] = $nombre . ' ' . $apellido;
-            
-        	$pedido['id'] = $dato->id;
-            $pedido['direccion'] = $dato->direccion_envio;
-        	$pedido['entrega'] = $dato->modo_envio;
-        	$pedido['codigo'] = $dato->codigo_descuento;
-        	$pedido['envio'] = $dato->envio;
-        	$pedido['modo_pago'] = $dato->modo_pago;
-        	$pedido['estado'] = $dato->estado_pedido;
-        	$pedido['fecha'] = $dato->fecha_pedido;
+            $nombre   = App\User::where('id', $dato->user_id)->value('usuario_nombre');
+            $apellido = App\User::where('id', $dato->user_id)->value('usuario_apellido');
+
+            $pedido['user_id']    = $nombre . ' ' . $apellido;            
+        	$pedido['id']         = $dato->pedido_id;
+            $pedido['pedido_dir'] = $dato->pedido_dir;
+        	$pedido['entrega']    = $dato->modo_envio;
+        	$pedido['promocion_id']     = $dato->promocion_id;
+        	$pedido['envio']      = $dato->envio;
+        	$pedido['modo_pago']  = $dato->modo_pago;
+        	$pedido['estado']     = $dato->estado_pedido;
+        	$pedido['fecha_creado']      = $dato->fecha_creado;
 
         	// Obtener total de pedido
         	$datos_pedido = App\DetallePedido::select(
-                            'precio',
-                            'cantidad',
-                            'descuento_porcentual'
+                            'detalle_precio',
+                            'detalle_cantidad',
+                            'detalle_promo_info'
                         )
-                        ->where('id_pedido', $dato->id)
+                        ->where('pedido_id', $dato->id)
                         ->get();
             $importes_totales = [];
         	foreach ($datos_pedido as $dato) {

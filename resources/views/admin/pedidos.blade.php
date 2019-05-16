@@ -63,27 +63,27 @@
 							<tr class="tables_admin_fila">
 								<td>{{ $pedido['id'] }}</td>								
 								<td class="pedido_direccion">
-									{{ $pedido['direccion'] }}
+									{{ $pedido['pedido_dir'] }}
 								</td>
 								<td>
 									{{ $pedido['entrega'] }}
 								</td>
-								<td>{{ $pedido['cliente'] }}</td>
-								<td>{{ $pedido['modo_pago'] }}</td>
+								<td>{{ 'Vacío' }}</td>
+								<td>{{ 'Vacío' }}</td>
 								<td>
-									@if($pedido['estado'] == 'aprobado')
+									@if(true)
 										<div class="pedido_estado exitoso">
 											Pago exitoso
 										</div>
-									@else($pedido['estado'] == 'rechazado')
+									@else(false)
 										<div class="pedido_estado rechazado">
 											Pago rechazado
 										</div>
 									@endif
 								</td>
-								<td>{{ $pedido['codigo'] }}</td>
+								<td>{{ $pedido['promocion_id'] }}</td>
 								<td>${{ number_format( $pedido['total'], 2 ) }} </td>
-								<td>{{ $pedido['fecha'] }}</td>
+								<td>{{ $pedido['fecha_creado'] }}</td>
 								<td class="menu_opcion">
 									<i class="fa fa-ellipsis-h menu_opcion_logo" id="menu_opcion_logo_{{ $pedido['id'] }}" aria-hidden="true"></i>
 									<div class="menu_opcion_items">

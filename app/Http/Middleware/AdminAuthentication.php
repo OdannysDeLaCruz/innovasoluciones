@@ -15,7 +15,7 @@ class AdminAuthentication
      */
     public function handle($request, Closure $next)
     {
-        if($request->user()->id_rol != 1) {
+        if($request->user()->rol_id != 1) {
             return response()->view('error.404',['response' => 'Esta pagina no existe'],404);
         }
         return $next($request);
