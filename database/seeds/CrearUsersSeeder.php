@@ -28,7 +28,7 @@ class CrearUsersSeeder extends Seeder
             // 'remember_token'   => str_random(10),            
         ]);
         App\User::create([
-            'rol_id'            => 2,
+            'rol_id'            => 1,
             'usuario_nombre'    => 'Carlos',
             'usuario_apellido'  => 'De La Cruz Calvo',
             'usuario_cedula'    => '1065825574',

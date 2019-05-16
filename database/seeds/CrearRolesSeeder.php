@@ -12,11 +12,11 @@ class CrearRolesSeeder extends Seeder
     public function run()
     {
         App\Rol::create([
-            'rol_nombre' => 'Admin'
+            'rol_nombre' => 'Admin',
         ]);
 
         App\Rol::create([
-            'rol_nombre' => 'Cliente'
+            'rol_nombre' => 'Cliente',
         ]);
     }
 }

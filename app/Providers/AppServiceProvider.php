@@ -31,9 +31,13 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
-        // $this->app->bind('path.public', function(){
-        //     return base_path().'/public_html';
-        // });
+    {   
+        $app_url = env('APP_URL');
+
+        if($app_url == 'https://www.innovainc.co'){
+            $this->app->bind('path.public', function(){
+                return base_path().'/public_html';
+            });
+        }
     }
 }

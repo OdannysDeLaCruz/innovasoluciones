@@ -2,7 +2,7 @@ APP_NAME=InnovaSoluciones
 APP_ENV=dev
 APP_KEY=base64:BoBXViKv8iEyxqHL9r3pUb3131BRv/+eUL7FlQCpzmQ=
 APP_DEBUG=true
-APP_URL=http:http://innovasoluciones.herokuapp.com/
+APP_URL=http://innovasoluciones.herokuapp.com/
 
 LOG_CHANNEL=stack
 

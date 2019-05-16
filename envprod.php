@@ -2,7 +2,7 @@ APP_NAME=InnovaSoluciones
 APP_ENV=production
 APP_KEY=base64:BoBXViKv8iEyxqHL9r3pUb3131BRv/+eUL7FlQCpzmQ=
 APP_DEBUG=true
-APP_URL=http:https://www.innovainc.co
+APP_URL=https://www.innovainc.co
 
 LOG_CHANNEL=stack
 
