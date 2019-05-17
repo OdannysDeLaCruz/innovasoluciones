@@ -67,6 +67,9 @@ class UserController extends Controller
 
         $detalle_pedido = App\DetallePedido::find($pedido_id);
 
+        dd($detalle_pedido);
+        
+
         // Verificamos que el pedido tenga detalle_pedidos
         if($detalle_pedido->isEmpty()){
             return view('users.compras', ['Error' => 'Este pedido no tiene detalles!', 'pedido_id' => $pedido_id]);
