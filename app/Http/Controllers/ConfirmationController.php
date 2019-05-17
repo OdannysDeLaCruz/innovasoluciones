@@ -96,7 +96,7 @@ class ConfirmationController extends Controller
 	// Enviar mensaje de correo electronico al usuario informando de el estado de su pedido
  
     public function confirmation() {
-	    $mensajeLog .= print_r($_POST,true) . "\r\n";
+	    $mensajeLog = print_r($_POST,true) . "\r\n";
 		$fp = fopen("data.txt", "a");
 		fwrite($fp, $mensajeLog);
 		fclose($fp);
