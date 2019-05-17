@@ -65,10 +65,10 @@ class UserController extends Controller
         //                     ->where('pedido_id', $pedido_id)
         //                     ->get();
 
-        $detalle_pedido = App\DetallePedido::find($pedido_id);
+        $detalle_pedido = App\DetallePedido::find(700);
 
         dd($detalle_pedido);
-        
+
 
         // Verificamos que el pedido tenga detalle_pedidos
         if($detalle_pedido->isEmpty()){
