@@ -30,21 +30,21 @@
 					</span>
 				</h1>
 		
-				@isset($detalle_pedidos)
-					@foreach( $detalle_pedidos as $detalle )
+				@isset($detalle_pedido)
+					@foreach( $detalle_pedido as $detalle )
 						<div class="compras_pedido">
 							<label class="compras_pedido_info">
-								<a target="_blanc" href="/productos/{{ $detalle['id_producto'] }}-{{ $detalle['descripcion'] }}">
-									<img class="compras_pedido_info_img" src="{{ $detalle['imagen'] }}"></img>
+								<a target="_blanc" href="/productos/{{ $detalle['id_producto'] }}-{{ $detalle['detalle_descripcion'] }}">
+									<img class="compras_pedido_info_img" src="{{ $detalle['detalle_imagen'] }}"></img>
 								
 								</a>
 								<div class="compras_pedido_info_datos">
-									<a target="_blanc" href="/productos/{{ $detalle['id_producto'] }}-{{ $detalle['descripcion'] }}">
-										<label class="compras_pedido_info_nombre">{{ $detalle['descripcion'] }}</label>
+									<a target="_blanc" href="/productos/{{ $detalle['detalle_producto_ref'] }}-{{ $detalle['detalle_descripcion'] }}">
+										<label class="compras_pedido_info_nombre">{{ $detalle['detalle_descripcion'] }}</label>
 									</a>
 									<label class="compras_pedido_info_monto">
-										$ {{ number_format($detalle['precio'], 2) }} x {{ $detalle['cantidad'] }} unidad(es), 
-										<b>-{{ $detalle['descuento_porcentual'] }}%</b></label>
+										$ {{ number_format($detalle['detalle_precio'], 2) }} x {{ $detalle['detalle_cantidad'] }} unidad(es), 
+										<b>-{{ $detalle['detalle_promo_info'] }}</b></label>
 
 									<label class="compras_pedido_info_monto">
 										<?php 
@@ -52,7 +52,7 @@
 											$a_descontar = $precio * ($detalle['descuento_porcentual'] / 100);
 											$total = $precio - $a_descontar;
 										?> 
-										Total: $ {{ number_format($total, 2) }} 
+										Total: $ {{ number_format($detalle['detalle_precio_final'], 2) }} 
 									</label>	
 								</div>
 							</label>
