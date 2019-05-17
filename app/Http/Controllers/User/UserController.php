@@ -51,44 +51,32 @@ class UserController extends Controller
             return view('users.compras', ['Error' => 'Este pedido no existe!', 'pedido_id' => $pedido_id]);
         }
         // Si el pedido_id si existe para este usuario, hacemos la consulta de los detalles de ese pedido
-        // $detalle_pedido = App\DetallePedido::select(
-        //                     'pedido_id',
-        //                     'detalle_producto_ref',
-        //                     'detalle_descripcion',
-        //                     'detalle_imagen',
-        //                     'detalle_precio',
-        //                     'detalle_cantidad',
-        //                     'detalle_promo_info',
-        //                     'detalle_precio_final',
-        //                     'detalle_talla',
-        //                     'detalle_color')
-        //                     ->where('pedido_id', $pedido_id)
-        //                     ->get();
-
-        $detalle_pedido = App\DetallePedido::find(700);
-
-        dd($detalle_pedido);
+        $detalle_pedido = App\DetallePedido::select(
+                            'pedido_id',
+                            'detalle_producto_ref',
+                            'detalle_descripcion',
+                            'detalle_imagen',
+                            'detalle_precio',
+                            'detalle_cantidad',
+                            'detalle_promo_info',
+                            'detalle_precio_final',
+                            'detalle_talla',
+                            'detalle_color')
+                            ->where('pedido_id', $pedido_id)
+                            ->get();
 
 
         // Verificamos que el pedido tenga detalle_pedidos
         if($detalle_pedido->isEmpty()){
             return view('users.compras', ['Error' => 'Este pedido no tiene detalles!', 'pedido_id' => $pedido_id]);
         }
-        // foreach ($detalle_pedido as $detalles) {
-        //     $dato_detalle['producto_ref']   = $detalles->detalle_producto_ref;
-        //     $dato_detalle['precio']         = $detalles->detalle_precio;
-        //     $dato_detalle['cantidad']       = $detalles->detalle_cantidad;
-        //     $dato_detalle['promo_info']     = $detalles->detalle_promo_info;
-        //     $dato_detalle['precio_final']   = $detalles->detalle_precio_final;
-        //     $datos_detalles_factura[]       = $dato_detalle;
-
-        // }
-        // $dato_detalle['producto_ref']   = $detalle_pedido->detalle_producto_ref;
-        // $dato_detalle['precio']         = $detalle_pedido->detalle_precio;
-        // $dato_detalle['cantidad']       = $detalle_pedido->detalle_cantidad;
-        // $dato_detalle['promo_info']     = $detalle_pedido->detalle_promo_info;
-        // $dato_detalle['precio_final']   = $detalle_pedido->detalle_precio_final;
-        // $datos_detalles_factura[]       = $dato_detalle;
+        foreach ($detalle_pedido as $detalles) {
+            $dato_detalle['producto_ref']   = $detalles->detalle_producto_ref;
+            $dato_detalle['precio']         = $detalles->detalle_precio;
+            $dato_detalle['cantidad']       = $detalles->detalle_cantidad;
+            $dato_detalle['promo_info']     = $detalles->detalle_promo_info;
+            $dato_detalle['precio_final']   = $detalles->detalle_precio_final;
+        }
 
         //Obtener valor del pedido, dependiendo de los productos
         // foreach ($datos_detalles_factura as $key => $value) {
