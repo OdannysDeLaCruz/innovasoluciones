@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class ConfirmationController extends Controller
@@ -96,13 +97,14 @@ class ConfirmationController extends Controller
 	// Enviar mensaje de correo electronico al usuario informando de el estado de su pedido
  
     public function confirmation() {
-	    $mensajeLog = print_r($_POST,true) . "\r\n";
-		$fp = fopen("data.txt", "a");
-		fwrite($fp, "Datos obtenidos");
-		fclose($fp);
-
 		$reference_sale = $_POST['reference_sale'];
 		$pedido_id      = (int)$_POST['extra2'];
+
+	    $mensajeLog = print_r($_POST,true) . "\r\n";
+		$fp = fopen("data.txt", "a");
+		fwrite($fp, "Datos obtenidos \r\n ref: $reference_sale - id: $pedido_id : int - " . is_int($pedido_id));
+		fclose($fp);
+
         $pedido         = App\Pedido::find($pedido_id);
         $pedido->pedido_ref_venta = $reference_sale;
         $pedido->save();
