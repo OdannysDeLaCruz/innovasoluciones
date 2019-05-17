@@ -98,7 +98,18 @@ class ConfirmationController extends Controller
     public function confirmation() {
 	    $mensajeLog = print_r($_POST,true) . "\r\n";
 		$fp = fopen("data.txt", "a");
-		fwrite($fp, $mensajeLog);
+		fwrite($fp, "Datos obtenidos");
+		fclose($fp);
+
+		$reference_sale = $_POST['reference_sale'];
+		$pedido_id      = (int)$_POST['extra2'];
+        $pedido         = App\Pedido::find($pedido_id);
+        $pedido->pedido_ref_venta = $reference_sale;
+        $pedido->save();
+
+        $mensajeLog = print_r($_POST,true) . "\r\n";
+		$fp = fopen("data.txt", "a");
+		fwrite($fp, "Data insertado");
 		fclose($fp);
 		
     	date_default_timezone_set('America/Bogota');
