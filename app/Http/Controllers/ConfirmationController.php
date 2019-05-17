@@ -96,6 +96,15 @@ class ConfirmationController extends Controller
 	// Enviar mensaje de correo electronico al usuario informando de el estado de su pedido
  
     public function confirmation() {
+	    $mensajeLog .= print_r($_POST,true) . "\r\n";
+		if(strlen($mensajeLog)>0){
+			$filename = "data.txt";
+			$fp = fopen($filename, "a");
+			if($fp) {
+				fwrite($fp, $mensajeLog, strlen($mensajeLog));
+				fclose($fp);
+			}
+		}
     	date_default_timezone_set('America/Bogota');
     	
 		// Obtener datos de payu

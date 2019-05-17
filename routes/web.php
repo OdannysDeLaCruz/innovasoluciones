@@ -99,9 +99,9 @@ Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function(){
 });
 
 // Ruta para prueba de datos de la pagina confirmation
-Route::get('/datosconfirmation', function(){
+Route::get('/data', function(){
 
-	$file = fopen("pruebas.txt", "r") or exit("Unable to open file!");
+	$file = fopen("data.txt", "r") or exit("Unable to open file!");
 	//Output a line of the file until the end is reached
 	while(!feof($file)) {
 		echo fgets($file). "<br />";
