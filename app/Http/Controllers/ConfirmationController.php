@@ -11,85 +11,85 @@ class ConfirmationController extends Controller
     private $ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
 
 	// Recepcion y verificacion de los datos de funcion response
-    public function response(Request $request) {
+  //   public function response(Request $request) {
 
-    	// Numero de identificación del comercio en el sistema de payu
-		$merchant_id   = $request['merchantId'];
-		// Referencia de venta o pedido que se envia al sistema
-		$referenceCode = $request['referenceCode'];
-		// Es el monto total de la transacción. Puede contener dos dígitos decimales. Ej. 10000.00 ó 10000
-		$TX_VALUE      = $request['TX_VALUE'];
-		$New_value     = number_format($TX_VALUE, 1, '.', '');
-		// La moneda respectiva en la que se realiza el pago
-		$currency      = $request['currency'];
-		// Indica el estado de la transacción en el sistema
-		$transactionState = $request['transactionState'];
-		// Firma creada localmente para comparar con la firma que viene del sistema
-		$firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
-		$firmacreada   = md5($firma_cadena);
-		// Es la firma digital creada para cada uno de las transacciones
-		$firma         = $request['signature'];
-		// La referencia o número de la transacción generado en PayU
-		$reference_pol = $request['reference_pol'];
-		// El cus, código único de seguimiento, es la referencia del pago dentro del Banco, aplica solo para pagos con PSE
-		$cus           = $request['cus'];
-		// Es la descripción de la venta
-		$description   = $request['description'];
-		// Campo adicional para enviar información sobre la compra. Ej. Codigo id del pedido a actualizar
-		$extra1        = $request['extra1'];
-		// El nombre del banco, aplica solo para pagos con PSE
-		$pseBank       = $request['pseBank'];
-		// Medio de pago con el cual se hizo el pago por ejemplo VISA
-		$lapPaymentMethod = $request['lapPaymentMethod'];
-		// Tipo de medio de pago con el que se realiza por ejemplo CREDIT_CARD
-		$lapPaymentMethodType = $request['lapPaymentMethodType'];
-		// Identificador de la transacción
-		$transactionId = $request['transactionId'];
+  //   	// Numero de identificación del comercio en el sistema de payu
+		// $merchant_id   = $request['merchantId'];
+		// // Referencia de venta o pedido que se envia al sistema
+		// $referenceCode = $request['referenceCode'];
+		// // Es el monto total de la transacción. Puede contener dos dígitos decimales. Ej. 10000.00 ó 10000
+		// $TX_VALUE      = $request['TX_VALUE'];
+		// $New_value     = number_format($TX_VALUE, 1, '.', '');
+		// // La moneda respectiva en la que se realiza el pago
+		// $currency      = $request['currency'];
+		// // Indica el estado de la transacción en el sistema
+		// $transactionState = $request['transactionState'];
+		// // Firma creada localmente para comparar con la firma que viene del sistema
+		// $firma_cadena  = "$this->ApiKey~$merchant_id~$referenceCode~$New_value~$currency~$transactionState";
+		// $firmacreada   = md5($firma_cadena);
+		// // Es la firma digital creada para cada uno de las transacciones
+		// $firma         = $request['signature'];
+		// // La referencia o número de la transacción generado en PayU
+		// $reference_pol = $request['reference_pol'];
+		// // El cus, código único de seguimiento, es la referencia del pago dentro del Banco, aplica solo para pagos con PSE
+		// $cus           = $request['cus'];
+		// // Es la descripción de la venta
+		// $description   = $request['description'];
+		// // Campo adicional para enviar información sobre la compra. Ej. Codigo id del pedido a actualizar
+		// $extra1        = $request['extra1'];
+		// // El nombre del banco, aplica solo para pagos con PSE
+		// $pseBank       = $request['pseBank'];
+		// // Medio de pago con el cual se hizo el pago por ejemplo VISA
+		// $lapPaymentMethod = $request['lapPaymentMethod'];
+		// // Tipo de medio de pago con el que se realiza por ejemplo CREDIT_CARD
+		// $lapPaymentMethodType = $request['lapPaymentMethodType'];
+		// // Identificador de la transacción
+		// $transactionId = $request['transactionId'];
 
 		
-		$direccion_envio = Auth::user()->direccion . ' - ' . Auth::user()->barrio;
-		$forma_entrega = session('entrega_pedido');
+		// $direccion_envio = Auth::user()->direccion . ' - ' . Auth::user()->barrio;
+		// $forma_entrega = session('entrega_pedido');
 
-		if ($transactionState == 4 ) {
-			$estadoTx = "Transacción aprobada";
-		}
-		else if ($transactionState == 6 ) {
-			$estadoTx = "Transacción rechazada";
-		}
-		else if ($transactionState == 7 ) {
-			$estadoTx = "Transacción pendiente";
-		}
-		else if ($transactionState == 104 ) {
-			$estadoTx = "Error";
-		}
-		else {
-			$estadoTx = $request['mensaje'];
-		}
+		// if ($transactionState == 4 ) {
+		// 	$estadoTx = "Transacción aprobada";
+		// }
+		// else if ($transactionState == 6 ) {
+		// 	$estadoTx = "Transacción rechazada";
+		// }
+		// else if ($transactionState == 7 ) {
+		// 	$estadoTx = "Transacción pendiente";
+		// }
+		// else if ($transactionState == 104 ) {
+		// 	$estadoTx = "Error";
+		// }
+		// else {
+		// 	$estadoTx = $request['mensaje'];
+		// }
 
-    	return view('response',
-    		compact(
-    			'estadoTx',
-    			'merchant_id',
-    			'referenceCode',
-    			'TX_VALUE',
-    			'New_value',
-    			'currency',
-    			'transactionState',
-    			'firma_cadena',
-    			'firmacreada',
-    			'firma',
-    			'reference_pol',
-    			'cus',
-    			'extra1',
-    			'pseBank',
-    			'lapPaymentMethod',
-    			'lapPaymentMethodType',
-    			'transactionId', 
-    			'direccion_envio',
-    			'forma_entrega'
-    		)
-    	);
-    }
+  //   	return view('response',
+  //   		compact(
+  //   			'estadoTx',
+  //   			'merchant_id',
+  //   			'referenceCode',
+  //   			'TX_VALUE',
+  //   			'New_value',
+  //   			'currency',
+  //   			'transactionState',
+  //   			'firma_cadena',
+  //   			'firmacreada',
+  //   			'firma',
+  //   			'reference_pol',
+  //   			'cus',
+  //   			'extra1',
+  //   			'pseBank',
+  //   			'lapPaymentMethod',
+  //   			'lapPaymentMethodType',
+  //   			'transactionId', 
+  //   			'direccion_envio',
+  //   			'forma_entrega'
+  //   		)
+  //   	);
+  //   }
 
     // Recepcion y verificacion de los datos de funcion confirmation
 	// Actualizar la información de la tabla pedidos con los nuevos datos recibidos en confirmation
@@ -97,14 +97,10 @@ class ConfirmationController extends Controller
  
     public function confirmation() {
 	    $mensajeLog .= print_r($_POST,true) . "\r\n";
-		if(strlen($mensajeLog)>0){
-			$filename = "data.txt";
-			$fp = fopen($filename, "a");
-			if($fp) {
-				fwrite($fp, $mensajeLog, strlen($mensajeLog));
-				fclose($fp);
-			}
-		}
+		$fp = fopen("data.txt", "a");
+		fwrite($fp, $mensajeLog);
+		fclose($fp);
+		
     	date_default_timezone_set('America/Bogota');
     	
 		// Obtener datos de payu
