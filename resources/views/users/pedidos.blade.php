@@ -24,38 +24,34 @@
 				<h1 class="compras_titulo mt-5 mt-sm-0">Mis Pedidos</h1>
 				
 				@if(isset($mis_pedidos))
-					@foreach($mis_pedidos as $pedidos)
+					@foreach($mis_pedidos as $pedido)
 						<div class="compras_pedido">
-						<label class="compras_pedido_fecha">Fecha del pedido: {{ $pedidos['fecha_creado'] }}</label>
+						<label class="compras_pedido_fecha">Fecha del pedido: {{ $pedido['fecha_creado'] }}</label>
 						<!-- <label class="compras_pedido_estado">Pedido facturado <i class="fa fa-check-circle"></i></label> -->
 
 						<label class="compras_pedido_info">
 							<div class="compras_pedido_info_datos">
 								<label class="compras_pedido_info_pedido">
-									Pedido N° {{ $pedidos['id'] }}						
+									Pedido N° {{ $pedido['id'] }}						
 								</label>
 								<label class="compras_pedido_info_direccion">
-									<strong> Dirección de envio: </strong> 
-									{{ $pedidos['pedido_dir'] }}
+									<strong> Dirección de envío: </strong> 
+									{{ $pedido['pedido_dir'] }}
 								</label>
 								<label class="compras_pedido_info_metodo">
 									<strong> Referencia de venta: </strong>
-									 {{ $pedidos['pedido_ref_venta'] }}
+									 {{ $pedido['pedido_ref_venta'] }}
 								</label>
 								<label class="compras_pedido_info_codigo">
-									<strong> Id códfigo promoción: </strong>
-									{{ $pedidos['promocion_id'] }}
+									<strong> Id código de promoción: </strong>
+									{{ $pedido['promocion_id'] }}
 								</label>
 								<label class="compras_pedido_info_metodo">
 									<strong> Tipo de envío: </strong>
-									 {{ $pedidos['envio_id'] }}
+									 {{ $pedido['envio_id'] }}
 								</label>
-								<!-- <label class="compras_pedido_info_total">
-									<strong> Total pago: </strong>
-									 $ {{ $pedidos['total_pago'] }}
-								</label> -->
 								<label class="compras_pedido_info_detalles"> 
-									<a href="/perfil/pedidos/{{ $pedidos['id'] }}"> 
+									<a href="/perfil/pedidos/{{ $pedido['id'] }}"> 
 										<strong> Ver detalles </strong>
 									</a>
 								</label>	

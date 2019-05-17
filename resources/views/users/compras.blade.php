@@ -22,7 +22,7 @@
 		@section('content')
 			<section class="col-xs-12 col-sm-9 pl-sm-2 compras">
 				<h1 class="compras_titulo mt-5 mt-sm-0">
-					Pedido N° {{ $idPedido }}, 
+					Pedido N° {{ $pedido_id }}, 
 					<span class="compras_titulo_total">
 						@isset($total_pedido)
 							Valor del pedido: $ {{ $total_pedido }}

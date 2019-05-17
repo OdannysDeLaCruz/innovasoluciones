@@ -32,58 +32,58 @@ class UserController extends Controller
                             'pedido_ref_venta',
                             'promocion_id',
                             'envio_id',
-                            'transaccion_id')
+                            'transaccion_id',
+                            'fecha_creado')
                         ->where('user_id', $user_id)
                         ->get();
         return view('users.pedidos', compact('mis_pedidos'));
     }
 
-    public function showPedidoDetalles($idPedido) {
+    public function showPedidoDetalles($pedido_id) {
 
-        $id_user = Auth::user()->id;
-        $res = App\Pedido::select('id', 'id_user')->where('id', $idPedido)->where('id_user', $id_user)->get();
+        $user_id = Auth::user()->id;
+        $pedido = App\Pedido::select('id', 'user_id')
+                         ->where('id', $pedido_id)
+                         ->where('user_id', $user_id)
+                         ->get();
 
-        if ($res->isEmpty()) {
-            return view('users.compras', ['Error' => 'Este pedido no existe!', 'idPedido' => $idPedido]);
+        if ($pedido->isEmpty()) {
+            return view('users.compras', ['Error' => 'Este pedido no existe!', 'pedido_id' => $pedido_id]);
         }
-        // Si el idPedido si existe para este usuario, hacemos la consulta de los detalles de ese pedido
-        $detalle_pedidos = App\DetallePedido::select(
-                            'id_producto',
-                            'id_pedido',
-                            'descripcion',
-                            'imagen',
-                            'precio',
-                            'cantidad',
-                            'descuento_porcentual',
-                            'tamaño',
-                            'color'
-                        )
-                        ->where('id_pedido', $idPedido)
-                        ->get();
-        foreach ($detalle_pedidos as $detalles) {
-            $dato_detalle['precio']          = $detalles->precio;
-            $dato_detalle['cantidad']        = $detalles->cantidad;
-            $dato_detalle['descuento_porcentual'] = $detalles->descuento_porcentual;
-            $precio_neto                     = $detalles->precio * $detalles->cantidad;
-            $descuento_porcentual            = $dato_detalle['descuento_porcentual'] / 100;
-            // Valor a descontar en peso
-            $dato_detalle['descuento_peso']  = round($precio_neto * $descuento_porcentual);
-            $dato_detalle['importe_total']   = $precio_neto - $dato_detalle['descuento_peso'];
-            $datos_detalles_factura[]        = $dato_detalle;
-        }
-
+        // Si el pedido_id si existe para este usuario, hacemos la consulta de los detalles de ese pedido
+        $detalle_pedido = App\DetallePedido::select(
+                            'pedido_id',
+                            'detalle_producto_ref',
+                            'detalle_descripcion',
+                            'detalle_imagen',
+                            'detalle_precio',
+                            'detalle_cantidad',
+                            'detalle_promo_info',
+                            'detalle_precio_final',
+                            'detalle_talla',
+                            'detalle_color')
+                            ->where('pedido_id', $pedido_id)
+                            ->get();
         // Verificamos que el pedido tenga detalle_pedidos
-        if($detalle_pedidos->isEmpty()){
-            return view('users.compras', ['Error' => 'Este pedido no tiene detalles!', 'idPedido' => $idPedido]);
+        if($detalle_pedido->isEmpty()){
+            return view('users.compras', ['Error' => 'Este pedido no tiene detalles!', 'pedido_id' => $pedido_id]);
+        }
+        foreach ($detalle_pedido as $detalles) {
+            $dato_detalle['producto_ref']   = $detalles->detalle_producto_ref;
+            $dato_detalle['precio']         = $detalles->detalle_precio;
+            $dato_detalle['cantidad']       = $detalles->detalle_cantidad;
+            $dato_detalle['promo_info']     = $detalles->detalle_promo_info;
+            $dato_detalle['precio_final']   = $dato_detalle->detalle_precio_final;
+            $datos_detalles_factura[]       = $dato_detalle;
         }
 
         //Obtener valor del pedido, dependiendo de los productos
-        foreach ($datos_detalles_factura as $key => $value) {
-            $importes[] = $value['importe_total'];
-            $total_pedido = array_sum($importes);
-        }
+        // foreach ($datos_detalles_factura as $key => $value) {
+        //     $importes[] = $value['importe_total'];
+        //     $total_pedido = array_sum($importes);
+        // }
         
-        return view('users.compras', compact('detalle_pedidos', 'idPedido', 'total_pedido'));
+        return view('users.compras', compact('detalle_pedido', 'pedido_id'));
     }
 
     public function showFacturas() {
