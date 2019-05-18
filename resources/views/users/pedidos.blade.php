@@ -50,6 +50,8 @@
 									</span>
 									<span class="pedidos_info_datos_items pedidos_estado">
 										<span class="items_titulo"> Estado </span>
+										@if($pedido['estado'] == 0 || $pedido['estado'] == '')
+											<p class="estados pedidos_estado_espera"> {{ "En espera" }} </p>
 										@if($pedido['estado'] == 4)
 											<p class="estados pedidos_estado_aprovado"> {{ "Aprovado" }} </p>	
 										@elseif($pedido['estado'] == 6) 

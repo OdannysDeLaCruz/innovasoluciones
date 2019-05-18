@@ -65,10 +65,10 @@
 								<div class="info_pedido_seccion_block">
 									<span class="info_pedido_seccion_block_items titulo">Estado del pedido</span>
 									<span class="info_pedido_seccion_block_items texto">
-										@if($pedido->estado == 0)
+										@if($pedido->estado == 0 || $pedido->estado == '')
 											<p class="estados pedidos_estado_espera"> {{ "En espera" }} </p>	
 										@elseif($pedido->estado == 4) 
-											<p class="estados pedidos_estado_rechazado"> {{ "Rechazado" }} </p>
+											<p class="estados pedidos_estado_aprovado"> {{ "Aprovado" }} </p>
 										@elseif($pedido->estado == 6) 
 											<p class="estados pedidos_estado_rechazado"> {{ "Rechazado" }} </p>
 										@elseif($pedido->estado == 5)
