@@ -20,49 +20,130 @@
 	@extends('users/layout')
 		@section('pedidos') active @stop
 		@section('content')
-			<section class="col-xs-12 col-sm-9 pl-sm-2 compras">
-				<h1 class="compras_titulo mt-5 mt-sm-0">
-					Pedido N° {{ $pedido_id }}, 
-					<span class="compras_titulo_total">
-						@isset($total_pedido)
-							Valor del pedido: $ {{ $total_pedido }}
-						@endisset
-					</span>
-				</h1>
-		
-				@isset($detalle_pedido)
-					@foreach( $detalle_pedido as $detalle )
-						<div class="compras_pedido">
-							<label class="compras_pedido_info">
-								<a target="_blanc" href="/productos/{{ $detalle['id_producto'] }}-{{ $detalle['detalle_descripcion'] }}">
-									<img class="compras_pedido_info_img" src="{{ $detalle['detalle_imagen'] }}"></img>
-								
-								</a>
-								<div class="compras_pedido_info_datos">
-									<a target="_blanc" href="/productos/{{ $detalle['detalle_producto_ref'] }}-{{ $detalle['detalle_descripcion'] }}">
-										<label class="compras_pedido_info_nombre">{{ $detalle['detalle_descripcion'] }}</label>
-									</a>
-									<label class="compras_pedido_info_monto">
-										$ {{ number_format($detalle['detalle_precio'], 2) }} x {{ $detalle['detalle_cantidad'] }} unidad(es), 
-										<b>-{{ $detalle['detalle_promo_info'] }}</b></label>
+			<section class="col-xs-12 col-sm-9 pl-sm-2 compras_users">
+				<h1 class="titulo_seccion mt-2 mb-4">
+					<a class="btn btn-outline-dark btn-sm mr-2" style="text-decoration: none;" href="javascript:history.back(-1);" title="Ir la página anterior">
+						<span class="fa fa-arrow-left mr-2"> </span>
+						Detalles del pedido {{ $pedido_id }}
+					</a>
 
-									<label class="compras_pedido_info_monto">
+					<span id="btn-toggle-detalles" class="compras_users_btn_toggle">
+						<p class="compras_users_btn_toggle_texto" id="texto-toggle">Ocultar detalles</p>
+						<span class="fa fa-chevron-down compras_users_btn_toggle_icon" id="icono-toggle"></span>
+					</span>
+				</h1>				
+				@if(isset($info_pedido) && isset($detalle_pedido))
+					@foreach($info_pedido as $pedido)
+						<section class="row info_pedido" id="info_pedido">
+							<div class="col-12 col-lg-6 info_pedido_seccion">
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Dirección envío</span>
+									<span class="info_pedido_seccion_block_items texto">{{ $pedido->pedido_dir }}</span>
+								</div>
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Referencia de venta</span>
+									<span class="info_pedido_seccion_block_items texto">{{ $pedido->pedido_ref_venta }}</span>
+								</div>
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Valor del pedido</span>
+									<span class="info_pedido_seccion_block_items texto">$ {{ number_format($total_pagar, 0, '', '.') . " " . $pedido->tipo_moneda_transaccion }}</span>
+								</div>
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Promoción</span>
+									<span class="info_pedido_seccion_block_items texto">
+										@if($pedido->promo_nombre) 
+											{{ $pedido->promo_nombre }}
+										@else
+											{{ "Ningúno" }}
+										@endif
+									</span>
+								</div>
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Tipo de envío</span>
+									<span class="info_pedido_seccion_block_items texto">{{ $pedido->envio_metodo }}</span>
+								</div>
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Estado del pedido</span>
+									<span class="info_pedido_seccion_block_items texto">
+										@if($pedido->estado == 4)
+											<p class="estados pedidos_estado_aprovado"> {{ "Aprovado" }} </p>	
+										@elseif($pedido->estado == 6) 
+											<p class="estados pedidos_estado_rechazado"> {{ "Rechazado" }} </p>
+										@elseif($pedido->estado == 5)
+											<p class="estados pedidos_estado_declinado"> {{ "Declinado" }} </p>
+										@endif										
+									</span>
+								</div>
+							</div>
+							<div class="col-12 col-lg-6 info_pedido_seccion">
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Metodo de pago</span>
+									<span class="info_pedido_seccion_block_items texto">{{ $pedido->metodo_pago_nombre }}</span>
+								</div>
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Número de cuotas</span>
+									<span class="info_pedido_seccion_block_items texto">{{ $pedido->numero_cuotas_pago }}</span>
+								</div>
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Referencia venta de Payu</span>
+									<span class="info_pedido_seccion_block_items texto">{{ $pedido->referencia_venta_payu  }}</span>
+								</div>
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Transacciones PSE</span>
+									<span class="info_pedido_seccion_block_items texto">
+										{{ "Banco: " . $pedido->pse_bank }} <br>
+										{{ "Cus : " . $pedido->pse_cus }} <br>
+										{{ "Codigos: " . $pedido->pse_references }}
+									</span>
+								</div>
+
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Dispositivo donde se realizó la compra</span>
+									<span class="info_pedido_seccion_block_items texto">{{ $pedido->pedido_tipo_dispositivo }}</span>
+								</div>
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Fecha de transacción</span>
+									<span class="info_pedido_seccion_block_items texto">
+										@dateformat( $pedido->fecha_transaccion)
+									</span>
+								</div>
+							</div>
+						</section>
+					@endforeach
+
+					@foreach( $detalle_pedido as $detalle )
+						<div class="compras">
+							<span class="compras_info">
+								<a target="_blank" href="/productos/{{ $detalle['detalle_producto_ref'] }}-{{ $detalle['detalle_descripcion'] }}">
+									<img class="compras_info_img" src="{{ $detalle['detalle_imagen'] }}"></img>
+								</a>
+								<div class="compras_info_datos">
+									<a target="_blanc" href="/productos/{{ $detalle['detalle_producto_ref'] }}-{{ $detalle['detalle_descripcion'] }}">
+										<span class="compras_info_descripcion">{{ $detalle['detalle_descripcion'] }}</span>
+									</a>
+									<span class="compras_info_datos_items compras_costo_cantidad">
+										$ {{ number_format($detalle['detalle_precio'], 0, '', '.') }} x {{ $detalle['detalle_cantidad'] }} unidad(es)
+									</span>
+									<span class="compras_info_datos_items compras_promo_info">
+										{{ $detalle['detalle_promo_info'] }}
+									</span>
+									<span class="compras_info_datos_items compras_total">
 										<?php 
 											$precio = $detalle['precio'] * $detalle['cantidad'];
 											$a_descontar = $precio * ($detalle['descuento_porcentual'] / 100);
 											$total = $precio - $a_descontar;
 										?> 
-										Total: $ {{ number_format($detalle['detalle_precio_final'], 2) }} 
-									</label>	
+										Total: $ {{ number_format($detalle['detalle_precio_final'], 0, '', '.') }} 
+									</span>	
 								</div>
-							</label>
+							</span>
 						</div>
 					@endforeach
-				@endisset
+				@endif
 				<!-- si no existe compra, es por que la idPedido no existe para este usuario, verificamos si existe la variable Error -->
 				@isset($Error)
 					<div class="compras_pedido">
-						<label class="compras_pedido_error">{{ $Error }}</label>
+						<span class="compras_pedido_error">{{ $Error }}</span>
 					</div>
 				@endisset
 			</section> 

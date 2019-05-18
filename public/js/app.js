@@ -114,5 +114,21 @@ $(document).ready(function(){
             }
         );
     });
+
+    // OCULTAR O MOSTRAR LA SECCION DE INFORMACION DEL PEDIDO
+    $('#btn-toggle-detalles').on('click', function(){
+        let display = $('#info_pedido').css('display');
+        if (display == 'flex') {
+            $('#info_pedido').fadeOut(200);
+            $('#texto-toggle').text('Mostrar detalles');
+            $('#icono-toggle').css('transform', 'rotate(-90deg)')
+        }
+        else {
+            $('#info_pedido').fadeIn(200);
+            $('#texto-toggle').text('Ocultar detalles');
+            $('#icono-toggle').css('transform', 'rotate(-0deg)')
+        }
+
+    });
 });
 

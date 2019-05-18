@@ -26,28 +26,66 @@ class UserController extends Controller
     public function showPedidos() {
 
         $user_id = Auth::user()->id;
+        // $mis_pedidos = App\Pedido::select(
+        //                     'pedidos.id', 
+        //                     'pedidos.pedido_dir', 
+        //                     'pedidos.pedido_ref_venta',
+        //                     'pedidos.fecha_creado',
+        //                     'envios.envio_metodo',
+        //                     'promociones.promo_nombre',
+        //                     'transacciones.estado',
+        //                     'transacciones.mensaje_respuesta'
+        //                     )
+        //                     ->leftJoin('envios', 'pedidos.envio_id', '=', 'envios.id')
+        //                     ->leftJoin('promociones', 'pedidos.promocion_id', '=', 'promociones.id')
+        //                     ->leftJoin('transacciones', 'pedidos.transaccion_id', '=', 'transacciones.id')
+        //                     ->where('user_id', $user_id)
+        //                     ->get();
         $mis_pedidos = App\Pedido::select(
-                            'id', 
-                            'pedido_dir', 
-                            'pedido_ref_venta',
-                            'promocion_id',
-                            'envio_id',
-                            'transaccion_id',
-                            'fecha_creado')
-                        ->where('user_id', $user_id)
-                        ->get();
+                            'pedidos.id', 
+                            'pedidos.pedido_dir', 
+                            'pedidos.pedido_ref_venta',
+                            'pedidos.fecha_creado',
+                            'promociones.promo_nombre',
+                            'transacciones.estado'
+                            )
+                            ->leftJoin('promociones', 'pedidos.promocion_id', '=', 'promociones.id')
+                            ->leftJoin('transacciones', 'pedidos.transaccion_id', '=', 'transacciones.id')
+                            ->where('user_id', $user_id)
+                            ->get();
+
+        // dd($mis_pedidos);
         return view('users.pedidos', compact('mis_pedidos'));
     }
 
     public function showPedidoDetalles($pedido_id) {
+        date_default_timezone_set('America/Bogota');
+        // Unix
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+        // En windows
+        setlocale(LC_TIME, 'spanish');
+
+        // dd(strftime("%A, %d de %B del %Y", strtotime('2019-05-16 17:56:50')));
 
         $user_id = Auth::user()->id;
-        $pedido = App\Pedido::select('id', 'user_id')
-                         ->where('id', $pedido_id)
-                         ->where('user_id', $user_id)
-                         ->get();
+        $info_pedido = App\Pedido::select(
+                            'pedidos.id', 
+                            'pedidos.pedido_dir', 
+                            'pedidos.pedido_ref_venta',
+                            'pedidos.pedido_tipo_dispositivo',
+                            'pedidos.fecha_creado',
+                            'envios.envio_metodo',
+                            'promociones.promo_nombre',
+                            'transacciones.*'
+                            )
+                            ->leftJoin('envios', 'pedidos.envio_id', '=', 'envios.id')
+                            ->leftJoin('promociones', 'pedidos.promocion_id', '=', 'promociones.id')
+                            ->leftJoin('transacciones', 'pedidos.transaccion_id', '=', 'transacciones.id')
+                            ->where('pedidos.id', $pedido_id)
+                            ->where('pedidos.user_id', $user_id)
+                            ->get();
 
-        if ($pedido->isEmpty()) {
+        if ($info_pedido->isEmpty()) {
             return view('users.compras', ['Error' => 'Este pedido no existe!', 'pedido_id' => $pedido_id]);
         }
         // Si el pedido_id si existe para este usuario, hacemos la consulta de los detalles de ese pedido
@@ -65,26 +103,17 @@ class UserController extends Controller
                             ->where('pedido_id', $pedido_id)
                             ->get();
 
-
+        // dd($detalle_pedido);
         // Verificamos que el pedido tenga detalle_pedidos
         if($detalle_pedido->isEmpty()){
             return view('users.compras', ['Error' => 'Este pedido no tiene detalles!', 'pedido_id' => $pedido_id]);
         }
-        foreach ($detalle_pedido as $detalles) {
-            $dato_detalle['producto_ref']   = $detalles->detalle_producto_ref;
-            $dato_detalle['precio']         = $detalles->detalle_precio;
-            $dato_detalle['cantidad']       = $detalles->detalle_cantidad;
-            $dato_detalle['promo_info']     = $detalles->detalle_promo_info;
-            $dato_detalle['precio_final']   = $detalles->detalle_precio_final;
+        $total_pagar = 0;
+        foreach ($detalle_pedido as $detalle) {
+            $total_pagar += $detalle->detalle_precio_final;
         }
-
-        //Obtener valor del pedido, dependiendo de los productos
-        // foreach ($datos_detalles_factura as $key => $value) {
-        //     $importes[] = $value['importe_total'];
-        //     $total_pedido = array_sum($importes);
-        // }
-        
-        return view('users.compras', compact('detalle_pedido', 'pedido_id'));
+       
+        return view('users.compras', compact('info_pedido', 'detalle_pedido', 'pedido_id', 'total_pagar'));
     }
 
     public function showFacturas() {

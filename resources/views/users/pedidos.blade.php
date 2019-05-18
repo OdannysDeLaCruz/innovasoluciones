@@ -20,44 +20,50 @@
 	@extends('users/layout')
 		@section('pedidos') active @stop
 		@section('content')
-			<section class="col-xs-12 col-sm-9 pl-sm-2 compras">
-				<h1 class="compras_titulo mt-5 mt-sm-0">Mis Pedidos</h1>
+			<section class="col-xs-12 col-sm-9 pl-sm-2 pedidos_users">
+				<h1 class="titulo_seccion mt-2 mb-4">Pedidos</h1>
 				
 				@if(isset($mis_pedidos))
 					@foreach($mis_pedidos as $pedido)
-						<div class="compras_pedido">
-						<label class="compras_pedido_fecha">Fecha del pedido: {{ $pedido['fecha_creado'] }}</label>
-						<!-- <label class="compras_pedido_estado">Pedido facturado <i class="fa fa-check-circle"></i></label> -->
-
-						<label class="compras_pedido_info">
-							<div class="compras_pedido_info_datos">
-								<label class="compras_pedido_info_pedido">
-									Pedido N° {{ $pedido['id'] }}						
-								</label>
-								<label class="compras_pedido_info_direccion">
-									<strong> Dirección de envío: </strong> 
-									{{ $pedido['pedido_dir'] }}
-								</label>
-								<label class="compras_pedido_info_metodo">
-									<strong> Referencia de venta: </strong>
-									 {{ $pedido['pedido_ref_venta'] }}
-								</label>
-								<label class="compras_pedido_info_codigo">
-									<strong> Id código de promoción: </strong>
-									{{ $pedido['promocion_id'] }}
-								</label>
-								<label class="compras_pedido_info_metodo">
-									<strong> Tipo de envío: </strong>
-									 {{ $pedido['envio_id'] }}
-								</label>
-								<label class="compras_pedido_info_detalles"> 
-									<a href="/perfil/pedidos/{{ $pedido['id'] }}"> 
-										<strong> Ver detalles </strong>
-									</a>
-								</label>	
-							</div>
-						</label>
-					</div>
+						<div class="pedidos">
+							<header class="pedidos_cabecera">
+								<span class="numero_pedidos">Pedido N° {{ $pedido['id'] }}</span>
+								<span class="fecha_pedidos">Fecha del pedido: {{ $pedido['fecha_creado'] }}</span>						
+							</header>
+							<span class="pedidos_info">
+								<div class="pedidos_info_datos">
+									<span class="pedidos_info_datos_items pedidos_direccion">
+										<span class="items_titulo"> Dirección de envío </span> 
+										{{ $pedido['pedido_dir'] }}
+									</span>
+									<span class="pedidos_info_datos_items pedidos_referencia">
+										<span class="items_titulo"> Referencia de venta </span>
+										 {{ $pedido['pedido_ref_venta'] }}
+									</span>
+									<span class="pedidos_info_datos_items pedidos_codigo_promocion">
+										<span class="items_titulo"> Código de promoción </span>
+										@if($pedido['promo_nombre'] != null)
+											{{ $pedido['promo_nombre'] }}
+										@else 
+											{{ "Ningúno" }}
+										@endif
+									</span>
+									<span class="pedidos_info_datos_items pedidos_estado">
+										<span class="items_titulo"> Estado </span>
+										@if($pedido['estado'] == 4)
+											<p class="estados pedidos_estado_aprovado"> {{ "Aprovado" }} </p>	
+										@elseif($pedido['estado'] == 6) 
+											<p class="estados pedidos_estado_rechazado"> {{ "Rechazado" }} </p>
+										@elseif($pedido['estado'] == 5)
+											<p class="estados pedidos_estado_declinado"> {{ "Declinado" }} </p>
+										@endif
+									</span>
+									<span class="pedidos_info_datos_items pedidos_detalles"> 
+										<a href="/perfil/pedidos/{{ $pedido['id'] }}"> Ver detalles</a>
+									</span>	
+								</div>
+							</span>
+						</div>
 					@endforeach
 				@endisset
 			</section> 

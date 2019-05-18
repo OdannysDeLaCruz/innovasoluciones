@@ -1233,7 +1233,7 @@ footer {
 	align-items: center;
 	color: #008AFF;
 }
-.seccion_resumen_pedido {
+.seccion_resumen_pedidos {
 	background: #F5F5F5;
 }
 .payment_proceso {
@@ -1261,7 +1261,7 @@ footer {
 	padding: 20px;
 	box-shadow: 0 0 3px 0 rgba(0,0,0,.3);
 }
-.pedido {
+.pedidos {
 	background: #F5F5F5;
 	display: flex;
 	padding: 15px;
@@ -1270,25 +1270,25 @@ footer {
 	border-radius: 2px;
 	margin-bottom: 10px;
 }
-.pedido_img {
+.pedidos_img {
 	width: 70px;
 	height: 70px;
 	margin: 0;
 }
-.pedido_info {
+.pedidos_info {
 	display: flex;
 	flex-direction: column;
 	padding-left: 20px;
 }
-.pedido_info a:hover {
+.pedidos_info a:hover {
 	text-decoration: none;
 }
-.pedido_info_nombre {
+.pedidos_info_nombre {
 	font-size: 18px;
 	color: #3E3E3E;
 	text-align: justify;
 }
-.pedido_info_cantidad, .pedido_info_precio {
+.pedidos_info_cantidad, .pedidos_info_precio {
 	font-size: 16px;
 	color: #3E3E3E;
 	margin: 0;
@@ -1315,12 +1315,12 @@ footer {
 	padding: 3px 10px;
 	border-radius: 2px;
 }
-.tarjeta_resumen_pedido {
+.tarjeta_resumen_pedidos {
  	display: flex;
  	justify-content: flex-end;
  	flex-direction: column;
 }
-.tarjeta_resumen_pedido > .titulo_resumen_table {
+.tarjeta_resumen_pedidos > .titulo_resumen_table {
  	width: 100%;
  	text-align: center;
  	padding: 10px;
@@ -1328,16 +1328,16 @@ footer {
  	background: #5795E2;
  	color: #fff;
 }
-.tarjeta_resumen_pedido > .resumen_table {
+.tarjeta_resumen_pedidos > .resumen_table {
  	width: 500px;
  	margin: 0;
 }
-.tarjeta_resumen_pedido > .resumen_table th {
+.tarjeta_resumen_pedidos > .resumen_table th {
  	text-align: left;
  	font-weight: 300;
  	font-size: 18px;
 }
-.tarjeta_resumen_pedido > .resumen_table td {
+.tarjeta_resumen_pedidos > .resumen_table td {
  	text-align: right;
 }
 .tarjeta_botones_pedidos > .pedidos_botones {
@@ -1501,14 +1501,13 @@ footer {
 
 .contenedor_perfil {
 	background: #b3b3b3;
-	padding: 30px 0;
 	min-height: 100vh;
 }
 .perfil {
 	background: #fff;
 	padding: 20px;
 	margin: auto;
-	max-width: 1200px;
+	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
@@ -1601,100 +1600,206 @@ footer {
 .perfil_info_datos_block label > a {
 	margin-left: 10px;
 }
-.compras {
+.pedidos_users, .compras_users {
 	padding: 0px;
 }
-.compras_titulo_total {
-	font-family: 'Roboto Condensed', sans-serif;
+.titulo_seccion {
+	font-size: 22px;
+	color: #6B1FBA;
+	font-weight: 600;
 }
-.compras_pedido {
-	width: 100%;
-	padding: 10px;
+.pedidos_users > .pedidos {
+	position: relative;
+	padding: 50px 10px 10px 10px;
 	margin-bottom: 10px;
 	width: 100%;
 	border: 1px solid #bbbbbf;
 }
-.compras_pedido label {
+.pedidos_users > .pedidos span, .compras span {
 	margin: 0px;
 	padding: 0px;
 }
-label.compras_pedido_fecha {
+.pedidos_users > .pedidos > .pedidos_cabecera {
+	background: #ccc;
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	top: 0;
+	left: 0;
 	width: 100%;
-	text-align: right;
-	font-size: 13px;
-	color: #666;
-	font-style: italic;
-	margin: 0px;
+	padding: 5px 10px;
 }
-label.compras_pedido_estado {
-	width: 100%;
+.pedidos_users > .pedidos > .pedidos_cabecera > .numero_pedidos {
 	font-size: 18px;
-	color: #7fff2a;
-	font-style: italic;
-	margin-bottom: 20px;
+	font-weight: 600;
 }
-label.compras_pedido_error {
+.pedidos_users > .pedidos > .pedidos_cabecera > .fecha_pedidos {
+	font-size: 14px;
+	font-weight: 300;
+	padding: 0;	
+}
+.pedidos_users > .pedidos > .pedidos_info {
 	width: 100%;
-	font-size: 18px;
-	color: tomato;
-	font-style: italic;
-	font-weight: 500;
-}
-.compras_pedido_info {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	align-items: flex-start;
 }
-.compras_pedido_info_img {
-	width: 80px;
-}
-.compras_pedido_info_datos {
+.pedidos_users > .pedidos > .pedidos_info > .pedidos_info_datos {
 	width: 100%;
 	display: flex;
 	padding-left: 10px;
 	flex-direction: column;
 }
-.compras_pedido_info_datos a {
+
+.pedidos_users > .pedidos > .pedidos_info > .pedidos_info_datos a {
 	text-decoration: none;
 }
-.compras_pedido_info_datos a > label {
+.pedidos_users > .pedidos > .pedidos_info > .pedidos_info_datos a > span {
 	cursor: pointer;
 	font-size: 20px;
 	font-weight: 500;
 	color: #3F3F3F;
 	text-transform: capitalize;
 }
-.compras_pedido_info_datos a > label:hover {
+.pedidos_users > .pedidos > .pedidos_info > .pedidos_info_datos a > span:hover {
 	color: #6B6B6B;
 }
-.compras_pedido_info_datos label {
-	font-size: 17px;
-	color: #333;
+.pedidos_users > .pedidos > .pedidos_info > .pedidos_info_datos > .pedidos_info_datos_items {
+	font-size: 16px;
 	display: flex;
 	flex-direction: column;
 	font-family: 'Roboto Condensed', sans-serif;
 }
-label.compras_pedido_info_pedido {
-	font-size: 19px;
-	font-weight: 600;
-	font-style: italic;
-	font-family: 'Roboto Condensed', sans-serif;
-	margin-bottom: 10px;
-}
-.compras_pedido_info_datos label > strong {
+.pedidos_users > .pedidos > .pedidos_info > .pedidos_info_datos > .pedidos_info_datos_items > .items_titulo {
+	font-size: 16px;
 	background: #EBEBEB;
 	margin: 5px 0;
-	padding-left: 5px;
-	font-weight: 450;
+	color: #000000;
+	font-weight: 600;
 }
-label.compras_pedido_info_monto {
-	color: #808080;
-	
+.estados {
+	color: #fff;
+	width: 100px;
+	border-radius: 25px;
+	text-align: center;
+	padding: 4px 10px;
 }
-label.compras_pedido_info_detalles {
+.pedidos_estado_aprovado {
+	background: #46F577;
+}
+.pedidos_estado_rechazado {
+	background: #FFCD21;
+}
+.pedidos_estado_declinado {
+	background: #FF3C16;
+}
+.pedidos_users > .pedidos > .pedidos_info > .pedidos_info_datos > .pedidos_detalles > a {
+	font-size: 1em;
+}
+
+/*--Pagina de Compras (Detalles) de usuario--*/
+.compras_users .titulo_seccion {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.compras_users .titulo_seccion .compras_users_btn_toggle {
+	color: #00B1E4;
+	cursor: pointer;
+	display: flex;
+	font-size: 16px;
+	font-weight: 400;
+}
+.compras_users .titulo_seccion .compras_users_btn_toggle .compras_users_btn_toggle_texto, 
+.compras_users .titulo_seccion .compras_users_btn_toggle .compras_users_btn_toggle_icon {
+	margin: 0 5px;
+	transition: all ease .2s;
+}
+.compras_users .info_pedido {
+	margin: 30px 0 20px 0;
+	padding-bottom: 20px;
+	border-bottom: 5px solid #ccc;
+	display: flex;
+	height: auto;
+}
+
+.compras_users > .info_pedido > .info_pedido_seccion {
+
+}
+.compras_users > .info_pedido > .info_pedido_seccion > .info_pedido_seccion_block {
+	display: flex;
+	align-items: flex-start;
+	margin: 0;
+}
+.compras_users > .info_pedido > .info_pedido_seccion > .info_pedido_seccion_block > .info_pedido_seccion_block_items {
+	font-size: 16px;
+}
+.compras_users > .info_pedido > .info_pedido_seccion > .info_pedido_seccion_block > .titulo {
+	min-width: 200px;
+	max-width: 200px;
+	color: #000;
+	font-weight: 600;
+}
+.compras_users > .info_pedido > .info_pedido_seccion > .info_pedido_seccion_block > .texto {
+	color: #333;
+	font-weight: 400;
+	border-left: 1px solid #000;
+	margin: 0 0 10px 0;
+	padding: 0 5px;
+}
+.compras_users > .compras {
+	padding: 15px;
+	margin-bottom: 10px;
+	width: 100%;
+	border: 1px solid #bbbbbf;
+}
+.compras_users > .compras > .compras_info {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+.compras_users > .compras > .compras_info > a > .compras_info_img {
+	width: 80px;
+}
+.compras_users > .compras > .compras_info > .compras_info_datos {
+	width: 100%;
+	display: flex;
+	padding-left: 10px;
+	flex-direction: column;
+}
+.compras_users > .compras > .compras_info > .compras_info_datos > a > .compras_info_descripcion {
+	font-size: 17px;
+	color: #000000;
+	font-weight: 600;
+	display: inline-block;
+}
+.compras_users > .compras > .compras_info > .compras_info_datos > .compras_info_datos_items {
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+.compras_users > .compras > .compras_info > .compras_info_datos > .compras_promo_info {
+	font-size: 16px;
+	background: #00DAEE;
+	border-radius: 25px;
+	color: #fff;
+	padding: 2px 5px 2px 10px;
+}
+.compras_users > .compras > .compras_info > .compras_info_datos > .compras_total {
 	margin-top: 10px;
+	font-size: 1.01em;
+	font-weight: 600;
 }
+
+
+
+
+
+
 .facturas {
 	padding: 0;
 }

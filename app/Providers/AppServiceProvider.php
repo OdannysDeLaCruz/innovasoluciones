@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 // Los que he ido usanso yo
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Blade;
 use App;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,11 +19,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        date_default_timezone_set('America/Bogota');
+        // Unix
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+        // En windows
+        setlocale(LC_TIME, 'spanish');
+
         Schema::defaultStringLength(191);
 
         // Para compartir el menu de secciones con todas las vistas
         $secciones = App\Seccion::all();
         View::share('secciones', $secciones);
+
+        Blade::directive('dateformat', function ($expression) {            
+            return "<?php echo strftime('%A, %d de %B del %Y - %H:%M', strtotime($expression)); ?>"; 
+        });
     }
 
     /**
