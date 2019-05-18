@@ -59,13 +59,6 @@ class UserController extends Controller
     }
 
     public function showPedidoDetalles($pedido_id) {
-        date_default_timezone_set('America/Bogota');
-        // Unix
-        setlocale(LC_TIME, 'es_ES.UTF-8');
-        // En windows
-        setlocale(LC_TIME, 'spanish');
-
-        // dd(strftime("%A, %d de %B del %Y", strtotime('2019-05-16 17:56:50')));
 
         $user_id = Auth::user()->id;
         $info_pedido = App\Pedido::select(

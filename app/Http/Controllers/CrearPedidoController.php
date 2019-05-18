@@ -20,7 +20,7 @@ class CrearPedidoController extends Controller
 
 				// Crear una transacción
 				$transaccion = App\Transaccion::create([
-					'estado'                  => 4,
+					'estado'                  => 0,
 			        'mensaje_respuesta'       => 'En espera',
 			        'codigo_respuesta'        => 'En espera',
 			        'valor_transaccion'       => 0,
@@ -39,6 +39,8 @@ class CrearPedidoController extends Controller
 
     			// Crear el pedido
 				if($transaccion != "" && count(session('cart')) > 0 ) {
+					date_default_timezone_set('America/Bogota');
+					
 					$pedido_dir = Auth::user()->usuario_direccion . ', ' 
 								. Auth::user()->usuario_barrio . ' - ' 
 								. Auth::user()->usuario_ciudad . ', ' 

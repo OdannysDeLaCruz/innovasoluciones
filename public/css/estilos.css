@@ -1686,6 +1686,9 @@ footer {
 	text-align: center;
 	padding: 4px 10px;
 }
+.pedidos_estado_espera {
+	background: #768DC6;
+}
 .pedidos_estado_aprovado {
 	background: #46F577;
 }

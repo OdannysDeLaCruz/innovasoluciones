@@ -195,13 +195,12 @@ class ConfirmationController extends Controller
 	    $transaccion_id = $pedido->transaccion_id;
         $pedido->save();
 
-    	if ($sign === $firma_cadena) {
+    	// if ($sign === $firma_cadena) {
 
     		// Verificar el estado de la transacción
 	  		if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {        
 		        // Actualizar la transaccion
 		        $transaccion = App\Transaccion::find($transaccion_id);
-
 		        $transaccion->estado                = $state_pol;
 		        $transaccion->mensaje_respuesta     = $response_message_pol;
 		        $transaccion->codigo_respuesta      = $response_code_pol;
@@ -221,34 +220,6 @@ class ConfirmationController extends Controller
 		        $transaccion->fecha_actualizado     = $transaction_date;
 		        $transaccion->save();
 			}
-			elseif($state_pol == 6) {
-				// Actualizar la transaccion
-		        $transaccion = App\Transaccion::find($transaccion_id);
-
-		        $transaccion->estado                = $state_pol;
-		        $transaccion->mensaje_respuesta     = $response_message_pol;
-		        $transaccion->codigo_respuesta      = $response_code_pol;
-		        $transaccion->valor_transaccion     = $value;
-		        $transaccion->metodo_pago_tipo      = $payment_method_type;
-		        $transaccion->metodo_pago_nombre    = $payment_method_name;
-		        $transaccion->metodo_pago_id        = $payment_method_id;
-		        $transaccion->id_transaccion        = $transaction_id;
-		        $transaccion->referencia_venta_payu = $reference_pol;
-		        $transaccion->tipo_moneda_transaccion = $currency;
-		        $transaccion->numero_cuotas_pago    = $installments_number;
-		        $transaccion->ip_transaccion        = $ip;
-		        $transaccion->pse_cus               = $pse_cus ;
-		        $transaccion->pse_bank              = $pse_bank;
-		        $transaccion->pse_references        = $pse_reference1 . ',' . $pse_reference2 . ', ' . $pse_reference3;
-		        $transaccion->fecha_transaccion     = $transaction_date;
-		        $transaccion->fecha_actualizado     = $transaction_date;
-		        $transaccion->save();
-
-				if ($response_message_pol == 'APPROVED' && $response_code_pol == 1) {
-					$mensaje_transaccion = '';
-				}
-    		}else {
-    		}
-    	}
+    	// }
     }
 }
