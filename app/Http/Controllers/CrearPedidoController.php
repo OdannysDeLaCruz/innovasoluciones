@@ -23,6 +23,7 @@ class CrearPedidoController extends Controller
 					'estado'                  => 0,
 			        'mensaje_respuesta'       => 'En espera',
 			        'codigo_respuesta'        => 'En espera',
+			        'descripcion_transaccion' => 'En espera',
 			        'valor_transaccion'       => 0,
 			        'metodo_pago_tipo'        => 0,
 			        'metodo_pago_nombre'      => 'En espera',

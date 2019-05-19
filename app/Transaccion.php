@@ -11,6 +11,7 @@ class Transaccion extends Model
         'estado',
         'mensaje_respuesta',
         'codigo_respuesta',
+        'descripcion_transaccion',
         'valor_transaccion',
         'metodo_pago_tipo',
         'metodo_pago_nombre',

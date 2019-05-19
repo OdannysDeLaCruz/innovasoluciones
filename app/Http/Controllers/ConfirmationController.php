@@ -354,4 +354,3 @@ class ConfirmationController extends Controller
     	}
     }
 }
-

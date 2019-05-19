@@ -18,6 +18,7 @@ class CreateTransaccionesTable extends Migration
             $table->integer('estado')->nullable();
             $table->string('mensaje_respuesta')->nullable();
             $table->string('codigo_respuesta')->nullable();
+            $table->string('descripcion_transaccion')->nullable();
             $table->decimal('valor_transaccion', 10, 2)->nullable();
             $table->integer('metodo_pago_tipo')->nullable();
             $table->string('metodo_pago_nombre')->nullable();
