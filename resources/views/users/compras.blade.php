@@ -48,16 +48,14 @@
 									<span class="info_pedido_seccion_block_items titulo">Valor del pedido</span>
 									<span class="info_pedido_seccion_block_items texto">$ {{ number_format($total_pagar, 0, '', '.') . " " . $pedido->tipo_moneda_transaccion }}</span>
 								</div>
-								<div class="info_pedido_seccion_block">
-									<span class="info_pedido_seccion_block_items titulo">Promoción</span>
-									<span class="info_pedido_seccion_block_items texto">
-										@if($pedido->promo_nombre) 
-											{{ $pedido->promo_nombre }}
-										@else
-											{{ "Ningúno" }}
-										@endif
-									</span>
-								</div>
+								@if($pedido->promo_nombre) 
+									<div class="info_pedido_seccion_block">
+										<span class="info_pedido_seccion_block_items titulo">Promoción</span>
+										<span class="info_pedido_seccion_block_items texto">
+												{{ $pedido->promo_nombre }}
+										</span>
+									</div>
+								@endif
 								<div class="info_pedido_seccion_block">
 									<span class="info_pedido_seccion_block_items titulo">Tipo de envío</span>
 									<span class="info_pedido_seccion_block_items texto">{{ $pedido->envio_metodo }}</span>
@@ -76,6 +74,10 @@
 										@endif										
 									</span>
 								</div>
+								<div class="info_pedido_seccion_block">
+									<span class="info_pedido_seccion_block_items titulo">Descripcion de transacción</span>
+									<span class="info_pedido_seccion_block_items texto">{{ $pedido->descripcion_transaccion }}</span>
+								</div>
 							</div>
 							<div class="col-12 col-lg-6 info_pedido_seccion">
 								<div class="info_pedido_seccion_block">
@@ -91,14 +93,19 @@
 									<span class="info_pedido_seccion_block_items texto">{{ $pedido->referencia_venta_payu  }}</span>
 								</div>
 								<div class="info_pedido_seccion_block">
-									<span class="info_pedido_seccion_block_items titulo">Transacciones PSE</span>
+									<span class="info_pedido_seccion_block_items titulo">Transacciones con PSE</span>
 									<span class="info_pedido_seccion_block_items texto">
-										{{ "Banco: " . $pedido->pse_bank }} <br>
-										{{ "Cus : " . $pedido->pse_cus }} <br>
-										{{ "Codigos: " . $pedido->pse_references }}
+										@if($pedido->pse_bank)
+											{{ "Banco: " . $pedido->pse_bank }} <br>
+										@endif
+										@if($pedido->pse_cus)
+											{{ "Cus : " . $pedido->pse_cus }} <br>
+										@endif
+										@if($pedido->pse_references)
+											{{ "Codigos: " . $pedido->pse_references }}
+										@endif
 									</span>
 								</div>
-
 								<div class="info_pedido_seccion_block">
 									<span class="info_pedido_seccion_block_items titulo">Dispositivo donde se realizó la compra</span>
 									<span class="info_pedido_seccion_block_items texto">{{ $pedido->pedido_tipo_dispositivo }}</span>
