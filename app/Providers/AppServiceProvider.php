@@ -19,18 +19,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        Schema::defaultStringLength(191);
+
+        // Para compartir el menu de secciones con todas las vistas
+        // $secciones = App\Seccion::all();
+        // View::share('secciones', $secciones);
+
         date_default_timezone_set('America/Bogota');
         // Unix
         setlocale(LC_TIME, 'es_ES.UTF-8');
         // En windows
         setlocale(LC_TIME, 'spanish');
-
-        Schema::defaultStringLength(191);
-
-        // Para compartir el menu de secciones con todas las vistas
-        $secciones = App\Seccion::all();
-        View::share('secciones', $secciones);
-
+        
         Blade::directive('dateformat', function ($expression) {            
             return "<?php echo strftime('%A, %d de %B del %Y - %H:%M', strtotime($expression)); ?>"; 
         });

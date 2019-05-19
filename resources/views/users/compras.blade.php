@@ -68,11 +68,11 @@
 										@if($pedido->estado == 0 || $pedido->estado == '')
 											<p class="estados pedidos_estado_espera"> {{ "En espera" }} </p>	
 										@elseif($pedido->estado == 4) 
-											<p class="estados pedidos_estado_aprovado"> {{ "Aprovado" }} </p>
+											<p class="estados pedidos_estado_aprovada"> {{ "Aprovado" }} </p>
 										@elseif($pedido->estado == 6) 
-											<p class="estados pedidos_estado_rechazado"> {{ "Rechazado" }} </p>
+											<p class="estados pedidos_estado_declinada"> {{ "Declinada" }} </p>
 										@elseif($pedido->estado == 5)
-											<p class="estados pedidos_estado_declinado"> {{ "Declinado" }} </p>
+											<p class="estados pedidos_estado_expirada"> {{ "Expirada" }} </p>
 										@endif										
 									</span>
 								</div>

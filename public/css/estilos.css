@@ -1689,13 +1689,13 @@ footer {
 .pedidos_estado_espera {
 	background: #768DC6;
 }
-.pedidos_estado_aprovado {
+.pedidos_estado_aprovada {
 	background: #46F577;
 }
-.pedidos_estado_rechazado {
+.pedidos_estado_decinada {
 	background: #FFCD21;
 }
-.pedidos_estado_declinado {
+.pedidos_estado_expirada {
 	background: #FF3C16;
 }
 .pedidos_users > .pedidos > .pedidos_info > .pedidos_info_datos > .pedidos_detalles > a {

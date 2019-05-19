@@ -26,35 +26,20 @@ class UserController extends Controller
     public function showPedidos() {
 
         $user_id = Auth::user()->id;
-        // $mis_pedidos = App\Pedido::select(
-        //                     'pedidos.id', 
-        //                     'pedidos.pedido_dir', 
-        //                     'pedidos.pedido_ref_venta',
-        //                     'pedidos.fecha_creado',
-        //                     'envios.envio_metodo',
-        //                     'promociones.promo_nombre',
-        //                     'transacciones.estado',
-        //                     'transacciones.mensaje_respuesta'
-        //                     )
-        //                     ->leftJoin('envios', 'pedidos.envio_id', '=', 'envios.id')
-        //                     ->leftJoin('promociones', 'pedidos.promocion_id', '=', 'promociones.id')
-        //                     ->leftJoin('transacciones', 'pedidos.transaccion_id', '=', 'transacciones.id')
-        //                     ->where('user_id', $user_id)
-        //                     ->get();
         $mis_pedidos = App\Pedido::select(
                             'pedidos.id', 
                             'pedidos.pedido_dir', 
                             'pedidos.pedido_ref_venta',
                             'pedidos.fecha_creado',
                             'promociones.promo_nombre',
-                            'transacciones.estado'
+                            'transacciones.estado',
+                            'transacciones.fecha_transaccion'
                             )
                             ->leftJoin('promociones', 'pedidos.promocion_id', '=', 'promociones.id')
                             ->leftJoin('transacciones', 'pedidos.transaccion_id', '=', 'transacciones.id')
                             ->where('user_id', $user_id)
                             ->get();
 
-        // dd($mis_pedidos);
         return view('users.pedidos', compact('mis_pedidos'));
     }
 

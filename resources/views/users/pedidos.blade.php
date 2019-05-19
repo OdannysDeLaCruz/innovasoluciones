@@ -28,7 +28,7 @@
 						<div class="pedidos">
 							<header class="pedidos_cabecera">
 								<span class="numero_pedidos">Pedido N° {{ $pedido['id'] }}</span>
-								<span class="fecha_pedidos">Fecha del pedido: {{ $pedido['fecha_creado'] }}</span>						
+								<span class="fecha_pedidos">Fecha del pedido: @dateformat( $pedido->fecha_transaccion)</span>						
 							</header>
 							<span class="pedidos_info">
 								<div class="pedidos_info_datos">
@@ -49,15 +49,15 @@
 										@endif
 									</span>
 									<span class="pedidos_info_datos_items pedidos_estado">
-										<span class="items_titulo"> Estado </span>
+										<span class="items_titulo"> Estado transacción</span>
 										@if($pedido['estado'] == 0 || $pedido['estado'] == '')
 											<p class="estados pedidos_estado_espera"> {{ "En espera" }} </p>
 										@elseif($pedido['estado'] == 4)
-											<p class="estados pedidos_estado_aprovado"> {{ "Aprovado" }} </p>	
+											<p class="estados pedidos_estado_aprovada"> {{ "Aprovada" }} </p>	
 										@elseif($pedido['estado'] == 6) 
-											<p class="estados pedidos_estado_rechazado"> {{ "Rechazado" }} </p>
+											<p class="estados pedidos_estado_declinada"> {{ "Declinada" }} </p>
 										@elseif($pedido['estado'] == 5)
-											<p class="estados pedidos_estado_declinado"> {{ "Declinado" }} </p>
+											<p class="estados pedidos_estado_expirada"> {{ "Expirada" }} </p>
 										@endif
 									</span>
 									<span class="pedidos_info_datos_items pedidos_detalles"> 

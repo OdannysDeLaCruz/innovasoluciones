@@ -195,31 +195,163 @@ class ConfirmationController extends Controller
 	    $transaccion_id = $pedido->transaccion_id;
         $pedido->save();
 
-    	// if ($sign === $firma_cadena) {
+    	if ($sign === $firma_cadena) {
+	        $transaccion = App\Transaccion::find($transaccion_id);
 
     		// Verificar el estado de la transacción
-	  		if($state_pol == 4 && $response_message_pol == 'APPROVED' && $response_code_pol == 1) {        
-		        // Actualizar la transaccion
-		        $transaccion = App\Transaccion::find($transaccion_id);
-		        $transaccion->estado                = $state_pol;
-		        $transaccion->mensaje_respuesta     = $response_message_pol;
-		        $transaccion->codigo_respuesta      = $response_code_pol;
-		        $transaccion->valor_transaccion     = $value;
-		        $transaccion->metodo_pago_tipo      = $payment_method_type;
-		        $transaccion->metodo_pago_nombre    = $payment_method_name;
-		        $transaccion->metodo_pago_id        = $payment_method_id;
-		        $transaccion->id_transaccion        = $transaction_id;
-		        $transaccion->referencia_venta_payu = $reference_pol;
-		        $transaccion->tipo_moneda_transaccion = $currency;
-		        $transaccion->numero_cuotas_pago    = $installments_number;
-		        $transaccion->ip_transaccion        = $ip;
-		        $transaccion->pse_cus               = $pse_cus ;
-		        $transaccion->pse_bank              = $pse_bank;
-		        $transaccion->pse_references        = $pse_reference1 . ',' . $pse_reference2 . ', ' . $pse_reference3;
-		        $transaccion->fecha_transaccion     = $transaction_date;
-		        $transaccion->fecha_actualizado     = $transaction_date;
-		        $transaccion->save();
+	  		if ($state_pol == 4 && $response_message_pol === 'APPROVED' && $response_code_pol == 1) {  
+	  			$descripcion_transaccion = 'Transacción aprobada';
 			}
-    	// }
+			if ($state_pol == 6) {
+				if ($response_code_pol == 4) {
+					if ($response_message_pol === 'PAYMENT_NETWORK_REJECTED') {
+						$descripcion_transaccion = 'Transacción rechazada por entidad financiera';
+					}
+				}
+				if ($response_code_pol == 5) {
+					if ($response_message_pol === 'ENTITY_DECLINED') {
+						$descripcion_transaccion = 'Transacción rechazada por el banco';
+					}
+				}
+				if ($response_code_pol == 6) {
+					if ($response_message_pol === 'INSUFFICIENT_FUNDS') {
+						$descripcion_transaccion = 'Fondos insuficientes';
+					}
+				}
+				if ($response_code_pol == 7) {
+					if ($response_message_pol === 'INVALID_CARD') {
+						$descripcion_transaccion = 'Tarjeta inválida';
+					}
+				}
+				if ($response_code_pol == 8) {
+					if ($response_message_pol === 'CONTACT_THE_ENTITY') {
+						$descripcion_transaccion = 'Contactar entidad financiera';						
+					}
+					if (
+						$response_message_pol === 'BANK_ACCOUNT_ACTIVATION_ERROR' && 
+						$response_message_pol === 'BANK_ACCOUNT_NOT_AUTHORIZED_FOR_AUTOMATIC_DEBIT' && 
+						$response_message_pol === 'INVALID_AGENCY_BANK_ACCOUNT' && 
+						$response_message_pol === 'INVALID_BANK_ACCOUNT' &&
+						$response_message_pol === 'INVALID_BANK'
+					) {
+						$descripcion_transaccion = 'Débito automático no permitido';
+					}
+				}
+				if ($response_code_pol == 9) {
+					if ($response_message_pol === 'EXPIRED_CARD') {
+						$descripcion_transaccion = 'Tarjeta vencida';	
+					}
+				}
+				if ($response_code_pol == 10) {
+					if ($response_message_pol === 'RESTRICTED_CARD') {
+						$descripcion_transaccion = 'Tarjeta restringida';	
+					}
+				}
+				if ($response_code_pol == 12) {
+					if ($response_message_pol === 'INVALID_EXPIRATION_DATE_OR_SECURITY_CODE') {
+						$descripcion_transaccion = 'Fecha de expiración o código de seguridadinválidos';	
+					}
+				}
+				if ($response_code_pol == 13) {
+					if ($response_message_pol === 'REPEAT_TRANSACTION') {
+						$descripcion_transaccion = 'Reintentar pago';	
+					}
+				}
+				if ($response_code_pol == 14) {
+					if ($response_message_pol === 'INVALID_TRANSACTION') {
+						$descripcion_transaccion = 'Transacción inválida';	
+					}
+				}
+				if ($response_code_pol == 17) {
+					if ($response_message_pol === 'EXCEEDED_AMOUNT') {
+						$descripcion_transaccion = 'El valor excede el máximo permitido por la entidad';	
+					}
+				}
+				if ($response_code_pol == 19) {
+					if ($response_message_pol === 'ABANDONED_TRANSACTION') {
+						$descripcion_transaccion = 'Transacción abandonada por el pagador';	
+					}
+				}
+				if ($response_code_pol == 22) {
+					if ($response_message_pol === 'CREDIT_CARD_NOT_AUTHORIZED_FOR_INTERNET_TRANSACTIONS') {
+						$descripcion_transaccion = 'Tarjeta no autorizada para comprar por internet';	
+					}
+				}
+				if ($response_code_pol == 23) {
+					if ($response_message_pol === 'ANTIFRAUD_REJECTED') {
+						$descripcion_transaccion = 'Transacción rechazada por sospecha de fraude';	
+					}
+				}
+				if ($response_code_pol == 9995) {
+					if ($response_message_pol === 'DIGITAL_CERTIFICATE_NOT_FOUND') {
+						$descripcion_transaccion = 'Certificado digital no encotnrado';	
+					}
+				}
+				if ($response_code_pol == 9996) {
+					if ($response_message_pol === 'BANK_UNREACHABLE') {
+						$descripcion_transaccion = 'Error tratando de cominicarse con el banco';	
+					}
+					if ($response_message_pol === 'PAYMENT_NETWORK_NO_CONNECTION') {
+						$descripcion_transaccion = 'No fue posible establecer comunicación con la entidad financiera';	
+					}
+					if ($response_message_pol === 'PAYMENT_NETWORK_NO_RESPONSE') {
+						$descripcion_transaccion = 'No se recibió respuesta de la entidad financiera';	
+					}
+				}
+				if ($response_code_pol == 9997) {
+					if ($response_message_pol === 'ENTITY_MESSAGING_ERROR') {
+						$descripcion_transaccion = 'Error comunicándose con la entidad financiera';	
+					}
+				}
+				if ($response_code_pol == 9998) {
+					if ($response_message_pol === 'NOT_ACCEPTED_TRANSACTION') {
+						$descripcion_transaccion = 'Transacción no permitida';	
+					}
+				}
+				if ($response_code_pol == 9999) {
+					if (
+						$response_message_pol === 'INTERNAL_PAYMENT_PROVIDER_ERROR' &&
+						$response_message_pol === 'INACTIVE_PAYMENT_PROVIDER' &&
+						$response_message_pol === 'ERROR' &&
+						$response_message_pol === 'ERROR_CONVERTING_TRANSACTION_AMOUNTS' &&
+						$response_message_pol === 'BANK_ACCOUNT_ACTIVATION_ERROR' &&
+						$response_message_pol === 'FIX_NOT_REQUIRED' &&
+						$response_message_pol === 'AUTOMATICALLY_FIXED_AND_SUCCESS_REVERSAL' &&
+						$response_message_pol === 'AUTOMATICALLY_FIXED_AND_UNSUCCESS_REVERSAL' &&
+						$response_message_pol === 'AUTOMATIC_FIXED_NOT_SUPPORTED' &&
+						$response_message_pol === 'NOT_FIXED_FOR_ERROR_STATE' &&
+						$response_message_pol === 'ERROR_FIXING_AND_REVERSING' &&
+						$response_message_pol === 'ERROR_FIXING_INCOMPLETE_DATA' &&
+						$response_message_pol === 'PAYMENT_NETWORK_BAD_RESPONSE'
+					) {
+						$descripcion_transaccion = 'Error';
+					}
+				}
+			}
+			if ($state_pol == 5 && $response_message_pol === 'EXPIRED_TRANSACTION' && $response_code_pol == 20) {
+				$descripcion_transaccion = 'Transacción expirada';
+			}
+
+			$transaccion->estado                = $state_pol;
+	        $transaccion->mensaje_respuesta     = $response_message_pol;
+	        $transaccion->codigo_respuesta      = $response_code_pol;
+	        $transaccion->descripcion_transaccion = $descripcion_transaccion;
+	        $transaccion->valor_transaccion     = $value;
+	        $transaccion->metodo_pago_tipo      = $payment_method_type;
+	        $transaccion->metodo_pago_nombre    = $payment_method_name;
+	        $transaccion->metodo_pago_id        = $payment_method_id;
+	        $transaccion->id_transaccion        = $transaction_id;
+	        $transaccion->referencia_venta_payu = $reference_pol;
+	        $transaccion->tipo_moneda_transaccion = $currency;
+	        $transaccion->numero_cuotas_pago    = $installments_number;
+	        $transaccion->ip_transaccion        = $ip;
+	        $transaccion->pse_cus               = $pse_cus ;
+	        $transaccion->pse_bank              = $pse_bank;
+	        $transaccion->pse_references        = $pse_reference1 . ',' . $pse_reference2 . ', ' . $pse_reference3;
+	        $transaccion->fecha_transaccion     = $transaction_date;
+	        $transaccion->fecha_actualizado     = $transaction_date;
+	        $transaccion->save();
+    	}
     }
 }
+
