@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
         setlocale(LC_TIME, 'spanish');
         
         Blade::directive('dateformat', function ($expression) {            
-            return "<?php echo strftime('%A, %d de %B de %Y - %H:%M', strtotime($expression)); y 
+            return "<?php echo strftime('%A, %d de %B de %Y - %H:%M', strtotime($expression)); ?>"; 
         });
     }
 
