@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Pedido::class, function (Faker $faker) {
     date_default_timezone_set('America/Bogota');
     
-    $user_id = App\User::where('id', rand(1, 7))->value('id');
+    $user_id = App\User::where('id', rand(1, 6))->value('id');
     $pedido_dir = App\User::where('id', $user_id)->value('usuario_direccion');   
 
     return [

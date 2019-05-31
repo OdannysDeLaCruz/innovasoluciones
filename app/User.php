@@ -19,6 +19,8 @@ class User extends Authenticatable
         'usuario_nombre',
         'usuario_apellido',
         'usuario_cedula',
+        'usuario_sexo',
+        'usuario_avatar',
         'usuario_telefono',
         'email',
         'usuario_pais',

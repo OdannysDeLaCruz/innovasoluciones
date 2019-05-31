@@ -158,9 +158,6 @@ class ConfirmationController extends Controller
 
 		$payment_method_name = $_POST['payment_method_name']; //VISA
 
-		// Referencia del pedido en payu
-		$reference_pol = $_POST['reference_pol']; //7069375
-
 		$currency = $_POST['currency']; //USD, COP
 
 		// Número de cuotas en las cuales se difirió el pago con tarjeta crédito.
@@ -171,6 +168,9 @@ class ConfirmationController extends Controller
 
 		// Dirección ip desde donde se realizó la transacción.
 		$ip = $_POST['ip']; //190.242.116.98
+
+		// Referencia del pedido en payu
+		$reference_pol = $_POST['reference_pol']; //7069375
 
 		// Es la referencia de la venta o pedido. Deber ser único por cada transacción que se envía al sistema.
 		// Esta es la que se envió a payu desde el formulario en el input referenceCode
@@ -347,7 +347,7 @@ class ConfirmationController extends Controller
 	        $transaccion->ip_transaccion        = $ip;
 	        $transaccion->pse_cus               = $pse_cus ;
 	        $transaccion->pse_bank              = $pse_bank;
-	        $transaccion->pse_references        = $pse_reference1 . ',' . $pse_reference2 . ', ' . $pse_reference3;
+	        $transaccion->pse_references        = $pse_reference1 . ', ' . $pse_reference2 . ', ' . $pse_reference3;
 	        $transaccion->fecha_transaccion     = $transaction_date;
 	        $transaccion->fecha_actualizado     = $transaction_date;
 	        $transaccion->save();

@@ -16,20 +16,20 @@
 		@foreach($productos_nuevos as $nuevos)
 			<?php 
 				$ref  = $nuevos['producto_ref'];
-				$desc = str_replace(" ", "-", $nuevos['producto_descripcion']);
+				$nombre = str_replace(" ", "_", $nuevos['producto_nombre']);
 			?>
 			<section class="producto">
 				<figure>
-					<a href="/productos/{{ $ref }}-{{ $desc }}">
-						<img src="{{ $nuevos['producto_imagen'] }}" class="producto_img" alt="{{ $nuevos['producto_descripcion'] }}">
+					<a href="/productos/{{ $ref }}-{{ $nombre }}">
+						<img src='{{ asset("storage/productos/imagenes/miniaturas/$nuevos->producto_imagen") }}' class="producto_img" alt="{{ $nuevos['producto_nombre'] }}">
 					</a>
 				</figure>
 				<div class="producto_info">
-					<a href="/productos/{{ $ref }}-{{ $desc }}">
-						<h1 class="producto_titulo"> {{ $nuevos['producto_descripcion'] }}</h1>
+					<a href="/productos/{{ $ref }}-{{ $nombre }}">
+						<h1 class="producto_titulo"> {{ $nuevos['producto_nombre'] }}</h1>
 					</a>
 
-					@if($nuevos['promo_tipo'] == 'descuento%')
+					@if($nuevos['promo_tipo'] == '%')
 						<span class="producto_precio_anterior">
 							<p class="descuento">
 								-{{ $nuevos['promo_costo'] }}%
@@ -37,7 +37,7 @@
 							<p class="precio_anterior"> ${{ number_format($nuevos['producto_precio'], 0, ',', '.') }} </p>
 						</span>
 
-					@elseif($nuevos['promo_tipo'] == 'peso')
+					@elseif($nuevos['promo_tipo'] == '$')
 						<span class="producto_precio_anterior">
 							<p class="descuento">
 								-${{ number_format($nuevos['promo_costo'], 0, ',', '.') }}							
@@ -55,11 +55,11 @@
 
 				<label class="producto_precio">
 					@php
-					if($nuevos['promo_tipo'] == 'descuento%') {
+					if($nuevos['promo_tipo'] == '%') {
 						$descuento = $nuevos['producto_precio'] * ($nuevos['promo_costo'] / 100);
 						$total = $nuevos['producto_precio'] - $descuento;
 					}
-					elseif($nuevos['promo_tipo'] == 'peso'){
+					elseif($nuevos['promo_tipo'] == '$'){
 						$total = $nuevos['producto_precio'] - $nuevos['promo_costo'];
 					}
 					else {

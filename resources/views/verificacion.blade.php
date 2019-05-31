@@ -25,15 +25,18 @@
 				<section class="payment_proceso_tarjeta tarjeta_detalle_pedido">
 					@foreach($cart as $carrito)
 						<section class="pedido">
-							<a target="_blank" href="/productos/{{ $carrito['id'] }}-{{ $carrito['descripcion'] }}">
-								<img class="pedido_img" src="{{ $carrito['imagen'] }}">						
+							<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
+									@php
+										$url = "storage/productos/imagenes/miniaturas/" . $carrito['imagen'];
+									@endphp
+								<img class="pedido_img" src="{{ $url }}">						
 							</a>
 							<div class="pedido_info">
-								<a target="_blank" href="/productos/{{ $carrito['id'] }}-{{ $carrito['descripcion'] }}">
-									<h1 class="pedido_info_nombre">{{ $carrito['descripcion'] }}</h1>
+								<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
+									<h1 class="pedido_info_nombre">{{ $carrito['nombre'] }}</h1>
 								</a>
 								<label class="pedido_info_precio">
-									Precio: <b>${{ number_format($carrito['precio'], 2) }} </b>
+									Precio: <b>${{ number_format($carrito['precio'], 0, '', '.') }} </b>
 								</label>
 								<label class="pedido_info_cantidad">
 									Cantidad: <b>{{ $carrito['cantidad'] }}</b>
@@ -44,7 +47,7 @@
 									</label>								
 								@endif
 								<label class="pedido_info_precio">
-									Total: <b>${{ number_format($carrito['total'], 2) }} </b>
+									Total: <b>${{ number_format($carrito['total'], 0, '', '.') }} </b>
 								</label>
 							</div>
 						</section>
@@ -70,7 +73,7 @@
 									</script>
 								@endif
 								
-								<label style="margin: 0;" for="codigo">
+								<label style="margin: 0;" for="codigo" class="text-center">
 									¿Tienes algún código de descuento? 
 									<small class="text-muted">(opcional)</small>
 								</label>
@@ -135,7 +138,7 @@
 							</small>
 						</span>
 					</div>
-					<a href="{{ route('perfil') }}" class="direccion_link">Editar esta dirección</a>
+					<a href="{{ route('perfil') }}" class="direccion_link text-center">Editar esta dirección</a>
 				</section>
 
 				<h1 class="payment_titulos">¿Como desea recibir el pedido?</h1>
@@ -173,7 +176,7 @@
 			</section>			
 		</div>
 		<div class="col-md-4 seccion_resumen_pedido">
-			<section class="payment_proceso_tarjeta tarjeta_resumen_pedido">
+			<section class="payment_proceso_tarjeta tarjeta_resumen_pedidos">
 				<span class="payment_proceso_tarjeta titulo_resumen_table">
 					<strong>Resumen del pedido</strong>
 				</span>

@@ -8,15 +8,21 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/estilos_admin.css') }}" >
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/media-query.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
+	<!-- Verison 5.8.2 de Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	
+	<!-- Theme included stylesheets -->
+	<!-- <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"> -->
+	<!-- <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet"> -->
+	<!-- Core build with no theme, formatting, non-essential modules -->
+	<!-- <link href="//cdn.quilljs.com/1.3.6/quill.core.css" rel="stylesheet"> -->
+
+	<!-- Librería Editor.js -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/editor.css') }}">
+
 	<title> @yield('title') | Innova Soluciones</title>
 </head>
 <body>
-	
-	<!-- SECCION HEADER -->
-	@include('includes/header')
-	<!-- FIN HEADER -->
-
-
 	<section class="contenedor_panel_admin row">
 		<!-- SECCION MENU LATERAL ADMIN -->
 		@include('admin/modulos/menu_lateral_admin')
@@ -27,11 +33,6 @@
 		<!-- FIN CONTENIDO PRINCIPAL -->
 		
 	</section>
-
-
-	<!-- SECCION FOOTER -->
-	@include('includes/footer')
-	<!-- FIN FOOTER -->
 
 	<!-- SECCION SCRIPTS JS -->
 	@include('includes/scripts')

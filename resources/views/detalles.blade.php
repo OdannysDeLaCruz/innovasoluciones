@@ -17,12 +17,7 @@
 	
 	<!-- SECCION HEADER -->
 	@include('includes/header')
-	<!-- FIN HEADER -->
-
-	<!-- SECCION CATEGORIAS -->
-	@include('includes/menu_categorias')	
-	<!-- FIN CATEGORIAS -->
-	
+	<!-- FIN HEADER -->	
 	<div class="detalle_fondo_img">
 		<img src="{{ asset('img/detalle_fondo.jpg') }}">
 	</div>
@@ -30,26 +25,29 @@
 		
 		@foreach($producto as $detalle)
 			
-			<div class="detalle_descripcion_img col-12 col-md-9">
-				<!-- <div class="detalle_visualizador" id="detalle_visualizador"></div> -->
-				<!-- <div class="detalle_descripcion_img_lista_img">	 -->
-					<!-- Va de primero la imagen que viene desde la tabla producto -->
+			<div class="detalle_descripcion_img col-12 col-md-8">
+				<div class="detalle_descripcion_img_banner">
+					<div class="detalle_descripcion_img_banner_lista">	
+						<!-- Va de primero la imagen que viene desde la tabla producto -->
+						<img class="lista_img" src='{{ asset("storage/productos/imagenes/miniaturas/$detalle->producto_imagen") }}' alt="imganes de descripcion">
+						<!-- Luego las imagenes que vienen de la tabla imagenes_productos -->
+				        @foreach ($imagenes as $imagen)
+							<img class="lista_img" src='{{ asset("storage/productos/imagenes/$imagen->imagen_url") }}' alt="{{ $detalle->producto_nombre }}">
+				        @endforeach
+					</div>
+					<div class="detalle_descripcion_img_banner_visualizador" id="detalle_visualizador"></div>					
+				</div>
 
-					<!-- <img class="lista_img" src="{{ asset($detalle['imagen']) }}" alt="imganes de descripcion"> -->
 
-					<!-- Luego las imagenes que vienen de la tabla imagenes_productos -->
-			        <!-- @foreach ($imagenes as $imagen)
-						<img class="lista_img" src="{{ asset($imagen['nombre_imagen']) }}" alt="imganes de descripcion">
-			        @endforeach -->
-				<!-- </div> -->
-				<img class="lista_img" src="{{ asset($detalle['producto_imagen']) }}" alt="imganes de descripcion">
+
+
+				<!-- <img class="lista_img" src='{{ asset("storage/productos/imagenes/$detalle->producto_imagen") }}' alt="{{ $detalle->producto_nombre }}"> -->
 				 @foreach ($imagenes as $imagen)
-					<img class="lista_img" src="{{ asset($imagen['imagen_url']) }}" alt="imganes de descripcion">
+					<!-- <img class="lista_img" src='{{ asset("storage/productos/imagenes/$imagen->imagen_url") }}' alt="{{ $detalle->producto_nombre }}"> -->
 		        @endforeach
-
 			</div>
-			<section class="detalle_info col-12 col-md-3 pt-4 pt-md-0">
-				<h1 class="detalle_info_titulo ">{{ $detalle['producto_descripcion'] }}</h1>
+			<section class="detalle_info col-12 col-md-4 pt-4 pt-md-4">
+				<h1 class="detalle_info_titulo ">{{ $detalle->producto_nombre }}</h1>
 				<span class="detalle_info_tags">
 					@foreach($tags as $tag)
 						<a href="{{ route('productoTag', $tag) }}">
@@ -57,54 +55,52 @@
 						</a>											
 					@endforeach
 				</span>
-				<span class="detalle_info_precio_anterior">
-
-					@if($detalle['promo_tipo'] == 'descuento%')
-						<p class="antes"> Antes ${{ number_format($detalle['producto_precio'], 0, ',', '.') }}</p>
-						<span class="promo">
-							-{{ $detalle['promo_costo'] }}% DESCUENTO
-						</span>
-					@elseif($detalle['promo_tipo'] == 'peso')
-						<span class="promo">
-							Cupón de ${{ number_format($detalle['promo_costo'], 0, ',', '.') }} <small>COP</small>
-						</span>
-					@elseif($detalle['promo_tipo'] == '2x1')
-						<span class="promo">{{$detalle['promo_tipo']}}</span>
-					@endif
-					
-				</span>
+				@if($detalle['promo_tipo'])
+					<span class="detalle_info_precio_anterior">
+						@if($detalle['promo_tipo'] == 'descuento%')
+							<p class="antes"> Antes ${{ number_format($detalle['producto_precio'], 0, ',', '.') }}</p>
+							<span class="promo">
+								-{{ $detalle['promo_costo'] }}% DESCUENTO
+							</span>
+						@elseif($detalle['promo_tipo'] == 'peso')
+							<span class="promo">
+								Cupón de ${{ number_format($detalle['promo_costo'], 0, ',', '.') }} <small>COP</small>
+							</span>
+						@elseif($detalle['promo_tipo'] == '2x1')
+							<span class="promo">{{$detalle['promo_tipo']}}</span>
+						@endif					
+					</span>
+				@endif
 				<span class="detalle_info_precio detalle_info_item"> 
 					<?php 
 						if ($detalle['promo_tipo'] == 'descuento%') {
 							$descuento = $detalle['producto_precio'] * ($detalle['promo_costo'] / 100);
-							$total = $detalle['producto_precio'] - $descuento;
-							$total = "Ahora $" . number_format($total, 0, ',', '.');
+							$total     = $detalle['producto_precio'] - $descuento;
+							$total     = '<span class="ahora">Ahora</span>' . 
+							'<span class="total">$ ' .  number_format($total, 0, '', '.') .  '</span>'; 
 						}
 						elseif($detalle['promo_tipo'] == 'peso'){
 							$total = $detalle['producto_precio'] - $detalle['promo_costo'];
-							$total = "$" . number_format($total, 0, ',', '.');
+							$total = '<span class="total">$ ' .  number_format($total, 0, '', '.') .  '</span>';
 						}
 						else {
 							$total = "$" . number_format($detalle['producto_precio'], 0, ',', '.');
 						}
 					 ?>
-					<i class="fa fa-money icon_envio" title="Envio gratis"></i>{{ $total }}
+					{!! $total !!}
 				</span>
 				<span class="detalle_info_costo_envio detalle_info_item">
-					<i class="fa fa-truck icon_envio" title="Envio gratis"></i>Envío gratis a todo Colombia
+					<i class="fa fa-truck detalle_info_icon" title="Envio gratis"></i>Envío gratis a todo Colombia
 				</span>
 				<span class="detalle_info_costo_envio detalle_info_item">
-					<i class="fa fa-hourglass-half icon_envio" title="Tiempo de entrega"></i>Tiempo de entrega: 20 días
-				</span>
-				
+					<i class="fa fa-hourglass-half detalle_info_icon" title="Tiempo de entrega"></i>Tiempo de entrega: 20 días
+				</span>				
 
 				<!-- OPCIONAL SI ES ALGUN ARTICULO QUE REQUIERA DE TALLAS, COMO ZAPATOS, CAMISAS ETC -->
 				<form class="detalle_info_form" id="datos-agregar-producto" action="{{ route('addItem') }}" method="post">
-
 					{{ csrf_field() }}
 					<input type="hidden" class="inputs" id="id" name="id" value="{{ $detalle['id'] }}">
-					<!-- <input type="hidden" class="inputs" id="descripcion" name="descripcion" value="{{ $detalle['producto_descripcion'] }}"> -->
-					<input type="text" class="inputs" id="producto_ref" name="producto_ref" value="{{ $detalle['producto_ref'] }}">
+					<input type="hidden" class="inputs" id="producto_ref" name="producto_ref" value="{{ $detalle['producto_ref'] }}">
 					@empty(!$detalle['producto_colores'])
 						<label for="colores">Colores</label>
 						<select id="colores" name="colores" class="detalle_info_color" required>
@@ -123,8 +119,13 @@
 							@endforeach
 						</select>
 					@endempty
-					<button type="submit" id="btn-agregar-producto" class="btn btn-primary detalle_info_btn_comprar">Realizar compra</button>
+					<button type="submit" id="btn-agregar-producto" class="btn btn-primary detalle_info_btn_comprar">Comprar</button>
 				</form>
+				<section class="detalle_info_descripcion">
+					<article>
+						<p>{!! $detalle->producto_descripcion !!}</p>
+					</article>
+				</section>
 			</section>
 		@endforeach
 	</section>

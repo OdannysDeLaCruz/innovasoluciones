@@ -16,6 +16,10 @@ class CrearRolesSeeder extends Seeder
         ]);
 
         App\Rol::create([
+            'rol_nombre' => 'Visitante',
+        ]);
+
+        App\Rol::create([
             'rol_nombre' => 'Cliente',
         ]);
     }

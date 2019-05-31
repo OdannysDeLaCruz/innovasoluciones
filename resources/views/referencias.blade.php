@@ -21,28 +21,23 @@
 	<section class="contenido_principal">
 		<section class="section_principal">
 			<span class="section_principal_titulo"> 
-				<a href=""> < </a>
-				<h1> {{ $producto['descripcion'] }} </h1>
+				<a href="javascript:history.back(-1);">
+					<span class="fa fa-arrow-left mr-2"></span> {{ $producto['nombre'] }}
+				</a>
+				<a href="{{ route('showDetallesCompra', [ $producto['ref'], $producto['nombre-url'] ]) }}">
+					<button class="section_principal_btncomprar">Comprar</button>				
+				</a>				
 			</span>
-			<a href="{{ route('showDetallesCompra', [ $producto['ref'], $producto['descripcion-url'] ]) }}">
-				<button class="section_principal_btncomprar">Información de compra</button>				
-			</a>
 		</section>
 		<section class="section_referencias">
-			<!-- @foreach ($imagenes as $imagen)
-				<img class="section_referencias_img" src="{{ asset($imagen['nombre_imagen']) }}" alt="{{ $imagen['nombre_imagen'] }}">
-	        @endforeach -->
-	        <img class="section_referencias_img" src="{{ asset('img/productos/bici/1.jpg') }}">
-	        <img class="section_referencias_img" src="{{ asset('img/productos/bici/2.jpg') }}">
-	        <img class="section_referencias_img" src="{{ asset('img/productos/bici/3.jpg') }}">
-	        <img class="section_referencias_img" src="{{ asset('img/productos/bici/4.jpg') }}">
-	        <img class="section_referencias_img" src="{{ asset('img/productos/bici/5.jpg') }}">
-	        <img class="section_referencias_img" src="{{ asset('img/productos/bici/6.jpg') }}">
-	        <img class="section_referencias_img" src="{{ asset('img/productos/bici/7.jpg') }}">
-	        <img class="section_referencias_img" src="{{ asset('img/productos/bici/8.jpg') }}">
-	        <img class="section_referencias_img" src="{{ asset('img/productos/bici/9.jpg') }}">
-	        <img class="section_referencias_img" src="{{ asset('img/productos/bici/10.jpg') }}">
-	        <img class="section_referencias_img" src="{{ asset('img/productos/bici/11.jpg') }}">
+			@foreach ($imagenes as $imagen)
+				<img class="section_referencias_img" src='{{ asset("storage/productos/imagenes/$imagen->imagen_url") }}'>
+	        @endforeach
+	        <div class="section_referencias_contenedor_videos">
+		        @foreach ($videos as $video)
+					{!! $video->video_url !!}
+		        @endforeach	        	
+	        </div>
 		</section>
 	</section>
 

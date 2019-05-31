@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -12,105 +13,126 @@ class AdminController extends Controller
     }
     public function getProductos() {
         // Obtener el listado de categorias para el forulario de filtrado
-        $categorias = App\Categoria::select('seccion_id', 'categoria_nombre')->orderBy('categoria_nombre')->get();
+        $categorias = App\Categoria::select('id', 'seccion_id', 'categoria_nombre')->orderBy('categoria_nombre')->get();
         // Productos
-        $productos = App\Producto::paginate(20);
-        return view('admin.productos', compact('categorias','productos'));
+        // $productos = App\Producto::orderBy('fecha_creado', 'desc')->paginate(20);
+
+        $productos = App\Producto::select('productos.*', 'promociones.promo_tipo', 'promociones.promo_costo', 'categorias.id', 'categorias.categoria_nombre')
+                                ->leftJoin('promociones', 'productos.promocion_id', '=', 'promociones.id')
+                                ->leftJoin('categorias', 'productos.categoria_id', '=', 'categorias.id')
+                                ->orderBy('productos.fecha_creado', 'desc')
+                                ->paginate(20);
+        return view('admin.productos/productos', compact('categorias','productos'));
     }
     public function showCreateProductos() {
-        return view('admin.crear-productos');
+        $categorias = App\Categoria::select('id', 'categoria_nombre')->orderBy('categoria_nombre')->get();
+        $promociones = App\Promocion::select('id','promo_nombre', 'promo_tipo', 'promo_costo')->get();
+        return view('admin.productos.producto-crear', compact('categorias', 'promociones'));
     }
     public function createProductos(Request $request) {
-        // $producto = new Producto;
-        // dd($producto);
+
         $v = \Validator::make($request->all(), [
-            
-            "id_categoria"      => 'required|integer|min:1',
-            // "descripcion"       => 'required|string|unique|min:1',
-            "tags"              => 'required|string|min:1',
-            // "codigo-referencia" => 'required|string|unique|min:1',
-            "imagen_principal"  => 'required|image|min:1',
-            // "imagen"            => 'dimensions:min_width=100,min_height=200',
-            "precio-unitario"   => 'required|integer',
-            "descuento"         => 'integer',
-            "tallas"            => 'string|nullable',
-            "colores"           => 'string|nullable',
-            "tiempo_entrega"    => 'required|string',
-            "cantidades"        => 'nullable|integer',
-            "imgsReferencias"   => 'nullable|image',
-            "tieneImgDescripcion"   => 'boolean'
+            "producto_nombre"              => 'required|string|unique:productos',
+            "producto_descripcion"         => 'required|string',
+            "producto_precio"              => 'required|integer|min:1',
+            "producto_cantidad"            => 'required|integer|min:1',
+            "producto_ref"                 => 'required|string|unique:productos',
+            "producto_categoria"           => 'required|integer',
+            "producto_tags"                => 'required|string',
+            "producto_imagen"              => 'required|image',
+            "producto_promocion"           => 'nullable|integer',
+            "producto_tallas"              => 'nullable|string',
+            "producto_colores"             => 'nullable|string',
+            "producto_imgs_referencia.*"   => 'nullable|image|mimes:jpg,jpeg,png',
+            "producto_videos_referencia"   => 'nullable|string',
+            'producto_tieneImgDescripcion' => 'nullable'
         ]);
 
         // dd($v);
- 
-        if ($v->fails()) {
+
+        if($v->fails()) {
             return redirect()->back()->withInput()->withErrors($v->errors());
         }
+        $producto_promocion = $request->producto_promocion == 0 ? null : $request->producto_promocion;
+        $producto_tieneImgDescripcion = $request->has('producto_tieneImgDescripcion') === true ? 1 : 0;
 
-        // $client->create($request->all());
-        // $clients = Client::all();
-        // return \View::make('list', compact('clients'));
+        $producto_nombre_imagen = $request->file('producto_imagen')->getClientOriginalName();
+        $pathImagen = Storage::putFileAs('productos/imagenes/miniaturas', $request->file('producto_imagen'), $producto_nombre_imagen);
 
-        // App\Producto::create([
-           
-        //     'id_categoria'    => $id_categoria,
-        //     'descripcion'     => $faker->text(50),
-        //     'tags'            => $mis_tags,
-        //     'referencia'      => $faker->word . rand(0,100) . $faker->word,
-        //     'imagen'          => $faker->imageUrl($width = 200, $height = 200),
-        //     'precio'          => $precio,
-        //     'descuento'       => $desc,
-        //     'tallas'          => $faker->word,
-        //     'colores'         => $faker->word,
-        //     'tiempo_entrega'  => $faker->word,
-        //     'imagenDescripcion'  => rand(0,1),
-        //     'cant_disponible' => rand(0,10),
-        //     'fecha_creado'    => date('Y-n-j H:i:s')
-        // ]);
+        if($pathImagen) {
+            // Crear el nuevo producto           
+            $producto = new App\Producto;
+
+            $producto->categoria_id         = $request->producto_categoria;
+            $producto->producto_nombre      = $request->producto_nombre;
+            $producto->producto_descripcion = $request->producto_descripcion;
+            $producto->producto_tags        = $request->producto_tags;
+            $producto->producto_ref         = strtoupper($request->producto_ref);
+            $producto->producto_imagen      = $producto_nombre_imagen;
+            $producto->producto_precio      = $request->producto_precio;
+            $producto->promocion_id         = $producto_promocion;
+            $producto->producto_tallas      = $request->producto_tallas;
+            $producto->producto_colores     = $request->producto_colores;
+            $producto->producto_tieneImgDescripcion = $producto_tieneImgDescripcion;
+            $producto->producto_cant        = $request->producto_cantidad;
+            $producto->producto_estado      = 1;
+
+            $producto->save();
+            $producto_id = $producto->id;
+            // Verifico si el producto se creó correctamente
+            if($producto_id) {
+                // Verifico si vienen imagenes desde el formulario
+                $producto_imgs_referencia = $request->file('producto_imgs_referencia');
+                if($producto_imgs_referencia) {
+                    // Recorro el array de imagenes para guardarlas una por una
+                    foreach($producto_imgs_referencia as $file) {
+                        $imagenes_productos = new App\Imagen;
+                        $nombre_imagen = $file->getClientOriginalName();
+
+                        // Guardo las imagenes en storage/productos/imagenes con su nombre original, tambien guardo el nombre de la imagen y a que producto pertenece en la tabla imagenes
+                        $pathImagen = Storage::putFileAs('productos/imagenes', $file, $nombre_imagen);
+                        $imagenes_productos->producto_id = $producto_id;
+                        $imagenes_productos->imagen_url  = $nombre_imagen;
+                        $imagenes_productos->save();
+                    }                
+                }
+                // Verifico si vienen videos desde el formulario
+                $producto_videos_referencia = $request->input('producto_videos_referencia');
+                if($producto_videos_referencia) {
+                    // los videos vienen de YouTube como codigo de insercion, se guardan en la BBDD en formato de texto separados por comas
+                    $videos_productos = new App\VideoProducto;
+                    $videos_productos->producto_id = $producto_id;
+                    $videos_productos->video_url   = $producto_videos_referencia;
+                    $videos_productos->save();
+                }
+                session()->flash('producto-creado', true);
+                return redirect()->route('getProductos');
+            }
+            else {
+                session()->flash('producto-creado', false);
+                return redirect()->route('getProductos');
+            }            
+        }
+        else {
+            session()->flash('producto-creado', false);
+            return redirect()->route('getProductos');
+        }
+    }
+    public function getDetallesProducto($producto_ref) {
+         // $producto = App\Producto::where()
+         //                        ->get();
+        return view('admin.productos.producto-detalles');
     }
 
     public function getPedidos() {
-    	// Pedidos
-        $misPedidos = App\Pedido::orderBy('fecha_creado', 'asc')->paginate(10);
-        foreach ($misPedidos as $dato) {
 
-            $nombre   = App\User::where('id', $dato->user_id)->value('usuario_nombre');
-            $apellido = App\User::where('id', $dato->user_id)->value('usuario_apellido');
-
-            $pedido['user_id']    = $nombre . ' ' . $apellido;            
-        	$pedido['id']         = $dato->pedido_id;
-            $pedido['pedido_dir'] = $dato->pedido_dir;
-        	$pedido['entrega']    = $dato->modo_envio;
-        	$pedido['promocion_id']     = $dato->promocion_id;
-        	$pedido['envio']      = $dato->envio;
-        	$pedido['modo_pago']  = $dato->modo_pago;
-        	$pedido['estado']     = $dato->estado_pedido;
-        	$pedido['fecha_creado']      = $dato->fecha_creado;
-
-        	// Obtener total de pedido
-        	$datos_pedido = App\DetallePedido::select(
-                            'detalle_precio',
-                            'detalle_cantidad',
-                            'detalle_promo_info'
-                        )
-                        ->where('pedido_id', $dato->id)
-                        ->get();
-            $importes_totales = [];
-        	foreach ($datos_pedido as $dato) {
-	            $precio_neto          = $dato->precio * $dato->cantidad;
-	            $descuento_porcentual = $dato->descuento_porcentual / 100;
-	            $descuento_peso       = $precio_neto * $descuento_porcentual;
-	            $total                = $precio_neto - $descuento_peso;
-	            $importes_totales[]   = $total;
-	        }
-
-            $pedido['total']  = array_sum($importes_totales);
-            // Una vez guardado el total del pedido, reinicio el array importes_totales a vacio '[]' para que no siga almacenando totales y empiece desde 0
-            $importes_totales = [];
-
-        	$pedidos[] = $pedido;
-        }
-        return view('admin.pedidos', compact('pedidos', 'misPedidos'));
+        $pedidos = App\Pedido::select('pedidos.*', 'users.usuario_nombre', 'users.usuario_apellido', 'envios.envio_metodo', 'transacciones.estado', 'transacciones.valor_transaccion')
+                            ->orderBy('pedidos.fecha_creado', 'desc')
+                            ->leftJoin('users', 'pedidos.user_id', '=', 'users.id')
+                            ->leftJoin('envios', 'pedidos.envio_id', '=', 'envios.id')
+                            ->leftJoin('transacciones', 'pedidos.transaccion_id', '=', 'transacciones.id')
+                            ->paginate(10);
+        return view('admin.pedidos', compact('pedidos'));
     }
     public function getClientes() {
         return view('admin.clientes');

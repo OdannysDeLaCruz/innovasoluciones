@@ -20,12 +20,11 @@
 	@extends('users/layout')
 		@section('facturas') active @stop
 		@section('content')
-			<section class="col-xs-12 col-sm-9 pl-sm-2 facturas">
-				<h1 class="facturas_titulo mt-5 mt-sm-0">Facturas pendientes</h1>
+			<section class="col-xs-12 col-md-10 facturas">
+				<h1 class="perfil_info_titulo mt-2 mb-4">Mis facturas</h1>
 
-			@if($pedidos_pendientes !== '')
-				<div class="contenedor_table facturas_pendientes table table-responsive">
-					
+			@if($pedidos !== '')
+				<div class="contenedor_table facturas_pendientes table table-responsive">					
 					<table class="table table-hover table-bordered">
 						<thead>
 							<tr class="facturas_titulos">
@@ -34,12 +33,25 @@
 								<th>Estado</th>
 							</tr>
 						</thead>
-					@foreach($pedidos_pendientes as $factura_pendiente)
+					@foreach($pedidos as $pedido)
 						<tbody>
 							<tr class="facturas_datos">
-								<td>{{$factura_pendiente['fecha_pedido']}}</td>
-								<td><a target="_blanc" href="/perfil/facturas/{{$factura_pendiente['id']}}">Ver</a> | <a href="/perfil/facturas/descargar/{{$factura_pendiente['id']}}">Descargar</a></td>
-								<td class="facturas_datos_estado_sin_pagar">Sin pagar</td>
+								<td>@dateformat( $pedido->fecha_creado )</td>
+								<td>
+									<a target="_blanc" href="/perfil/facturas/{{$pedido->id}}">Ver</a> | 
+									<a href="/perfil/facturas/descargar/{{$pedido->id}}">Descargar</a>
+								</td>
+								<td class="facturas_datos_estado">
+									@if($pedido->estado == 0 || $pedido->estado == '')
+										<p class="estados pedidos_estado_espera"> {{ "En espera" }} </p>	
+									@elseif($pedido->estado == 4) 
+										<p class="estados pedidos_estado_aprovada"> {{ "Aprovado" }} </p>
+									@elseif($pedido->estado == 6) 
+										<p class="estados pedidos_estado_declinada"> {{ "Declinada" }} </p>
+									@elseif($pedido->estado == 5)
+										<p class="estados pedidos_estado_expirada"> {{ "Expirada" }} </p>
+									@endif	
+								</td>
 							</tr>
 						</tbody>
 					@endforeach
@@ -49,32 +61,6 @@
 				{{ 'Todo en orden por aquí' }}
 			@endif
 
-				<h1 class="facturas_titulo mt-2 mt-sm-0">Facturas pagadas</h1>
-
-			@if($pedidos_pagados !== '')
-				<div class="contenedor_table facturas_pagadas table table-responsive">
-					<table class="table table-hover table-bordered">
-						<thead>
-							<tr class="facturas_titulos">
-								<th>Fecha de la factura</th>
-								<th>Detalles</th>
-								<th>Estado</th>
-							</tr>
-						</thead>
-					@foreach($pedidos_pagados as $factura_pagada)
-						<tbody>
-							<tr class="facturas_datos">
-								<td>{{$factura_pagada['fecha_pedido']}}</td>
-								<td><a target="_blanc" href="/perfil/facturas/{{$factura_pagada['id']}}">Ver</a> | <a href="/perfil/facturas/descargar/{{$factura_pagada['id']}}">Descargar</a></td>
-								<td class="facturas_datos_estado_pagadas">Pagadas</td>
-							</tr>
-						</tbody>
-					@endforeach
-					</table>
-				</div>
-			@else
-				{{ 'Todo en orden por aquí' }}
-			@endif
 			</section>			
 		@stop
 	<!-- FIN PERFIL -->

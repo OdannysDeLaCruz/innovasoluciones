@@ -7,19 +7,19 @@
 			@foreach($publicidad as $producto)
 				<?php 
 					$ref  = $producto['producto_ref'];
-					$desc = str_replace(" ", "-", $producto['producto_descripcion']);
+					$nombre = str_replace(" ", "_", $producto['producto_nombre']);
 				?>
 				<div class="col-12 col-md-6 seccion_publicidad_mensaje">
-					<span class="seccion_publicidad_titulo">{{$producto['producto_descripcion']}}</span>
-					<span class="seccion_publicidad_precio"> ${{ number_format($producto['producto_precio'], 0, ',', '.') }}</span>
+					<span class="seccion_publicidad_titulo">{{ $producto->producto_nombre }}</span>
+					<span class="seccion_publicidad_precio"> ${{ number_format($producto->producto_precio, 0, ',', '.') }}</span>
 						
 					<div class="btn_publicidad botones_innova">
-						<a href="productos/{{ $ref }}-{{ $desc }}">Ver detalles</a>
+						<a href="productos/{{ $ref }}-{{ $nombre }}">Ver detalles</a>
 					</div>		
 				</div>
 				<figure class="col-12 col-md-6 seccion_publicidad_img">
-					<a href="/productos/{{ $ref }}-{{ $desc }}">
-						<img src="{{ $producto['producto_imagen'] }}" alt="foto del producto">						
+					<a href="/productos/{{ $ref }}-{{ $nombre }}">
+						<img src='{{ asset("storage/productos/imagenes/miniaturas/$producto->producto_imagen") }}' alt="{{ $producto->producto_nombre }}">						
 					</a>
 				</figure>
 			@endforeach

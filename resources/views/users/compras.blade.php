@@ -20,7 +20,7 @@
 	@extends('users/layout')
 		@section('pedidos') active @stop
 		@section('content')
-			<section class="col-xs-12 col-sm-9 pl-sm-2 compras_users">
+			<section class="col-xs-12 col-md-10 compras_users">
 				<h1 class="titulo_seccion mt-2 mb-4">
 					<a class="btn btn-outline-dark btn-sm mr-2" style="text-decoration: none;" href="javascript:history.back(-1);" title="Ir la página anterior">
 						<span class="fa fa-arrow-left mr-2"> </span>
@@ -45,14 +45,15 @@
 									<span class="info_pedido_seccion_block_items texto">{{ $pedido->pedido_ref_venta }}</span>
 								</div>
 								<div class="info_pedido_seccion_block">
-									<span class="info_pedido_seccion_block_items titulo">Valor del pedido</span>
-									<span class="info_pedido_seccion_block_items texto">$ {{ number_format($total_pagar, 0, '', '.') . " " . $pedido->tipo_moneda_transaccion }}</span>
+									<span class="info_pedido_seccion_block_items titulo">Valor de transacción</span>
+									<span class="info_pedido_seccion_block_items texto">$ {{ number_format($pedido->valor_transaccion, 0, '', '.') . ", Moneda (" . $pedido->tipo_moneda_transaccion .")" }}</span>
 								</div>
 								@if($pedido->promo_nombre) 
 									<div class="info_pedido_seccion_block">
 										<span class="info_pedido_seccion_block_items titulo">Promoción</span>
 										<span class="info_pedido_seccion_block_items texto">
-												{{ $pedido->promo_nombre }}
+												{{ 'Nombre: ' . $pedido->promo_nombre}} <br>
+												{{ 'Costo: ' . $pedido->promo_tipo . ' ' . number_format($pedido->promo_costo, 0, '', '.') }} <br>
 										</span>
 									</div>
 								@endif
@@ -123,12 +124,12 @@
 					@foreach( $detalle_pedido as $detalle )
 						<div class="compras">
 							<span class="compras_info">
-								<a target="_blank" href="/productos/{{ $detalle['detalle_producto_ref'] }}-{{ $detalle['detalle_descripcion'] }}">
-									<img class="compras_info_img" src="{{ $detalle['detalle_imagen'] }}"></img>
+								<a target="_blank" href="/productos/{{ $detalle['detalle_producto_ref'] }}-{{ $detalle['detalle_nombre'] }}">
+									<img class="compras_info_img" src='{{ asset("storage/productos/imagenes/miniaturas/$detalle->detalle_imagen") }}'></img>
 								</a>
 								<div class="compras_info_datos">
-									<a target="_blanc" href="/productos/{{ $detalle['detalle_producto_ref'] }}-{{ $detalle['detalle_descripcion'] }}">
-										<span class="compras_info_descripcion">{{ $detalle['detalle_descripcion'] }}</span>
+									<a target="_blanc" href="/productos/{{ $detalle['detalle_producto_ref'] }}-{{ $detalle['detalle_nombre'] }}">
+										<span class="compras_info_descripcion">{{ $detalle['detalle_nombre'] }}</span>
 									</a>
 									<span class="compras_info_datos_items compras_costo_cantidad">
 										$ {{ number_format($detalle['detalle_precio'], 0, '', '.') }} x {{ $detalle['detalle_cantidad'] }} unidad(es)

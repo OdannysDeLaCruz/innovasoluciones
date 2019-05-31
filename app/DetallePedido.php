@@ -10,6 +10,7 @@ class DetallePedido extends Model
     protected $fillable = [
     	'pedido_id',
         'detalle_producto_ref',
+        'detalle_nombre',
         'detalle_descripcion',
         'detalle_imagen',
         'detalle_precio',

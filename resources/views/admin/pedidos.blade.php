@@ -4,105 +4,95 @@
 	@endsection
 	@section('pedidos') active @endsection
 	@section('contenido')
-		<section class="col-10 col-sm-10 col-md-10 contenido_principal">
+		<section class="col-12 col-md-10 contenido_principal">
 			<header class="encabezado_principal">
-				<h1 class="titulo_principal">pedidos</h1>
+				<h1 class="titulo_principal">Pedidos</h1>
 			</header>
-			<!-- TABLA DE PEDIDOS -->
+
+			<!-- BUSCAR PEDIDOS -->
 			<section class="filtro">
 				<form class="form-inline filtro_form" action="" method="POST">
+					<input type="text" name="pedido_ref_venta" class="filtro_form_input filtro_pedido_ref" placeholder="Referencia">
+					<input type="text" name="pedido_cliente_nombre" class="filtro_form_input filtro_nombre_cliente" placeholder="Nombre del cliente">
+					<input type="text" name="pedido_cliente_apellido" class="filtro_form_input filtro_apellido_cliente" placeholder="Apellido del cliente">
+					<select name="pedido_estado" class="filtro_form_input filtro_categoria">
+						<option>Estados</option>
+						<option value="0">En espera</option>
+						<option value="4">Aprovada</option>
+						<option value="6">Declinada</option>
+						<option value="5">Expirada</option>
+					</select>
+					<input type="number" min="1" name="pedido_valor_transaccion" class="filtro_form_input filtro_precio" placeholder="0.0">
 
-					<input type="number" name="id_pedido" class="form-control filtro_id" placeholder="Id">
-					<input type="text" name="direccion_pedido" class="form-control filtro_direccion" placeholder="Dirección">
-					<input type="text" name="cliente_pedido" class="form-control filtro_cliente" placeholder="Cliente">
-					
-					<select name="modo_pago_pedido" class="form-control filtro_modo_pago">
-						<option>Modo de pago</option>
-						<option value="">Payu</option>
-						<option value="">Efecty</option>
-						<option value="">Transferencia Bancaria</option>
-					</select>
-					<select name="estado_pedido" class="form-control filtro_estado">
-						<option>Estado</option>
-						<option value="1">Pago</option>
-						<option value="0">Pendiente</option>
-					</select>
-					<input type="text" name="codigo_descuento_pedido" class="form-control filtro_codigo" placeholder="Código de descuento">
-					<div class="input-group">
-						<div class="input-group-prepend">
-					    	<div class="input-group-text">$</div>
-					    </div>
-					    <input type="number" min="1" name="total_pedido" class="form-control filtro_total" placeholder="Total">
-					</div>
-					<input type="date" name="fecha_pedido" class="form-control filtro_fecha">
-					<button type="submit" class="filtro_btn_filtrar">
-						<i class="fa fa-search"></i>
-						Buscar
-					</button>
+					<input type="date" name="pedido_fecha" class="filtro_form_input filtro_fecha">
+
+					<button type="submit" class="filtro_btn_filtrar">Buscar</button>
 				</form>
 			</section>
+			<!-- FIN BUSCAR PEDIDOS -->
+			
+			<!-- TABLA DE PEDIDOS -->
 			<section class="contenedor_tabla">
-				<table class="table table-hover table-bordered tables_admin">
-					<thead>
-						<tr>
-							<th class="table_id">ID</th>
-							<th class="table_direccion">Dirección</th>
-							<th class="table_direccion">Modo de entrega</th>
-							<th class="table_cliente">Cliente</th>
-							<th class="table_modo_pago">Pago</th>
-							<th class="table_estado">Estado</th>
-							<th class="table_codigo">Código desc</th>
-							<th class="table_total">Total</th>
-							<th class="table_fecha">Fecha</th>
-							<th class="table_opcion"></th>
-						</tr>
-					</thead>
-					<tbody>
-						@if(isset($pedidos))
-							@foreach($pedidos as $pedido)
-							<tr class="tables_admin_fila">
-								<td>{{ $pedido['id'] }}</td>								
-								<td class="pedido_direccion">
-									{{ $pedido['pedido_dir'] }}
-								</td>
-								<td>
-									{{ $pedido['entrega'] }}
-								</td>
-								<td>{{ 'Vacío' }}</td>
-								<td>{{ 'Vacío' }}</td>
-								<td>
-									@if(true)
-										<div class="pedido_estado exitoso">
-											Pago exitoso
-										</div>
-									@else(false)
-										<div class="pedido_estado rechazado">
-											Pago rechazado
-										</div>
-									@endif
-								</td>
-								<td>{{ $pedido['promocion_id'] }}</td>
-								<td>${{ number_format( $pedido['total'], 2 ) }} </td>
-								<td>{{ $pedido['fecha_creado'] }}</td>
-								<td class="menu_opcion">
-									<i class="fa fa-ellipsis-h menu_opcion_logo" id="menu_opcion_logo_{{ $pedido['id'] }}" aria-hidden="true"></i>
-									<div class="menu_opcion_items">
-										<a href="">Editar</a>
-										<a href="">Eliminar</a>
-									</div>
-								</td>
-							</tr>
-							@endforeach
-						@else
-						@endif
-					</tbody>
-				</table>
-				@if($misPedidos->links())
+				<section class="contenedor_tabla_head">
+					<span class="contenedor_tabla_head_titulos_pedidos pedido-ref">Referencia</span>
+					<span class="contenedor_tabla_head_titulos_pedidos pedido-cliente">Nombre cliente</span>
+					<span class="contenedor_tabla_head_titulos_pedidos pedido-cliente">Apellido cliente</span>
+					<span class="contenedor_tabla_head_titulos_pedidos pedido-modo-envio d-none d-md-block">Modo envío</span>
+					<span class="contenedor_tabla_head_titulos_pedidos pedido-estado">Estado</span>
+					<span class="contenedor_tabla_head_titulos_pedidos pedido-total">Valor transacción</span>
+					<span class="contenedor_tabla_head_titulos_pedidos pedido-fecha d-none d-md-block">Fecha</span>
+					<span class="contenedor_tabla_head_titulos_pedidos pedido-operaciones">Operaciones</span>
+				</section>
+				@if(isset($pedidos))
+					@foreach($pedidos as $pedido)
+						<section class="contenedor_tabla_body">
+							<span class="contenedor_tabla_body_titulos_pedidos pedido-ref">
+								{{ $pedido->pedido_ref_venta }}
+							</span>
+							<span class="contenedor_tabla_body_titulos_pedidos pedido-cliente">
+								{{ $pedido->usuario_nombre}}
+							</span>
+							<span class="contenedor_tabla_body_titulos_pedidos pedido-cliente">
+								{{ $pedido->usuario_apellido }}
+							</span>
+							<span class="contenedor_tabla_body_titulos_pedidos pedido-modo-envio d-none d-md-block">
+								{{ $pedido->envio_metodo }}
+							</span>
+							<span class="contenedor_tabla_body_titulos_pedidos pedido-estado">
+								@if($pedido->estado == 0 || $pedido->estado == '')
+									<p class="estados pedidos_estado_espera"> {{ "En espera" }} </p>	
+								@elseif($pedido->estado == 4) 
+									<p class="estados pedidos_estado_aprovada"> {{ "Aprovado" }} </p>
+								@elseif($pedido->estado == 6) 
+									<p class="estados pedidos_estado_declinada"> {{ "Declinada" }} </p>
+								@elseif($pedido->estado == 5)
+									<p class="estados pedidos_estado_expirada"> {{ "Expirada" }} </p>
+								@endif
+							</span>
+							<span class="contenedor_tabla_body_titulos_pedidos pedido-total">
+								{{ $pedido->valor_transaccion }}
+							</span>
+							<span class="contenedor_tabla_body_titulos_pedidos pedido-fecha d-none d-md-block">
+								@dateformat($pedido->fecha_creado)
+							</span>
+							<span class="contenedor_tabla_body_titulos_pedidos pedido-operaciones">
+								<a data-toggle="tooltip" data-placement="top" title="Ver pedido" href="">
+									<span class="fa fa-edit mr-2 btn-ver-item" ></span>
+								</a>  |  
+								<a data-toggle="tooltip" data-placement="top" title="Eliminar pedido" href="">
+									<span class="fa fa-trash ml-2 btn-eliminar-item" ></span>
+								</a>
+							</span>
+						</section>
+				@endforeach
+				@else
+				@endif
+				@if($pedidos->links())
 					<section class="paginacion_links">
-						<p class="text-muted">Página {{ $misPedidos->currentPage() }} de {{$misPedidos->total()}} resultados</p>
-						{{ $misPedidos->links() }}
+						{{ $pedidos->links() }}
 					</section>
 				@endif
 			</section>
+			<!-- FIN TABLA DE PEDIDOS -->
 		</section>
 	@endsection

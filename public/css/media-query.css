@@ -63,9 +63,6 @@
 	/*---FIN ESTILOS DE PAGINA INICIO---*/
 
 	/*--ESTILOS DE PAGNA DE DETALLES--*/
-	.detalle_descripcion_img {
-		margin: auto;
-	}
 	.detalle_info_precio {
 		font-size: 30px;
 	}
@@ -159,12 +156,13 @@
 	}
 	.seccion_algunos_productos_content > .producto {
 		padding: 0;
-		background: yellow;
+		background: none;
 		margin: 5px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		width: 130px;
+		min-width: 140px;
 	}
 	.seccion_algunos_productos_content > .producto figure {
 		align-self: flex-start;
@@ -224,10 +222,10 @@
 	.seccion_productos_content > .producto .producto_info {
 		align-self: flex-start;
 		margin-left: 10px;
+		width: 90%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
-
 	}
 	/*--ESTILOS DE PAGINA DE DETALLES POR REFERENCIAS--*/
 	.contenedor_detalle_referencia {
@@ -260,6 +258,7 @@
 	.form_registro {
 		padding: 0;
 		padding-top: 20px;
+		margin: 0 20px;
 	}
 	.form_registro_titulo {
 		font-size: 18px;
@@ -298,6 +297,14 @@
 	}
 	.pedidos_botones .pedidos_botones_btn {
 		margin-bottom: 10px;
+	}
+	.alertify .ajs-dialog {
+		max-width: 90%;
+	}
+}
+@media (max-width: 768px) {
+	.detalle_refencia {
+		flex-direction: column-reverse;
 	}
 }
 

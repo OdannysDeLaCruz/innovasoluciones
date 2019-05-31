@@ -52,7 +52,7 @@ class CrearPedidoController extends Controller
 					$pedido = App\Pedido::create([
 				        'user_id'                 => Auth::user()->id,
 				        'pedido_dir'              => $pedido_dir,
-				        'pedido_ref_venta'        => 'En espera',
+				        'pedido_ref_venta'        => session('pedido_ref_venta'),
 				        'promocion_id'            => session('promocion_id') ? session('promocion_id') : null,
 				        'envio_id'                => session('tipo_envio'),
 				        'pedido_tipo_dispositivo' => $this->getUserDevice(),
@@ -77,6 +77,7 @@ class CrearPedidoController extends Controller
 				            App\DetallePedido::create([
 						        'pedido_id'            => $pedido_id,
 						        'detalle_producto_ref' => $detalle['producto_ref'],
+						        'detalle_nombre'       => $detalle['nombre'],
 						        'detalle_descripcion'  => $detalle['descripcion'],
 						        'detalle_imagen'       => $detalle['imagen'],
 						        'detalle_precio'       => $detalle['precio'],

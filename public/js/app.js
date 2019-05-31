@@ -1,5 +1,43 @@
 $(document).ready(function(){
 
+    // EFECTOS DE PAGINA DESTALLES.PHP, DETALLE_VISUALIZADOR
+
+    // Poner la primera imagen de la lista en el visualizador 
+    $('.lista_img:first-child').css('border', '2px solid #333');
+    const url_img = $('.lista_img:first-child').attr('src');
+    $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
+
+    $('.lista_img').on('click', function () {
+
+        // Obtengo la url de la imagen clickeada
+        const url_img = $(this).attr('src');
+        // Elimino los bordes de las imagenes clickeadas anteriormente
+        $('.lista_img').css('border', 'none');
+        // Le asigno bordes a la imagen clickeada actualmente
+        $(this).css('border', '2px solid #333');
+        // Remuevo la imagen que esta actualmente
+        $("#detalle_visualizador img").remove();
+
+
+        $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
+
+        // let visualizador = $('#detalle_visualizador').width();
+        // let img_ancho = $('#detalle_visualizador img').width();
+        // let img_alto = $('#detalle_visualizador img').height();
+
+        // if (img_ancho == img_alto) {
+        //     // console.log(ancho + '>' + alto);
+        //     $("#detalle_visualizador").append("<img width='" + visualizador + "' src=' " + url_img + "'>");
+        // }
+        // else {
+        //     console.log(ancho + '<' + alto);
+        //     // $("#detalle_visualizador").append("<img height='100%' width='auto' src=' " + url_img + "'>");
+
+        // }
+
+        // Asigno la nueva imagen clickeada
+    });
+
 	// EFECTOS DEL MENÚ
 
 	$('.abrir_menu').on( 'click', function() {
@@ -72,7 +110,7 @@ $(document).ready(function(){
     $('#crearPedido').on('click', function(e){
         
         e.preventDefault();
-        alertify.confirm('Comfirma tu pedido', 'Al confirmar tu pedido seras llevado a Payu para finalizar el pago', 
+        alertify.confirm('Comfirma tu pedido', 'Seras llevado a Payu para finalizar el pago', 
             function() { 
                 $.ajax({
                     url: '/checkout/buying/payment/crearpedido',
@@ -128,7 +166,15 @@ $(document).ready(function(){
             $('#texto-toggle').text('Ocultar detalles');
             $('#icono-toggle').css('transform', 'rotate(-0deg)')
         }
+    });
 
+    // EDITOR DE TEXTO DE PAGINA CREAR PRODUCTOS
+
+    $('#producto_descripcion').Editor();
+
+    $('#btn-crear-producto').click(function(){
+        $('#producto_descripcion').text($('#producto_descripcion').Editor('getText'));
+        $('#form_crear_producto').submit();
     });
 });
 

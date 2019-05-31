@@ -20,30 +20,34 @@
                 <li><a href="{{ route('login') }}">Ingresar<i class="fa fa-user logo_user"></i></a></li>
                 <li><a href="{{ route('register') }}">Registrarse</a></li>
             @else
-                <li class="nav-item dropdown">
-
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fa fa-user logo_user"></i></a>
+                <li class="nav-item dropdown menu_desplegable">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><img class="dropdown-toggle-icono-avatar" src="{{ asset('storage/avatars/avatar.png') }}"></a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    	<a class="dropdown-item" style="font-size: 16px;">
-                        	<strong>{{ Auth::user()->usuario_nombre }} {{ Auth::user()->usuario_apellido }}</strong>
-                    	</a>
+                        <div class="dropdown_menu_foto_perfil">
+                            <div class="dropdown_menu_foto_perfil_contenedor">
+                                <div class="dropdown_menu_foto_perfil_contenedor_img">
+                                    <img src="{{ asset('storage/avatars/avatar.png') }}">           
+                                </div>
+                            </div>                          
+                            <label class="dropdown_menu_foto_perfil_nombre"> {{ Auth::user()->usuario_nombre }} {{ Auth::user()->usuario_apellido }} </label>
+                        </div>
                         @if(Auth::user()->rol_id == 1)
-                        	<a target="blank" class="dropdown-item" style="font-size: 14px;" href="{{ route('admin') }}">
+                        	<a target="blank" class="dropdown-item" href="{{ route('admin') }}">
                             	{{ __('Panel de administración') }}
                         	</a>
-                            <a class="dropdown-item" style="font-size: 14px;" href="{{ route('perfil') }}">
+                            <a class="dropdown-item" href="{{ route('perfil') }}">
                                 {{ __('Mi cuenta') }}
                             </a>
                         @else
-                            <a class="dropdown-item" style="font-size: 14px;" href="{{ route('perfil') }}">
+                            <a class="dropdown-item" href="{{ route('perfil') }}">
                                 {{ __('Mi cuenta') }}
                             </a>
                         @endif
-                        <a class="dropdown-item" style="font-size: 14px;" href="{{ route('logout') }}"
+                        <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
-                            {{ __('Salir') }}
+                            {{ __('Cerrar sesión') }}
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -59,10 +63,7 @@
         $cantidad_productos = 0;
         $cart = session('cart');
         
-        if($cart === null) {
-            $cantidad_productos = 0;
-        }
-        else {
+        if(!empty($cart)) {
             foreach ($cart as $producto) {
                 $cantidad_productos += $producto['cantidad'];
             }

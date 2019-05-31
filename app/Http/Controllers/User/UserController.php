@@ -39,8 +39,10 @@ class UserController extends Controller
                             ->leftJoin('transacciones', 'pedidos.transaccion_id', '=', 'transacciones.id')
                             ->where('user_id', $user_id)
                             ->get();
-
-        return view('users.pedidos', compact('mis_pedidos'));
+        if ($mis_pedidos->isEmpty()) {
+            return view('users.pedidos', ['mis_pedidos' => false]);            
+        }                    
+        return view('users.pedidos', compact('mis_pedidos'));            
     }
 
     public function showPedidoDetalles($pedido_id) {
@@ -54,6 +56,8 @@ class UserController extends Controller
                             'pedidos.fecha_creado',
                             'envios.envio_metodo',
                             'promociones.promo_nombre',
+                            'promociones.promo_tipo',
+                            'promociones.promo_costo',
                             'transacciones.*'
                             )
                             ->leftJoin('envios', 'pedidos.envio_id', '=', 'envios.id')
@@ -70,6 +74,7 @@ class UserController extends Controller
         $detalle_pedido = App\DetallePedido::select(
                             'pedido_id',
                             'detalle_producto_ref',
+                            'detalle_nombre',
                             'detalle_descripcion',
                             'detalle_imagen',
                             'detalle_precio',
@@ -81,11 +86,12 @@ class UserController extends Controller
                             ->where('pedido_id', $pedido_id)
                             ->get();
 
-        // dd($detalle_pedido);
         // Verificamos que el pedido tenga detalle_pedidos
         if($detalle_pedido->isEmpty()){
             return view('users.compras', ['Error' => 'Este pedido no tiene detalles!', 'pedido_id' => $pedido_id]);
         }
+
+
         $total_pagar = 0;
         foreach ($detalle_pedido as $detalle) {
             $total_pagar += $detalle->detalle_precio_final;
@@ -96,22 +102,54 @@ class UserController extends Controller
 
     public function showFacturas() {
         
-        function getPedidos($estado) {
-            $id_user = Auth::user()->id;
-            $pedidos = App\Pedido::select('id', 'direccion_envio', 'fecha_pedido')
-                            ->where('id_user', $id_user)
-                            ->where('estado_pedido', $estado)
+        // function getPedidos($estado) {
+            $user_id = Auth::user()->id;
+            // $pedidos = App\Pedido::select('id', 'direccion_envio', 'fecha_pedido')
+            //                 ->where('id_user', $id_user)
+            //                 ->where('estado_pedido', $estado)
+            //                 ->get();
+            $pedidos = App\Pedido::select(
+                            'pedidos.id', 
+                            'pedidos.pedido_dir', 
+                            'pedidos.pedido_ref_venta',
+                            'pedidos.fecha_creado',
+                            'promociones.promo_nombre',
+                            'transacciones.estado',
+                            'transacciones.fecha_transaccion'
+                            )
+                            ->leftJoin('promociones', 'pedidos.promocion_id', '=', 'promociones.id')
+                            ->leftJoin('transacciones', 'pedidos.transaccion_id', '=', 'transacciones.id')
+                            ->where('pedidos.user_id', $user_id)
+                            // ->where('transacciones.estado', $estado)
                             ->get();
-            return $pedidos;
-        }
+            // return $pedidos;
+
+        // }
         
-        $pendientes = getPedidos(0);
-        $pagados    = getPedidos(1);
+        // // Pedidos en espera == 0
+        // $espera = getPedidos(0);
+        // // Pedidos aprovados == 4
+        // $aprovados    = getPedidos(4);
+        // // Pedidos declinada == 6
+        // $declinados    = getPedidos(6);
+        // // Pedidos expirada == 5
+        // $expirados    = getPedidos(5);
 
-        $pendientes->isEmpty() ? $pedidos_pendientes = '' : $pedidos_pendientes = $pendientes;
-        $pagados->isEmpty() ? $pedidos_pagados = '' : $pedidos_pagados = $pagados;
+        // $espera->isEmpty()     ? $pedidos_espera      = '' : $pedidos_espera     = $espera;
+        // $aprovados->isEmpty()  ? $pedidos_aprovados   = '' : $pedidos_aprovados  = $aprovados;
+        // $declinados->isEmpty() ? $pedidos_declinados  = '' : $pedidos_declinados = $declinados;
+        // $expirados->isEmpty()  ? $pedidos_expirados   = '' : $pedidos_expirados  = $expirados;
+        $pedidos->isEmpty() ? $pedido = '' : $pedidos  = $pedidos;
 
-        return view('users.facturas', compact('pedidos_pendientes', 'pedidos_pagados'));
+        return view('users.facturas', 
+            compact(
+                'pedidos' 
+                // 'pedidos_espera', 
+                // 'pedidos_aprovados', 
+                // 'pedidos_declinados', 
+                // 'pedidos_expirados'
+            )
+        );
     }
 
     public function showFacturasDetalles($idFactura) {

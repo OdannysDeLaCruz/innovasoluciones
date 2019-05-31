@@ -20,15 +20,14 @@
 	@extends('users/layout')
 		@section('pedidos') active @stop
 		@section('content')
-			<section class="col-xs-12 col-sm-9 pl-sm-2 pedidos_users">
-				<h1 class="titulo_seccion mt-2 mb-4">Pedidos</h1>
-				
-				@if(isset($mis_pedidos))
+			<section class="col-xs-12 col-md-10 pedidos_users">
+				<h1 class="perfil_info_titulo mt-2 mb-4">Pedidos</h1>
+				@if($mis_pedidos)
 					@foreach($mis_pedidos as $pedido)
 						<div class="pedidos">
 							<header class="pedidos_cabecera">
-								<span class="numero_pedidos">Pedido N° {{ $pedido['id'] }}</span>
-								<span class="fecha_pedidos">Fecha del pedido: @dateformat( $pedido->fecha_transaccion)</span>						
+								<span class="numero_pedidos">Pedido N° {{ $pedido->id }}</span>
+								<span class="fecha_pedidos">@dateformat( $pedido->fecha_transaccion)</span>		
 							</header>
 							<span class="pedidos_info">
 								<div class="pedidos_info_datos">
@@ -67,7 +66,9 @@
 							</span>
 						</div>
 					@endforeach
-				@endisset
+				@else
+					<p>Aún no realizado ningún pedido</p>
+				@endif
 			</section> 
 		@stop
 	<!-- FIN PERFIL -->

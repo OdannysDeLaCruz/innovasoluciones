@@ -15,20 +15,21 @@ use Faker\Generator as Faker;
 
 $factory->define(App\User::class, function (Faker $faker) {
     date_default_timezone_set('America/Bogota');
-    static $password;
+
 	return [
-	    'rol_id'            => 2,
+	    'rol_id'            => 3,
 	    'usuario_nombre'    => $faker->firstName,
 	    'usuario_apellido'  => $faker->lastName,
 	    'usuario_cedula'    => rand(000000000, 999999999),
+	    'usuario_sexo'      => null,
+	    'usuario_avatar'    => 'avatar.png',
 	    'usuario_telefono'  => $faker->phoneNumber,
-	    'email'     		=> $faker->unique()->safeEmail,
+	    'email'     		=> 'usuario' . rand(0,999) . '@gmail.com',
 	    'usuario_pais'      => $faker->country,
 	    'usuario_ciudad'    => $faker->city,
 	    'usuario_barrio'    => $faker->streetName,
 	    'usuario_direccion' => $faker->address,
-	    'password'  		=> bcrypt('secret'),
+	    'password'  		=> bcrypt('cliente321'),
 	    'usuario_estado'    => rand(0, 1)
-	    // 'remember_token'   => str_random(10)
 	];
 });

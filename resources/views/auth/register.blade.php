@@ -24,12 +24,14 @@
 				<img class="form_registro_logo" src="img/logos/LogoInnova.svg">
 			</figure>
 			<h1 class="form_registro_titulo">Hola, registrate para empezar a comprar.</h1>
+
 			<div class="form_registro_grupo">
-				<div class="nombre_apellido row">
+				<p class="form_registro_grupo_titulo">Datos personales</p>
+
+				<div class="form_registro_grupo_seccion row">
+					<!-- NOMBRE -->
 					<div class="user col-xs-12 col-md-6">
-						<!-- NOMBRE -->
-						<label for="nombre" class="texto mt-4 mt-md-0">Nombre</label>
-						<input id="nombre" type="text" class="nombre {{ $errors->has('usuario_nombre') ? ' is-invalid' : '' }}" name="usuario_nombre" value="{{ old('usuario_nombre') }}" required placeholder="Digite su nombre">
+						<input id="nombre" type="text" class="usuario_nombre {{ $errors->has('usuario_nombre') ? ' is-invalid' : '' }}" name="usuario_nombre" value="{{ old('usuario_nombre') }}" required placeholder="Nombre">
 
 		                @if ($errors->has('usuario_nombre'))
 		                    <span class="invalid-feedback" role="alert">
@@ -37,11 +39,9 @@
 		                    </span>
 		                @endif
 					</div>
-
-	                <div class="user col-xs-12 col-md-6 pl-md-2">
-		                <!-- APELLIDO -->
-						<label for="apellido" class="texto mt-4 mt-md-0">Apellido</label>
-						<input id="apellido" type="text" class="apellido {{ $errors->has('usuario_apellido') ? ' is-invalid' : '' }}" name="usuario_apellido" value="{{ old('usuario_apellido') }}" required placeholder="Digite su apellido">
+		            <!-- APELLIDO -->
+	                <div class="user col-xs-12 col-md-6">
+						<input id="apellido" type="text" class="usuario_apellido {{ $errors->has('usuario_apellido') ? ' is-invalid' : '' }}" name="usuario_apellido" value="{{ old('usuario_apellido') }}" required placeholder="Apellido">
 
 		                @if ($errors->has('usuario_apellido'))
 		                    <span class="invalid-feedback" role="alert">
@@ -49,38 +49,81 @@
 		                    </span>
 		                @endif	                	
 	                </div>
+					<!-- Nº DOCUMENTO -->
+					<div class="user col-xs-12 col-md-6">
+						<input id="usuario_cedula" type="number" class="usuario_cedula {{ $errors->has('usuario_cedula') ? ' is-invalid' : '' }}" name="usuario_cedula" value="{{ old('usuario_cedula') }}" required placeholder="Nº de documento">
+		                @if ($errors->has('usuario_cedula'))
+		                    <span class="invalid-feedback" role="alert">
+		                        <strong>{{ $errors->first('usuario_cedula') }}</strong>
+		                    </span>
+		                @endif						
+					</div>
+		            <!-- TELEFONO -->
+					<div class="user col-xs-12 col-md-6">
+						<input id="usuario_telefono" type="number" class="num_documento {{ $errors->has('usuario_telefono') ? ' is-invalid' : '' }}" name="usuario_telefono" value="{{ old('usuario_telefono') }}" required placeholder="Número de teléfono ó celular">
+		                @if ($errors->has('usuario_telefono'))
+		                    <span class="invalid-feedback" role="alert">
+		                        <strong>{{ $errors->first('usuario_telefono') }}</strong>
+		                    </span>
+		                @endif						
+					</div>
+					<!-- EMAIL -->
+					<div class="user col-xs-12">
+						<input id="email" type="email" class="email {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}" required placeholder="Correo electrónico">
+						<!-- <small class="msm_email">No compartiremos este email con nadie mas</small> -->
+
+						@if ($errors->has('email'))
+		                    <span class="invalid-feedback" role="alert">
+		                        <strong>{{ $errors->first('email') }}</strong>
+		                    </span>
+		                @endif						
+					</div>
 				</div>
+			
+                <p class="form_registro_grupo_titulo">Datos de envío</p>
+                <!-- DIRECCION DE ENVIO -->
+				<div class="form_registro_grupo_seccion row">
+					<!-- PAIS -->
+					<div class="user col-xs-12 col-md-6">
+						<input id="usuario_pais" type="text" class="num_documento {{ $errors->has('usuario_pais') ? ' is-invalid' : '' }}" name="usuario_pais" value="{{ old('usuario_pais') }}" required placeholder="Pais de residencia">
 
-				<!-- Nº DOCUMENTO -->
-				<label class="texto"></label>
-				<input id="usuario_cedula" type="number" class="num_documento {{ $errors->has('usuario_cedula') ? ' is-invalid' : '' }}" name="usuario_cedula" value="{{ old('usuario_cedula') }}" required placeholder="Nº de documento">
+		                @if ($errors->has('usuario_pais'))
+		                    <span class="invalid-feedback" role="alert">
+		                        <strong>{{ $errors->first('usuario_pais') }}</strong>
+		                    </span>
+		                @endif						
+					</div>
+					<!-- CIUDAD -->
+					<div class="user col-xs-12 col-md-6">
+						<input id="usuario_ciudad" type="text" class="num_documento {{ $errors->has('usuario_ciudad') ? ' is-invalid' : '' }}" name="usuario_ciudad" value="{{ old('usuario_ciudad') }}" required placeholder="Ciudad de residencia">
 
-                @if ($errors->has('usuario_cedula'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('usuario_cedula') }}</strong>
-                    </span>
-                @endif
+		                @if ($errors->has('usuario_ciudad'))
+		                    <span class="invalid-feedback" role="alert">
+		                        <strong>{{ $errors->first('usuario_ciudad') }}</strong>
+		                    </span>
+		                @endif	
+					</div>
+					<!-- BARRIO -->
+					<div class="user col-xs-12 col-md-6">
+						<input id="usuario_barrio" type="text" class="num_documento {{ $errors->has('usuario_barrio') ? ' is-invalid' : '' }}" name="usuario_barrio" value="{{ old('usuario_barrio') }}" required placeholder="Barrio de residencia">
 
-                <!-- TELEFONO -->
-				<label class="texto"></label>
-				<input id="usuario_telefono" type="number" class="num_documento {{ $errors->has('usuario_telefono') ? ' is-invalid' : '' }}" name="usuario_telefono" value="{{ old('usuario_telefono') }}" required placeholder="Digite su número de teléfono ó celular">
+		                @if ($errors->has('usuario_barrio'))
+		                    <span class="invalid-feedback" role="alert">
+		                        <strong>{{ $errors->first('usuario_barrio') }}</strong>
+		                    </span>
+		                @endif	
+					</div>
+					<!-- DIRECCION -->
+					<div class="user col-xs-12 col-md-6">
+						<input id="usuario_direccion" type="text" class="num_documento {{ $errors->has('usuario_direccion') ? ' is-invalid' : '' }}" name="usuario_direccion" value="{{ old('usuario_direccion') }}" required placeholder="Dirección de residencia">
 
-                @if ($errors->has('usuario_telefono'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('usuario_telefono') }}</strong>
-                    </span>
-                @endif
-
-				<!-- EMAIL -->
-				<label for="email" class="texto">E-mail</label>
-				<input id="email" type="email" class="email {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}" required placeholder="Correo electrónico">
-				<small class="msm_email">No compartiremos este email con nadie mas</small>
-
-				@if ($errors->has('email'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                @endif
+		                @if ($errors->has('usuario_direccion'))
+		                    <span class="invalid-feedback" role="alert">
+		                        <strong>{{ $errors->first('usuario_direccion') }}</strong>
+		                    </span>
+		                @endif	
+					</div>
+				</div>
 
 				<!-- PASSWORD -->
 				<label for="password" class="texto">Contraseña</label>
@@ -106,8 +149,18 @@
 			</div>
 		</form>
 	</div>
-	<!-- FIN SECCION DE FORMULARIO DE REGISTRO
-
+	<!-- FIN SECCION DE FORMULARIO DE REGISTRO -->
+	
+	<!-- ALERTA DE MESAJE DE ERROR -->
+	@if ($errors) {
+		@foreach($errors->all() as $error)
+			<script>
+				alert(' {{ $error }} ');
+			</script>
+		@endforeach
+    @endif 
+    
+	<!-- FIN ALERTA DE MESAJE DE ERROR -->
 	
 	<!-- SECCION FOOTER -->
 	@include('includes/footer')	

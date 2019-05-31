@@ -17,7 +17,8 @@ class CreateDetallePedidosTable extends Migration
             $table->increments('id');
             $table->integer('pedido_id')->unsigned();
             $table->string('detalle_producto_ref');
-            $table->string('detalle_descripcion');
+            $table->string('detalle_nombre');
+            $table->longText('detalle_descripcion');
             $table->string('detalle_imagen');
             $table->decimal('detalle_precio', 10, 2);
             $table->integer('detalle_cantidad');

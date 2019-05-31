@@ -5,37 +5,14 @@
 		@foreach($algunos_productos as $algunos)
 			<?php 
 				$ref  = $algunos['producto_ref'];
-				$desc = str_replace(" ", "-", $algunos['producto_descripcion']);
+				$nombre = str_replace(" ", "_", $algunos['producto_nombre']);
 			?>
 			<section class="producto">
 				<figure>
-					<a href="/productos/{{ $ref }}-{{ $desc }}">
-						<!-- <img src="{{ $algunos['imagen'] }}" class="producto_img" alt="{{ $algunos['descripcion'] }}"> -->
-						<!-- <img src="img/zapatos.jpg" class="producto_img"> -->
-						<img src="{{ $algunos['producto_imagen'] }}" class="producto_img">
+					<a href="/productos/{{ $ref }}-{{ $nombre }}">
+						<img src='{{ asset("storage/productos/imagenes/miniaturas/$algunos->producto_imagen") }}' class="producto_img">
 					</a>
 				</figure>
-				<!-- <div class="producto_info">
-					<a href="/productos/{{ $ref }}-{{ $desc }}">
-						<h1 class="producto_titulo"> {{ $algunos['descripcion'] }}</h1>
-					</a>
-					@if($algunos['descuento'] != 0)
-						<span class="producto_precio_anterior">
-							<p class="precio_anterior"> ${{ number_format($algunos['precio'], 2) }} </p>
-							<p class="descuento">
-							-{{ $algunos['descuento'] }}%
-							</p>
-						</span>
-					@endif
-
-					<label class="producto_precio">
-						@php 
-							$descuento = $algunos['precio'] * ($algunos['descuento'] / 100);
-							$total = $algunos['precio'] - $descuento;
-						@endphp
-						<p>${{ number_format($total, 2) }} <small>COP</small></p>
-					</label>					
-				</div> -->
 			</section>
 		@endforeach
 

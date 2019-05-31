@@ -14,7 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/estilos.css') }}" >
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/media-query.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
-	<title> Productos | Innova Soluciones</title>
+	<title> Checkout | Innova Soluciones</title>
 </head>
 <body>
 	
@@ -70,11 +70,14 @@
 					</section>
 				</form>
 			</div>
+			<a class="btn btn-outline-primary" href="{{ route('verificar') }}">
+				Ver detalles
+			</a> 
 		</div>	
 		<div class="col-md-4 seccion_resumen_pedido">
-			<section class="payment_proceso_tarjeta tarjeta_resumen_pedido">
+			<section class="payment_proceso_tarjeta tarjeta_resumen_pedidos">
 				<span class="payment_proceso_tarjeta titulo_resumen_table">
-					<strong>Resumen de la pedido</strong>
+					<strong>Resumen del pedido</strong>
 				</span>
 				<table class="table table-bordered resumen_table">
 				  	<tr>

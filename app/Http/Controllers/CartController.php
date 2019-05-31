@@ -19,7 +19,7 @@ class CartController extends Controller
 	// Mostrar carrito
     public function show() {
         $cart = session('cart');
-        // dd($cart);
+        // dd(key($cart));
         // Sacar total del pedido
         $this->total();
         return view('carrito', compact('cart'));
@@ -34,13 +34,14 @@ class CartController extends Controller
         $colorEscogido = $request->input('colores');
         $tallaEscogido = $request->input('tallas');
 
-        $producto = App\Producto::select('id', 'producto_descripcion', 'producto_ref', 'producto_imagen', 'producto_precio', 'promocion_id')
+        $producto = App\Producto::select('id', 'producto_nombre', 'producto_descripcion', 'producto_ref', 'producto_imagen', 'producto_precio', 'promocion_id')
                                 ->where('id', $id)
                                 ->where('producto_ref', $producto_ref)
                                 ->get();                    
         foreach ($producto as $prod) {
             $dato['id']           = $prod->id;
             $dato['producto_ref'] = $prod->producto_ref;
+            $dato['nombre'] = $prod->producto_nombre;
             $dato['descripcion']  = $prod->producto_descripcion;
             $dato['referencia']   = $prod->producto_ref;
             $dato['imagen']       = $prod->producto_imagen;
@@ -64,12 +65,12 @@ class CartController extends Controller
                 $dato['promo_tipo'] = $promo[0]->promo_tipo;
 
                 switch ($dato['promo_tipo']) {
-                    case 'descuento%':
+                    case '%':
                         $dato['promocion'] = $dato['promo_costo'] . '%';
                         $descuento = $total * ($dato['promo_costo'] / 100);
                         $dato['total'] = $total - $descuento;
                         break; 
-                    case 'peso':
+                    case '$':
                         $dato['promocion'] = '$' . number_format($dato['promo_costo'], 0, ',', '.');
                         $descuento = $dato['promo_costo'] * $dato['cantidad']; 
                         $dato['total'] = $total - $descuento;

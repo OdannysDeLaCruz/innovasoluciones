@@ -22,7 +22,8 @@ $factory->define(App\Producto::class, function (Faker $faker) {
 
     return [
         'categoria_id'          => $categoria_id,
-        'producto_descripcion'  => $faker->text(50),
+        'producto_nombre'       => $faker->text(20),
+        'producto_descripcion'  => $faker->text(150),
         'producto_tags'         => $mis_tags,
         'producto_ref'          => strtoupper($faker->word) . rand(rand(0, 999), rand(1000,9999)),
         'producto_imagen'       => $faker->imageUrl($width = 200, $height = 200),

@@ -1,7 +1,7 @@
 <section class="seccion_categorias">
 	<label class="seccion_categorias_textos">
 		<h1 class="seccion_categorias_titulo">Categorias de productos</h1>
-		<a href="/productos" class="seccion_categorias_link">Ver mas</a>
+		<!-- <a href="/productos" class="seccion_categorias_link">Ver mas</a> -->
 	</label>
 	<section class="seccion_categorias_items">
 		<!-- COLRES DE FONDO PARA LOS ITEM_IMG -->

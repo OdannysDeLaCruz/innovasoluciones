@@ -29,7 +29,7 @@ Route::get('/productos/{seccion?}', 'PrincipalController@showCategoriaProductos'
 // Esta ruta mostrará la vista de opción de comprar de los productos que vengan de la vista referencias
 Route::get('detalle-compra/{ref}-{descripcion}', 'PrincipalController@showDetallesCompra')->name('showDetallesCompra');
 
-Route::get('/search/{tag?}', 'SearchProductsController@showProductosTag')->name('productoTag');
+Route::get('/search/{tag?}', 'SearchProductsController@showProductosSearch')->name('productoTag');
 Route::post('/searchtags', 'SearchProductsController@index')->name('searchtags');
 
 
@@ -82,8 +82,13 @@ Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function(){
 	Route::get('/', 'AdminController@index')->name('admin');
 
 	Route::get('/productos', 'AdminController@getProductos')->name('getProductos');
-	
+
 	Route::get('/productos/nuevo', 'AdminController@showCreateProductos')->name('showCreateProductos');
+	
+	Route::get('/productos/{producto_ref}', 'AdminController@getDetallesProducto')->name('getDetallesProducto');
+
+	Route::post('/productos/eliminar/{producto_ref}', 'AdminController@eliminarProducto')->name('eliminarProducto');
+	
 	
 	Route::post('/productos/registrar', 'AdminController@createProductos')->name('createProductos');
 

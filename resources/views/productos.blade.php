@@ -41,39 +41,42 @@
 			@endisset
 			
 		</span>
-		<div class="seccion_productos_content">
-			@if(isset($productos))
+		@if(isset($productos))
+			<div class="seccion_productos_content">
 				@foreach($productos as $producto)
 					<?php 
 						$ref  = $producto['producto_ref'];
-						$desc = str_replace(" ", "-", $producto['producto_descripcion']);
+						$nombre = str_replace(" ", "_", $producto['producto_nombre']);
 					?>
 					<section class="producto">
 						<figure>
-							<a href="/productos/{{ $ref }}-{{ $desc }}">
-								<!-- <img src="{{ $producto['producto_imagen'] }}" class="producto_img" alt="{{ $producto['producto_descripcion'] }}"> -->
-								<img src="{{asset('img/zapatos.jpg')}}" class="producto_img">							
+							<a href="/productos/{{ $ref }}-{{ $nombre }}">
+								<img src='{{ asset("storage/productos/imagenes/miniaturas/$producto->producto_imagen") }}' class="producto_img" alt="{{ $producto->producto_nombre }}">							
 							</a>
 						</figure>
 						<div class="producto_info">
-							<a href="/productos/{{ $ref }}-{{ $desc }}">
-								<h1 class="producto_titulo"> {{ $producto['producto_descripcion'] }}</h1>
+							<a href="/productos/{{ $ref }}-{{ $nombre }}">
+								<h1 class="producto_titulo">{{ $producto->producto_nombre }}</h1>
 							</a>
 
-							@if($producto['promo_tipo'] == 'descuento%')
+							@if($producto['promo_tipo'] == '%')
 								<span class="producto_precio_anterior">
 									<p class="descuento">
-										-{{ $producto['promo_costo'] }}%
+										-{{ $producto->promo_costo }}%
 									</p>
-									<p class="precio_anterior"> ${{ number_format($producto['producto_precio'], 0, ',', '.') }} </p>
+									<p class="precio_anterior"> 
+										${{ number_format($producto->producto_precio, 0, '', '.') }}
+									</p>
 								</span>
 
-							@elseif($producto['promo_tipo'] == 'peso')
+							@elseif($producto->promo_tipo == '$')
 								<span class="producto_precio_anterior">
 									<p class="descuento">
-										-${{ number_format($producto['promo_costo'], 0, ',', '.') }}							
+										-${{ number_format($producto['promo_costo'], 0, '', '.') }}		
 									</p>
-									<p class="precio_anterior"> ${{ number_format($producto['producto_precio'], 0, ',', '.') }} </p>
+									<p class="precio_anterior"> 
+										${{ number_format($producto['producto_precio'], 0, '', '.') }}
+									</p>
 								</span>
 							@elseif($producto['promo_tipo'] == '2x1')
 								<span class="producto_precio_anterior">
@@ -82,28 +85,30 @@
 									</p>
 								</span>
 							@endif
-						</div>
+							<label class="producto_precio">
 
-						<label class="producto_precio">
-
-								@php
-								if($producto['promo_tipo'] == 'descuento%') {
-									$descuento = $producto['producto_precio'] * ($producto['promo_costo'] / 100);
-									$total = $producto['producto_precio'] - $descuento;
-								}
-								elseif($producto['promo_tipo'] == 'peso'){
-									$total = $producto['producto_precio'] - $producto['promo_costo'];
-								}
-								else {
-									$total = $producto['producto_precio'];
-								}
-								@endphp
-								<p>${{ number_format($total, 0, ',', '.') }} </p>		
-						</label>
-						
+									@php
+									if($producto['promo_tipo'] == '%') {
+										$descuento = $producto['producto_precio'] * ($producto['promo_costo'] / 100);
+										$total = $producto['producto_precio'] - $descuento;
+									}
+									elseif($producto['promo_tipo'] == '$'){
+										$total = $producto['producto_precio'] - $producto['promo_costo'];
+									}
+									else {
+										$total = $producto['producto_precio'];
+									}
+									@endphp
+									<p>${{ number_format($total, 0, ',', '.') }} </p>		
+							</label>
+						</div>						
 					</section>	
 				@endforeach
-		</div>
+			</div>
+			<section class="text-center paginacion_links">
+				<p class="mt-5 text-center text-muted">Página {{ $productos->currentPage() }} de {{$productos->total()}} resultados</p>
+				{{ $productos->links() }}
+			</section>
 		@else 
 			<div class="respuesta">
 				<img src="{{asset('img/logos/svg/box.svg')}}">
@@ -115,6 +120,7 @@
 					@endisset
 				</p>
 			</div>
+			
 		@endif
 	</section>
 	<!-- FIN SECCION PRODUCTOS -->

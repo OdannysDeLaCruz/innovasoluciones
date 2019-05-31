@@ -54,12 +54,16 @@ class PaymentController extends Controller
 		// Obtener metodo de entrega del pedido
 		$this->modoEnvio($request);
 
+		// Guardar referencia del pedido en una variable de sesion
+		$pedido_ref_venta = 'INNOVA' . time();
+		session()->put('pedido_ref_venta', $pedido_ref_venta);
+
 		// Configurar los datos para la pasarela de Payu
 		$dataPayu['merchantId'] = '508029';
 		$dataPayu['accountId'] = '512321';
 		$dataPayu['extra2'] = 0; // id del pedido para actualizarlo luego
 		$dataPayu['description'] = "Compra desde tienda online Innova Soluciones";
-		$dataPayu['referenceCode'] = 'INNOVA' . time();
+		$dataPayu['referenceCode'] = $pedido_ref_venta;
 		$dataPayu['amount'] = $total_pagar;
 		$dataPayu['tax'] = 0;
 		$dataPayu['taxReturnBase'] = 0;

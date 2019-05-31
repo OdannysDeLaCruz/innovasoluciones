@@ -41,14 +41,17 @@
 					  		@foreach($cart as $carrito)
 					  			<tr class="carrito_fila">
 					  				<td scope="row">
-					  					<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['descripcion'] }}">
-					  						<img class="carrito_fila_img" src="{{ $carrito['imagen'] }}" alt="{{ $carrito['descripcion'] }}">			
+					  					<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
+					  						@php
+												$url = "storage/productos/imagenes/miniaturas/" . $carrito['imagen'];
+											@endphp
+					  						<img class="carrito_fila_img" src="{{ $url }}" alt="{{ $carrito['descripcion'] }}">			
 					  					</a>
 						      		</td>
 						      		<td class="carrito_fila_titulo">
 						      			<p>
-						      				<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['descripcion'] }}">
-						      					{{ $carrito['descripcion'] }}
+						      				<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
+						      					{{ $carrito['nombre'] }}
 						      				</a>
 						      				<br>
 						      				Color: {{ $carrito['color'] }} <br>
@@ -123,20 +126,16 @@
 			</label>
 		@endif
 	</section>
-
 	<!-- FIN SECCION CARRITO -->
-
 	<!-- SECCION FOOTER -->
 	@include('includes/footer')	
-	<!-- FIN FOOTER -->
-	
+	<!-- FIN FOOTER -->	
 	<!-- SECCION SCRIPTS JS -->
 	@include('includes/scripts')
 	<!-- FIN SCRIPTS JS -->
-
-	@if(session('response'))
+	@if(session('vacio'))
 		<script>
-			alertify.alert('Para ver los detalles del pedido, por favor añada productos al carrito');
+			alertify.alert('Agregue productos al carrito');
 		</script>
 	@endif
 </body>

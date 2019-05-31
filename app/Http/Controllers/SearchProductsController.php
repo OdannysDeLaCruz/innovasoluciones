@@ -18,79 +18,119 @@ class SearchProductsController extends Controller
     	
     }
 
-    public function showProductosTag($search){
-
-        $seccion_id = App\Seccion::where('seccion_nombre', 'LIKE', '%'. $search .'%')->value('id');
-        // Si existe un id seccion con la palabra de busqueda, obtener categorias de esa sección
-        if ($seccion_id) {
-            $categorias_ids = App\Categoria::select('id')->where('seccion_id', $seccion_id)->get();
-            // Verificar si categorias_ids no esta vacio, osea, es diferente de empty
-            if($categorias_ids->isEmpty() != true) {
-                // Si no esta vacio, generar un array normal con esos ids, para consultar los productos luego.
-                foreach ($categorias_ids as $categoria) {
-                    $categoria_id[] = $categoria['id']; 
+    public function showProductosSearch($search) {
+        // Array donde almacenaré los ids de los productos encontrados
+        $array_ids_productos = [];
+        // Obtener por seccion
+        $seccion_id = $this->verificarSeccion($search); // Regresa el id de una seccion en caso de existir, si no false
+        // dd($seccion_id);
+        if($seccion_id) {
+            // Obtener categorias de esta sección
+            $categorias_id = $this->obtenerCategoriasSeccion($seccion_id); // Regresa los ids existentes de las categorias de esta seccion, si no false 
+            if ($categorias_id) {
+                // Obtener productos
+                $ids_productos = $this->obtenerProductosIds($categorias_id);
+                if ($ids_productos) {
+                    foreach ($ids_productos as $id) {
+                        // almacenar los ids de los productos al array
+                        array_push($array_ids_productos, $id);
+                    }
                 }
-                // Obtener los productos con esos ids de categorias.
-                $productos = App\Producto::select('productos.*', 'promociones.promo_tipo', 'promociones.promo_costo')
-                                ->leftJoin('promociones', 'productos.promocion_id', '=', 'promociones.id')
-                                ->where([
-                                    ['producto_estado', '=', 1],
-                                    ['producto_cant', '>', 0]
-                                ])->whereIn('productos.categoria_id', $categoria_id)->get();
-                // Si existen productos con esos ids, mostrarlos.
-                if (count($productos) > 0) {
-                    return view('productos', compact('search', 'productos'));
-                }
-                // Si no hay productos con esos ids de categorias.
-                else {
-                    return response()->view('error.404', ['response' => 'No hay productos con esta categoria disponibles'], 404);
-                }
-            }
-            // Si categorias_ids es vacio, no hay categorias en la seccion.
-            else {
-                return response()->view('error.404', ['response' => 'Esta categoria no existe'], 404);
             }
         }
-        // Buscar palabra en tabla de categorias.
-        else {
-            $categorias_ids = App\Categoria::select('id')
-                                        ->where('categoria_nombre', 'LIKE', '%'. $search .'%')
-                                        ->orWhere('categoria_descripcion', 'LIKE', '%'. $search .'%')
-                                        ->get();
-
-            // Verificar si categorias_ids no esta vacio, osea, es diferente de empty
-            if($categorias_ids->isEmpty() != true) {
-                // Si no esta vacio, generar un array normal con esos ids, para consultar los productos luego.
-                foreach ($categorias_ids as $categoria) {
-                    $categoria_id[] = $categoria['id']; 
-                }
-                // Obtener los productos con esos ids de categorias.
-                $productos = App\Producto::select('productos.*', 'promociones.promo_tipo', 'promociones.promo_costo')
-                                ->leftJoin('promociones', 'productos.promocion_id', '=', 'promociones.id')
-                                ->where([
-                                    ['producto_estado', '=', 1],
-                                    ['producto_cant', '>', 0]
-                                ])->whereIn('productos.categoria_id', $categoria_id)->get();
-                // Si existen productos con esos ids, mostrarlos.
-                if (count($productos) > 0) {
-                    return view('productos', compact('search', 'productos'));
-                }
-                // Si no hay productos con esos ids de categorias.
-                else {
-                    return response()->view('error.404', ['response' => 'No hay productos con esta categoria disponibles'], 404);
+        // Obtener por categoria
+        $categoria_id =  $this->obtenerCategorias($search);
+        // dd($categoria_id);
+        if($categoria_id) {
+            // Obtener productos
+            $ids_productos = $this->obtenerProductosIds($categoria_id);
+            if ($ids_productos) {
+                foreach ($ids_productos as $id) {
+                    // almacenar los ids de los productos al array
+                    array_push($array_ids_productos, $id);
                 }
             }
-            // Si categorias_ids es vacio, es decir, no existe esa palabra en la categoria. Verificar conincidencias en tabla productos.
-            else {
-                
-                return response()->view('error.404', ['response' => 'Esta categoria no existe'], 404);
+        }
+        // Obtener por etiquetas de los productos
+        $ids_productos = $this->obtenerProductosIds($search);
+        if ($ids_productos) {
+            foreach ($ids_productos as $id) {
+                // almacenar los ids de los productos al array
+                array_push($array_ids_productos, $id);
             }
         }
 
+        // Elimino ids duplicados
+        $array_ids_productos = array_unique($array_ids_productos, SORT_NUMERIC);
+        // Ordeno los numeros de menor a mayor
+        sort($array_ids_productos, SORT_NUMERIC);
 
-    	// if($productos->isEmpty() === true) {
-    	// 	return view('productos', ['response' => 'Woops!, Aún no hay productos que coincidan con', 'search' => $search ]);   
-    	// }
-    	// return view('productos', compact('search', 'productos'));
+        // Obtener los productos
+        $productos = $this->obtenerProductos($array_ids_productos);
+        return view('productos', compact('search', 'productos'));
+    }
+
+    // Verificar seccion
+    private function verificarSeccion($key) {
+        $seccion_id = App\Seccion::where('seccion_nombre', 'LIKE', '%'. $key .'%')->value('id');
+        if($seccion_id) {
+            return $seccion_id;
+        }else {
+            return false;
+        }
+    }
+    // Obtener categorias por de la seccion en cuestion
+    private function obtenerCategoriasSeccion($key) {
+        $categorias_ids = App\Categoria::select('id')->where('seccion_id', $key)->get();
+        if ($categorias_ids->isEmpty() != true) {
+             foreach ($categorias_ids as $categoria) {
+                $categorias_id[] = $categoria['id']; 
+            }
+            return $categorias_id;
+        }else {
+            return false;
+        }
+    }
+    // Obtener Categorias
+    private function obtenerCategorias($key) {
+        $categoria_id = App\Categoria::where('categoria_nombre', 'LIKE', '%'. $key .'%')->value('id');
+        // dd($categoria_id);
+        if($categoria_id) {
+            return $categoria_id;
+        }else {
+            return false;
+        }
+    }
+    // Obtener ids de productos
+    private function obtenerProductosIds($parametro) {
+        if(is_array($parametro)) {
+            $productos = App\Producto::select('id')->whereIn('categoria_id', $parametro)->get();
+        }elseif(is_int($parametro)) {
+            $productos = App\Producto::select('id')->where('categoria_id', $parametro)->get();            
+        }else {
+            $productos = App\Producto::select('id')->where('producto_tags', 'LIKE', '%'. $parametro .'%')->get();  
+        }
+        if (!$productos->isEmpty()) {
+            foreach ($productos as $producto) {
+                $ids[] = $producto->id;
+            }
+            return $ids;
+        }else {
+            return false;
+        }
+    }
+    // Obtener productos
+    private function obtenerProductos($ids) {
+        $productos = App\Producto::select('productos.*', 'promociones.promo_tipo', 'promociones.promo_costo')
+                                ->leftJoin('promociones', 'productos.promocion_id', '=', 'promociones.id')
+                                ->latest('fecha_creado')
+                                ->limit(10)
+                                ->where([
+                                    ['producto_estado', '=', 1],
+                                    ['producto_cant', '>', 0]
+                                ])
+                                ->whereIn('productos.id', $ids)
+                                ->paginate(20);
+        return $productos;
     }
 }

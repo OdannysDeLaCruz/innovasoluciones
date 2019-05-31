@@ -60,7 +60,6 @@ class RegisterController extends Controller
             'usuario_direccion'=> 'string|max:100|',
             'password'         => 'required|string|min:6|max:15|confirmed',
         ]);
-        
     }
 
     /**
@@ -72,14 +71,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'rol_id'            => 2,
+            'rol_id'            => 3,
             'usuario_nombre'    => $data['usuario_nombre'],
             'usuario_apellido'  => $data['usuario_apellido'],
             'usuario_cedula'    => $data['usuario_cedula'],
             'usuario_telefono'  => $data['usuario_telefono'],
             'email'             => $data['email'],            
             'usuario_pais'      => $this->verificarExistenciaCampo('usuario_pais', $data),
-            'usuario_ciudad'    => $this->verificarExistenciaCampo('usuario_ciuda', $data),
+            'usuario_ciudad'    => $this->verificarExistenciaCampo('usuario_ciudad', $data),
             'usuario_barrio'    => $this->verificarExistenciaCampo('usuario_barrio', $data),
             'usuario_direccion' => $this->verificarExistenciaCampo('usuario_direccion', $data),
             'password'          => bcrypt($data['password']),
@@ -88,8 +87,8 @@ class RegisterController extends Controller
     }
 
     protected function verificarExistenciaCampo($key, $data) {
-        if (array_key_exists('usuario_pais', $data)) {
-            return $data;
+        if (array_key_exists($key, $data)) {
+            return $data[$key];
         }else {
             return "Vacio";
         }
