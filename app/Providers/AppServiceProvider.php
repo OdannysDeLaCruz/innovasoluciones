@@ -26,15 +26,15 @@ class AppServiceProvider extends ServiceProvider
         // $secciones = App\Seccion::all();
         // View::share('secciones', $secciones);
 
-        date_default_timezone_set('America/Bogota');
-        // Unix
-        setlocale(LC_TIME, 'es_ES.UTF-8');
-        // En windows
-        setlocale(LC_TIME, 'spanish');
+        // date_default_timezone_set('America/Bogota');
+        // // Unix
+        // setlocale(LC_TIME, 'es_ES.UTF-8');
+        // // En windows
+        // setlocale(LC_TIME, 'spanish');
         
-        Blade::directive('dateformat', function ($expression) {            
-            return "<?php echo strftime('%A, %d de %B de %Y - %H:%M', strtotime($expression)); ?>"; 
-        });
+        // Blade::directive('dateformat', function ($expression) {            
+        //     return "<?php echo strftime('%A, %d de %B de %Y - %H:%M', strtotime($expression));  
+        // });
     }
 
     /**
