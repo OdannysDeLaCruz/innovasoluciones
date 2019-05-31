@@ -23,8 +23,8 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         // Para compartir el menu de secciones con todas las vistas
-        $secciones = App\Seccion::all();
-        View::share('secciones', $secciones);
+        // $secciones = App\Seccion::all();
+        // View::share('secciones', $secciones);
 
         date_default_timezone_set('America/Bogota');
         // Unix
