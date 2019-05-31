@@ -7,11 +7,11 @@ APP_URL=http://innovasoluciones.herokuapp.com/
 LOG_CHANNEL=stack
 
 DB_CONNECTION=pgsql
-DB_HOST=ec2-54-225-72-238.compute-1.amazonaws.com
+DB_HOST=ec2-54-163-226-238.compute-1.amazonaws.com
 DB_PORT=5432
-DB_DATABASE=d7n86errh7tl8
-DB_USERNAME=lhbzvllemzmsaf
-DB_PASSWORD=e0d9676415a3efbbe9c7492c16f6ca4f523ffd2e0a7d2680114507d8e86d2986
+DB_DATABASE=df4un85e42p25q
+DB_USERNAME=mrzmzorqsgsvir
+DB_PASSWORD=c96d5bc2d0742bd750eb506854a663724821bbff0881922e328a59a76126ff65
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
