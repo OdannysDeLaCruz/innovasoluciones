@@ -125,11 +125,11 @@ class CartController extends Controller
         // Verificao si promo_tipo existe en el array del producto a actualizar
         if(array_key_exists('promo_tipo', $cart[$id])){            
             switch ($cart[$id]['promo_tipo']) {
-                case 'descuento%':
+                case '%':
                     $descuento = $precio_nuevo * ($cart[$id]['promo_costo'] / 100);
                     $cart[$id]['total'] = $precio_nuevo - $descuento;
                     break; 
-                case 'peso':
+                case '$':
                     $descuento = $cart[$id]['promo_costo']; 
                     $cart[$id]['total'] = $precio_nuevo - ( $descuento * $cart[$id]['cantidad']);
                     break;

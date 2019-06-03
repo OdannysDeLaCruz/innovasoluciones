@@ -14,7 +14,7 @@ class CrearPromocionesSeeder extends Seeder
     {
     	App\Promocion::create([ 
 	        'promo_nombre' => 'Descuento # 1',
-            'promo_tipo' => 'descuento%',
+            'promo_tipo' => '%',
 	        'promo_costo' => 10,
             'promo_publicidad' => true, 
             'promo_banner_publicidad' => $faker->imageUrl($width = 200, $height = 200, 'cats'), 
@@ -25,7 +25,7 @@ class CrearPromocionesSeeder extends Seeder
     	]);
         App\Promocion::create([ 
             'promo_nombre' => 'Descuento # 2',
-            'promo_tipo' => 'peso',
+            'promo_tipo' => '$',
             'promo_costo' => 10000,
             'promo_publicidad' => false, 
             'promo_banner_publicidad' => $faker->imageUrl($width = 200, $height = 200, 'cats'), 
