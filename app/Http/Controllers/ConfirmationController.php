@@ -97,14 +97,14 @@ class ConfirmationController extends Controller
 	// Enviar mensaje de correo electronico al usuario informando de el estado de su pedido
  
     public function confirmation() {
+		// Firma digital de la transacción que viene de Payu
+		$sign = $_POST['sign']; //e1b0939bbdc99ea84387bee9b90e4f5c
 
 	    $mensajeLog = print_r($_POST,true) . "\r\n";
 		$fp = fopen("data.txt", "a");
-		fwrite($fp, "Datos obtenidos: \r\n $mensajeLog");
+		fwrite($fp, "Sing: $sing \r\nDatos obtenidos: \r\n $mensajeLog");
 		fclose($fp);
 
-		// Firma digital de la transacción que viene de Payu
-		$sign = $_POST['sign']; //e1b0939bbdc99ea84387bee9b90e4f5c
 
 
     	date_default_timezone_set('America/Bogota');
