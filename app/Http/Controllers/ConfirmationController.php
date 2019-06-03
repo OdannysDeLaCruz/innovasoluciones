@@ -218,7 +218,7 @@ class ConfirmationController extends Controller
 	  		if ($state_pol == 4 && $response_message_pol === 'APPROVED' && $response_code_pol == 1) {  
 	  			$descripcion_transaccion = 'Transacción aprobada';
 			}
-			if ($state_pol == 6) {
+			elseif ($state_pol == 6) {
 				if ($response_code_pol == 4) {
 					if ($response_message_pol === 'PAYMENT_NETWORK_REJECTED') {
 						$descripcion_transaccion = 'Transacción rechazada por entidad financiera';
@@ -347,7 +347,7 @@ class ConfirmationController extends Controller
 					}
 				}
 			}
-			if ($state_pol == 5 && $response_message_pol === 'EXPIRED_TRANSACTION' && $response_code_pol == 20) {
+			else ($state_pol == 5 && $response_message_pol === 'EXPIRED_TRANSACTION' && $response_code_pol == 20) {
 				$descripcion_transaccion = 'Transacción expirada';
 			}
 
