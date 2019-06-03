@@ -97,10 +97,14 @@ class ConfirmationController extends Controller
 	// Enviar mensaje de correo electronico al usuario informando de el estado de su pedido
  
     public function confirmation() {
+		// Firma digital de la transacción que viene de Payu
+		$sign = $_POST['sign']; //e1b0939bbdc99ea84387bee9b90e4f5c
+
 	    $mensajeLog = print_r($_POST,true) . "\r\n";
 		$fp = fopen("data.txt", "a");
-		fwrite($fp, "Datos obtenidos: \r\n $mensajeLog");
+		fwrite($fp, "Sing: $sing \r\n Datos obtenidos: \r\n $mensajeLog");
 		fclose($fp);
+
 
     	date_default_timezone_set('America/Bogota');
     	
@@ -152,9 +156,6 @@ class ConfirmationController extends Controller
 
 		// id de la transacción hecha en payu
 		$transaction_id = $_POST['transaction_id']; //f5e668f1-7ecc-4b83-a4d1-0aaa68260862
-
-		// Firma digital de la transacción que viene de Payu
-		$sign = $_POST['sign']; //e1b0939bbdc99ea84387bee9b90e4f5c
 
 		$payment_method_name = $_POST['payment_method_name']; //VISA
 
