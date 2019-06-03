@@ -187,7 +187,7 @@ class ConfirmationController extends Controller
 		// VERIFICAR LA FIRMA QUE VIENE DE PAYU
 
     	// Esquema de la firma : "ApiKey~merchant_id~reference_sale~new_value~currency~state_pol"
-    	// $firma_cadena  = md5("$this->ApiKey~$merchant_id~$reference_sale~$new_value~$currency~$state_pol");
+    	$firma_cadena  = md5("$this->ApiKey~$merchant_id~$reference_sale~$new_value~$currency~$state_pol");
 
     	$pedido_id = (int)$pedido_id;
         $pedido    = App\Pedido::find($pedido_id);
