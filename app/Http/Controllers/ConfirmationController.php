@@ -102,7 +102,7 @@ class ConfirmationController extends Controller
 
 	    $mensajeLog = print_r($_POST,true) . "\r\n";
 		$fp = fopen("data.txt", "a");
-		fwrite($fp, "Sing: $sing \r\nDatos obtenidos: \r\n $mensajeLog");
+		fwrite($fp, "Sing: $sign \r\nDatos obtenidos: \r\n $mensajeLog");
 		fclose($fp);
 
 
