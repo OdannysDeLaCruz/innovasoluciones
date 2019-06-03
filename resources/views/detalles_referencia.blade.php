@@ -52,13 +52,13 @@
 				@endif
 				<span class="detalle_info_precio detalle_info_item"> 
 					<?php 
-						if ($detalle['promo_tipo'] == 'descuento%') {
+						if ($detalle['promo_tipo'] == '%') {
 							$descuento = $detalle['producto_precio'] * ($detalle['promo_costo'] / 100);
 							$total     = $detalle['producto_precio'] - $descuento;
 							$total     = '<span class="ahora">Ahora</span>' . 
 							'<span class="total">$ ' .  number_format($total, 0, '', '.') .  '</span>'; 
 						}
-						elseif($detalle['promo_tipo'] == 'peso'){
+						elseif($detalle['promo_tipo'] == '$'){
 							$total = $detalle['producto_precio'] - $detalle['promo_costo'];
 							$total = '<span class="total">$ ' .  number_format($total, 0, '', '.') .  '</span>';
 						}
