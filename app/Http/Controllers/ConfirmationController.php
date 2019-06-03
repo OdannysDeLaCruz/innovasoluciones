@@ -129,14 +129,7 @@ class ConfirmationController extends Controller
 		// Esquema de la firma : "ApiKey~merchant_id~reference_sale~new_value~currency~state_pol"
     	$firma_cadena  = md5("$this->ApiKey~$merchant_id~$reference_sale~$new_value~$currency~$state_pol");
 
-    	$fp = fopen("data.txt", "a");
-		fwrite($fp, "Sing: \r\n $sign \r\n Firma generada: \r\n: $firma_cadena");
-		if ($sign === $firma_cadena) {
-			fwrite($fp, "\r\n Las firmas son iguales");
-		}else {
-			fwrite($fp, "\r\n Las firmas NO son iguales");			
-		}
-		fclose($fp);
+
 
 
 
@@ -303,6 +296,9 @@ class ConfirmationController extends Controller
 				if ($response_code_pol == 23) {
 					if ($response_message_pol === 'ANTIFRAUD_REJECTED') {
 						$descripcion_transaccion = 'Transacción rechazada por sospecha de fraude';	
+						$fp = fopen("data.txt", "a");
+						fwrite($fp, "$response_message_pol: $descripcion_transaccion");
+						fclose($fp);
 					}
 				}
 				if ($response_code_pol == 9995) {
