@@ -189,6 +189,15 @@ class ConfirmationController extends Controller
     	// Esquema de la firma : "ApiKey~merchant_id~reference_sale~new_value~currency~state_pol"
     	$firma_cadena  = md5("$this->ApiKey~$merchant_id~$reference_sale~$new_value~$currency~$state_pol");
 
+    	$fp = fopen("data.txt", "a");
+		fwrite($fp, "Sing: \r\n $sign \r\n Firma generada: \r\n: $firma_cadena");
+		if ($sign === $firma_cadena) {
+			fwrite($fp, "\r\n Las firmas son iguales");
+		}else {
+			fwrite($fp, "\r\n Las firmas NO son iguales");			
+		}
+		fclose($fp);
+
     	$pedido_id = (int)$pedido_id;
         $pedido    = App\Pedido::find($pedido_id);
         $pedido->pedido_ref_venta = $reference_sale;
