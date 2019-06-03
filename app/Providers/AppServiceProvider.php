@@ -49,6 +49,8 @@ class AppServiceProvider extends ServiceProvider
         if($app_url == 'https://www.innovainc.co'){
             $this->app->bind('path.public', function(){
                 return base_path().'/public_html';
+                // cambia base_path() por public_path()
+                // $path = base_path().'/../public_html/images';
             });
         }
     }

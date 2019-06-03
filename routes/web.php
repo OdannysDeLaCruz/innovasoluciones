@@ -11,11 +11,6 @@
 |
 */
 
-Route::get('pruebas', function(){
-	return view('pruebas');
-});
-
-
 Route::get('/', 'PrincipalController@index')->name('home');
 
 // RUTAS PARA PRODUCTOS

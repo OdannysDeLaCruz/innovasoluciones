@@ -2,7 +2,7 @@ APP_NAME=InnovaSoluciones
 APP_ENV=local
 APP_KEY=base64:BoBXViKv8iEyxqHL9r3pUb3131BRv/+eUL7FlQCpzmQ=
 APP_DEBUG=true
-APP_URL=http:https://www.innovasoluciones.com
+APP_URL=http:http://www.innovasoluciones.com
 
 LOG_CHANNEL=stack
 

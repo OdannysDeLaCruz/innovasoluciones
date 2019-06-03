@@ -119,7 +119,7 @@ $(document).ready(function(){
                     dataType: 'json',
                     success: function(data){
                         if (data.status == 'Success') {
-                            // alert(data.message);
+                            // console.log(data.message);
                             alertify.notify(data.message, 'success', 10);
                             alertify.notify('Será redireccionado a Payu', 'success', 10);
                             // Despues de que se crea el pedido y sus detalles, se obtiene el id que returna crearPedidoController.php de ese pedido se añade a la descripcion que se envía a payu
@@ -139,6 +139,7 @@ $(document).ready(function(){
                     },
                     error: function(data){
                         if(data.status == 500){
+                            console.log(data.message, data.status);
                             e.preventDefault();
                             alertify.alert("Ha ocurrido un error, recarga la página o contácta a soporte técnico", function() {
                                 window.location.reload();                 

@@ -12,7 +12,7 @@ class ConfirmationController extends Controller
     private $ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
 
 	// Recepcion y verificacion de los datos de funcion response
-  //   public function response(Request $request) {
+  	// public function response(Request $request) {
 
   //   	// Numero de identificación del comercio en el sistema de payu
 		// $merchant_id   = $request['merchantId'];
@@ -97,10 +97,10 @@ class ConfirmationController extends Controller
 	// Enviar mensaje de correo electronico al usuario informando de el estado de su pedido
  
     public function confirmation() {
-	    //$mensajeLog = print_r($_POST,true) . "\r\n";
-		// $fp = fopen("data.txt", "a");
-		// fwrite($fp, "Datos obtenidos \r\n ref: $reference_sale - id: $pedido_id : int - " . is_int($pedido_id));
-		// fclose($fp);
+	    $mensajeLog = print_r($_POST,true) . "\r\n";
+		$fp = fopen("data.txt", "a");
+		fwrite($fp, "Datos obtenidos \r\n ref: $reference_sale - id: $pedido_id : int - " . is_int($pedido_id));
+		fclose($fp);
 
     	date_default_timezone_set('America/Bogota');
     	
@@ -196,8 +196,7 @@ class ConfirmationController extends Controller
         $pedido->save();
 
     	if ($sign === $firma_cadena) {
-	        $transaccion = App\Transaccion::find($transaccion_id);
-
+	        
     		// Verificar el estado de la transacción
 	  		if ($state_pol == 4 && $response_message_pol === 'APPROVED' && $response_code_pol == 1) {  
 	  			$descripcion_transaccion = 'Transacción aprobada';
@@ -332,6 +331,8 @@ class ConfirmationController extends Controller
 				$descripcion_transaccion = 'Transacción expirada';
 			}
 
+			$transaccion = App\Transaccion::find($transaccion_id);
+
 			$transaccion->estado                = $state_pol;
 	        $transaccion->mensaje_respuesta     = $response_message_pol;
 	        $transaccion->codigo_respuesta      = $response_code_pol;
@@ -351,6 +352,11 @@ class ConfirmationController extends Controller
 	        $transaccion->fecha_transaccion     = $transaction_date;
 	        $transaccion->fecha_actualizado     = $transaction_date;
 	        $transaccion->save();
+
+
+	        $fp = fopen("data.txt", "a");
+			fwrite($fp, "\r\n \r\n Transacción actualizada \r\n: $transaccion_id");
+			fclose($fp);
     	}
     }
 }

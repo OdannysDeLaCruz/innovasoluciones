@@ -7,10 +7,10 @@
   	<div class="carousel-inner">
     	<div class="carousel-item active">
     		<a href="/">
-      			<img class="d-block w-100" src="img/carrusel/imagen1.jpg" alt="First slide">	    			
+      			<img class="d-block w-100" src='{{ asset("storage/banners/home/tecnologia-en-camino.jpg") }}' alt="First slide">	    			
     		</a>
     	</div>
-    	<div class="carousel-item">
+    	<!-- <div class="carousel-item">
     		<a href="/">
       			<img class="d-block w-100" src="img/carrusel/imagen2.jpg" alt="Second slide">
     		</a>
@@ -19,7 +19,7 @@
     		<a href="/">
       			<img class="d-block w-100" src="img/carrusel/imagen3.jpg" alt="Third slide">	    			
     		</a>
-    	</div>
+    	</div> -->
   	</div>
 	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
