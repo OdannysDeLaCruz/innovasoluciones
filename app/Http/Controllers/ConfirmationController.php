@@ -114,8 +114,34 @@ class ConfirmationController extends Controller
     	// Es el número identificador del comercio en el sistema de PayU
 		$merchant_id = $_POST['merchant_id'];
 
+		// Es la referencia de la venta o pedido. Deber ser único por cada transacción que se envía al sistema.
+		// Esta es la que se envió a payu desde el formulario en el input referenceCode
+		$reference_sale = $_POST['reference_sale']; //2015-05-27 13:04:37
+
+		$value = $_POST['value']; // 1000.00 , 1000
+		$new_value = number_format($value, 1, '.', ''); // 1000.0
+
+		$currency = $_POST['currency']; //USD, COP
+
 		// 4 = aprovada, 6 = declinada, 5 = expirada
 		$state_pol = $_POST['state_pol'];
+
+		// Esquema de la firma : "ApiKey~merchant_id~reference_sale~new_value~currency~state_pol"
+    	$firma_cadena  = md5("$this->ApiKey~$merchant_id~$reference_sale~$new_value~$currency~$state_pol");
+
+    	$fp = fopen("data.txt", "a");
+		fwrite($fp, "Sing: \r\n $sign \r\n Firma generada: \r\n: $firma_cadena");
+		if ($sign === $firma_cadena) {
+			fwrite($fp, "\r\n Las firmas son iguales");
+		}else {
+			fwrite($fp, "\r\n Las firmas NO son iguales");			
+		}
+		fclose($fp);
+
+
+
+
+
 
 		/* ENTITY_DECLINED  APPROVED, PAYMENT_NETWORK_REJECTED, INVALID_CARD, INSUFFICIENT_FUNDS, CONTACT_THE_ENTITY, EXPIRED_CARD, RESTRICTED_CARD, INVALID_EXPIRATION_DATE_OR_SECURITY_CODE, INVALID_TRANSACTION, EXCEEDED_AMOUNT, ABANDONED_TRANSACTION, PAYMENT_NETWORK_NO_CONNECTION, NOT_ACCEPTED_TRANSACTION, ERROR, EXPIRED_TRANSACTION */
 		$response_message_pol = $_POST['response_message_pol'];
@@ -125,9 +151,6 @@ class ConfirmationController extends Controller
 
 		// Fecha de tansaccion de la compra, diferente a fecha_creado de realizado el pedido
 		$transaction_date = $_POST['transaction_date'];
-
-		$value = $_POST['value']; // 1000.00 , 1000
-		$new_value = number_format($value, 1, '.', ''); // 1000.0
 
 		// Puedo utilizar cualquiera de los dos para identificar el medio de pago
 		// El tipo de medio de pago utilizado para el pago, Numérico.
@@ -160,7 +183,7 @@ class ConfirmationController extends Controller
 
 		$payment_method_name = $_POST['payment_method_name']; //VISA
 
-		$currency = $_POST['currency']; //USD, COP
+		
 
 		// Número de cuotas en las cuales se difirió el pago con tarjeta crédito.
 		$installments_number = $_POST['installments_number']; //1
@@ -174,9 +197,7 @@ class ConfirmationController extends Controller
 		// Referencia del pedido en payu
 		$reference_pol = $_POST['reference_pol']; //7069375
 
-		// Es la referencia de la venta o pedido. Deber ser único por cada transacción que se envía al sistema.
-		// Esta es la que se envió a payu desde el formulario en el input referenceCode
-		$reference_sale = $_POST['reference_sale']; //2015-05-27 13:04:37
+
 
 		// Para pagos con pse
 		$pse_cus        = $_POST['cus'];
@@ -188,17 +209,9 @@ class ConfirmationController extends Controller
 
 		// VERIFICAR LA FIRMA QUE VIENE DE PAYU
 
-    	// Esquema de la firma : "ApiKey~merchant_id~reference_sale~new_value~currency~state_pol"
-    	$firma_cadena  = md5("$this->ApiKey~$merchant_id~$reference_sale~$new_value~$currency~$state_pol");
+    	
 
-    	$fp = fopen("data.txt", "a");
-		fwrite($fp, "Sing: \r\n $sign \r\n Firma generada: \r\n: $firma_cadena");
-		if ($sign === $firma_cadena) {
-			fwrite($fp, "\r\n Las firmas son iguales");
-		}else {
-			fwrite($fp, "\r\n Las firmas NO son iguales");			
-		}
-		fclose($fp);
+    	
 
     	$pedido_id = (int)$pedido_id;
         $pedido    = App\Pedido::find($pedido_id);
