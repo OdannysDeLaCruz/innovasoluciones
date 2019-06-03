@@ -99,7 +99,7 @@ class ConfirmationController extends Controller
     public function confirmation() {
 	    $mensajeLog = print_r($_POST,true) . "\r\n";
 		$fp = fopen("data.txt", "a");
-		fwrite($fp, "Datos obtenidos \r\n ref: $reference_sale - id: $pedido_id : int - " . is_int($pedido_id));
+		fwrite($fp, "Datos obtenidos: \r\n $mensajeLog");
 		fclose($fp);
 
     	date_default_timezone_set('America/Bogota');
