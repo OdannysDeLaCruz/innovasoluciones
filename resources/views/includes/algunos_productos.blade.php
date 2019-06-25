@@ -10,7 +10,7 @@
 			<section class="producto">
 				<figure>
 					<a href="/productos/{{ $ref }}-{{ $nombre }}">
-						<img src='{{ asset("storage/productos/imagenes/miniaturas/$algunos->producto_imagen") }}' class="producto_img">
+						<img src='{{ asset("uploads/productos/imagenes/miniaturas/$algunos->producto_imagen") }}' class="producto_img" alt="{{ $algunos->producto_nombre }}">
 					</a>
 				</figure>
 			</section>

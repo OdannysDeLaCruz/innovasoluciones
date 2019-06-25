@@ -121,12 +121,12 @@
 					<!-- Promocion -->
 					<div class="form-group">
 						<div class="form-group-items">
-							<label class="form_titulos" for="producto_promocion">Agrergar promoción</label>
+							<label class="form_titulos" for="producto_promocion">Agregar promoción</label>
 							<select class="form-control producto_promocion" id="producto_promocion" name="producto_promocion" value="{{ old('producto_promocion') }}">
 								<option value="0">Asigna una promoción al producto </option>
 								@if(isset($promociones))
 									@foreach($promociones as $promocione)
-										<option value="{{ $promocione->id }}">{{ $promocione->promo_nombre }} ( {{ $promocione->promo_tipo }}) ($promocione->promo_costo)</option>
+										<option value="{{ $promocione->id }}">{{ $promocione->promo_nombre }} ( {{ $promocione->promo_tipo }} )  ( {{ $promocione->promo_costo }} )</option>
 									@endforeach
 								@endif
 							</select>
@@ -164,14 +164,14 @@
 
 					<!-- imagenes de referencias -->
 					<section class="form-group section_subir_imagenes">
-						<h1 class="section_subir_imagenes_titulo">SUBIR IMAGENES DE REFERENCIAS <small>(Max 4)</small></h1>
+						<h1 class="section_subir_imagenes_titulo">SUBIR IMAGENES COMPLEMENTARIAS <small>(Max 4)</small></h1>
 						<input type="file" class="form-control section_subir_imagenes_input" name="producto_imgs_referencia[]" multiple>
 						@if ($errors->has('producto_imgs_referencia'))
 		                    <span class="invalid-feedback" role="alert">
 		                        <p>{{ $errors->first('producto_imgs_referencia') }}</p>
 		                    </span>
 		                @endif
-						<h1 class="section_subir_imagenes_titulo mt-4">SUBIR VIDEOS DE REFERENCIAS</h1>
+						<h1 class="section_subir_imagenes_titulo mt-4">SUBIR VIDEOS COMPLEMENTARIAS</h1>
 						<input type="text" class="form-control section_subir_imagenes_input" name="producto_videos_referencia" placeholder="Separe cada código de video con una coma ( , )">
 
 						@if ($errors->has('producto_videos_referencia'))

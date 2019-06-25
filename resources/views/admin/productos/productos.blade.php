@@ -55,7 +55,7 @@
 					@foreach($productos as $producto)
 						<section class="contenedor_tabla_body">
 							<span class="contenedor_tabla_body_titulos producto-img">
-								<img class="producto_img" src='{{ asset("storage/productos/imagenes/miniaturas/$producto->producto_imagen") }}'>			
+								<img class="producto_img" src='{{ asset("uploads/productos/imagenes/miniaturas/$producto->producto_imagen") }}'>			
 							</span>
 							<span class="contenedor_tabla_body_titulos producto-nombre">
 								@if(strlen($producto->producto_nombre) > 10)
@@ -88,10 +88,10 @@
 								@endphp
 							</span>
 							<span class="contenedor_tabla_body_titulos producto-operaciones">
-								<a data-toggle="tooltip" data-placement="top" title="Ver producto" href="{{ route ('getDetallesProducto', $producto->producto_ref ) }}">
+								<a data-toggle="tooltip" data-placement="top" title="Ver producto" href="{{ route ('getDetallesProducto', $producto->id ) }}">
 									<span class="fa fa-edit mr-2 btn-ver-item"></span>
 								</a>  |  
-								<a data-toggle="tooltip" data-placement="top" title="Eliminar producto" href="{{ route ('eliminarProducto', $producto->producto_ref ) }}">
+								<a class="btnEliminarProducto" data-toggle="tooltip" data-placement="top" title="Eliminar producto" href="{{ route ('eliminarProducto', $producto->id ) }}">
 									<span class="fa fa-trash ml-2 btn-eliminar-item"></span>
 								</a>
 							</span>
@@ -111,6 +111,11 @@
 		@if(session('producto-creado'))
 			<script>
 				alert('Producto creado correctamente');
+			</script>
+		@endif
+		@if(session('mensaje'))
+			<script>
+				alert( '{{ session('mensaje') }}' );
 			</script>
 		@endif
 	@endsection

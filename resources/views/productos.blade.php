@@ -51,7 +51,7 @@
 					<section class="producto">
 						<figure>
 							<a href="/productos/{{ $ref }}-{{ $nombre }}">
-								<img src='{{ asset("storage/productos/imagenes/miniaturas/$producto->producto_imagen") }}' class="producto_img" alt="{{ $producto->producto_nombre }}">							
+								<img src='{{ asset("uploads/productos/imagenes/miniaturas/$producto->producto_imagen") }}' class="producto_img" alt="{{ $producto->producto_nombre }}">							
 							</a>
 						</figure>
 						<div class="producto_info">

@@ -1,9 +1,9 @@
 @if($publicidad != '')
-	<section class="seccion_publicidad">
+	<!-- <section class="seccion_publicidad"> -->
 		<!-- IMAGEN DE FONDO -->
-		<img class="img_fondo_publicidad" src="img/futball.jpg">
+		<!-- <img class="img_fondo_publicidad" src="img/futball.jpg"> -->
 
-		<div class="contenedor_publicidad row">			
+		<!-- <div class="contenedor_publicidad row">			
 			@foreach($publicidad as $producto)
 				<?php 
 					$ref  = $producto['producto_ref'];
@@ -23,6 +23,6 @@
 					</a>
 				</figure>
 			@endforeach
-		</div>
-	</section>
+		</div> -->
+	<!-- </section> -->
 @endif

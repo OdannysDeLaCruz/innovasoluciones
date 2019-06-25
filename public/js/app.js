@@ -177,5 +177,13 @@ $(document).ready(function(){
         $('#producto_descripcion').text($('#producto_descripcion').Editor('getText'));
         $('#form_crear_producto').submit();
     });
+
+    // CONFIRMACION DE ELIMINAR PRODUCTO
+    $('.btnEliminarProducto').on('click', function(e) {
+        $eliminar = confirm('¿Desea eliminar este producto?');
+        if (!$eliminar) {
+            e.preventDefault();
+        }
+    });
 });
 

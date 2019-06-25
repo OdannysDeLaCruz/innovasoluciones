@@ -501,7 +501,8 @@ body {
 .seccion_categorias {
 	width: 100%;
 	height: auto;
-	padding: 10px 0;
+	padding: 30px 0;
+	background: #fff;
 }
 .seccion_categorias_textos {
 	max-width: 1200px;	
@@ -547,12 +548,13 @@ body {
 .seccion_categorias_items .item .item_img {
 	width: 100px;
 	height: 100px;
-	background: #0066FF;
+	/*background: #0066FF;*/
 	padding: 20px;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border: 3px solid #3A52A2;
 }
 .seccion_categorias_items .item .item_img img {
 	width: 60px;
@@ -560,12 +562,15 @@ body {
 }
 .seccion_categorias_items .item .item_titulo {
 	word-break: break-all;
-	font-size: 14px;
-	font-weight: 500;
+	/* font-size: 14px; */
+	 font-size: 18px; 
+	/*font-weight: 500;*/
+	font-weight: 600;
 	text-align: center;
 	margin: 10px 0;
 	padding: 0 10px;
-	color: #333;
+	/*color: #333;*/
+	color: #3A52A2;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 }
