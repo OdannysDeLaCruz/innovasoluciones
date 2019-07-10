@@ -30,8 +30,8 @@
 	                <!-- Descripcion -->
 					<div class="form-group">
 						<div class="form-group-items descripcion_editor">
-							<label class="form_titulos" for="producto_descripcion"> <span class="form_titulos_required">*</span> Descripción del producto</label>
-							<textarea id="producto_descripcion" name="producto_descripcion" required placeholder="Escribe la increible descripcion de este producto"></textarea>		
+							<label class="form_titulos" for="producto_descripcion"> <span class="form_titulos_required"></span> Descripción del producto</label>
+							<textarea id="producto_descripcion" name="producto_descripcion" placeholder="Escribe la increible descripcion de este producto"></textarea>		
 						</div>
 						@if ($errors->has('producto_descripcion'))
 		                    <span class="invalid-feedback" role="alert">
@@ -166,11 +166,26 @@
 					<section class="form-group section_subir_imagenes">
 						<h1 class="section_subir_imagenes_titulo">SUBIR IMAGENES COMPLEMENTARIAS <small>(Max 4)</small></h1>
 						<input type="file" class="form-control section_subir_imagenes_input" name="producto_imgs_referencia[]" multiple>
-						@if ($errors->has('producto_imgs_referencia'))
+
+						<!-- <span class="invalid-feedback" role="alert">
+		                    <p>Mensaje de error</p>
+		                </span> -->
+
+						@if ($errors)
+							@foreach($errors as $error)
+								<span class="invalid-feedback" role="alert">
+		                    		<p>Mensaje de error</p>
+		                		</span>
+							@endforeach
+		                   <!--  <span class="invalid-feedback" role="alert">
+		                        <p>{{ $errors->first('producto_imgs_referencia.0') }}</p>
+		                    </span> -->
+		                @endif
+		               <!--  @if ($errors->has('producto_imgs_referencia'))
 		                    <span class="invalid-feedback" role="alert">
 		                        <p>{{ $errors->first('producto_imgs_referencia') }}</p>
 		                    </span>
-		                @endif
+		                @endif -->
 						<h1 class="section_subir_imagenes_titulo mt-4">SUBIR VIDEOS COMPLEMENTARIAS</h1>
 						<input type="text" class="form-control section_subir_imagenes_input" name="producto_videos_referencia" placeholder="Separe cada código de video con una coma ( , )">
 

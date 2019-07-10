@@ -31,7 +31,7 @@
 		</section>
 		<section class="section_referencias">
 			@foreach ($imagenes as $imagen)
-				<img class="section_referencias_img" src='{{ asset("storage/productos/imagenes/$imagen->imagen_url") }}'>
+				<img class="section_referencias_img" src='{{ asset("uploads/productos/imagenes/$imagen->imagen_url") }}'>
 	        @endforeach
 	        <div class="section_referencias_contenedor_videos">
 		        @foreach ($videos as $video)

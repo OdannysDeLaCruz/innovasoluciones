@@ -5,6 +5,20 @@
 
     RewriteEngine On
 
+    # Redireccionar de www a sin www
+    #RewriteCond %{HTTP_HOST} ^www.innovainc.co [NC]
+    #RewriteRule ^(.*)$ https://innovainc.co/$1 [L,R=301]
+
+    # Rediccionar trafico web de http a https
+    #RewriteCond %{HTTPS} !=on
+    #RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Tamaño de subida maximo de imagenes de productos
+    php_value upload_max_filesize 10M 
+    php_value post_max_size 50M 
+    #php_value memory_limit 128M
+    php_value max_execution_time 120
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -18,8 +32,4 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-#php_value upload_max_filesize 10M
-#php_value post_max_size 20M
-#php_value max_execution_time 180
 </IfModule>

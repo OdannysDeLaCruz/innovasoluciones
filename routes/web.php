@@ -82,8 +82,9 @@ Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function(){
 	
 	Route::get('/productos/{producto_ref}', 'AdminController@getDetallesProducto')->name('getDetallesProducto');
 
-	Route::get('/productos/eliminar/{id}', 'AdminController@eliminarProducto')->name('eliminarProducto');
-	
+	Route::post('/productos/{producto_ref}/actualizar', 'AdminController@actualizarProducto')->name('actualizarProducto');
+
+	Route::get('/productos/eliminar/{id}', 'AdminController@eliminarProducto')->name('eliminarProducto');	
 	
 	Route::post('/productos/registrar', 'AdminController@createProductos')->name('createProductos');
 

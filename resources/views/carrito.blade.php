@@ -43,7 +43,7 @@
 					  				<td scope="row">
 					  					<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
 					  						@php
-												$url = "storage/productos/imagenes/miniaturas/" . $carrito['imagen'];
+												$url = "uploads/productos/imagenes/miniaturas/" . $carrito['imagen'];
 											@endphp
 					  						<img class="carrito_fila_img" src="{{ $url }}" alt="{{ $carrito['descripcion'] }}">			
 					  					</a>

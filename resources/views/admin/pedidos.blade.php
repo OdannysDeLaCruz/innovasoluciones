@@ -64,9 +64,9 @@
 								@elseif($pedido->estado == 4) 
 									<p class="estados pedidos_estado_aprovada"> {{ "Aprovado" }} </p>
 								@elseif($pedido->estado == 6) 
-									<p class="estados pedidos_estado_declinada"> {{ "Declinada" }} </p>
+									<p class="estados pedidos_estado_declinada"> {{ "Rechazado" }} </p>
 								@elseif($pedido->estado == 5)
-									<p class="estados pedidos_estado_expirada"> {{ "Expirada" }} </p>
+									<p class="estados pedidos_estado_expirada"> {{ "Expirado" }} </p>
 								@endif
 							</span>
 							<span class="contenedor_tabla_body_titulos_pedidos pedido-total">

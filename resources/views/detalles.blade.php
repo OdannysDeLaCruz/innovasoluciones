@@ -29,10 +29,10 @@
 				<div class="detalle_descripcion_img_banner">
 					<div class="detalle_descripcion_img_banner_lista">	
 						<!-- Va de primero la imagen que viene desde la tabla producto -->
-						<img class="lista_img" src='{{ asset("storage/productos/imagenes/miniaturas/$detalle->producto_imagen") }}' alt="imganes de descripcion">
+						<img class="lista_img" src='{{ asset("uploads/productos/imagenes/miniaturas/$detalle->producto_imagen") }}' alt="imganes de descripcion">
 						<!-- Luego las imagenes que vienen de la tabla imagenes_productos -->
 				        @foreach ($imagenes as $imagen)
-							<img class="lista_img" src='{{ asset("storage/productos/imagenes/$imagen->imagen_url") }}' alt="{{ $detalle->producto_nombre }}">
+							<img class="lista_img" src='{{ asset("uploads/productos/imagenes/$imagen->imagen_url") }}' alt="{{ $detalle->producto_nombre }}">
 				        @endforeach
 					</div>
 					<div class="detalle_descripcion_img_banner_visualizador" id="detalle_visualizador"></div>					

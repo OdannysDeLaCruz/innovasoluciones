@@ -15,8 +15,6 @@ class AdminController extends Controller
         // Obtener el listado de categorias para el forulario de filtrado
         $categorias = App\Categoria::select('id', 'seccion_id', 'categoria_nombre')->orderBy('categoria_nombre')->get();
         // Productos
-        // $productos = App\Producto::orderBy('fecha_creado', 'desc')->paginate(20);
-
         $productos = App\Producto::select('productos.*', 'promociones.promo_tipo', 'promociones.promo_costo', 'categorias.id as categoria_id', 'categorias.categoria_nombre')
                                 ->leftJoin('promociones', 'productos.promocion_id', '=', 'promociones.id')
                                 ->leftJoin('categorias', 'productos.categoria_id', '=', 'categorias.id')
@@ -34,7 +32,7 @@ class AdminController extends Controller
 
         $v = \Validator::make($request->all(), [
             "producto_nombre"              => 'required|string|unique:productos',
-            "producto_descripcion"         => 'required|string',
+            "producto_descripcion"         => 'nullable|string',
             "producto_precio"              => 'required|integer|min:1',
             "producto_cantidad"            => 'required|integer|min:1',
             "producto_ref"                 => 'required|string|unique:productos',
@@ -49,16 +47,13 @@ class AdminController extends Controller
             'producto_tieneImgDescripcion' => 'nullable'
         ]);
 
-        // dd($v);
 
         if($v->fails()) {
+            // dd($v->errors());
             return redirect()->back()->withInput()->withErrors($v->errors());
         }
         $producto_promocion = $request->producto_promocion == 0 ? null : $request->producto_promocion;
         $producto_tieneImgDescripcion = $request->has('producto_tieneImgDescripcion') === true ? 1 : 0;
-
-        //$producto_nombre_imagen = $request->file('producto_imagen')->getClientOriginalName();
-        //$pathImagen = Storage::putFileAs('productos/imagenes/miniaturas', $request->file('producto_imagen'), $producto_nombre_imagen);
 
         // Subir imagen principal al servidor - carpeta uploads - esta debe ser de baja resoluciones y peso
         $imagen_prinicipal = $request->file('producto_imagen');
@@ -93,10 +88,7 @@ class AdminController extends Controller
                     // Recorro el array de imagenes para guardarlas una por una
                     foreach($producto_imgs_referencia as $file) {
                         $imagenes_productos = new App\Imagen;
-                        // $nombre_imagen = $file->getClientOriginalName();
-
                         // Guardo las imagenes en uploads/productos/imagenes con su nuevo nombre, tambien guardo el nombre de la imagen y a que producto pertenece en la tabla imagenes
-                        // Storage::putFileAs('productos/imagenes', $file, $nombre_imagen);
 
                         $nombre_imagen = time() . '_' . $file->getClientOriginalName();
                         $file->move('uploads/productos/imagenes', $nombre_imagen);
@@ -161,7 +153,6 @@ class AdminController extends Controller
         // Obtener producto
         $producto = App\Producto::find($id);
         if($producto != null) {
-
             // Obtener la imagen principal del producto y eliminarla del servidor
             $imagen_prinicipal = $producto->producto_imagen;
             \File::delete('uploads/productos/imagenes/miniaturas'.$imagen_prinicipal);
@@ -183,47 +174,8 @@ class AdminController extends Controller
             return redirect()->route('getProductos');
         }
 
-
-        if ($producto != null) {
-            
-            // Obtener imagenes del producto
-            // $imgs = $productos->url_foto;
-            
-            // Eliminar foto
-            //$img_delete = Storage::delete('compositores/' . $img_compositor);
-            // \File::delete('uploads/compositores/'.$img_compositor);
-            
-            // Eliminar compositor de base de datos
-            // $delete = $compositor->delete();
-            
-            // if ($delete) {
-            //     session()->flash('mensaje', 'Usuario eliminado');
-            //     return redirect()->route('admin');
-            // }
-        }
         // compositor no existe
         session()->flash('mensaje', 'Usuario no existe');
         return redirect()->route('admin');
-    }
-
-    protected function validator(array $data) {
-
-        return Validator::make($data, [
-            // 'nombre'         => 'required|string|max:255',
-            // 'apellido'       => 'required|string|max:255',
-            // 'num_documento'  => 'required|string|max:255',
-            // 'email'          => 'required|string|email|max:255|unique:users',
-            // 'password'       => 'required|string|min:6|confirmed',
-
-            "descripcion"       => 'required|string|min:1',
-            "codigo-referencia" => 'required|string|min:1',
-            "precio-unitario"   => 'required|int',
-            "descuento"         => 'required|int',
-            "categoria"         => 'required|string|min:1',
-            "etiquetas"         => 'required|string|min:1',
-            "tamaño"            => 'required|int',
-            "color"             => 'required|string|min:1',
-            "cantidades"        => 'required|int',
-        ]);
     }
 }

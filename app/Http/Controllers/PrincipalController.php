@@ -52,6 +52,7 @@ class PrincipalController extends Controller
                 'publicidad'
     		)
     	);
+        // return view('home');
     }
     public function showProductos() {
         $productos = App\Producto::select('productos.*', 'promociones.promo_tipo', 'promociones.promo_costo')
@@ -152,7 +153,7 @@ class PrincipalController extends Controller
     private function obtenerCategoriasSeccion($key) {
         $categorias_ids = App\Categoria::select('id')->where('seccion_id', $key)->get();
         if ($categorias_ids->isEmpty() != true) {
-             foreach ($categorias_ids as $categoria) {
+            foreach ($categorias_ids as $categoria) {
                 $categorias_id[] = $categoria['id']; 
             }
             return $categorias_id;
@@ -160,7 +161,13 @@ class PrincipalController extends Controller
             return false;
         }
     }
-    // Obtener productos
+
+    /**
+     * Funcion para obtener productos
+     *
+     * @param  int  $ids
+     * @return \Illuminate\Http\Response
+     */
     private function obtenerProductos($ids) {
         // dd($ids);
         $productos = App\Producto::select('productos.*', 'promociones.promo_tipo', 'promociones.promo_costo')

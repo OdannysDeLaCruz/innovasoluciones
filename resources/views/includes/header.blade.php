@@ -21,13 +21,13 @@
                 <li><a href="{{ route('register') }}">Registrarse</a></li>
             @else
                 <li class="nav-item dropdown menu_desplegable">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><img class="dropdown-toggle-icono-avatar" src="{{ asset('storage/avatars/avatar.png') }}"></a>
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><img class="dropdown-toggle-icono-avatar" src="{{ asset('uploads/avatars/avatar.png') }}"></a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <div class="dropdown_menu_foto_perfil">
                             <div class="dropdown_menu_foto_perfil_contenedor">
                                 <div class="dropdown_menu_foto_perfil_contenedor_img">
-                                    <img src="{{ asset('storage/avatars/avatar.png') }}">           
+                                    <img src="{{ asset('uploads/avatars/avatar.png') }}">           
                                 </div>
                             </div>                          
                             <label class="dropdown_menu_foto_perfil_nombre"> {{ Auth::user()->usuario_nombre }} {{ Auth::user()->usuario_apellido }} </label>

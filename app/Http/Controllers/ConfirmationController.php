@@ -14,7 +14,7 @@ class ConfirmationController extends Controller
 	// Recepcion y verificacion de los datos de funcion response
   	// public function response(Request $request) {
 
-  //   	// Numero de identificación del comercio en el sistema de payu
+        // Numero de identificación del comercio en el sistema de payu
 		// $merchant_id   = $request['merchantId'];
 		// // Referencia de venta o pedido que se envia al sistema
 		// $referenceCode = $request['referenceCode'];
@@ -67,30 +67,30 @@ class ConfirmationController extends Controller
 		// 	$estadoTx = $request['mensaje'];
 		// }
 
-  //   	return view('response',
-  //   		compact(
-  //   			'estadoTx',
-  //   			'merchant_id',
-  //   			'referenceCode',
-  //   			'TX_VALUE',
-  //   			'New_value',
-  //   			'currency',
-  //   			'transactionState',
-  //   			'firma_cadena',
-  //   			'firmacreada',
-  //   			'firma',
-  //   			'reference_pol',
-  //   			'cus',
-  //   			'extra1',
-  //   			'pseBank',
-  //   			'lapPaymentMethod',
-  //   			'lapPaymentMethodType',
-  //   			'transactionId', 
-  //   			'direccion_envio',
-  //   			'forma_entrega'
-  //   		)
-  //   	);
-  //   }
+      //return view('response',
+    	// 	compact(
+    	// 		'estadoTx',
+    	// 		'merchant_id',
+    	// 		'referenceCode',
+    	// 		'TX_VALUE',
+    	// 		'New_value',
+    	// 		'currency',
+    	// 		'transactionState',
+    	// 		'firma_cadena',
+    	// 		'firmacreada',
+    	// 		'firma',
+    	// 		'reference_pol',
+    	// 		'cus',
+    	// 		'extra1',
+    	// 		'pseBank',
+    	// 		'lapPaymentMethod',
+    	// 		'lapPaymentMethodType',
+    	// 		'transactionId', 
+    	// 		'direccion_envio',
+    	// 		'forma_entrega'
+    	// 	)
+    	// );
+    //}
 
     // Recepcion y verificacion de los datos de funcion confirmation
 	// Actualizar la información de la tabla pedidos con los nuevos datos recibidos en confirmation
@@ -102,10 +102,8 @@ class ConfirmationController extends Controller
 
 	    $mensajeLog = print_r($_POST,true) . "\r\n";
 		$fp = fopen("data.txt", "a");
-		fwrite($fp, "Sing: $sign \r\nDatos obtenidos: \r\n $mensajeLog");
+		fwrite($fp, "Sing: $sign \r\nDatos obtenidos: \r\n $mensajeLog \r\n\r\n");
 		fclose($fp);
-
-
 
     	date_default_timezone_set('America/Bogota');
     	
@@ -215,10 +213,10 @@ class ConfirmationController extends Controller
     	if ($sign === $firma_cadena) {
 	        
     		// Verificar el estado de la transacción
-	  		if ($state_pol == 4 && $response_message_pol === 'APPROVED' && $response_code_pol == 1) {  
+			if ($state_pol == 4 && $response_message_pol === 'APPROVED' && $response_code_pol == 1) {  
 	  			$descripcion_transaccion = 'Transacción aprobada';
 			}
-			elseif ($state_pol == 6) {
+			if ($state_pol == 6) {
 				if ($response_code_pol == 4) {
 					if ($response_message_pol === 'PAYMENT_NETWORK_REJECTED') {
 						$descripcion_transaccion = 'Transacción rechazada por entidad financiera';
@@ -265,7 +263,7 @@ class ConfirmationController extends Controller
 				}
 				if ($response_code_pol == 12) {
 					if ($response_message_pol === 'INVALID_EXPIRATION_DATE_OR_SECURITY_CODE') {
-						$descripcion_transaccion = 'Fecha de expiración o código de seguridadinválidos';	
+						$descripcion_transaccion = 'Fecha de expiración o código de seguridad inválidos';	
 					}
 				}
 				if ($response_code_pol == 13) {
@@ -295,10 +293,7 @@ class ConfirmationController extends Controller
 				}
 				if ($response_code_pol == 23) {
 					if ($response_message_pol === 'ANTIFRAUD_REJECTED') {
-						$descripcion_transaccion = 'Transacción rechazada por sospecha de fraude';	
-						$fp = fopen("data.txt", "a");
-						fwrite($fp, "$response_message_pol: $descripcion_transaccion");
-						fclose($fp);
+						$descripcion_transaccion = 'Transacción rechazada por sospecha de fraude';
 					}
 				}
 				if ($response_code_pol == 9995) {
@@ -328,8 +323,7 @@ class ConfirmationController extends Controller
 					}
 				}
 				if ($response_code_pol == 9999) {
-					if (
-						$response_message_pol === 'INTERNAL_PAYMENT_PROVIDER_ERROR' &&
+					if ($response_message_pol === 'INTERNAL_PAYMENT_PROVIDER_ERROR' &&
 						$response_message_pol === 'INACTIVE_PAYMENT_PROVIDER' &&
 						$response_message_pol === 'ERROR' &&
 						$response_message_pol === 'ERROR_CONVERTING_TRANSACTION_AMOUNTS' &&
@@ -341,15 +335,19 @@ class ConfirmationController extends Controller
 						$response_message_pol === 'NOT_FIXED_FOR_ERROR_STATE' &&
 						$response_message_pol === 'ERROR_FIXING_AND_REVERSING' &&
 						$response_message_pol === 'ERROR_FIXING_INCOMPLETE_DATA' &&
-						$response_message_pol === 'PAYMENT_NETWORK_BAD_RESPONSE'
-					) {
+						$response_message_pol === 'PAYMENT_NETWORK_BAD_RESPONSE') 
+					{
 						$descripcion_transaccion = 'Error';
 					}
 				}
 			}
-			else ($state_pol == 5 && $response_message_pol === 'EXPIRED_TRANSACTION' && $response_code_pol == 20) {
+			if ($state_pol == 5 && $response_message_pol === 'EXPIRED_TRANSACTION' && $response_code_pol == 20) {
 				$descripcion_transaccion = 'Transacción expirada';
 			}
+
+			$fp = fopen("data.txt", "a");
+			fwrite($fp, "\r\n\r\n $response_message_pol: $descripcion_transaccion \r\n\r\n");
+			fclose($fp);
 
 			$transaccion = App\Transaccion::find($transaccion_id);
 

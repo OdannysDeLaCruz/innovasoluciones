@@ -27,7 +27,7 @@
 						<section class="pedido">
 							<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
 									@php
-										$url = "storage/productos/imagenes/miniaturas/" . $carrito['imagen'];
+										$url = "uploads/productos/imagenes/miniaturas/" . $carrito['imagen'];
 									@endphp
 								<img class="pedido_img" src="{{ $url }}">						
 							</a>

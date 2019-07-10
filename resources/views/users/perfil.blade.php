@@ -27,7 +27,7 @@
 					<div class="perfil_info_datos_block foto_perfil">
 						<div class="foto_perfil_contenedor">
 							<div class="foto_perfil_contenedor_img">
-								<img src="{{ asset('storage/avatars/avatar.png') }}">			
+								<img src="{{ asset('uploads/avatars/avatar.png') }}">			
 							</div>
 						</div>							
 						<label class="foto_perfil_nombre"> {{ Auth::user()->usuario_nombre }} {{ Auth::user()->usuario_apellido }} </label>

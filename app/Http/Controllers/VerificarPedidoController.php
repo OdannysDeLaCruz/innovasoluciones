@@ -28,6 +28,7 @@ class VerificarPedidoController extends Controller
             $cantidad_productos += $producto['cantidad'];
         }
 
+
         // Hago descuento por el codigo ingresado por usuario, este codigo ya ha sido verificado por la funcion verificarCodigo
         $total_del_pedido = session('total_del_pedido');
         $descuento_peso   = session('descuento_peso') ? session('descuento_peso') : 0;
@@ -40,16 +41,8 @@ class VerificarPedidoController extends Controller
 
         $tipo_entregas = App\Envio::select('id', 'envio_metodo')->get();
 
-        return view('verificacion', 
-            compact(
-                'cart',
-                'cantidad_productos',
-                'tipo_entregas',
-                'total_del_pedido',
-                'descuento_peso',
-                'total_pagar'
-            )
-        );
+        // return view('productos');  
+        return view('verificacion', compact('cart','cantidad_productos','tipo_entregas','total_del_pedido','descuento_peso','total_pagar'));
     }
 
     // VERIFICAR CODIGO DE DESCUENTO

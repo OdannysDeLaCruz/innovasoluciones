@@ -34,10 +34,6 @@
 	@include('includes/algunos_productos')	
 	<!-- FIN ALGUNOS PRODUCTOS -->
 
-	<!-- SECCION PUBLICIDAD -->
-	<!-- @include('includes/publicidad') -->
-	<!-- FIN PUBLICIDAD -->
-
 	<!-- SECCION FOOTER -->
 	@include('includes/footer')	
 	<!-- FIN FOOTER -->

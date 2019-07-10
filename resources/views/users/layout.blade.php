@@ -4,7 +4,7 @@
 			<div class="perfil_menu_avatar">
 				<div class="perfil_menu_avatar_contenedor">
 					<div class="perfil_menu_avatar_contenedor_img">
-						<img src="{{ asset('storage/avatars/avatar.png') }}">			
+						<img src="{{ asset('uploads/avatars/avatar.png') }}">			
 					</div>
 				</div>							
 				<label class="perfil_menu_avatar_nombre"> {{ Auth::user()->usuario_nombre }} {{ Auth::user()->usuario_apellido }} </label>
