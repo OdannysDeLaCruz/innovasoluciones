@@ -24,10 +24,12 @@ class CreateUsersTable extends Migration
             $table->string('usuario_avatar')->default('avatar.png');
             $table->string('usuario_telefono')->nullable();
             $table->string('email', 60)->unique();
-            $table->string('usuario_pais')->nullable();
-            $table->string('usuario_ciudad')->nullable();
-            $table->string('usuario_barrio')->nullable();
-            $table->string('usuario_direccion')->nullable();
+
+            // $table->string('usuario_pais')->nullable();
+            // $table->string('usuario_ciudad')->nullable();
+            // $table->string('usuario_barrio')->nullable();
+            // $table->string('usuario_direccion')->nullable();
+
             $table->string('password');
             $table->boolean('usuario_estado');
 
