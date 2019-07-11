@@ -10,7 +10,6 @@ $factory->define(App\Pedido::class, function (Faker $faker) {
 
     return [
         'user_id'                 => $user_id,
-        'pedido_dir'              => $pedido_dir,
         'pedido_ref_venta'        => '',
         'promocion_id'            => rand(1,3),
         'envio_id'                => rand(1,2),

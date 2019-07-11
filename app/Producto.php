@@ -15,7 +15,7 @@ class Producto extends Model
         'producto_ref',
         'producto_imagen',
         'producto_precio',
-        'producto_id',
+        'promocion_id',
         'producto_tallas',
         'producto_colores',
         'producto_tieneImgDescripcion',
@@ -23,4 +23,9 @@ class Producto extends Model
         'producto_estado'
     ];
     public $timestamps = false;
+
+    public function promocion()
+    {        
+        return $this->belongsTo('App\Promocion', 'id');
+    }
 }

@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Direccion extends Model
+class DireccionPedido extends Model
 {
-	protected $table = 'direcciones';
+    protected $table = 'direccion_pedido';
 	protected $fillable = [
     	'id',
-		'user_id',
+		'pedido_id',
 		'pais',
 		'departamento',
 		'distrito',
@@ -20,9 +20,4 @@ class Direccion extends Model
 		'codigo_postal',
     ];
     public $timestamps = false;
-
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
 }

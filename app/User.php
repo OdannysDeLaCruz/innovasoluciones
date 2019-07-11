@@ -42,4 +42,9 @@ class User extends Authenticatable
     ];
 
     public $timestamps = false;
+
+    public function direccion()
+    {
+        return $this->hasMany('App\Direccion');
+    }
 }
