@@ -41,17 +41,29 @@ class CrearPedidoController extends Controller
     			// Crear el pedido
 				if($transaccion != "" && count(session('cart')) > 0 ) {
 					date_default_timezone_set('America/Bogota');
-					
-					$pedido_dir = Auth::user()->usuario_direccion . ', ' 
-								. Auth::user()->usuario_barrio . ' - ' 
-								. Auth::user()->usuario_ciudad . ', ' 
-								. Auth::user()->usuario_pais;
+
+			        // Obtener direccion por defecto
+					$direccion_defecto_usuario = session('direccion_defecto');
+			        // Obtener direccion nueva de envio
+			        $direccion_nueva_pedido = session('direccion_nueva');
+
+					if($direccion_nueva_pedido == []) {
+			            $direccion = $direccion_defecto_usuario;
+			        }else {
+			            $direccion = $direccion_nueva_pedido;
+			        }
+
+					$calle         = $direccion['usuario_calle'];
+					$numero_calle  = $direccion['usuario_numero_calle'];
+					$barrio        = $direccion['usuario_barrio'];
+					$ciudad        = $direccion['usuario_ciudad'];
+					$pais          = $direccion['usuario_pais'];
+					$codigo_postal = $direccion['usuario_cod_postal'];
 
 					$transaccion_id = $transaccion->id;
 
 					$pedido = App\Pedido::create([
 				        'user_id'                 => Auth::user()->id,
-				        'pedido_dir'              => $pedido_dir,
 				        'pedido_ref_venta'        => session('pedido_ref_venta'),
 				        'promocion_id'            => session('promocion_id') ? session('promocion_id') : null,
 				        'envio_id'                => session('tipo_envio'),
@@ -91,7 +103,7 @@ class CrearPedidoController extends Controller
 				        
 	    				// Eliminar todos los datos (variables) de session que esten relacionados con el pedido
 
-	            		$datos_session = ['cart', 'codigos_usados', 'descuento_realizado', 'descuento_peso', 'total_pagar','total_del_pedido','tipo_envio', 'promocion_id'];
+	            		$datos_session = ['cart', 'codigos_usados', 'descuento_realizado', 'descuento_peso', 'total_pagar','total_del_pedido','tipo_envio', 'promocion_id', 'direccion_defecto_usuario', 'direccion_nueva_pedido'];
 			            foreach ($datos_session as $session) {
 			                if (session()->has($session)) {
 			                    session()->forget($session);

@@ -14,6 +14,7 @@ class CartController extends Controller
 			session()->put('cart', []);
 			session()->put('total_del_pedido', '');
 		}
+        
     }
 
 	// Mostrar carrito
@@ -28,11 +29,14 @@ class CartController extends Controller
     // Agragar item al carrito, metodo post
     public function add(Request $request) {
 
+        // Obtener los datos que vienen del formulario de pagina detalles
         $id = $request->input('id');
         $producto_ref  = $request->input('producto_ref');
         // Color y Talla escogidos por el usuario
         $colorEscogido = $request->input('colores');
         $tallaEscogido = $request->input('tallas');
+
+        
 
         $producto = App\Producto::select('id', 'producto_nombre', 'producto_descripcion', 'producto_ref', 'producto_imagen', 'producto_precio', 'promocion_id')
                                 ->where('id', $id)

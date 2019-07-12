@@ -58,6 +58,8 @@ Route::get('/cart/update/{producto}/{cantidad}', 'CartController@update')->name(
 // RUTAS PARA PAGOS
 Route::get('/verificacion', 'VerificarPedidoController@verificar')->name('verificar');
 
+Route::post('/verificacion/cambiar-direccion', 'VerificarPedidoController@cambiar_direccion_envio')->name('cambiar-direccion-envio');
+
 Route::post('/verificarCodigo', 'VerificarPedidoController@verificarCodigo')->name('verificarCodigo');
 
 Route::post('checkout/buying/payment/', 'PaymentController@payment')->name('payment');

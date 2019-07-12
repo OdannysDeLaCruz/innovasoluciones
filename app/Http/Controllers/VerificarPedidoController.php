@@ -3,22 +3,64 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App;
 class VerificarPedidoController extends Controller
 {
+    private $direccion_defecto;
+    private $direccion_nueva;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
+
+        $this->direccion_defecto = [];
+        $this->direccion_nueva = [];
+
+        // Session para almacenar la direccion por defecto del usuario
+        if(!session()->has('direccion_defecto')) {
+            session()->put('direccion_defecto', []);            
+        }
+        // session para almacenar la dirección nueva que digite el usuario
+        if(!session()->has('direccion_nueva')) {
+            session()->put('direccion_nueva', []);            
+        }
+
     }
     
     public function verificar() {
+        // dd(session('direccion_defecto'), session('direccion_nueva'));
         $cart = session('cart');
+        // Agregar datos de direccion del usuario a una variable de session 
+        // Se agragará la direccion con la que se registro por defecto
+
+        // Obtener direccion principal de envio del usuario
+        $this->direccion_defecto['usuario_calle']      = Auth::user()->direccion()->value('calle');
+        $this->direccion_defecto['usuario_numero_calle']  = Auth::user()->direccion()->value('numero');
+        $this->direccion_defecto['usuario_barrio']     = Auth::user()->direccion()->value('barrio');
+        $this->direccion_defecto['usuario_ciudad']     = Auth::user()->direccion()->value('ciudad');
+        $this->direccion_defecto['usuario_pais']       = Auth::user()->direccion()->value('pais');
+        $this->direccion_defecto['usuario_cod_postal'] = Auth::user()->direccion()->value('codigo_postal');
+
+        $direccion_defecto_usuario = session('direccion_defecto');
+        $direccion_defecto_usuario = $this->direccion_defecto;
+        session()->put('direccion_defecto', $direccion_defecto_usuario);
+        $direccion_defecto_usuario = session('direccion_defecto');
+
+        // Obtener direccion nueva de envio
+        $direccion_nueva_pedido = session('direccion_nueva');
+        
+        // Verificar que dirección existe para envio del pedido
+        if($direccion_nueva_pedido == []) {
+            $direccion = $direccion_defecto_usuario;
+        }else {
+            $direccion = $direccion_nueva_pedido;
+        }
+
         if (empty($cart)) {
             session()->flash('vacio', true);
             return redirect()->route('showCart');
@@ -42,7 +84,7 @@ class VerificarPedidoController extends Controller
         $tipo_entregas = App\Envio::select('id', 'envio_metodo')->get();
 
         // return view('productos');  
-        return view('verificacion', compact('cart','cantidad_productos','tipo_entregas','total_del_pedido','descuento_peso','total_pagar'));
+        return view('verificacion', compact('cart','direccion', 'cantidad_productos','tipo_entregas','total_del_pedido','descuento_peso','total_pagar'));
     }
 
     // VERIFICAR CODIGO DE DESCUENTO
@@ -207,6 +249,64 @@ class VerificarPedidoController extends Controller
         elseif ($tipo == 'peso') {
             $descuento = $costo;
             session()->put('descuento_peso', $descuento);
+        }
+    }
+
+    // Obtener direccion de envio
+    // private function get_direccion_envio() {
+
+    //     $direccion_envio_pedido = session('direccion_envio');
+    //     $direccion_envio_pedido = $this->direccion_envio;
+    //     return $direccion_envio_pedido;
+    // }
+    // Cambiar direccion de envio
+    public function cambiar_direccion_envio(Request $request) {
+
+        if($request->ajax()) {
+
+            $v = \Validator::make($request->all(), [
+                "calle"    => 'required|string',
+                "numero"   => 'required|string',
+                "barrio"   => 'required|string',
+                "ciudad"   => 'required|string',
+                "pais"     => 'required|string',
+                "codigo_postal" => 'nullable|integer'
+            ]);
+            // Si hay errores
+            if($v->fails()) {
+                echo json_encode(
+                    array(
+                        'status' => 'Errors',
+                        'errors' => array(
+                            'calle' => $v->errors()->first('calle'),
+                            'numero' => $v->errors()->first('numero'),
+                            'barrio' => $v->errors()->first('barrio'),
+                            'ciudad' => $v->errors()->first('ciudad'),
+                            'pais' => $v->errors()->first('pais'),
+                            'codigo_postal' => $v->errors()->first('codigo_postal'),
+                        ),
+                    )
+                );
+            }
+
+            // Si no hay errores, obtenemos los nuevos datos de direccion de envio y los asignamos a el array direccion
+
+            $this->direccion_nueva['usuario_calle'] = $request->calle;
+            $this->direccion_nueva['usuario_numero_calle'] = $request->numero;
+            $this->direccion_nueva['usuario_barrio'] = $request->barrio;
+            $this->direccion_nueva['usuario_ciudad'] = $request->ciudad;
+            $this->direccion_nueva['usuario_pais'] = $request->pais;
+            $this->direccion_nueva['usuario_cod_postal'] = $request->codigo_postal;
+
+            $direccion_nueva_pedido = session('direccion_nueva');
+            $direccion_nueva_pedido = $this->direccion_nueva;
+            session()->put('direccion_nueva', $direccion_nueva_pedido);
+
+            echo json_encode(array(
+                'status' => 'Success',
+                'message' => 'Dirección cambiada exitosamente',
+                'data' => $this->direccion_nueva
+            ));
         }
     }
 }

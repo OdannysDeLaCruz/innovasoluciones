@@ -154,6 +154,35 @@ $(document).ready(function(){
         );
     });
 
+    $('#btn_cambiar_direccion').on('click', function(e){
+        e.preventDefault();
+        const frm = $('#form_cambiar_direccion');
+        let datos_direccion = $('#form_cambiar_direccion').serialize();
+        // console.log(datos_direccion);
+        $.ajax({
+            url: frm.attr('action'),
+            type: 'POST',
+            data: datos_direccion,
+            dataType: 'json',
+            success: function(data){
+                if (data.status = 'Errors') {
+                    console.log(data.errors);
+                    // Mostrar errores en el formulario
+                }
+                if (data.status = 'Success') {
+                    console.log(data);
+                    window.location.reload();
+                }
+            },
+            error: function(data){
+                // console.log( data );
+                // alertify.alert("Ha ocurrido un error, recarga la página o contácta a soporte técnico", function() {
+                    // window.location.reload();                 
+                // });
+            }
+        });
+    });
+
     // OCULTAR O MOSTRAR LA SECCION DE INFORMACION DEL PEDIDO
     $('#btn-toggle-detalles').on('click', function(){
         let display = $('#info_pedido').css('display');

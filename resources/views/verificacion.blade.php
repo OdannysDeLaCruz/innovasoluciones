@@ -132,13 +132,31 @@
 					<div class="direccion_envio">
 						<span class="fa fa-map-marker direccion_envio_icono"></span>
 						<span class="direccion_envio_texto">
-							<b> {{ Auth::user()->usuario_direccion }} </b>
+
+							<b> {{ $direccion['usuario_calle'] . ' # ' . $direccion['usuario_numero_calle'] . ' ' . $direccion['usuario_barrio'] }} </b>
+							
 							<small>
-								{{ Auth::user()->usuario_barrio }} - {{ Auth::user()->usuario_ciudad }} - {{ Auth::user()->usuario_pais }}							
+								{{ $direccion['usuario_ciudad'] . ' - ' . $direccion['usuario_pais'] . ' - Cod. Postal: ' . $direccion['usuario_cod_postal'] }}					
 							</small>
 						</span>
 					</div>
-					<a href="{{ route('perfil') }}" class="direccion_link text-center">Editar esta dirección</a>
+					<a href="{{ route('cambiar-direccion-envio') }}" class="direccion_link text-center">Cambiar dirección</a>
+					<!-- Formulario cambiar dirección de envio del pedido -->
+					<div>
+						<form id="form_cambiar_direccion" action="{{ route('cambiar-direccion-envio') }}" method="POST">
+							@csrf
+							<input type="text" name="calle" id="calle">
+							<input type="text" name="numero" id="numero">
+							<input type="text" name="barrio" id="barrio">
+							<input type="text" name="ciudad" id="ciudad">
+							<input type="text" name="pais" id="pais">
+							<input type="number" name="codigo_postal" id="codigo_postal">
+
+							<input type="submit" id="btn_cambiar_direccion" value="Cambiar dirección">
+						</form>
+
+					</div>
+					<!-- Fin Formulario -->
 				</section>
 
 				<h1 class="payment_titulos">¿Como desea recibir el pedido?</h1>

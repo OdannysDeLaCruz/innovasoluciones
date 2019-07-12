@@ -101,6 +101,7 @@
 					{{ csrf_field() }}
 					<input type="hidden" class="inputs" id="id" name="id" value="{{ $detalle['id'] }}">
 					<input type="hidden" class="inputs" id="producto_ref" name="producto_ref" value="{{ $detalle['producto_ref'] }}">
+					
 					@empty(!$detalle['producto_colores'])
 						<label for="colores">Colores</label>
 						<select id="colores" name="colores" class="detalle_info_color" required>

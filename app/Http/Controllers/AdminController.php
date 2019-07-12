@@ -49,7 +49,7 @@ class AdminController extends Controller
 
 
         if($v->fails()) {
-            // dd($v->errors());
+            dd($v->errors()->has('producto_nombre'), $v->errors()->first('producto_nombre'));
             return redirect()->back()->withInput()->withErrors($v->errors());
         }
         $producto_promocion = $request->producto_promocion == 0 ? null : $request->producto_promocion;
