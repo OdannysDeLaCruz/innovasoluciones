@@ -43,8 +43,10 @@ class VerificarPedidoController extends Controller
         $this->direccion_defecto['usuario_numero_calle']  = Auth::user()->direccion()->value('numero');
         $this->direccion_defecto['usuario_barrio']     = Auth::user()->direccion()->value('barrio');
         $this->direccion_defecto['usuario_ciudad']     = Auth::user()->direccion()->value('ciudad');
-        $this->direccion_defecto['usuario_pais']       = Auth::user()->direccion()->value('pais');
-        $this->direccion_defecto['usuario_cod_postal'] = Auth::user()->direccion()->value('codigo_postal');
+        $this->direccion_defecto['usuario_departamento']  = Auth::user()->direccion()->value('departamento');
+        $this->direccion_defecto['usuario_distrito']    = Auth::user()->direccion()->value('distrito');
+        $this->direccion_defecto['usuario_pais']        = Auth::user()->direccion()->value('pais');
+        $this->direccion_defecto['usuario_cod_postal']  = Auth::user()->direccion()->value('codigo_postal');
 
         $direccion_defecto_usuario = session('direccion_defecto');
         $direccion_defecto_usuario = $this->direccion_defecto;
@@ -269,44 +271,48 @@ class VerificarPedidoController extends Controller
                 "numero"   => 'required|string',
                 "barrio"   => 'required|string',
                 "ciudad"   => 'required|string',
+                "departamento"  => 'nullable|string',
+                "distrito" => 'nullable|string',
                 "pais"     => 'required|string',
                 "codigo_postal" => 'nullable|integer'
             ]);
             // Si hay errores
             if($v->fails()) {
-                echo json_encode(
-                    array(
-                        'status' => 'Errors',
-                        'errors' => array(
-                            'calle' => $v->errors()->first('calle'),
-                            'numero' => $v->errors()->first('numero'),
-                            'barrio' => $v->errors()->first('barrio'),
-                            'ciudad' => $v->errors()->first('ciudad'),
-                            'pais' => $v->errors()->first('pais'),
-                            'codigo_postal' => $v->errors()->first('codigo_postal'),
-                        ),
-                    )
-                );
+                $dataErrors['calle']  = $v->errors()->first('calle');
+                $dataErrors['numero'] = $v->errors()->first('numero');
+                $dataErrors['barrio'] = $v->errors()->first('barrio');
+                $dataErrors['ciudad'] = $v->errors()->first('ciudad');
+                $dataErrors['departamento'] = $v->errors()->first('departamento');
+                $dataErrors['distrito'] = $v->errors()->first('distrito');
+                $dataErrors['pais']     = $v->errors()->first('pais');
+                $dataErrors['codigo_postal'] = $v->errors()->first('codigo_postal');
+
+                echo json_encode(array(
+                    'status' => 'Errors',
+                    'data' => $dataErrors
+                ));
+            }else {
+                // Si no hay errores, obtenemos los nuevos datos de direccion de envio y los asignamos a el array direccion
+
+                $this->direccion_nueva['usuario_calle'] = $request->calle;
+                $this->direccion_nueva['usuario_numero_calle'] = $request->numero;
+                $this->direccion_nueva['usuario_barrio'] = $request->barrio;
+                $this->direccion_nueva['usuario_ciudad'] = $request->ciudad;
+                $this->direccion_nueva['usuario_departamento'] = $request->departamento;
+                $this->direccion_nueva['usuario_distrito'] = $request->distrito;
+                $this->direccion_nueva['usuario_pais'] = $request->pais;
+                $this->direccion_nueva['usuario_cod_postal'] = $request->codigo_postal;
+
+                $direccion_nueva_pedido = session('direccion_nueva');
+                $direccion_nueva_pedido = $this->direccion_nueva;
+                session()->put('direccion_nueva', $direccion_nueva_pedido);
+
+                echo json_encode(array(
+                    'status' => 'Success',
+                    'message' => 'Dirección cambiada exitosamente',
+                    'data' => $this->direccion_nueva
+                ));
             }
-
-            // Si no hay errores, obtenemos los nuevos datos de direccion de envio y los asignamos a el array direccion
-
-            $this->direccion_nueva['usuario_calle'] = $request->calle;
-            $this->direccion_nueva['usuario_numero_calle'] = $request->numero;
-            $this->direccion_nueva['usuario_barrio'] = $request->barrio;
-            $this->direccion_nueva['usuario_ciudad'] = $request->ciudad;
-            $this->direccion_nueva['usuario_pais'] = $request->pais;
-            $this->direccion_nueva['usuario_cod_postal'] = $request->codigo_postal;
-
-            $direccion_nueva_pedido = session('direccion_nueva');
-            $direccion_nueva_pedido = $this->direccion_nueva;
-            session()->put('direccion_nueva', $direccion_nueva_pedido);
-
-            echo json_encode(array(
-                'status' => 'Success',
-                'message' => 'Dirección cambiada exitosamente',
-                'data' => $this->direccion_nueva
-            ));
         }
     }
 }

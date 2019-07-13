@@ -28,7 +28,7 @@ class UserController extends Controller
         $user_id = Auth::user()->id;
         $mis_pedidos = App\Pedido::select(
                             'pedidos.id', 
-                            'pedidos.pedido_dir', 
+                            // 'pedidos.pedido_dir', 
                             'pedidos.pedido_ref_venta',
                             'pedidos.fecha_creado',
                             'promociones.promo_nombre',
@@ -50,7 +50,7 @@ class UserController extends Controller
         $user_id = Auth::user()->id;
         $info_pedido = App\Pedido::select(
                             'pedidos.id', 
-                            'pedidos.pedido_dir', 
+                            // 'pedidos.pedido_dir', 
                             'pedidos.pedido_ref_venta',
                             'pedidos.pedido_tipo_dispositivo',
                             'pedidos.fecha_creado',
@@ -110,7 +110,7 @@ class UserController extends Controller
             //                 ->get();
             $pedidos = App\Pedido::select(
                             'pedidos.id', 
-                            'pedidos.pedido_dir', 
+                            // 'pedidos.pedido_dir', 
                             'pedidos.pedido_ref_venta',
                             'pedidos.fecha_creado',
                             'promociones.promo_nombre',

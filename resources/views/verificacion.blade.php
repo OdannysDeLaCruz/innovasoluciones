@@ -119,14 +119,15 @@
 							<a href="{{ route('productos') }}"><i class="fa fa-arrow-left"></i>Seguir comprando</a>
 						</div>
 						<div class="pedidos_botones_btn botones_innova">
-							<a id="btn_siguiente" href="#">Siguiente <i class="fa fa-arrow-right"></i></a>
+							<!-- <a id="btn_siguiente" href="/verificacion?s=datos_envio">Siguiente <i class="fa fa-arrow-right"></i></a> -->
+							<a href="/verificacion?s=datos_envio" id="btn_siguiente" onclick="history.pushState(null, '', '/verificacion?s=datos_envio');">Siguiente <i class="fa fa-arrow-right"></i></a>
 						</div>
 					</div>			
 				</section>			
 			</section>
 			<section id="datos_envio" class="payment_proceso payment_envio">
 				<h1 class="payment_titulos">¿Donde quieres recibirlo?</h1>
-				<small>Si deseas recibir el pedido a otra dirección cambiela desde su cuenta de perfil.</small>
+				<!-- <small>Si deseas recibir el pedido a otra dirección cambiela desde su cuenta de perfil.</small> -->
 
 				<section class="payment_proceso_tarjeta tarjeta_direccion_envio">
 					<div class="direccion_envio">
@@ -140,24 +141,53 @@
 							</small>
 						</span>
 					</div>
-					<a href="{{ route('cambiar-direccion-envio') }}" class="direccion_link text-center">Cambiar dirección</a>
-					<!-- Formulario cambiar dirección de envio del pedido -->
-					<div>
-						<form id="form_cambiar_direccion" action="{{ route('cambiar-direccion-envio') }}" method="POST">
-							@csrf
-							<input type="text" name="calle" id="calle">
-							<input type="text" name="numero" id="numero">
-							<input type="text" name="barrio" id="barrio">
-							<input type="text" name="ciudad" id="ciudad">
-							<input type="text" name="pais" id="pais">
-							<input type="number" name="codigo_postal" id="codigo_postal">
-
-							<input type="submit" id="btn_cambiar_direccion" value="Cambiar dirección">
-						</form>
-
-					</div>
-					<!-- Fin Formulario -->
+					<a href="" class="direccion_link text-center" id="btn-mostrar-form-cambio-direccion">Cambiar dirección</a>
 				</section>
+				<!-- Formulario cambiar dirección de envio del pedido -->
+				<div class="contenedor-form-cambiar-direccion payment_proceso_tarjeta">
+					<form class="form-cambiar-direccion" id="form_cambiar_direccion" action="{{ route('cambiar-direccion-envio') }}" method="POST">
+						@csrf
+						<div class="form-cambiar-direccion-contenedor d-flex justify-content-center justify-content-md-start">
+							<div class="form-group">
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="pais" id="pais" placeholder="Pais" required>						
+								<label class="form-cambiar-direccion-error" id="pais">Mensaje de error aqui</label>
+							</div>
+							<div class="form-group">
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="departamento" id="departamento" placeholder="Departamento">						
+								<label class="form-cambiar-direccion-error" id="departamento">Mensaje de error aqui</label>
+							</div>
+							<div class="form-group">
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="distrito" id="distrito" placeholder="Distrito">						
+								<label class="form-cambiar-direccion-error" id="distrito">Mensaje de error aqui</label>
+							</div>
+							<div class="form-group">
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="ciudad" id="ciudad" placeholder="Ciudad" required>						
+								<label class="form-cambiar-direccion-error" id="ciudad">Mensaje de error aqui</label>
+							</div>
+							<div class="form-group">
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="barrio" id="barrio" placeholder="Barrio" required>						
+								<label class="form-cambiar-direccion-error" id="barrio">Mensaje de error aqui</label>
+							</div>
+							<div class="form-group">
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="calle" id="calle" placeholder="Calle" required>						
+								<label class="form-cambiar-direccion-error" id="calle">Mensaje de error aqui</label>
+							</div>
+							<div class="form-group">
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="numero" id="numero" placeholder="Numero de calle" required>						
+								<label class="form-cambiar-direccion-error" id="numero">Mensaje de error aqui</label>
+							</div>
+							<div class="form-group">
+								<input class="form-cambiar-direccion-contenedor-inputs" type="number" name="codigo_postal" id="codigo_postal" placeholder="Codigo postal" required>	
+								<label class="form-cambiar-direccion-error" id="codigo_postal">Mensaje de error aqui</label>					
+							</div>
+							
+						</div>
+
+						<input type="submit" id="btn_cambiar_direccion" class="btn-cambiar-direccion" value="Cambiar dirección">
+					</form>
+
+				</div>
+				<!-- Fin Formulario -->
 
 				<h1 class="payment_titulos">¿Como desea recibir el pedido?</h1>
 
@@ -185,7 +215,7 @@
 
 				<section class="payment_proceso_tarjeta tarjeta_ver_detalle_pedido">
 					<div class="botones_innova">
-						<a id="btn_ver_detalles" href="#">
+						<a id="btn_ver_detalles" href="/verificacion">
 							<i class="fa fa-arrow-left mr-2"></i>
 							Ver detalles
 						</a> 

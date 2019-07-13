@@ -49,20 +49,39 @@ $(document).ready(function(){
 
     //BOTON SIGUIENTE DE DETALLES
 
-    $('#btn_siguiente').on('click', function(e){
-        e.preventDefault();
+    // Obtener parametros de la url para poder activar las seccion de datos de envio
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    function activar_seccion_datos_envio() {
         $(document).scrollTop(0);
         $('#indicador_detalle').removeClass('active');
         $('#indicador_envio').addClass('active');
         $('#indicador_pagar').removeClass('active');
         $('#detalles').removeClass('payment_activo');
         $('#datos_envio').addClass('payment_activo');
-        $('#datos_pagar').removeClass('payment_activo');
+        $('#datos_pagar').removeClass('payment_activo');        
+    }
+
+    let seccion = getParameterByName('s');
+    if (seccion == 'datos_envio') {
+        activar_seccion_datos_envio();
+    }
+
+    $('#btn_siguiente').on('click', function(e){
+        e.preventDefault();
+        activar_seccion_datos_envio();
     });
 
     //BOTON REGRESAR A VER DETALLES 
     $('#btn_ver_detalles').on('click', function(e){
         e.preventDefault();
+        history.pushState(null, "", "/verificacion");
+
         $(document).scrollTop(0);
         $('#indicador_detalle').addClass('active');
         $('#indicador_envio').removeClass('active');
@@ -106,8 +125,8 @@ $(document).ready(function(){
     $.ajaxSetup({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }        
     });
-
-    $('#crearPedido').on('click', function(e){
+    // Crear pedido
+    $('#crearPedido').on('click', function(e) {
         
         e.preventDefault();
         alertify.confirm('Comfirma tu pedido', 'Seras llevado a Payu para finalizar el pago', 
@@ -139,7 +158,7 @@ $(document).ready(function(){
                     },
                     error: function(data){
                         if(data.status == 500){
-                            console.log(data.message, data.status);
+                            // console.log(data);
                             e.preventDefault();
                             alertify.alert("Ha ocurrido un error, recarga la página o contácta a soporte técnico", function() {
                                 window.location.reload();                 
@@ -154,6 +173,17 @@ $(document).ready(function(){
         );
     });
 
+    $('#btn-mostrar-form-cambio-direccion').on('click', function(e){
+        e.preventDefault();
+        let display = $('.contenedor-form-cambiar-direccion').css('display');
+        if (display == 'none') {
+            $('.contenedor-form-cambiar-direccion').slideDown(200);
+        }
+        else {
+            $('.contenedor-form-cambiar-direccion').slideUp(200);;            
+        }
+    });
+
     $('#btn_cambiar_direccion').on('click', function(e){
         e.preventDefault();
         const frm = $('#form_cambiar_direccion');
@@ -165,17 +195,17 @@ $(document).ready(function(){
             data: datos_direccion,
             dataType: 'json',
             success: function(data){
-                if (data.status = 'Errors') {
-                    console.log(data.errors);
+                if (data.status == 'Errors') {
+                    console.log(data);
                     // Mostrar errores en el formulario
                 }
-                if (data.status = 'Success') {
+                if (data.status == 'Success') {
                     console.log(data);
                     window.location.reload();
                 }
             },
             error: function(data){
-                // console.log( data );
+                console.log(data);
                 // alertify.alert("Ha ocurrido un error, recarga la página o contácta a soporte técnico", function() {
                     // window.location.reload();                 
                 // });
@@ -202,9 +232,9 @@ $(document).ready(function(){
 
     $('#producto_descripcion').Editor();
 
-    $('#btn-crear-producto').click(function(){
+    $('#btn-crear-producto').click(function() {
         $('#producto_descripcion').text($('#producto_descripcion').Editor('getText'));
-        $('#form_crear_producto').submit();
+        // $('#form_crear_producto').submit();
     });
 
     // CONFIRMACION DE ELIMINAR PRODUCTO

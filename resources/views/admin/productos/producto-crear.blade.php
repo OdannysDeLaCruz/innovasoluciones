@@ -19,7 +19,7 @@
 					<div class="form-group">
 						<div class="form-group-items">
 							<label class="form_titulos" for="producto_nombre"> <span class="form_titulos_required">*</span> Nombre del producto</label>
-							<input type="text" id="producto_nombre" class="form-control" name="producto_nombre" value="{{ old('producto_nombre') }}" >	
+							<input type="text" id="producto_nombre" class="form-control" name="producto_nombre" value="{{ old('producto_nombre') }}" required>	
 						</div>
 		                @if ($errors->has('producto_nombre'))
 		                    <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
 					<div class="form-group">
 						<div class="form-group-items">
 							<label class="form_titulos" for="producto_precio"> <span class="form_titulos_required">*</span> Precio del producto</label>
-							<input type="number" id="producto_precio" class="form-control" name="producto_precio" placeholder="Sin puntos ni comas, ej: 10000" value="{{ old('producto_precio') }}" >
+							<input type="number" id="producto_precio" class="form-control" name="producto_precio" placeholder="Sin puntos ni comas, ej: 10000" value="{{ old('producto_precio') }}" required>
 			            </div>
 						@if ($errors->has('producto_precio'))
 		                    <span class="invalid-feedback" role="alert">
@@ -55,7 +55,7 @@
 					<div class="form-group">
 						<div class="form-group-items">
 							<label class="form_titulos" for="producto_cantidad"> <span class="form_titulos_required">*</span> Cantidades disponibles</label>
-							<input type="number" min="1" id="producto_cantidad" class="form-control" name="producto_cantidad" value="{{ old('producto_cantidad') }}" >
+							<input type="number" min="1" id="producto_cantidad" class="form-control" name="producto_cantidad" value="{{ old('producto_cantidad') }}" required>
 						</div>
 						@if ($errors->has('producto_cantidad'))
 		                    <span class="invalid-feedback" role="alert">
@@ -67,7 +67,7 @@
 					<div class="form-group">
 						<div class="form-group-items">
 							<label class="form_titulos" for="producto_ref"> <span class="form_titulos_required">*</span> Referencia del producto</label>
-							<input type="text" id="producto_ref" class="form-control producto_ref" name="producto_ref" placeholder="Este código debe ser unico para cada producto" value="{{ old('producto_ref') }}" >
+							<input type="text" id="producto_ref" class="form-control producto_ref" name="producto_ref" placeholder="Este código debe ser unico para cada producto" value="{{ old('producto_ref') }}" required>
 						</div>
 						@if ($errors->has('producto_ref'))
 		                    <span class="invalid-feedback" role="alert">
@@ -79,7 +79,7 @@
 					<div class="form-group">
 						<div class="form-group-items">	
 							<label class="form_titulos" for="producto_categoria"><span class="form_titulos_required">*</span> Categorias del producto</label>
-							<select class="form-control producto_categoria" id="producto_categoria" name="producto_categoria" value="{{ old('producto_categoria') }}" >
+							<select class="form-control producto_categoria" id="producto_categoria" name="producto_categoria" value="{{ old('producto_categoria') }}" required>
 								<option>Escoge una categoria</option>
 								@if(isset($categorias))
 									@foreach($categorias as $categoria)
@@ -98,7 +98,7 @@
 					<div class="form-group">
 						<div class="form-group-items">
 							<label class="form_titulos" for="producto_tags"> <span class="form_titulos_required">*</span> Etiquetas del producto</label>
-							<input type="text" id="producto_tags" class="form-control" name="producto_tags" placeholder="Separados por comas (zapatos, ropa, celular)" value="{{ old('producto_tags') }}" >
+							<input type="text" id="producto_tags" class="form-control" name="producto_tags" placeholder="Separados por comas (zapatos, ropa, celular)" value="{{ old('producto_tags') }}" required>
 						</div>
 						@if ($errors->has('producto_tags'))
 		                    <span class="invalid-feedback" role="alert">
@@ -110,7 +110,7 @@
 					<div class="form-group">
 						<div class="form-group-items">
 							<label class="form_titulos" for="Producto_imagen"> <span class="form_titulos_required">*</span> Imagen principal</label>
-							<input type="file" class="form-control Producto_imagen" id="producto_imagen" name="producto_imagen" value="{{ old('producto_imagen') }}" >
+							<input type="file" class="form-control Producto_imagen" id="producto_imagen" name="producto_imagen" value="{{ old('producto_imagen') }}" required>
 						</div>
 						@if ($errors->has('producto_imagen'))
 		                    <span class="invalid-feedback" role="alert">

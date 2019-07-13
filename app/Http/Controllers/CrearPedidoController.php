@@ -42,24 +42,6 @@ class CrearPedidoController extends Controller
 				if($transaccion != "" && count(session('cart')) > 0 ) {
 					date_default_timezone_set('America/Bogota');
 
-			        // Obtener direccion por defecto
-					$direccion_defecto_usuario = session('direccion_defecto');
-			        // Obtener direccion nueva de envio
-			        $direccion_nueva_pedido = session('direccion_nueva');
-
-					if($direccion_nueva_pedido == []) {
-			            $direccion = $direccion_defecto_usuario;
-			        }else {
-			            $direccion = $direccion_nueva_pedido;
-			        }
-
-					$calle         = $direccion['usuario_calle'];
-					$numero_calle  = $direccion['usuario_numero_calle'];
-					$barrio        = $direccion['usuario_barrio'];
-					$ciudad        = $direccion['usuario_ciudad'];
-					$pais          = $direccion['usuario_pais'];
-					$codigo_postal = $direccion['usuario_cod_postal'];
-
 					$transaccion_id = $transaccion->id;
 
 					$pedido = App\Pedido::create([
@@ -72,9 +54,8 @@ class CrearPedidoController extends Controller
 				        'transaccion_id'          => $transaccion_id
 			        ]);
 
+	    			// Crear detalles del pedido y guardar direccion de envio del pedido
 			        if($pedido != "") {
-
-	    				// Crear detalles del pedido
 			        	$pedido_id = $pedido->id; 
 
 	    				$cart = session('cart');
@@ -100,10 +81,36 @@ class CrearPedidoController extends Controller
 						        'detalle_color'        => $detalle['color']
 		    				]);
 				        }
+
+				        // Guardar dirección 
+
+				        // Obtener direccion por defecto
+						$direccion_defecto_usuario = session('direccion_defecto');
+				        // Obtener direccion nueva de envio
+				        $direccion_nueva_pedido = session('direccion_nueva');
+
+						if($direccion_nueva_pedido == []) {
+				            $direccion = $direccion_defecto_usuario;
+				        }else {
+				            $direccion = $direccion_nueva_pedido;
+				        }
+				        // Datos de direcion de envio para guardar en tabla direcciones de envios
+						App\DireccionPedido::create([
+							'pedido_id'     => $pedido_id,
+							'pais'          => $direccion['usuario_pais'],
+							'departamento'  => $direccion['usuario_departamento'],
+							'distrito'      => $direccion['usuario_distrito'],
+							'ciudad'        => $direccion['usuario_ciudad'],
+							'barrio'        => $direccion['usuario_barrio'],
+							'calle'         => $direccion['usuario_calle'],
+							'numero'        => $direccion['usuario_numero_calle'],
+							'codigo_postal' => $direccion['usuario_cod_postal'],
+						]);
 				        
 	    				// Eliminar todos los datos (variables) de session que esten relacionados con el pedido
 
 	            		$datos_session = ['cart', 'codigos_usados', 'descuento_realizado', 'descuento_peso', 'total_pagar','total_del_pedido','tipo_envio', 'promocion_id', 'direccion_defecto_usuario', 'direccion_nueva_pedido'];
+
 			            foreach ($datos_session as $session) {
 			                if (session()->has($session)) {
 			                    session()->forget($session);
@@ -135,8 +142,7 @@ class CrearPedidoController extends Controller
 						'id_pedido' => '',
 						'message' => 'No hay productos en el carrito'
 					));
-				}
-				
+				}				
 			}
 			else {
 				echo json_encode(array(
