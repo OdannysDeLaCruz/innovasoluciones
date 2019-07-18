@@ -79,13 +79,13 @@ class PaymentController extends Controller
 		$dataPayu['buyerEmail'] = Auth::user()->email;
 		$dataPayu['telephone'] = Auth::user()->telefono;
 
-		$dataPayu['shippingAddress'] = Auth::user()->direccion . ' - ' . Auth::user()->barrio;
-		$dataPayu['shippingCity'] = Auth::user()->ciudad;
-		$dataPayu['shippingCountry'] = 'CO';
+		// $dataPayu['shippingAddress'] = Auth::user()->direccion . ' - ' . Auth::user()->barrio;
+		// $dataPayu['shippingCity'] = Auth::user()->ciudad;
+		// $dataPayu['shippingCountry'] = 'CO';
 
-		$dataPayu['responseUrl'] = "http://innovasoluciones.herokuapp.com/response";
+		$dataPayu['responseUrl'] = "https://innovainc.co/response";
 		// $dataPayu['responseUrl'] = "www.innovasoluciones.com/response";
-		$dataPayu['confirmationUrl'] = "http://innovasoluciones.herokuapp.com/confirmation";
+		$dataPayu['confirmationUrl'] = "https://innovainc.co/confirmation";
 		// $dataPayu['confirmationUrl'] = "www.innovasoluciones.com/confirmation";
 
 		return view('payment', 

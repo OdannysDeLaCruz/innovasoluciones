@@ -24,7 +24,7 @@
 				<h1 class="titulo_seccion mt-2 mb-4">
 					<a class="btn btn-outline-dark btn-sm mr-2" style="text-decoration: none;" href="javascript:history.back(-1);" title="Ir la página anterior">
 						<span class="fa fa-arrow-left mr-2"> </span>
-						Detalles del pedido {{ $pedido_id }}
+						Pedido {{ $pedido_ref }}
 					</a>
 
 					<span id="btn-toggle-detalles" class="compras_users_btn_toggle">
@@ -34,22 +34,30 @@
 				</h1>				
 				@if(isset($info_pedido) && isset($detalle_pedido))
 					@foreach($info_pedido as $pedido)
-						<section class="row info_pedido" id="info_pedido">
-							<div class="col-12 col-lg-6 info_pedido_seccion">
-								<div class="info_pedido_seccion_block">
+						<section class="row info_pedido row" id="info_pedido">
+								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Dirección envío</span>
-									<span class="info_pedido_seccion_block_items texto">{{ $pedido->pedido_dir }}</span>
+									<span class="info_pedido_seccion_block_items texto">
+										{{ $direccion[0]->calle . ' #' . $direccion[0]->numero . ' ' . $direccion[0]->barrio }} <br>
+										{{ $direccion[0]->ciudad . ' - ' . $direccion[0]->departamento . ' - ' . $direccion[0]->pais }}
+									</span>
 								</div>
-								<div class="info_pedido_seccion_block">
+								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Referencia de venta</span>
 									<span class="info_pedido_seccion_block_items texto">{{ $pedido->pedido_ref_venta }}</span>
 								</div>
-								<div class="info_pedido_seccion_block">
+								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Valor de transacción</span>
-									<span class="info_pedido_seccion_block_items texto">$ {{ number_format($pedido->valor_transaccion, 0, '', '.') . ", Moneda (" . $pedido->tipo_moneda_transaccion .")" }}</span>
+									<span class="info_pedido_seccion_block_items texto">
+										@if($pedido->valor_transaccion != 0)
+											 {{ "$ " . number_format($pedido->valor_transaccion, 0, '', '.') . ' ' . $pedido->tipo_moneda_transaccion }}										
+										@else
+											{{ "$ 0" }}
+										@endif
+									</span>
 								</div>
 								@if($pedido->promo_nombre) 
-									<div class="info_pedido_seccion_block">
+									<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 										<span class="info_pedido_seccion_block_items titulo">Promoción</span>
 										<span class="info_pedido_seccion_block_items texto">
 												{{ 'Nombre: ' . $pedido->promo_nombre}} <br>
@@ -57,11 +65,11 @@
 										</span>
 									</div>
 								@endif
-								<div class="info_pedido_seccion_block">
+								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Tipo de envío</span>
 									<span class="info_pedido_seccion_block_items texto">{{ $pedido->envio_metodo }}</span>
 								</div>
-								<div class="info_pedido_seccion_block">
+								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Estado del pedido</span>
 									<span class="info_pedido_seccion_block_items texto">
 										@if($pedido->estado == 0 || $pedido->estado == '')
@@ -75,25 +83,23 @@
 										@endif										
 									</span>
 								</div>
-								<div class="info_pedido_seccion_block">
+								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Descripcion de transacción</span>
 									<span class="info_pedido_seccion_block_items texto">{{ $pedido->descripcion_transaccion }}</span>
 								</div>
-							</div>
-							<div class="col-12 col-lg-6 info_pedido_seccion">
-								<div class="info_pedido_seccion_block">
+								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Metodo de pago</span>
 									<span class="info_pedido_seccion_block_items texto">{{ $pedido->metodo_pago_nombre }}</span>
 								</div>
-								<div class="info_pedido_seccion_block">
+								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Número de cuotas</span>
 									<span class="info_pedido_seccion_block_items texto">{{ $pedido->numero_cuotas_pago }}</span>
 								</div>
-								<div class="info_pedido_seccion_block">
+								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Referencia venta de Payu</span>
 									<span class="info_pedido_seccion_block_items texto">{{ $pedido->referencia_venta_payu  }}</span>
 								</div>
-								<div class="info_pedido_seccion_block">
+								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Transacciones con PSE</span>
 									<span class="info_pedido_seccion_block_items texto">
 										@if($pedido->pse_bank)
@@ -107,17 +113,12 @@
 										@endif
 									</span>
 								</div>
-								<div class="info_pedido_seccion_block">
-									<span class="info_pedido_seccion_block_items titulo">Dispositivo donde se realizó la compra</span>
-									<span class="info_pedido_seccion_block_items texto">{{ $pedido->pedido_tipo_dispositivo }}</span>
-								</div>
-								<div class="info_pedido_seccion_block">
+								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Fecha de transacción</span>
 									<span class="info_pedido_seccion_block_items texto">
 										@dateformat( $pedido->fecha_transaccion)
 									</span>
 								</div>
-							</div>
 						</section>
 					@endforeach
 
@@ -125,7 +126,7 @@
 						<div class="compras">
 							<span class="compras_info">
 								<a target="_blank" href="/productos/{{ $detalle['detalle_producto_ref'] }}-{{ $detalle['detalle_nombre'] }}">
-									<img class="compras_info_img" src='{{ asset("storage/productos/imagenes/miniaturas/$detalle->detalle_imagen") }}'></img>
+									<img class="compras_info_img" src='{{ asset("uploads/productos/imagenes/miniaturas/$detalle->detalle_imagen") }}'></img>
 								</a>
 								<div class="compras_info_datos">
 									<a target="_blanc" href="/productos/{{ $detalle['detalle_producto_ref'] }}-{{ $detalle['detalle_nombre'] }}">
@@ -134,9 +135,11 @@
 									<span class="compras_info_datos_items compras_costo_cantidad">
 										$ {{ number_format($detalle['detalle_precio'], 0, '', '.') }} x {{ $detalle['detalle_cantidad'] }} unidad(es)
 									</span>
-									<span class="compras_info_datos_items compras_promo_info">
-										{{ $detalle['detalle_promo_info'] }}
-									</span>
+									@if($detalle['detalle_promo_info'] != '')
+										<span class="compras_info_datos_items compras_promo_info">
+											{{ $detalle['detalle_promo_info'] }}
+										</span>
+									@endif
 									<span class="compras_info_datos_items compras_total">
 										<?php 
 											$precio = $detalle['precio'] * $detalle['cantidad'];

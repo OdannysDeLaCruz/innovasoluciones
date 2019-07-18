@@ -1,4 +1,7 @@
 @extends('admin/layout')
+	@section('script-local') 
+		<script src="https://cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>
+	@endsection
 	@section('title') 
 		Productos de Innova
 	@endsection
@@ -31,7 +34,8 @@
 					<div class="form-group">
 						<div class="form-group-items descripcion_editor">
 							<label class="form_titulos" for="producto_descripcion"> <span class="form_titulos_required"></span> Descripción del producto</label>
-							<textarea id="producto_descripcion" name="producto_descripcion" placeholder="Escribe la increible descripcion de este producto"></textarea>		
+							<!-- <textarea id="producto_descripcion" name="producto_descripcion" placeholder="Escribe la increible descripcion de este producto"></textarea> -->
+							<textarea name="producto_descripcion" placeholder="Escribe la increible descripcion de este producto">{{ old('producto_descripcion') }}</textarea>
 						</div>
 						@if ($errors->has('producto_descripcion'))
 		                    <span class="invalid-feedback" role="alert">
@@ -83,7 +87,11 @@
 								<option>Escoge una categoria</option>
 								@if(isset($categorias))
 									@foreach($categorias as $categoria)
-										<option value="{{ $categoria->id }}">{{ $categoria->categoria_nombre }}</option>
+										@if(old('producto_categoria') == $categoria->id )
+											<option value="{{ $categoria->id }}" selected >{{ $categoria->id }} {{ $categoria->categoria_nombre }}</option>
+										@else
+											<option value="{{ $categoria->id }}" >{{ $categoria->id }} {{ $categoria->categoria_nombre }}</option>
+										@endif
 									@endforeach
 								@endif
 							</select>	
@@ -110,7 +118,7 @@
 					<div class="form-group">
 						<div class="form-group-items">
 							<label class="form_titulos" for="Producto_imagen"> <span class="form_titulos_required">*</span> Imagen principal</label>
-							<input type="file" class="form-control Producto_imagen" id="producto_imagen" name="producto_imagen" value="{{ old('producto_imagen') }}" required>
+							<input type="file" class="form-control Producto_imagen" id="producto_imagen" name="producto_imagen" value="{{ old('producto_imagen') }}" >
 						</div>
 						@if ($errors->has('producto_imagen'))
 		                    <span class="invalid-feedback" role="alert">
@@ -126,7 +134,10 @@
 								<option value="0">Asigna una promoción al producto </option>
 								@if(isset($promociones))
 									@foreach($promociones as $promocione)
-										<option value="{{ $promocione->id }}">{{ $promocione->promo_nombre }} ( {{ $promocione->promo_tipo }} )  ( {{ $promocione->promo_costo }} )</option>
+										@if(old('producto_promocion') == $promocione->id )
+											<option value="{{ $promocione->id }}" selected>{{ $promocione->promo_nombre }} ( {{ $promocione->promo_tipo }} )  ( {{ $promocione->promo_costo }} )</option>
+										@endif
+											<option value="{{ $promocione->id }}">{{ $promocione->promo_nombre }} ( {{ $promocione->promo_tipo }} )  ( {{ $promocione->promo_costo }} )</option>
 									@endforeach
 								@endif
 							</select>

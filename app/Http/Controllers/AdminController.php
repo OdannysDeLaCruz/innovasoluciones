@@ -11,6 +11,11 @@ class AdminController extends Controller
     public function index() {
         return view('admin.home');
     }
+    public function pruebaEditor(Request $request) {
+        $request = $request->input('texto_descripcion_producto');
+        $productos = [];
+        return view('admin.productos.productos', compact('request', 'productos'));
+    }
     public function getProductos() {
         // Obtener el listado de categorias para el forulario de filtrado
         $categorias = App\Categoria::select('id', 'seccion_id', 'categoria_nombre')->orderBy('categoria_nombre')->get();
@@ -38,7 +43,7 @@ class AdminController extends Controller
             "producto_ref"                 => 'required|string|unique:productos',
             "producto_categoria"           => 'required|integer',
             "producto_tags"                => 'required|string',
-            "producto_imagen"              => 'required|image|mimes:jpg,jpeg,png,gif',
+            "producto_imagen"              => 'nullable|image|mimes:jpg,jpeg,png,gif',
             "producto_promocion"           => 'nullable|integer',
             "producto_tallas"              => 'nullable|string',
             "producto_colores"             => 'nullable|string',

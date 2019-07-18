@@ -28,6 +28,12 @@ Route::get('/search/{tag?}', 'SearchProductsController@showProductosSearch')->na
 Route::post('/searchtags', 'SearchProductsController@index')->name('searchtags');
 
 
+	Route::get('ver-facturas',function() {
+			return view('users.template-factura.factura');
+	});
+	Route::get('ver-email',function() {
+			return view('emails.confirmacion_pedido');
+	});
 // RUTAS PARA USUARIOS
 Route::group(['namespace' => 'User', 'prefix' => 'perfil'], function(){
 
@@ -36,6 +42,7 @@ Route::group(['namespace' => 'User', 'prefix' => 'perfil'], function(){
 	Route::get('pedidos', 'UserController@showPedidos')->name('pedidos');
 
 	Route::get('pedidos/{id?}', 'UserController@showPedidoDetalles')->name('compras');
+
 
 	Route::get('facturas','UserController@showFacturas')->name('facturas');
 
@@ -111,3 +118,5 @@ Route::get('/data', function(){
 	}
 	fclose($file);
 });
+
+Route::post('/prueba-editor', 'AdminController@pruebaEditor')->name('prueba-editor');

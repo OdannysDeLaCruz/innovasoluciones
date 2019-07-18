@@ -27,8 +27,7 @@ class UserController extends Controller
 
         $user_id = Auth::user()->id;
         $mis_pedidos = App\Pedido::select(
-                            'pedidos.id', 
-                            // 'pedidos.pedido_dir', 
+                            'pedidos.id',
                             'pedidos.pedido_ref_venta',
                             'pedidos.fecha_creado',
                             'promociones.promo_nombre',
@@ -39,6 +38,7 @@ class UserController extends Controller
                             ->leftJoin('transacciones', 'pedidos.transaccion_id', '=', 'transacciones.id')
                             ->where('user_id', $user_id)
                             ->get();
+
         if ($mis_pedidos->isEmpty()) {
             return view('users.pedidos', ['mis_pedidos' => false]);            
         }                    
@@ -48,9 +48,9 @@ class UserController extends Controller
     public function showPedidoDetalles($pedido_id) {
 
         $user_id = Auth::user()->id;
+        // Obtengo pedido solicitado siempre y cuando pertenezca al usuario autenticado
         $info_pedido = App\Pedido::select(
-                            'pedidos.id', 
-                            // 'pedidos.pedido_dir', 
+                            'pedidos.id',
                             'pedidos.pedido_ref_venta',
                             'pedidos.pedido_tipo_dispositivo',
                             'pedidos.fecha_creado',
@@ -58,8 +58,7 @@ class UserController extends Controller
                             'promociones.promo_nombre',
                             'promociones.promo_tipo',
                             'promociones.promo_costo',
-                            'transacciones.*'
-                            )
+                            'transacciones.*')
                             ->leftJoin('envios', 'pedidos.envio_id', '=', 'envios.id')
                             ->leftJoin('promociones', 'pedidos.promocion_id', '=', 'promociones.id')
                             ->leftJoin('transacciones', 'pedidos.transaccion_id', '=', 'transacciones.id')
@@ -70,7 +69,13 @@ class UserController extends Controller
         if ($info_pedido->isEmpty()) {
             return view('users.compras', ['Error' => 'Este pedido no existe!', 'pedido_id' => $pedido_id]);
         }
-        // Si el pedido_id si existe para este usuario, hacemos la consulta de los detalles de ese pedido
+        // Obtener referencia de venta del pedido
+        $pedido_ref = $info_pedido[0]->pedido_ref_venta;
+
+        // Obtener datos de dirección de este pedido
+        $direccion = App\DireccionPedido::where('pedido_id', $pedido_id)->get();
+
+        // Consulta de los detalles de ese pedido
         $detalle_pedido = App\DetallePedido::select(
                             'pedido_id',
                             'detalle_producto_ref',
@@ -97,13 +102,13 @@ class UserController extends Controller
             $total_pagar += $detalle->detalle_precio_final;
         }
        
-        return view('users.compras', compact('info_pedido', 'detalle_pedido', 'pedido_id', 'total_pagar'));
+        return view('users.compras', compact('info_pedido', 'detalle_pedido', 'pedido_ref', 'total_pagar', 'direccion'));
     }
 
     public function showFacturas() {
         
         // function getPedidos($estado) {
-            $user_id = Auth::user()->id;
+            $user_id = Auth::user()->usuario_id;
             // $pedidos = App\Pedido::select('id', 'direccion_envio', 'fecha_pedido')
             //                 ->where('id_user', $id_user)
             //                 ->where('estado_pedido', $estado)
@@ -155,7 +160,10 @@ class UserController extends Controller
     public function showFacturasDetalles($idFactura) {
 
         $id_user = Auth::user()->id;
-        $factura = App\Pedido::where('id', $idFactura)->where('id_user', $id_user)->get();
+        $id_factura = $idFactura;
+        $factura = App\Pedido::where('id', $idFactura)
+                             ->where('user_id', $id_user)
+                             ->get();
 
         if ($factura->isEmpty()) {
             return view('error.404', ['response' => 'Esta factura no existe!']);
@@ -171,14 +179,14 @@ class UserController extends Controller
         }
         //Datos de los detalles de la factura
         $detalles_factura = App\DetallePedido::select(
-                            'descripcion',
-                            'precio',
-                            'cantidad',
-                            'descuento_porcentual',
-                            'tamaño',
-                            'color'
+                            'detalle_descripcion',
+                            'detalle_precio',
+                            'detalle_cantidad',
+                            'detalle_promo_info',
+                            'detalle_talla',
+                            'detalle_color'
                         )
-                        ->where('id_pedido', $idFactura)
+                        ->where('pedido_id', $idFactura)
                         ->get();
 
         if ($detalles_factura->isEmpty()) {
@@ -237,8 +245,8 @@ class UserController extends Controller
 
     public function descargarFactura($idFactura) {
 
-        $id_user = Auth::user()->id;
-        $factura = App\Pedido::where('id', $idFactura)->where('id_user', $id_user)->get();
+        $id_user = Auth::user()->usuario_id;
+        $factura = App\Pedido::where('id', $idFactura)->where('user_id', $id_user)->get();
 
         if ($factura->isEmpty()) {
             return view('error.404', ['response' => 'Esta factura no existe!']);

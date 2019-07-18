@@ -26,27 +26,27 @@
 					@foreach($mis_pedidos as $pedido)
 						<div class="pedidos">
 							<header class="pedidos_cabecera">
-								<span class="numero_pedidos">Pedido N° {{ $pedido->id }}</span>
+								<span class="numero_pedidos">Ref. {{ $pedido->pedido_ref_venta }}</span>
 								<span class="fecha_pedidos">@dateformat( $pedido->fecha_transaccion)</span>		
 							</header>
 							<span class="pedidos_info">
 								<div class="pedidos_info_datos">
-									<span class="pedidos_info_datos_items pedidos_direccion">
+									<!-- <span class="pedidos_info_datos_items pedidos_direccion">
 										<span class="items_titulo"> Dirección de envío </span> 
 										{{ $pedido['pedido_dir'] }}
 									</span>
 									<span class="pedidos_info_datos_items pedidos_referencia">
 										<span class="items_titulo"> Referencia de venta </span>
 										 {{ $pedido['pedido_ref_venta'] }}
-									</span>
-									<span class="pedidos_info_datos_items pedidos_codigo_promocion">
-										<span class="items_titulo"> Código de promoción </span>
-										@if($pedido['promo_nombre'] != null)
-											{{ $pedido['promo_nombre'] }}
-										@else 
-											{{ "Ningúno" }}
-										@endif
-									</span>
+									</span> -->
+									@if($pedido['promo_nombre'] != null)
+										<span class="pedidos_info_datos_items pedidos_codigo_promocion">
+											<span class="items_titulo"> Código de promoción </span>
+											<span class="items-texto">												
+													{{ $pedido['promo_nombre'] }}
+											</span>
+										</span>
+									@endif
 									<span class="pedidos_info_datos_items pedidos_estado">
 										<span class="items_titulo"> Estado transacción</span>
 										@if($pedido['estado'] == 0 || $pedido['estado'] == '')

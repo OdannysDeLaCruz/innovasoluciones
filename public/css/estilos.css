@@ -1832,9 +1832,6 @@ footer {
 	border: none;
 	font-size: 15px;
 }
-.perfil_datos_envio {
-	background: none;
-}
 
 .perfil_info_datos_block {
 	margin-left: 10px;
@@ -1854,6 +1851,11 @@ footer {
 	font-size: 16px;
 	color: #fff;
 }
+
+.perfil_datos_envio > .perfil_info_datos_postal {
+	width: 100px;
+}
+
 .perfil_info_datos_block label {
 	width: 100%;
 	margin: 0;
@@ -1876,7 +1878,7 @@ footer {
 }
 .pedidos_users > .pedidos {
 	position: relative;
-	padding: 50px 10px 10px 10px;
+	padding: 0px;
 	margin-bottom: 10px;
 	width: 100%;
 	border: 1px solid #bbbbbf;
@@ -1888,7 +1890,6 @@ footer {
 .pedidos_users > .pedidos > .pedidos_cabecera {
 	background: linear-gradient(to right, #9D62DB, #673CCA);
 	color: #fff;
-	position: absolute;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -1899,24 +1900,25 @@ footer {
 }
 .pedidos_users > .pedidos > .pedidos_cabecera > .numero_pedidos {
 	font-size: 18px;
-	font-weight: 600;
+	font-weight: 500;
 }
 .pedidos_users > .pedidos > .pedidos_cabecera > .fecha_pedidos {
 	font-size: 14px;
 	font-weight: 300;
 	padding: 0;	
+	text-transform: capitalize;
+	text-align: right;
 }
 .pedidos_users > .pedidos > .pedidos_info {
-	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	align-items: flex-start;
+	margin: 10px;
 }
 .pedidos_users > .pedidos > .pedidos_info > .pedidos_info_datos {
 	width: 100%;
 	display: flex;
-	padding-left: 10px;
 	flex-direction: column;
 }
 
@@ -1945,6 +1947,15 @@ footer {
 	margin: 5px 0;
 	color: #000000;
 	font-weight: 600;
+	padding: 5px;
+}
+.pedidos_users > .pedidos > .pedidos_info > .pedidos_info_datos > .pedidos_info_datos_items > .items-texto {
+	font-size: 16px;
+	background: #EBEBEB;
+	margin: 5px 0;
+	color: #000000;
+	font-weight: 600;
+	padding: 5px;
 }
 .estados {
 	color: #fff;
@@ -1992,39 +2003,39 @@ footer {
 	transition: all ease .2s;
 }
 .compras_users .info_pedido {
+	padding-top: 20px;
 	margin: 30px 0 20px 0;
-	padding-bottom: 20px;
-	border-bottom: 5px solid #ccc;
+	border-top: 2px solid #2FBFE9;
+	border-bottom: 2px solid #2FBFE9;
 	display: flex;
 	height: auto;
 }
 
-.compras_users > .info_pedido > .info_pedido_seccion {
-
-}
-.compras_users > .info_pedido > .info_pedido_seccion > .info_pedido_seccion_block {
+.compras_users > .info_pedido > .info_pedido_seccion_block {
 	display: flex;
 	align-items: flex-start;
 	margin: 0;
+	flex-direction: column;
+	width: 100%;
+	padding: 5px;
+	margin-bottom: 5px;
 }
-.compras_users > .info_pedido > .info_pedido_seccion > .info_pedido_seccion_block > .info_pedido_seccion_block_items {
+.compras_users > .info_pedido > .info_pedido_seccion_block > .info_pedido_seccion_block_items {
 	font-size: 16px;
 }
-.compras_users > .info_pedido > .info_pedido_seccion > .info_pedido_seccion_block > .titulo {
-	min-width: 200px;
-	max-width: 200px;
+.compras_users > .info_pedido > .info_pedido_seccion_block > .titulo {
 	color: #000;
 	font-weight: 600;
 }
-.compras_users > .info_pedido > .info_pedido_seccion > .info_pedido_seccion_block > .texto {
+.compras_users > .info_pedido > .info_pedido_seccion_block > .texto {
 	color: #333;
 	font-weight: 400;
-	border-left: 1px solid #000;
-	margin: 0 0 10px 0;
-	padding: 0 5px;
+	margin: 5px 0;
+	text-transform: capitalize;
 }
 .compras_users > .compras {
 	padding: 15px;
+	margin-top: 40px;
 	margin-bottom: 10px;
 	width: 100%;
 	border: 1px solid #bbbbbf;

@@ -54,10 +54,6 @@
 				  	<input name="buyerEmail"    type="hidden"  value="{{ $dataPayu['buyerEmail'] }}" >
 				  	<input name="telephone"    type="hidden"  value="{{ $dataPayu['telephone'] }}" >
 				  	
-				  	<input name="shippingAddress" type="hidden"  value="{{ $dataPayu['shippingAddress'] }}" >
-				  	<input name="shippingCity"  type="hidden"  value="{{ $dataPayu['shippingCity'] }}" >
-				  	<input name="shippingCountry" type="hidden"  value="{{ $dataPayu['shippingCountry'] }}" >
-				  	
 				  	<input name="responseUrl"   type="hidden"  value="{{ $dataPayu['responseUrl'] }}" >
 				  	<input name="confirmationUrl" type="hidden"  value="{{ $dataPayu['confirmationUrl'] }}" >
 

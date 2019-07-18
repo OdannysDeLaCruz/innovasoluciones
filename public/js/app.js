@@ -138,7 +138,7 @@ $(document).ready(function(){
                     dataType: 'json',
                     success: function(data){
                         if (data.status == 'Success') {
-                            // console.log(data.message);
+                            console.log(data.message);
                             alertify.notify(data.message, 'success', 10);
                             alertify.notify('Será redireccionado a Payu', 'success', 10);
                             // Despues de que se crea el pedido y sus detalles, se obtiene el id que returna crearPedidoController.php de ese pedido se añade a la descripcion que se envía a payu
@@ -158,7 +158,7 @@ $(document).ready(function(){
                     },
                     error: function(data){
                         if(data.status == 500){
-                            // console.log(data);
+                            console.log(data.responseText);
                             e.preventDefault();
                             alertify.alert("Ha ocurrido un error, recarga la página o contácta a soporte técnico", function() {
                                 window.location.reload();                 
@@ -230,11 +230,19 @@ $(document).ready(function(){
 
     // EDITOR DE TEXTO DE PAGINA CREAR PRODUCTOS
 
-    $('#producto_descripcion').Editor();
+    // $('#producto_descripcsion').Editor();
 
-    $('#btn-crear-producto').click(function() {
-        $('#producto_descripcion').text($('#producto_descripcion').Editor('getText'));
-        // $('#form_crear_producto').submit();
+    // $('#btn-crear-producto').click(function() {
+    //     $('#producto_descripcion').text($('#producto_descripcion').Editor('getText'));
+    //     // $('#form_crear_producto').submit();
+    // });
+
+    // Editor de texto de descripcion de producto
+    CKEDITOR.replace( 'producto_descripcion', {
+        customConfig: '/js/editor_config.js',
+        language: 'es',
+        width: '100%',
+        height: 300
     });
 
     // CONFIRMACION DE ELIMINAR PRODUCTO
@@ -244,5 +252,6 @@ $(document).ready(function(){
             e.preventDefault();
         }
     });
+
 });
 

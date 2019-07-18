@@ -96,7 +96,6 @@ class VerificarPedidoController extends Controller
 
         // Obtener y formatear cadena codigo de descuento
         $codigo_usuario = strtoupper(trim($request->input('codigo_descuento')));
-        // dd($codigo_usuario);
         // Redireccionar a pagina verificar en caso de que el codigo ya se haya usado
         if($this->codigoUsado()) {
             redirect()->route('verificar');
@@ -133,25 +132,29 @@ class VerificarPedidoController extends Controller
         $promo_tipo  = $existe[0]->promo_tipo;
         $promo_costo = $existe[0]->promo_costo;
 
-        $total_del_pedido    = session('total_del_pedido');
+        $total_del_pedido = session('total_del_pedido');
+        // dd($total_del_pedido);
         // Realizar descuento
-        $this->hacer_descuento($total_del_pedido, $promo_tipo, $promo_costo);
+        $descuento = $this->hacer_descuento($total_del_pedido, $promo_tipo, $promo_costo);
 
-        // Guardar código en la sesion codigos_usados
-        session()->put('codigos_usados', $codigo_usuario);
-
-        // Guardar la notificacion del descuento a true
-        session()->put('descuento_realizado', true);
-
-        return redirect()->route('verificar')->with('noticia_descuento', 'Ha recibido un descuento de $' . number_format(session('descuento_peso'), 0, ',', '.'));
+        if($descuento) {
+            // Guardar código en la sesion codigos_usados
+            session()->put('codigos_usados', $codigo_usuario);
+            // Guardar la notificacion del descuento a true
+            session()->put('descuento_realizado', true);
+        
+            return redirect()->route('verificar')->with('noticia_descuento', 'Ha recibido un descuento de $' . number_format(session('descuento_peso'), 0, ',', '.'));
+        }
     }
 
     // Verifico si hay algun código usado ya
     private function codigoUsado() {
         if(session('codigos_usados') > 1 ) {
             session()->flash('Errors', 'No puede usar mas de un código de descuento');
-            return true; redirect()->route('verificar');
+            return true; 
+            // redirect()->route('verificar');
         }
+        return false;
     }
 
     // Verificar si codigo existe en la tabla
@@ -182,15 +185,14 @@ class VerificarPedidoController extends Controller
     private function codigoCanjeable($existe) {
         // Si esta vigente, verifico numero de canjeos en otros pedidos
         $canjeos_permitidos = $existe[0]->promo_numero_canjeo;
-        $codigo_usados = App\Pedido::where('promocion_id', $existe[0]->id)
-                                    ->get()
-                                    ->count('promocion_id');
+        $codigo_usados = App\Pedido::where('promocion_id', $existe[0]->id)->count('promocion_id');
 
         if ($codigo_usados >= $canjeos_permitidos) {
             // Numero de canjeos excedido
             session()->flash('Errors', 'Este código ya no esta disponible');
             return false;
         }
+        // dd($codigo_usados);
         return true;
     }
 
@@ -214,53 +216,53 @@ class VerificarPedidoController extends Controller
     // Verificar si el codigo de descuento solo se puede aplicar a una categoria de producto en especifico
     // Los Codigos de descuento que pertenezcan a una categoria de producto especifo, solo se pueden aplicar a esa categoria de productos, ademas el carrito solo debe tener un producto agregado.
     private function verificarCategoria($existe) {
-        $cart =session('cart');
-        $categoria_id = $existe[0]->categoria_id;
-        $categoria_nombre = App\Categoria::where('id', $categoria_id)->value('categoria_nombre');
+        $cart = session('cart');
+        $codigo_categoria_id = $existe[0]->categoria_id;
+        // dd($categoria_id);
 
-        if($categoria_id) {
-            // Verificar cantidad de productos agregado
-            if(count($cart) == 1) {
-                // Verificar categoria del producto en el carrito
-                $producto_id = key($cart);
+        // Si este codigo tiene categoria_id, entonces aplicar codigo al producto en el pedido.
+        if($codigo_categoria_id != null) {
+            $codigo_categoria_nombre = App\Categoria::where('id', $codigo_categoria_id)->value('categoria_nombre');
+            $cantidad_producto = $this->obtener_cantidad_productos($cart);
+            // dd($cantidad_producto);
+
+            if($cantidad_producto == 1) {
+
+                $producto_id = key($cart); // Devuelve el id del unico producto que esta en el carriro
                 $producto_categoria_id = App\Producto::where('id', $producto_id)->value('categoria_id');
                 
-                // Deben ser iguales para que el descuento se realize
-                if($producto_categoria_id == $categoria_id) {
+                // Las categorias deben ser iguales para que el descuento se realize
+                if($producto_categoria_id == $codigo_categoria_id) {
                     return true;
                 }else {
-                    session()->flash('Errors', 'Código disponible solo para productos de la categoria ' . $categoria_nombre);
+                    session()->flash('Errors', 'Código disponible solo para productos de la categoria ' . $codigo_categoria_nombre);
                     return false;
                 }
             }else {
-                dd('productos: ' . count($cart) . ' != ' . 1);
                 session()->flash('Errors', 'Código disponible solo para un producto a la vez');
                 return false;
             }
-        }else {
-            return false;
+        }
+        // Si este codigo tiene categoria_id en null, retorbar true para  hacer descuento al pedido completo
+        else {            
+            return true;
         }
     }
 
-    // Realizar descuento
-    public function hacer_descuento($monto, $tipo, $costo) {
-        if ($tipo == 'descuento%') {
-            $descuento = $monto * ($costo / 100);
+    // Realizar descuento, almacena el descuento en una variable de sesion
+    private function hacer_descuento($total_pedido, $promo_tipo, $promo_costo) {
+        if ($promo_tipo == '%') {
+            $descuento = $total_pedido * ($promo_costo / 100);
             session()->put('descuento_peso', $descuento);
+            return true;
         }
-        elseif ($tipo == 'peso') {
-            $descuento = $costo;
+        elseif ($promo_tipo == '$') {
+            $descuento = $promo_costo;
             session()->put('descuento_peso', $descuento);
+            return true;
         }
     }
 
-    // Obtener direccion de envio
-    // private function get_direccion_envio() {
-
-    //     $direccion_envio_pedido = session('direccion_envio');
-    //     $direccion_envio_pedido = $this->direccion_envio;
-    //     return $direccion_envio_pedido;
-    // }
     // Cambiar direccion de envio
     public function cambiar_direccion_envio(Request $request) {
 
@@ -313,6 +315,16 @@ class VerificarPedidoController extends Controller
                     'data' => $this->direccion_nueva
                 ));
             }
+        }
+    }
+
+    private function obtener_cantidad_productos($cart) {
+        if(!empty($cart)) {
+            $cantidad_productos = 0;
+            foreach ($cart as $producto) {
+                $cantidad_productos += $producto['cantidad'];
+            }
+            return $cantidad_productos;
         }
     }
 }

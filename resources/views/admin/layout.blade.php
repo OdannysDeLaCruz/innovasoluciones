@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/estilos_admin.css') }}" >
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/media-query.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
+	@yield('script-local')
 	<!-- Verison 5.8.2 de Font Awesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 	

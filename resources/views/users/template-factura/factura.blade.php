@@ -198,12 +198,12 @@
 	@include('users/template-factura/partials/header_factura')
 
 	<div style="width: 100%; height: 50px;">
-		<div class="total_pagar"><b>Total a pagar $ {{ number_format($total_pagar, 2) }}</b></div>				
+		<div class="total_pagar"><b>Total a pagar $ <!-- {{ number_format($total_pagar, 2) }} --></b></div>				
 	</div>
 
 	<div class="info">
 		<div class="info_factura">
-			<div>Numero factura: {{ $datos_factura['id'] }}</div>
+			<div>Numero factura: <!-- {{ $datos_factura['id'] }} --></div>
 			<div>Metodo de pago: Payu </div>
 			<div>Referencia de pago: <b>75318670-53</b></div>
 		</div>
@@ -220,26 +220,26 @@
 		<table class="facturar" style="float: left; margin: 0 20px 0 0; text-align: left;">
 			<tr>
 			    <th class="titulos">Nombre</th>
-			    <td><b> {{ Auth::user()->nombre }} {{ Auth::user()->apellido }} </b></td>
+			    <td><b> <!-- {{ Auth::user()->nombre }} {{ Auth::user()->apellido }} --> </b></td>
 			</tr>
 			<tr>
 			 	<th class="titulos">CC/NIT</th>
-			 	<td><b>{{ Auth::user()->num_cedula }}</b></td>
+			 	<td><b><!-- {{ Auth::user()->num_cedula }} --></b></td>
 			</tr>
 			<tr>
 				<th class="titulos">Dirección</th>
-				<td>{{ Auth::user()->direccion }}, {{ Auth::user()->barrio }}</td>
+				<td><!-- {{ Auth::user()->direccion }}, {{ Auth::user()->barrio }} --></td>
 			</tr>
 			<tr>
 				<th class="titulos">Ciudad</th>
-				<td>{{ Auth::user()->ciudad }}</td>
+				<td><!-- {{ Auth::user()->ciudad }} --></td>
 			</tr>
 		</table>
 		<!-- TABLA DE DATOS DE ENVIO DEL PEDIDO -->
 		<table class="enviar" style="float: right; margin: 0; text-align: left;">
 			<tr>
 				<th class="titulos">Dirección de envío</th>
-				<td> {{ $datos_factura['direccion_envio'] }} </td>
+				<td> <!-- {{ $datos_factura['direccion_envio'] }} --> </td>
 			</tr>
 		</table>
 	</div>
@@ -261,11 +261,11 @@
 		<tbody>
 			@foreach($datos_detalles_factura as $detalle)
 				<tr>
-					<td>{{ $detalle['cantidad'] }}</td>
+					<!-- <td>{{ $detalle['cantidad'] }}</td>
 					<td>{{ $detalle['descripcion'] }}</td>
 					<td>$ {{ number_format( $detalle['precio'], 2) }}</td>
 					<td>$ {{ number_format( $detalle['descuento_peso'], 2 ) }}</td>
-					<td class="total">$ {{ number_format( $detalle['importe_total'], 2 ) }}</td>
+					<td class="total">$ {{ number_format( $detalle['importe_total'], 2 ) }}</td> -->
 				</tr>
 				
 			@endforeach
@@ -276,31 +276,31 @@
 	<table class="procesamiento" style="width: 300px; float: right; margin-top: 10px;">
 		<tr>
 			<th class="titulos">Subtotal ($)</th>
-		    <td>${{ number_format($subtotal, 2) }}</td>
+		    <td>$<!-- {{ number_format($subtotal, 2) }} --></td>
 		</tr>
 		<tr>
 		 	<th class="titulos">Descuento por codigo ($)</th>
 		 	<td> 
-				${{ number_format($valor_del_codigo, 2) }}
+				$<!-- {{ number_format($valor_del_codigo, 2) }} -->
 		 	</td>
 		</tr>
 		<tr>
 		 	<th class="titulos">Costo de envío ($)</th>
 		 	<td> 
-		 		@if($datos_factura['envio'] == 0)
-		 			{{ 'Envío gratis' }}
-		 		@else 
-					${{ number_format($datos_factura['envio'], 2) }}		 			
-		 		@endif
+		 	<!-- 	@if($datos_factura['envio'] == 0)
+		 		{{ 'Envío gratis' }}
+		 	@else 
+		 						${{ number_format($datos_factura['envio'], 2) }}		 			
+		 	@endif -->
 		 	</td>
 		</tr>
 		<tr>
 			<th class="titulos">Impuesto IVA ($)</th>
-			<td>${{ number_format($iva, 2) }}</td>
+			<td>$<!-- {{ number_format($iva, 2) }} --></td>
 		</tr>
 		<tr>
 			<th class="titulos total_pagar">TOTAL A PAGAR ($)</th>
-			<td class="total_pagar">${{ number_format($total_pagar, 2) }}</td>
+			<td class="total_pagar"><!-- ${{ number_format($total_pagar, 2) }} --></td>
 		</tr>
 		<tr>
 			<th>Atención:</th>
