@@ -66,6 +66,7 @@ class UserController extends Controller
                             ->where('pedidos.user_id', $user_id)
                             ->get();
 
+
         if ($info_pedido->isEmpty()) {
             return view('users.compras', ['Error' => 'Este pedido no existe!', 'pedido_id' => $pedido_id]);
         }
@@ -96,23 +97,20 @@ class UserController extends Controller
             return view('users.compras', ['Error' => 'Este pedido no tiene detalles!', 'pedido_id' => $pedido_id]);
         }
 
-
-        $total_pagar = 0;
+        // Obtener precio final del pedido
+        $costo_pedido = 0;
         foreach ($detalle_pedido as $detalle) {
-            $total_pagar += $detalle->detalle_precio_final;
+            $costo_pedido += $detalle->detalle_precio_final;
         }
+        $costo_pedido = number_format($costo_pedido, 0, '', '.');
        
-        return view('users.compras', compact('info_pedido', 'detalle_pedido', 'pedido_ref', 'total_pagar', 'direccion'));
+        return view('users.compras', compact('info_pedido', 'detalle_pedido', 'pedido_ref', 'costo_pedido', 'direccion'));
     }
 
     public function showFacturas() {
         
         // function getPedidos($estado) {
-            $user_id = Auth::user()->usuario_id;
-            // $pedidos = App\Pedido::select('id', 'direccion_envio', 'fecha_pedido')
-            //                 ->where('id_user', $id_user)
-            //                 ->where('estado_pedido', $estado)
-            //                 ->get();
+            $user_id = Auth::user()->id;
             $pedidos = App\Pedido::select(
                             'pedidos.id',
                             'pedidos.pedido_ref_venta',

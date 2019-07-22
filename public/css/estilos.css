@@ -2040,6 +2040,11 @@ footer {
 	margin: 0 5px;
 	transition: all ease .2s;
 }
+.compras_users > .costo_pedido {
+	font-size: 22px; 
+	font-weight: 800;
+	color: #03002D;
+}
 .compras_users .info_pedido {
 	padding-top: 20px;
 	margin: 30px 0 20px 0;
@@ -2059,14 +2064,14 @@ footer {
 	margin-bottom: 5px;
 }
 .compras_users > .info_pedido > .info_pedido_seccion_block > .info_pedido_seccion_block_items {
-	font-size: 16px;
+	font-size: 17px;
 }
 .compras_users > .info_pedido > .info_pedido_seccion_block > .titulo {
-	color: #000;
+	color: #03002D;
 	font-weight: 600;
 }
 .compras_users > .info_pedido > .info_pedido_seccion_block > .texto {
-	color: #333;
+	color: #03002D;
 	font-weight: 400;
 	margin: 5px 0;
 	text-transform: capitalize;
