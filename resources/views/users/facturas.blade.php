@@ -28,7 +28,9 @@
 					<table class="table table-hover table-bordered">
 						<thead>
 							<tr class="facturas_titulos">
-								<th>Fecha de la factura</th>
+								<th>Ref del pedido</th>
+								<th class="d-none d-md-table-cell">Fecha de la factura</th>
+								<th>Costo</th>
 								<th>Detalles</th>
 								<th>Estado</th>
 							</tr>
@@ -36,19 +38,21 @@
 					@foreach($pedidos as $pedido)
 						<tbody>
 							<tr class="facturas_datos">
-								<td>@dateformat( $pedido->fecha_creado )</td>
+								<td>{{ $pedido['ref_venta'] }}</td>
+								<td class="d-none d-md-table-cell">@dateformat( $pedido['fecha_creado'] )</td>
+								<td class="facturas_datos_precio">${{ $pedido['precio_final'] }}</td>
 								<td>
-									<a target="_blanc" href="/perfil/facturas/{{$pedido->id}}">Ver</a> | 
-									<a href="/perfil/facturas/descargar/{{$pedido->id}}">Descargar</a>
+									<a target="_blanc" href="/perfil/facturas/{{$pedido['id']}}">Ver</a> | 
+									<a href="/perfil/facturas/descargar/{{$pedido['id']}}">Descargar</a>
 								</td>
 								<td class="facturas_datos_estado">
-									@if($pedido->estado == 0 || $pedido->estado == '')
+									@if($pedido['estado'] == 0 || $pedido['estado'] == '')
 										<p class="estados pedidos_estado_espera"> {{ "En espera" }} </p>	
-									@elseif($pedido->estado == 4) 
+									@elseif($pedido['estado'] == 4) 
 										<p class="estados pedidos_estado_aprovada"> {{ "Aprovado" }} </p>
-									@elseif($pedido->estado == 6) 
+									@elseif($pedido['estado'] == 6) 
 										<p class="estados pedidos_estado_declinada"> {{ "Declinada" }} </p>
-									@elseif($pedido->estado == 5)
+									@elseif($pedido['estado'] == 5)
 										<p class="estados pedidos_estado_expirada"> {{ "Expirada" }} </p>
 									@endif	
 								</td>

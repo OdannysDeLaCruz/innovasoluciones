@@ -111,47 +111,36 @@ class UserController extends Controller
         
         // function getPedidos($estado) {
             $user_id = Auth::user()->id;
-            $pedidos = App\Pedido::select(
+            $facturas = App\Pedido::select(
                             'pedidos.id',
-                            'pedidos.pedido_ref_venta',
+                            'pedidos.pedido_ref_venta as ref_venta',
                             'pedidos.fecha_creado',
-                            'promociones.promo_nombre',
-                            'transacciones.estado',
-                            'transacciones.fecha_transaccion'
-                            )
-                            ->leftJoin('promociones', 'pedidos.promocion_id', '=', 'promociones.id')
+                            'transacciones.estado')
                             ->leftJoin('transacciones', 'pedidos.transaccion_id', '=', 'transacciones.id')
                             ->where('pedidos.user_id', $user_id)
-                            // ->where('transacciones.estado', $estado)
                             ->get();
-            // return $pedidos;
-
+        // return $pedidos;
         // }
-        
-        // // Pedidos en espera == 0
-        // $espera = getPedidos(0);
-        // // Pedidos aprovados == 4
-        // $aprovados    = getPedidos(4);
-        // // Pedidos declinada == 6
-        // $declinados    = getPedidos(6);
-        // // Pedidos expirada == 5
-        // $expirados    = getPedidos(5);
+        // dd($pedidos);
+        $facturas->isEmpty() ? $facturas = '' : $facturas = $facturas;
+        // Recorrer los pedidos para generar las facturas, 
+        foreach ($facturas as $dato) {
+            // Obtener precio total de la factura desde detalle pedidos
+            $detalles = App\DetallePedido::select('detalle_precio_final')->where('pedido_id', $dato->id)->get();
+            $precio_final = $detalles->sum('detalle_precio_final');
 
-        // $espera->isEmpty()     ? $pedidos_espera      = '' : $pedidos_espera     = $espera;
-        // $aprovados->isEmpty()  ? $pedidos_aprovados   = '' : $pedidos_aprovados  = $aprovados;
-        // $declinados->isEmpty() ? $pedidos_declinados  = '' : $pedidos_declinados = $declinados;
-        // $expirados->isEmpty()  ? $pedidos_expirados   = '' : $pedidos_expirados  = $expirados;
-        $pedidos->isEmpty() ? $pedido = '' : $pedidos  = $pedidos;
+            $datos['id']           = $dato->id;
+            $datos['ref_venta']    = $dato->ref_venta;
+            $datos['precio_final'] = number_format($precio_final, 0, '', '.');
+            $datos['fecha_creado'] = $dato->fecha_creado;
+            $datos['estado']       = $dato->estado;
+            $pedidos[] = $datos; 
+        }
+        // dd($pedidos);
 
-        return view('users.facturas', 
-            compact(
-                'pedidos' 
-                // 'pedidos_espera', 
-                // 'pedidos_aprovados', 
-                // 'pedidos_declinados', 
-                // 'pedidos_expirados'
-            )
-        );
+
+
+        return view('users.facturas', compact('pedidos'));
     }
 
     public function showFacturasDetalles($idFactura) {
