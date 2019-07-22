@@ -40,9 +40,9 @@ class UserController extends Controller
                             ->get();
 
         if ($mis_pedidos->isEmpty()) {
-            return view('users.pedidos', ['mis_pedidos' => false]);            
-        }                    
-        return view('users.pedidos', compact('mis_pedidos'));            
+            return view('users.pedidos', ['mis_pedidos' => false]);
+        }
+        return view('users.pedidos', compact('mis_pedidos'));
     }
 
     public function showPedidoDetalles($pedido_id) {
@@ -114,8 +114,7 @@ class UserController extends Controller
             //                 ->where('estado_pedido', $estado)
             //                 ->get();
             $pedidos = App\Pedido::select(
-                            'pedidos.id', 
-                            // 'pedidos.pedido_dir', 
+                            'pedidos.id',
                             'pedidos.pedido_ref_venta',
                             'pedidos.fecha_creado',
                             'promociones.promo_nombre',

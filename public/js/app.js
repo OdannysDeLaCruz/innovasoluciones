@@ -3,7 +3,7 @@ $(document).ready(function(){
     // EFECTOS DE PAGINA DESTALLES.PHP, DETALLE_VISUALIZADOR
 
     // Poner la primera imagen de la lista en el visualizador 
-    $('.lista_img:first-child').css('border', '2px solid #333');
+    $('.lista_img:first-child').css('filter', 'opacity(1)');
     const url_img = $('.lista_img:first-child').attr('src');
     $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
 
@@ -11,31 +11,16 @@ $(document).ready(function(){
 
         // Obtengo la url de la imagen clickeada
         const url_img = $(this).attr('src');
-        // Elimino los bordes de las imagenes clickeadas anteriormente
-        $('.lista_img').css('border', 'none');
-        // Le asigno bordes a la imagen clickeada actualmente
-        $(this).css('border', '2px solid #333');
+        // Elimino los filtros de las imagenes clickeadas anteriormente
+        $('.lista_img').css('filter', 'opacity(.5)');
+        $(this).css('border', 'none');
+        // Le asigno filter a la imagen clickeada actualmente
+        $(this).css('filter', 'opacity(1)');
         // Remuevo la imagen que esta actualmente
         $("#detalle_visualizador img").remove();
 
-
         $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
 
-        // let visualizador = $('#detalle_visualizador').width();
-        // let img_ancho = $('#detalle_visualizador img').width();
-        // let img_alto = $('#detalle_visualizador img').height();
-
-        // if (img_ancho == img_alto) {
-        //     // console.log(ancho + '>' + alto);
-        //     $("#detalle_visualizador").append("<img width='" + visualizador + "' src=' " + url_img + "'>");
-        // }
-        // else {
-        //     console.log(ancho + '<' + alto);
-        //     // $("#detalle_visualizador").append("<img height='100%' width='auto' src=' " + url_img + "'>");
-
-        // }
-
-        // Asigno la nueva imagen clickeada
     });
 
 	// EFECTOS DEL MENÚ

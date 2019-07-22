@@ -6,6 +6,8 @@ $factory->define(App\Producto::class, function (Faker $faker) {
     date_default_timezone_set('America/Bogota');
     
 	$categoria_id = App\Categoria::where('id', rand(1,15))->value('id');
+    $proveedor_id = App\Proveedor::where('id', rand(1,5))->value('id');
+    $marca_id     = App\Marca::where('id', rand(1,10))->value('id');
 
     $productos_precios = [10000,20000,30000,40000,50000];
     $producto_precio = $productos_precios[rand(0, 4)];
@@ -22,6 +24,8 @@ $factory->define(App\Producto::class, function (Faker $faker) {
 
     return [
         'categoria_id'          => $categoria_id,
+        'proveedor_id'          => $proveedor_id,
+        'marca_id'              => $marca_id,
         'producto_nombre'       => $faker->text(20),
         'producto_descripcion'  => $faker->text(150),
         'producto_tags'         => $mis_tags,

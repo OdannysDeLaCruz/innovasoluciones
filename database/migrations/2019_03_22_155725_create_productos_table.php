@@ -16,6 +16,8 @@ class CreateProductosTable extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('categoria_id')->unsigned(); //Dependiendo de la categoria se rellenan los campos tamaño y color
+            $table->integer('proveedor_id')->unsigned(); // Proveedor del producto
+            $table->integer('marca_id')->unsigned(); // Informacion de marca del producto
             $table->string('producto_nombre')->unique()->required();
             $table->longText('producto_descripcion')->required();
             $table->string('producto_tags')->required();
@@ -37,6 +39,8 @@ class CreateProductosTable extends Migration
             $table->timestamp('fecha_actualizado')->default(\DB::raw('CURRENT_TIMESTAMP'));
 
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
+            $table->foreign('proveedor_id')->references('id')->on('proveedores')->onDelete('cascade');
+            $table->foreign('marca_id')->references('id')->on('marcas')->onDelete('cascade');
             $table->foreign('promocion_id')->references('id')->on('promociones')->onDelete('cascade');
         });
     }

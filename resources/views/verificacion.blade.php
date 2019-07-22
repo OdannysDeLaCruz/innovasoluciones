@@ -57,15 +57,7 @@
 					<div class="codigo_descuento" id="codigo_descuento">
 						<form action="{{ route('verificarCodigo') }}" method="POST" >
 							{{ csrf_field() }}
-							<div class="form-group 
-								d-flex
-								flex-column
-								flex-sm-row
-								justify-content-around
-								justify-content-sm-end 
-								align-items-center
-								justify-content-end	
-								">
+							<div class="form-group d-flex flex-column flex-sm-column justify-content-around justify-content-sm-end align-items-center justify-content-end">
 								
 								@if(session('Errors')) 
 									<script>
@@ -76,16 +68,16 @@
 								<label style="margin: 0;" for="codigo" class="text-center">
 									¿Tienes algún código de descuento? 
 									<small class="text-muted">(opcional)</small>
-								</label>
-								
-								<input type="text" id="codigo" name="codigo_descuento" value="{{ session('codigo_verificado') ? session('codigo_verificado') : '' }}" required>
-
-								<button type="submit" class="btn_enviar_codigo mt-1 mt-sm-0" name="verificarCodigo">
-									Descontar
-								</button>
+								</label><br>
+								<div>
+									<input type="text" id="codigo" name="codigo_descuento" value="{{ session('codigo_verificado') ? session('codigo_verificado') : '' }}" required>
+									<button type="submit" class="btn_enviar_codigo mt-1 mt-sm-0" name="verificarCodigo">
+										Descontar
+									</button>
+								</div>
 							</div>
 							@if (session('Errors'))
-				                <span class="invalid-feedback" role="alert" style="font-size: 15px;">
+				                <span class="invalid-feedback text-center" role="alert" style="font-size: 15px;">
 				                    <strong>{{ session('Errors') }}</strong>
 				                </span>
 			                @endif

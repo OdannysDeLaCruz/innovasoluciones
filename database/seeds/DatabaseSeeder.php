@@ -22,9 +22,11 @@ class DatabaseSeeder extends Seeder
                 'promociones',
                 'envios',
                 'transacciones',
-                // 'pedidos',
+                'pedidos',
+                'proveedores',
+                'marcas',
                 'productos',
-                // 'detalle_pedidos',
+                'detalle_pedidos',
                 'imagenes'
             ]);
         }
@@ -36,6 +38,8 @@ class DatabaseSeeder extends Seeder
             CrearPromocionesSeeder::class,
         	CrearEnviosSeeder::class,
             // CrearPedidosSeeder::class,
+            CrearProveedorSeeder::class,
+            CrearMarcaSeeder::class,
             CrearProductosSeeder::class,
             // CrearDetallePedidosSeeder::class,
             CrearImagenesSeeder::class,

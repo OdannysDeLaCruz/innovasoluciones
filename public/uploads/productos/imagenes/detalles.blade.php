@@ -21,9 +21,10 @@
 	<div class="detalle_fondo_img">
 		<img src="{{ asset('img/detalle_fondo.jpg') }}">
 	</div>
-	<section class="detalle row ml-4 mr-4 m-md-auto">
+	<section class="detalle row">
 		
-		@foreach($producto as $detalle)			
+		@foreach($producto as $detalle)
+			
 			<div class="detalle_descripcion_img col-12 col-md-8">
 				<div class="detalle_descripcion_img_banner">
 					<div class="detalle_descripcion_img_banner_lista">	
@@ -34,9 +35,16 @@
 							<img class="lista_img" src='{{ asset("uploads/productos/imagenes/$imagen->imagen_url") }}' alt="{{ $detalle->producto_nombre }}">
 				        @endforeach
 					</div>
-					<div class="detalle_descripcion_img_banner_visualizador" id="detalle_visualizador">
-					</div>
+					<div class="detalle_descripcion_img_banner_visualizador" id="detalle_visualizador"></div>					
 				</div>
+
+
+
+
+				<!-- <img class="lista_img" src='{{ asset("storage/productos/imagenes/$detalle->producto_imagen") }}' alt="{{ $detalle->producto_nombre }}"> -->
+				 @foreach ($imagenes as $imagen)
+					<!-- <img class="lista_img" src='{{ asset("storage/productos/imagenes/$imagen->imagen_url") }}' alt="{{ $detalle->producto_nombre }}"> -->
+		        @endforeach
 			</div>
 			<section class="detalle_info col-12 col-md-4 pt-4 pt-md-4">
 				<h1 class="detalle_info_titulo ">{{ $detalle->producto_nombre }}</h1>
@@ -114,23 +122,13 @@
 					@endempty
 					<button type="submit" id="btn-agregar-producto" class="btn btn-primary detalle_info_btn_comprar">Comprar</button>
 				</form>
+				<section class="detalle_info_descripcion">
+					<article>
+						<p>{!! $detalle->producto_descripcion !!}</p>
+					</article>
+				</section>
 			</section>
 		@endforeach
-	</section>
-	<section class="detalle row ml-4 mr-4 m-md-auto flex-column-reverse flex-md-row">
-		<section class="col-12 col-md-8 p-3">
-			<section class="detalle_info_descripcion p-4">
-				<article>
-					<h2>Información del producto</h2>
-					<p>{!! $detalle->producto_descripcion !!}</p>
-				</article>
-			</section>
-		</section>
-		<section class="col-12 col-md-4 pt-4 pt-md-4">
-			<!-- <section class="detalle_info_descripcion">
-				<h2>Información de envío</h2>
-			</section> -->
-		</section>
 	</section>
 
 	<!-- SECCION FOOTER -->
