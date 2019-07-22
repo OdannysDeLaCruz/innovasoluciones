@@ -40,7 +40,7 @@
 							<tr class="facturas_datos">
 								<td>{{ $pedido['ref_venta'] }}</td>
 								<td class="d-none d-md-table-cell">@dateformat( $pedido['fecha_creado'] )</td>
-								<td class="facturas_datos_precio">${{ $pedido['precio_final'] }}</td>
+								<td class="facturas_datos_precio">$ {{ $pedido['precio_final'] }}</td>
 								<td>
 									<a target="_blanc" href="/perfil/facturas/{{$pedido['id']}}">Ver</a> | 
 									<a href="/perfil/facturas/descargar/{{$pedido['id']}}">Descargar</a>

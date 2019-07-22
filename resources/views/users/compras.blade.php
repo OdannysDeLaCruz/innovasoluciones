@@ -34,7 +34,7 @@
 						</span>
 					</h1>
 					<span class="costo_pedido">
-						Costo del pedido: ${{ $costo_pedido }}					
+						Costo del pedido: $ {{ $costo_pedido }}					
 					</span>
 					@if(isset($info_pedido) && isset($detalle_pedido))
 						@foreach($info_pedido as $pedido)

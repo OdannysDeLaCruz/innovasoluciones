@@ -35,11 +35,10 @@
 			<section class="contenedor_tabla">
 				<section class="contenedor_tabla_head">
 					<span class="contenedor_tabla_head_titulos_pedidos pedido-ref">Referencia</span>
-					<span class="contenedor_tabla_head_titulos_pedidos pedido-cliente">Nombre cliente</span>
-					<span class="contenedor_tabla_head_titulos_pedidos pedido-cliente">Apellido cliente</span>
+					<span class="contenedor_tabla_head_titulos_pedidos pedido-cliente">Cliente</span>
 					<span class="contenedor_tabla_head_titulos_pedidos pedido-modo-envio d-none d-md-block">Modo envío</span>
 					<span class="contenedor_tabla_head_titulos_pedidos pedido-estado">Estado</span>
-					<span class="contenedor_tabla_head_titulos_pedidos pedido-total">Valor transacción</span>
+					<span class="contenedor_tabla_head_titulos_pedidos pedido-total">Valor <br> transacción</span>
 					<span class="contenedor_tabla_head_titulos_pedidos pedido-fecha d-none d-md-block">Fecha</span>
 					<span class="contenedor_tabla_head_titulos_pedidos pedido-operaciones">Operaciones</span>
 				</section>
@@ -50,10 +49,7 @@
 								{{ $pedido->pedido_ref_venta }}
 							</span>
 							<span class="contenedor_tabla_body_titulos_pedidos pedido-cliente">
-								{{ $pedido->usuario_nombre}}
-							</span>
-							<span class="contenedor_tabla_body_titulos_pedidos pedido-cliente">
-								{{ $pedido->usuario_apellido }}
+								{{ $pedido->usuario_nombre . ' ' . $pedido->usuario_apellido }}
 							</span>
 							<span class="contenedor_tabla_body_titulos_pedidos pedido-modo-envio d-none d-md-block">
 								{{ $pedido->envio_metodo }}
@@ -70,17 +66,17 @@
 								@endif
 							</span>
 							<span class="contenedor_tabla_body_titulos_pedidos pedido-total">
-								{{ $pedido->valor_transaccion }}
+								$ {{ $pedido->valor_transaccion }}
 							</span>
 							<span class="contenedor_tabla_body_titulos_pedidos pedido-fecha d-none d-md-block">
 								@dateformat($pedido->fecha_creado)
 							</span>
 							<span class="contenedor_tabla_body_titulos_pedidos pedido-operaciones">
 								<a data-toggle="tooltip" data-placement="top" title="Ver pedido" href="">
-									<span class="fa fa-edit mr-2 btn-ver-item" ></span>
+									<span class="fa fa-edit mr-2 btn-ver-item"></span>
 								</a>  |  
 								<a data-toggle="tooltip" data-placement="top" title="Eliminar pedido" href="">
-									<span class="fa fa-trash ml-2 btn-eliminar-item" ></span>
+									<span class="fa fa-trash ml-2 btn-eliminar-item"></span>
 								</a>
 							</span>
 						</section>
