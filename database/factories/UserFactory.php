@@ -17,7 +17,7 @@ $factory->define(App\User::class, function (Faker $faker) {
     date_default_timezone_set('America/Bogota');
 
 	return [
-	    'rol_id'            => 3,
+	    'rol_id'            => 2,
 	    'usuario_nombre'    => $faker->firstName,
 	    'usuario_apellido'  => $faker->lastName,
 	    'usuario_cedula'    => rand(000000000, 999999999),

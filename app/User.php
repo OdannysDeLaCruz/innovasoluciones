@@ -23,10 +23,6 @@ class User extends Authenticatable
         'usuario_avatar',
         'usuario_telefono',
         'email',
-        'usuario_pais',
-        'usuario_ciudad',
-        'usuario_barrio',
-        'usuario_direccion',
         'password',
         'usuario_estado',
         'remember_token'
