@@ -23,17 +23,14 @@ class CrearUsersSeeder extends Seeder
         $odannys->usuario_telefono = '3107484079';
         $odannys->email            = 'el_odanis321@hotmail.com';
         $odannys->password         = bcrypt('odannys321');
-        $odannys->usuario_estado   = 1; 
+        $odannys->usuario_estado   = 1;
         $odannys->save();
         $odannys->direccion()->create([
-            'pais'          => 'Colombia',
-            'departamento'  => 'Bogotá', 
-            'distrito'      => null, 
-            'ciudad'        => 'Bogotá', 
-            'barrio'        => 'Suba', 
-            'calle'         => 'Cll 8b', 
-            'numero'        => '109-23', 
-            'codigo_postal' => 23323
+            'pais'       => 'Colombia',
+            'estado'     => 'Cesar',
+            'ciudad'     => 'Valledupar',
+            'direccion'  => 'Calle 6b # 41 - 36 La Nevada',
+            'codigo_postal' => 200001
         ]);
 
 

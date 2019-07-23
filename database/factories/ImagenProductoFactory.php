@@ -8,6 +8,6 @@ $factory->define(App\Imagen::class, function (Faker $faker) {
 
     return [
         'producto_id' => $producto_id,
-        'imagen_url'  => $faker->imageUrl($width = 200, $height = 200, 'cats') 
+        'imagen_url'  => '1562990851_03 p Mi band 3 1.jpg' 
     ];
 });

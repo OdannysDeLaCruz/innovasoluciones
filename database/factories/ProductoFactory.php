@@ -30,7 +30,7 @@ $factory->define(App\Producto::class, function (Faker $faker) {
         'producto_descripcion'  => $faker->text(150),
         'producto_tags'         => $mis_tags,
         'producto_ref'          => strtoupper($faker->word) . rand(rand(0, 999), rand(1000,9999)),
-        'producto_imagen'       => $faker->imageUrl($width = 200, $height = 200),
+        'producto_imagen'       => '1562990443_05 p Moonbeam.jpg',
         'producto_precio'       => $producto_precio,
         'promocion_id'          => rand(1,3),
         'producto_tallas'       => '28, 30, 32, 50X20, 160X100',

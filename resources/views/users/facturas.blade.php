@@ -28,7 +28,7 @@
 					<table class="table table-hover table-bordered">
 						<thead>
 							<tr class="facturas_titulos">
-								<th>Ref del pedido</th>
+								<th>Ref. pedido</th>
 								<th class="d-none d-md-table-cell">Fecha de la factura</th>
 								<th>Costo</th>
 								<th>Detalles</th>
