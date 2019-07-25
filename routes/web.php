@@ -27,13 +27,13 @@ Route::get('detalle-compra/{ref}-{descripcion}', 'PrincipalController@showDetall
 Route::get('/search/{tag?}', 'SearchProductsController@showProductosSearch')->name('productoTag');
 Route::post('/searchtags', 'SearchProductsController@index')->name('searchtags');
 
+Route::get('ver-facturas',function() {
+	return view('users.template-factura.factura');
+});
 
-	Route::get('ver-facturas',function() {
-			return view('users.template-factura.factura');
-	});
-	Route::get('ver-email',function() {
-			return view('emails.confirmacion_pedido');
-	});
+Route::get('ver-email',function() {
+	return view('emails.confirmacion_pedido');
+});
 // RUTAS PARA USUARIOS
 Route::group(['namespace' => 'User', 'prefix' => 'perfil'], function(){
 
@@ -42,7 +42,6 @@ Route::group(['namespace' => 'User', 'prefix' => 'perfil'], function(){
 	Route::get('pedidos', 'UserController@showPedidos')->name('pedidos');
 
 	Route::get('pedidos/{id?}', 'UserController@showPedidoDetalles')->name('compras');
-
 
 	Route::get('facturas','UserController@showFacturas')->name('facturas');
 
@@ -66,6 +65,8 @@ Route::get('/cart/update/{producto}/{cantidad}', 'CartController@update')->name(
 Route::get('/verificacion', 'VerificarPedidoController@verificar')->name('verificar');
 
 Route::post('/verificacion/cambiar-direccion', 'VerificarPedidoController@cambiar_direccion_envio')->name('cambiar-direccion-envio');
+
+Route::post('/establecer-direccion-defecto', 'DireccionController@establecerDireccionDefecto');
 
 Route::post('/verificarCodigo', 'VerificarPedidoController@verificarCodigo')->name('verificarCodigo');
 
@@ -109,7 +110,7 @@ Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function(){
 });
 
 // Ruta para prueba de datos de la pagina confirmation
-Route::get('/data', function(){
+Route::get('/data', function() {
 
 	$file = fopen("data.txt", "r") or exit("Unable to open file!");
 	//Output a line of the file until the end is reached

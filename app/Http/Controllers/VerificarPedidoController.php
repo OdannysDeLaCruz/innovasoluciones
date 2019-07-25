@@ -9,11 +9,6 @@ class VerificarPedidoController extends Controller
 {
     private $direccion_defecto;
     private $direccion_nueva;
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
 
     public function __construct() {
         $this->middleware('auth');
@@ -39,29 +34,35 @@ class VerificarPedidoController extends Controller
         // Se agragará la direccion con la que se registro por defecto
 
         // Obtener direccion principal de envio del usuario
-        $this->direccion_defecto['usuario_calle']      = Auth::user()->direccion()->value('calle');
-        $this->direccion_defecto['usuario_numero_calle']  = Auth::user()->direccion()->value('numero');
-        $this->direccion_defecto['usuario_barrio']     = Auth::user()->direccion()->value('barrio');
-        $this->direccion_defecto['usuario_ciudad']     = Auth::user()->direccion()->value('ciudad');
-        $this->direccion_defecto['usuario_departamento']  = Auth::user()->direccion()->value('departamento');
-        $this->direccion_defecto['usuario_distrito']    = Auth::user()->direccion()->value('distrito');
-        $this->direccion_defecto['usuario_pais']        = Auth::user()->direccion()->value('pais');
-        $this->direccion_defecto['usuario_cod_postal']  = Auth::user()->direccion()->value('codigo_postal');
+        // $this->direccion_defecto['usuario_calle']      = Auth::user()->direccion()->value('calle');
+        // $this->direccion_defecto['usuario_numero_calle']  = Auth::user()->direccion()->value('numero');
+        // $this->direccion_defecto['usuario_barrio']     = Auth::user()->direccion()->value('barrio');
+        // $this->direccion_defecto['usuario_ciudad']     = Auth::user()->direccion()->value('ciudad');
+        // $this->direccion_defecto['usuario_departamento']  = Auth::user()->direccion()->value('departamento');
+        // $this->direccion_defecto['usuario_distrito']    = Auth::user()->direccion()->value('distrito');
+        // $this->direccion_defecto['usuario_pais']        = Auth::user()->direccion()->value('pais');
+        // $this->direccion_defecto['usuario_cod_postal']  = Auth::user()->direccion()->value('codigo_postal');
 
-        $direccion_defecto_usuario = session('direccion_defecto');
-        $direccion_defecto_usuario = $this->direccion_defecto;
-        session()->put('direccion_defecto', $direccion_defecto_usuario);
-        $direccion_defecto_usuario = session('direccion_defecto');
+        // $direccion_defecto_usuario = session('direccion_defecto');
+        // $direccion_defecto_usuario = $this->direccion_defecto;
+        // session()->put('direccion_defecto', $direccion_defecto_usuario);
+        // $direccion_defecto_usuario = session('direccion_defecto');
 
         // Obtener direccion nueva de envio
-        $direccion_nueva_pedido = session('direccion_nueva');
+        // $direccion_nueva_pedido = session('direccion_nueva');
         
         // Verificar que dirección existe para envio del pedido
-        if($direccion_nueva_pedido == []) {
-            $direccion = $direccion_defecto_usuario;
-        }else {
-            $direccion = $direccion_nueva_pedido;
-        }
+        // if($direccion_nueva_pedido == []) {
+        //     $direccion = $direccion_defecto_usuario;
+        // }else {
+        //     $direccion = $direccion_nueva_pedido;
+        // }
+
+
+        // Obtener direccciones del usuario
+        $user_id = Auth::user()->id;
+        $direcciones = Auth::user()->direccion;
+        // dd($direcciones);
 
         if (empty($cart)) {
             session()->flash('vacio', true);
@@ -86,7 +87,7 @@ class VerificarPedidoController extends Controller
         $tipo_entregas = App\Envio::select('id', 'envio_metodo')->get();
 
         // return view('productos');  
-        return view('verificacion', compact('cart','direccion', 'cantidad_productos','tipo_entregas','total_del_pedido','descuento_peso','total_pagar'));
+        return view('verificacion', compact('cart','direcciones', 'cantidad_productos','tipo_entregas','total_del_pedido','descuento_peso','total_pagar'));
     }
 
     // VERIFICAR CODIGO DE DESCUENTO

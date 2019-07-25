@@ -103,8 +103,8 @@
 			</section>
 			<div class="detalle_descripcion_img_principal col-12 col-md-8 h-25">
 				<!-- Va de primero la imagen que viene desde la tabla producto -->
-				<!-- <img class="img_principal" src='{{ asset("uploads/productos/imagenes/miniaturas/$detalle->producto_imagen") }}' alt="imganes de descripcion"> -->
-				<img class="img_principal" src='{{ asset("uploads/productos/imagenes/miniaturas/1563425529_asus1.png") }}' alt="imganes de descripcion">
+				<img class="img_principal" src='{{ asset("uploads/productos/imagenes/miniaturas/$detalle->producto_imagen") }}' alt="{{ $detalle->producto_nombre }}">
+				<!-- <img class="img_principal" src='{{ asset("uploads/productos/imagenes/miniaturas/1563425529_asus1.png") }}' alt="imganes de descripcion"> -->
 			</div> 
 		@endforeach
 	</section>

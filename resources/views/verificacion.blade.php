@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
@@ -53,6 +54,8 @@
 						</section>
 					@endforeach
 				</section>
+
+				<!-- SECCION CODIGO DE DESCUENTO -->
 				<section id="tarjeta_codigo_descuento" class="payment_proceso_tarjeta tarjeta_codigo_descuento">
 					<div class="codigo_descuento" id="codigo_descuento">
 						<form action="{{ route('verificarCodigo') }}" method="POST" >
@@ -105,6 +108,8 @@
 						</script>
 					@endif
 				</section>
+
+				<!-- SECCION BOTONES DE PEDIDO -->
 				<section class="payment_proceso_tarjeta tarjeta_botones_pedidos">
 					<div class="pedidos_botones">
 						<div class="pedidos_botones_btn botones_innova">
@@ -115,26 +120,39 @@
 							<a href="/verificacion?s=datos_envio" id="btn_siguiente" onclick="history.pushState(null, '', '/verificacion?s=datos_envio');">Siguiente <i class="fa fa-arrow-right"></i></a>
 						</div>
 					</div>			
-				</section>			
+				</section>
 			</section>
+
+			<!-- SECCION DIRECCION DE ENVIO DE PEDIDO -->
 			<section id="datos_envio" class="payment_proceso payment_envio">
 				<h1 class="payment_titulos">¿Donde quieres recibirlo?</h1>
 				<!-- <small>Si deseas recibir el pedido a otra dirección cambiela desde su cuenta de perfil.</small> -->
 
-				<section class="payment_proceso_tarjeta tarjeta_direccion_envio">
-					<div class="direccion_envio">
-						<span class="fa fa-map-marker direccion_envio_icono"></span>
-						<span class="direccion_envio_texto">
+				<section class="payment_proceso_tarjeta tarjeta_direccion_envio" id="seccionDirecciones">
+					@if(isset($direcciones))
+						@foreach($direcciones as $direccion)
+							@php
+								$defecto = $direccion->defecto ? 'defecto' : ''
+							@endphp
+							<div id="tarjeta_direccion_envio_cargador">
+								<img src="{{ asset('img/logos/cargador.gif') }}">
+							</div>
 
-							<b> {{ $direccion['usuario_calle'] . ' # ' . $direccion['usuario_numero_calle'] . ' ' . $direccion['usuario_barrio'] }} </b>
-							
-							<small>
-								{{ $direccion['usuario_ciudad'] . ' - ' . $direccion['usuario_pais'] . ' - Cod. Postal: ' . $direccion['usuario_cod_postal'] }}					
-							</small>
-						</span>
+							<div class="direccion_envio {{ $defecto }} direccion_defecto_id" data-direccion-id="{{ $direccion->id }}">
+								<p class="direccion_envio_texto {{ $defecto }}">
+									<span class="fa fa-check direccion_envio_texto_iconselect"></span>
+									{{ Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido . ' | ' . "$direccion->direccion,  $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais" }}
+								</p>
+							</div>
+						@endforeach
+					@endif
+					<div class="link_agregar_direccion">
+						<a href="" class="direccion_link text-center" id="btn-mostrar-form-cambio-direccion">
+							<span class="fa fa-plus mr-2"></span> Agregar dirección
+						</a>						
 					</div>
-					<a href="" class="direccion_link text-center" id="btn-mostrar-form-cambio-direccion">Cambiar dirección</a>
 				</section>
+			
 				<!-- Formulario cambiar dirección de envio del pedido -->
 				<div class="contenedor-form-cambiar-direccion payment_proceso_tarjeta">
 					<form class="form-cambiar-direccion" id="form_cambiar_direccion" action="{{ route('cambiar-direccion-envio') }}" method="POST">

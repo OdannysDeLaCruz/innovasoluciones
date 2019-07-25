@@ -74,27 +74,17 @@
 					<!-- Depart / Estado / Provincia -->
 					<div class="perfil_info_datos_block">
 						<label class="titulo_item titulo_item_estado">Depart / Estado / Provincia</label>
-						<input class="input_item titulo_item_estado" type="text" name="usuario_estado_nuevo" value="{{ Auth::user()->direccion()->value('departamento') }}">
+						<input class="input_item titulo_item_estado" type="text" name="usuario_estado_nuevo" value="{{ Auth::user()->direccion()->value('estado') }}">
 					</div>
 					<!-- Ciudad -->
 					<div class="perfil_info_datos_block">
 						<label class="titulo_item titulo_item_ciudad">Ciudad</label>
 						<input class="input_item imput_item_ciudad" type="text" name="usuario_ciudad_nuevo" value="{{ Auth::user()->direccion()->value('ciudad') }}">
 					</div>
-					<!-- Barrio -->
+					<!-- Direccion -->
 					<div class="perfil_info_datos_block">
-						<label class="titulo_item titulo_item_barrio">Barrio</label>
-						<input class="input_item imput_item_barrio" type="text" name="usuario_barrio_nuevo" value="{{ Auth::user()->direccion()->value('barrio') }}">
-					</div>
-					<!-- Calle -->
-					<div class="perfil_info_datos_block">
-						<label class="titulo_item titulo_item_calle">Calle</small></label>
-						<input class="input_item imput_item_calle" type="text" name="usuario_calle_nuevo" value="{{ Auth::user()->direccion()->value('calle') }}">
-					</div>
-					<!-- Numero Calle -->
-					<div class="perfil_info_datos_block">
-						<label class="titulo_item titulo_item_num_calle">N° Calle</small></label>
-						<input class="input_item imput_item_num_calle" type="text" name="usuario_num_calle_nuevo" value="{{ Auth::user()->direccion()->value('numero') }}">
+						<label class="titulo_item titulo_item_direccion">Dirección</label>
+						<input class="input_item imput_item_direccion" type="text" name="usuario_direccion_nuevo" value="{{ Auth::user()->direccion()->value('direccion') }}">
 					</div>
 					<!-- Codigo postal -->
 					<div class="perfil_info_datos_block perfil_info_datos_postal">

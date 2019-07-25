@@ -238,5 +238,41 @@ $(document).ready(function(){
         }
     });
 
+    // CAMBIAR DIRECCION POR DEFECTO PARA EL ENVIO DEL USUARIO
+    // Obtener direccion clickeada (escojida) por el usuario
+    $('.direccion_envio').on('click', function() {
+        let direccion_id = $(this).data('direccion-id');
+        // console.log(direccion_id);
+
+        $.ajax({
+            url: '/establecer-direccion-defecto',
+            type: 'POST',
+            data: { id:direccion_id },
+            dataType: 'json',
+            beforeSend: function(objeto){
+                console.log("Cambiando direccion...");
+                $('#tarjeta_direccion_envio_cargador').css('display', 'flex');
+            },
+            complete: function(objeto, exito){
+                console.log("Terminé.");
+                window.location.reload();
+            },
+            success: function(data){
+                // console.log("Direccion cambiada");
+                // console.log(data.direcciones);
+                // $direcciones = data.direcciones;
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
+    });
+
 });
 
+// <div class="direccion_envio {{ $defecto }} direccion_defecto_id" data-direccion-id="{{ $direccion->id }}">
+//     <p class="direccion_envio_texto {{ $defecto }}">
+//         <span class="fa fa-check direccion_envio_texto_iconselect"></span>
+//         {{ Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido . ' | ' . "$direccion->direccion,  $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais" }}
+//     </p>
+// </div>

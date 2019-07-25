@@ -15,16 +15,13 @@ class CreateDireccionesTable extends Migration
     {
         Schema::create('direcciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->unique();
+            $table->integer('user_id')->unsigned();
             $table->string('pais');
             $table->string('estado'); // estado / provincia / region / departamento
-            // $table->string('distrito')->nullable();
             $table->string('ciudad');
-            // $table->string('barrio');
-            // $table->string('calle');
-            // $table->string('numero');
             $table->string('direccion'); // Barrio, calle, numero, piso, apartamento, etc
             $table->integer('codigo_postal');
+            $table->boolean('defecto');
 
             $table->timestamp('fecha_creado')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('fecha_actualizado')->default(\DB::raw('CURRENT_TIMESTAMP'));

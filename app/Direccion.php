@@ -12,13 +12,10 @@ class Direccion extends Model
 		'user_id',
 		'pais',
 		'estado',
-		// 'distrito',
 		'ciudad',
-		// 'barrio',
-		// 'calle',
-		// 'numero',
 		'direccion',
 		'codigo_postal',
+		'defecto',
     ];
     public $timestamps = false;
 

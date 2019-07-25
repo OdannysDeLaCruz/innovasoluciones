@@ -22,6 +22,8 @@
 <!-- <script src="//cdn.quilljs.com/1.3.6/quill.core.js"></script> -->
 
 <!-- Librería Editor.js -->
-<script src="{{ asset('js/editor.js') }}"></script>
+<!-- <script src="{{ asset('js/editor.js') }}"></script> -->
 
+<!-- Ckeditor.js -->
+<script src="https://cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
