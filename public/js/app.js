@@ -158,7 +158,7 @@ $(document).ready(function(){
         );
     });
 
-    $('#btn-mostrar-form-cambio-direccion').on('click', function(e){
+    $('.btn-mostrar-form-cambio-direccion').on('click', function(e){
         e.preventDefault();
         let display = $('.contenedor-form-cambiar-direccion').css('display');
         if (display == 'none') {
@@ -269,10 +269,3 @@ $(document).ready(function(){
     });
 
 });
-
-// <div class="direccion_envio {{ $defecto }} direccion_defecto_id" data-direccion-id="{{ $direccion->id }}">
-//     <p class="direccion_envio_texto {{ $defecto }}">
-//         <span class="fa fa-check direccion_envio_texto_iconselect"></span>
-//         {{ Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido . ' | ' . "$direccion->direccion,  $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais" }}
-//     </p>
-// </div>

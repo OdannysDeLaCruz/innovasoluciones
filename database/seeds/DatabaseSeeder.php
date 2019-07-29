@@ -27,7 +27,9 @@ class DatabaseSeeder extends Seeder
                 'marcas',
                 'productos',
                 'detalle_pedidos',
-                'imagenes'
+                'imagenes',
+                'estados',
+                'paises',
             ]);
         }
         $this->call([
@@ -37,11 +39,17 @@ class DatabaseSeeder extends Seeder
             CrearCategoriasSeeder::class,
             CrearPromocionesSeeder::class,
         	CrearEnviosSeeder::class,
+
             // CrearPedidosSeeder::class,
+
             CrearProveedorSeeder::class,
             CrearMarcaSeeder::class,
             CrearProductosSeeder::class,
+
             // CrearDetallePedidosSeeder::class,
+            
+            CrearPaisSeeder::class,
+            CrearEstadoSeeder::class,
             CrearImagenesSeeder::class,
         ]);
     }
