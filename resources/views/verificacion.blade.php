@@ -116,7 +116,6 @@
 							<a href="{{ route('productos') }}"><i class="fa fa-arrow-left"></i>Seguir comprando</a>
 						</div>
 						<div class="pedidos_botones_btn botones_innova">
-							<!-- <a id="btn_siguiente" href="/verificacion?s=datos_envio">Siguiente <i class="fa fa-arrow-right"></i></a> -->
 							<a href="/verificacion?s=datos_envio" id="btn_siguiente" onclick="history.pushState(null, '', '/verificacion?s=datos_envio');">Siguiente <i class="fa fa-arrow-right"></i></a>
 						</div>
 					</div>			
@@ -134,14 +133,15 @@
 							@php
 								$defecto = $direccion->defecto ? 'defecto' : ''
 							@endphp
-							<div id="tarjeta_direccion_envio_cargador">
+							<!-- Cargador de espera -->
+							<div class="tarjeta_direccion_envio_cargador">
 								<img src="{{ asset('img/logos/cargador.gif') }}">
 							</div>
 
 							<div class="direccion_envio {{ $defecto }} direccion_defecto_id" data-direccion-id="{{ $direccion->id }}">
 								<p class="direccion_envio_texto {{ $defecto }}">
 									<span class="fa fa-check direccion_envio_texto_iconselect"></span>
-									{{ Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido . ' | ' . "$direccion->direccion,  $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais" }}
+									{{ $direccion->nombre . ' ' . $direccion->apellido . ' | ' . "$direccion->direccion,  $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais" }}
 								</p>
 							</div>
 						@endforeach
@@ -155,73 +155,64 @@
 			
 				<!-- Formulario cambiar dirección de envio del pedido -->
 				<div class="contenedor-form-cambiar-direccion payment_proceso_tarjeta">
-					<form class="form-cambiar-direccion" id="form_cambiar_direccion" action="{{ route('cambiar-direccion-envio') }}" method="POST">
+					<!-- Cargador de espera -->
+					<div class="tarjeta_direccion_envio_cargador">
+						<img src="{{ asset('img/logos/cargador.gif') }}">
+					</div>
+					<form class="form-cambiar-direccion" id="form_agregar_direccion" action="{{ route('agregar-direccion') }}" method="POST">
 						@csrf
 						<div class="form-cambiar-direccion-contenedor d-flex justify-content-center justify-content-md-start">
 							<h4 class="form-cambiar-direccion-contenedor-titulo">Dirección de envío</h4>
+							<!-- CAMPO NOMBRE -->
 							<div class="form-group">
-								<div class="form-group-interno">
-									<!-- CAMPO NOMBRE -->
-									<input class="form-cambiar-direccion-contenedor-inputs-interno" type="text" name="nombre" id="nombre" placeholder="Nombre" required value="{{ Auth::user()->usuario_nombre }}">
-									<label class="form-cambiar-direccion-error" id="nombre_error">Mensaje de error aqui</label>
-
-									<!-- CAMPO APELLIDO -->
-									<input class="form-cambiar-direccion-contenedor-inputs-interno" type="text" name="apellido" id="apellido" placeholder="Apellido" required value="{{ Auth::user()->usuario_apellido }}">						
-									<label class="form-cambiar-direccion-error" id="apellido_error">Mensaje de error aqui</label>					
-								</div>
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+								<label class="form-cambiar-direccion-error" id="nombre_error">Mensaje de error aqui</label>
+							</div>
+							<!-- CAMPO APELLIDO -->
+							<div class="form-group">
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="apellido" id="apellido" placeholder="Apellido" required>
+									<label class="form-cambiar-direccion-error" id="apellido_error"></label>
 							</div>
 							<!-- CAMPO PAIS -->
 							<div class="form-group">
-								<select class="form-cambiar-direccion-contenedor-inputs" name="pais" id="pais">
-									<option>Pais</option>
-									<option>Pais</option>
-									<option>Pais</option>
-									<option>Pais</option>
-									<option>Pais</option>
+								<select class="form-cambiar-direccion-contenedor-inputs" name="pais" id="lista_paises" required>
 								</select>
-								<label class="form-cambiar-direccion-error" id="pais_error">Mensaje de error aqui</label>
+								<label class="form-cambiar-direccion-error" id="pais_error"></label>
 							</div>
-
 							<!-- CAMPO Departamento / Estado / Provincia / Región -->
 							<div class="form-group">
-								<select class="form-cambiar-direccion-contenedor-inputs" name="departamento" id="departamento">
-									<option>Departamento / Estado / Provincia / Región</option>
-									<option>Pais</option>
-									<option>Pais</option>
-									<option>Pais</option>
-									<option>Pais</option>
+								<select id="lista_estados" class="form-cambiar-direccion-contenedor-inputs" name="estado" required>
+									<option value="">Departamento / Estado / Provincia / Región</option>
 								</select>
-								<label class="form-cambiar-direccion-error" id="departamento_error">Mensaje de error aqui</label>
+								<label class="form-cambiar-direccion-error" id="estado_error"></label>
 							</div>
-
 							<!-- CAMPO CIUDAD -->	
 							<div class="form-group">
-								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="ciudad" id="ciudad" placeholder="Ciudad" required>						
-								<label class="form-cambiar-direccion-error" id="ciudad_error">Mensaje de error aqui</label>
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="ciudad" id="ciudad" placeholder="Ciudad" required>
+								<label class="form-cambiar-direccion-error" id="ciudad_error"></label>
 							</div>
-
 							<!-- CAMPO DIRECCIÓN -->	
 							<div class="form-group">
-								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="direccion" id="direccion" placeholder="Dirección: calle, numero, casa, barrio, etc..." required>						
-								<label class="form-cambiar-direccion-error" id="barrio_error">Mensaje de error aqui</label>
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="direccion" id="direccion" placeholder="Dirección: calle, número, casa, barrio, etc..." required>						
+								<label class="form-cambiar-direccion-error" id="direccion_error"></label>
 							</div>
-
 							<!-- CAMPO CODIGO POSTAL -->	
-							<div class="form-group">
+							<div class="form-group d-flex">
 								<input class="form-cambiar-direccion-contenedor-inputs" type="number" name="codigo_postal" id="codigo_postal" placeholder="Codigo postal" required>	
-								<label class="form-cambiar-direccion-error" id="codigo_postal_error">Mensaje de error aqui</label>		
+								<label class="form-cambiar-direccion-error" id="codigo_postal_error"></label>
 							</div>
-
 							<!-- CAMPO TELEFONO -->	
 							<div class="form-group">
-								<input class="form-cambiar-direccion-contenedor-inputs" type="number" name="telefono" id="telefono" placeholder="Numro de teléfono" required value="{{ Auth::user()->usuario_telefono }}">	
-								<label class="form-cambiar-direccion-error" id="telefono_error">Mensaje de error aqui</label>
-								<a data-toggle="tooltip" data-placement="bottom" title="le solicitamos su número de teléfono en caso de que necesitemos contactarlo con respecto a su pedido." class="form-cambiar-direccion-contenedor-link" href="" id="btn-mostrar-form-cambio-direccion">¿Por qué un teléfono?</a>
+								<input class="form-cambiar-direccion-contenedor-inputs" type="number" name="telefono" id="telefono" placeholder="Número de teléfono" required>	
+
+								<label class="form-cambiar-direccion-error" id="telefono_error"></label>
+
+								<a data-toggle="tooltip" data-placement="bottom" title="Le solicitamos su número de teléfono en caso de que necesitemos contactarlo con respecto a su pedido." class="form-cambiar-direccion-contenedor-link" href="#" id="btn-mostrar-form-cambio-direccion">¿Por qué un teléfono?</a>
 							</div>
 						</div>
 
 						<div class="form-group-btns">
-							<input type="submit" id="btn_cambiar_direccion" class="btn-cambiar-direccion" value="Guardar">
+							<input type="submit" id="btn_agregar_direccion" class="btn-cambiar-direccion" value="Guardar">
 							<input type="reset" id="btn_cancelar_direccion" class="btn-cancelar-direccion btn-mostrar-form-cambio-direccion" value="Cancelar">
 						</div>
 

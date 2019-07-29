@@ -3,14 +3,71 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Direccion;
+use App\Pais;
+use App\Estado;
 
 class DireccionController extends Controller
 {
 	/*
 	* Crear nuevas direcciones de envios de pedidos.
 	*/
-    public function crear() {
+    public function crear(Request $request) {
+        if($request->ajax()) {
+
+            $v = \Validator::make($request->all(), [
+                "nombre"    => 'required|string',
+                "apellido"  => 'required|string',
+                "pais"      => 'required|string',
+                "estado"    => 'required|string',
+                "ciudad"    => 'required|string',
+                "direccion" => 'required|string',
+                "telefono"  => 'required|string',
+                "codigo_postal" => 'required|integer',
+            ]);
+            // dd($v);
+            // Si hay errores
+            if($v->fails()) {
+                $dataErrors = $v->errors();
+                echo json_encode(array(
+                    'status' => 'Errors',
+                    'data' => $dataErrors
+                ));
+            }else {
+                // Si no hay errores, obtenemos los nuevos datos de direccion de envio y se almacenan en la base de datos
+
+                // Quitar direccion por defecto del usuario para envios
+                Direccion::where('defecto', true)->update(['defecto' => false]);
+
+                $direccion = new Direccion;
+                $direccion->user_id    = Auth::user()->id;
+                $direccion->nombre     = $request->nombre;
+                $direccion->apellido   = $request->apellido;
+
+                // Obtener Nombre pais
+                $pais_id = (int)$request->pais;
+                $pais_nombre = Pais::where('id', $pais_id)->value('pais_nombre');   
+                $direccion->pais       = $pais_nombre;
+
+                // Obtener Nombre pais
+                $estado_id = (int)$request->estado;
+                $estado_nombre = Estado::where('id', $estado_id)->value('estado_nombre');
+                $direccion->estado     = $estado_nombre;
+
+                $direccion->ciudad     = $request->ciudad;
+                $direccion->direccion  = $request->direccion;
+                $direccion->codigo_postal = $request->codigo_postal;
+                $direccion->telefono   = $request->telefono;
+                $direccion->defecto    = true;
+                $direccion->save();
+
+                echo json_encode(array(
+                    'status' => 'Success',
+                    'message' => 'Dirección agregada exitosamente'
+                ));
+            }
+        }
 
     }
 

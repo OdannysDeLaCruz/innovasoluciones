@@ -10,10 +10,13 @@ class Direccion extends Model
 	protected $fillable = [
     	'id',
 		'user_id',
+		'nombre',
+		'apellido',
 		'pais',
 		'estado',
 		'ciudad',
 		'direccion',
+		'telefono',
 		'codigo_postal',
 		'defecto',
     ];

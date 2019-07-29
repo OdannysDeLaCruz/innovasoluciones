@@ -16,14 +16,15 @@ class CreateDireccionPedidoTable extends Migration
         Schema::create('direccion_pedido', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('pedido_id')->unsigned();
+            $table->string('nombre');
+            $table->string('apellido');
             $table->string('pais');
-            $table->string('departamento');
-            $table->string('distrito')->nullable();
+            $table->string('estado');
             $table->string('ciudad');
-            $table->string('barrio');
-            $table->string('calle');
-            $table->string('numero');
-            $table->integer('codigo_postal')->nullable();
+            $table->string('direccion');
+            $table->string('telenofo');
+            $table->integer('codigo_postal');
+
             $table->timestamp('fecha_creado')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('fecha_actualizado')->default(\DB::raw('CURRENT_TIMESTAMP'));
 

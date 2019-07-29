@@ -68,6 +68,9 @@ Route::post('/verificacion/cambiar-direccion', 'VerificarPedidoController@cambia
 
 Route::post('/establecer-direccion-defecto', 'DireccionController@establecerDireccionDefecto');
 
+// Ruta para agregar una nueva dirección de envio
+Route::post('/agregar-direccion', 'DireccionController@crear')->name('agregar-direccion');
+
 Route::post('/verificarCodigo', 'VerificarPedidoController@verificarCodigo')->name('verificarCodigo');
 
 Route::post('checkout/buying/payment/', 'PaymentController@payment')->name('payment');
@@ -121,3 +124,7 @@ Route::get('/data', function() {
 });
 
 Route::post('/prueba-editor', 'AdminController@pruebaEditor')->name('prueba-editor');
+
+// Ruta para obtener los paises y los estados
+Route::post('/paises', 'PaisEstadoController@getPaises');
+Route::post('/estados', 'PaisEstadoController@getEstados');

@@ -268,4 +268,118 @@ $(document).ready(function(){
         });
     });
 
+    // AGREGAR DIRECCION PARA EL ENVIO DEL USUARIO
+    $('.direccion_envio').on('click', function() {
+        let direccion_id = $(this).data('direccion-id');
+        // console.log(direccion_id);
+
+        $.ajax({
+            url: '/establecer-direccion-defecto',
+            type: 'POST',
+            data: { id:direccion_id },
+            dataType: 'json',
+            beforeSend: function(objeto){
+                console.log("Cambiando direccion...");
+                $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
+            },
+            complete: function(objeto, exito){
+                console.log("Terminé.");
+                window.location.reload();
+            },
+            success: function(data){
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
+    });
+
+    $('#btn_agregar_direccion').on('click', function(e){
+        e.preventDefault();
+        const frm = $('#form_agregar_direccion');
+        let datos_direccion = $('#form_agregar_direccion').serialize();
+        // console.log(datos_direccion);
+        $.ajax({
+            url: frm.attr('action'),
+            type: 'POST',
+            data: datos_direccion,
+            dataType: 'json',
+            beforeSend: function(objeto) {
+                // console.log("Agregando direccion...");
+                $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
+            },
+            complete: function(objeto, exito){
+                // console.log("Terminé.");
+                // window.location.reload();
+                $('.tarjeta_direccion_envio_cargador').css('display', 'none');
+            },
+            success: function(data) {
+                // $('.form-cambiar-direccion-error').css('display', 'none');
+                if (data.status == 'Errors') {
+                    // si hay errores, limipiar los mensajes de error mostrados anteriormente
+                    for(const e in data.data) {
+                        let spanError = $('#'+e+'_error');
+                        spanError.text(data.data[e][0]).css('display', 'block');
+                    }
+                }
+                if (data.status == 'Success') {
+                    console.log(data.message);
+                    frm[0].reset();
+                    $('..contenedor-form-cambiar-direccion').css('display', 'none');
+                    window.location.reload();
+                }
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
+    });
+    // Obtener paises y estados
+
+    // Paises
+    $.ajax({
+        url: '/paises',
+        type: 'POST',
+        dataType: 'json',
+        success: function(data){
+            // console.log(data);
+            if(data.status = 'Success') {
+                $('#lista_paises').append("<option value=''>Pais</option>");
+                // Recorrer los paises
+                data.paises.forEach( pais => { 
+                    $('#lista_paises').append("<option value='" + pais.id + "'>" + pais.pais_nombre + "</option>");
+                });
+
+                // Agregar evento onChange
+                $('#lista_paises').on('change', function() {
+                    // const estado_pais = $('.estado_pais');
+                    $('.estado_pais').remove();
+                    const pais_id = $('#lista_paises').val();
+
+                    // Obtener estados segun el pais                
+                    $.ajax({
+                        url: '/estados',
+                        type: 'POST',
+                        data: { pais_id : pais_id },
+                        dataType: 'json',
+                        success: function(data){
+                            // Recorrer los paises
+                            data.estados.forEach( estado => { 
+                                $('#lista_estados').append("<option class='estado_pais' value='" + estado.id + "'>" + estado.estado_nombre + "</option>");
+                            });
+                        },
+                        error: function(data){
+                            console.log(data);
+                        }
+                    });
+                });
+
+            }
+        },
+        error: function(data){
+            console.log(data);
+        }
+    });
+
+
 });

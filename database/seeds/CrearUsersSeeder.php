@@ -26,10 +26,13 @@ class CrearUsersSeeder extends Seeder
         $odannys->usuario_estado   = 1;
         $odannys->save();
         $odannys->direccion()->create([
+            'nombre'     => 'Odannys',
+            'apellido'   => 'De La Cruz',
             'pais'       => 'Colombia',
             'estado'     => 'Cesar',
             'ciudad'     => 'Valledupar',
             'direccion'  => 'Calle 6b # 41 - 36 La Nevada',
+            'telefono'   => 3043614864,
             'codigo_postal' => 200001,
             'defecto' => 1
         ]);

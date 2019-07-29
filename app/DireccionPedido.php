@@ -10,13 +10,13 @@ class DireccionPedido extends Model
 	protected $fillable = [
     	'id',
 		'pedido_id',
+		'nombre',
+		'apellido',
 		'pais',
-		'departamento',
-		'distrito',
+		'estado',
 		'ciudad',
-		'barrio',
-		'calle',
-		'numero',
+		'direccion',
+		'telenofo',
 		'codigo_postal',
     ];
     public $timestamps = false;

@@ -265,59 +265,59 @@ class VerificarPedidoController extends Controller
     }
 
     // Cambiar direccion de envio
-    public function cambiar_direccion_envio(Request $request) {
+    // public function cambiar_direccion_envio(Request $request) {
 
-        if($request->ajax()) {
+    //     if($request->ajax()) {
 
-            $v = \Validator::make($request->all(), [
-                "calle"    => 'required|string',
-                "numero"   => 'required|string',
-                "barrio"   => 'required|string',
-                "ciudad"   => 'required|string',
-                "departamento"  => 'nullable|string',
-                "distrito" => 'nullable|string',
-                "pais"     => 'required|string',
-                "codigo_postal" => 'nullable|integer'
-            ]);
-            // Si hay errores
-            if($v->fails()) {
-                $dataErrors['calle']  = $v->errors()->first('calle');
-                $dataErrors['numero'] = $v->errors()->first('numero');
-                $dataErrors['barrio'] = $v->errors()->first('barrio');
-                $dataErrors['ciudad'] = $v->errors()->first('ciudad');
-                $dataErrors['departamento'] = $v->errors()->first('departamento');
-                $dataErrors['distrito'] = $v->errors()->first('distrito');
-                $dataErrors['pais']     = $v->errors()->first('pais');
-                $dataErrors['codigo_postal'] = $v->errors()->first('codigo_postal');
+    //         $v = \Validator::make($request->all(), [
+    //             "calle"    => 'required|string',
+    //             "numero"   => 'required|string',
+    //             "barrio"   => 'required|string',
+    //             "ciudad"   => 'required|string',
+    //             "departamento"  => 'nullable|string',
+    //             "distrito" => 'nullable|string',
+    //             "pais"     => 'required|string',
+    //             "codigo_postal" => 'nullable|integer'
+    //         ]);
+    //         // Si hay errores
+    //         if($v->fails()) {
+    //             $dataErrors['calle']  = $v->errors()->first('calle');
+    //             $dataErrors['numero'] = $v->errors()->first('numero');
+    //             $dataErrors['barrio'] = $v->errors()->first('barrio');
+    //             $dataErrors['ciudad'] = $v->errors()->first('ciudad');
+    //             $dataErrors['departamento'] = $v->errors()->first('departamento');
+    //             $dataErrors['distrito'] = $v->errors()->first('distrito');
+    //             $dataErrors['pais']     = $v->errors()->first('pais');
+    //             $dataErrors['codigo_postal'] = $v->errors()->first('codigo_postal');
 
-                echo json_encode(array(
-                    'status' => 'Errors',
-                    'data' => $dataErrors
-                ));
-            }else {
-                // Si no hay errores, obtenemos los nuevos datos de direccion de envio y los asignamos a el array direccion
+    //             echo json_encode(array(
+    //                 'status' => 'Errors',
+    //                 'data' => $dataErrors
+    //             ));
+    //         }else {
+    //             // Si no hay errores, obtenemos los nuevos datos de direccion de envio y los asignamos a el array direccion
 
-                $this->direccion_nueva['usuario_calle'] = $request->calle;
-                $this->direccion_nueva['usuario_numero_calle'] = $request->numero;
-                $this->direccion_nueva['usuario_barrio'] = $request->barrio;
-                $this->direccion_nueva['usuario_ciudad'] = $request->ciudad;
-                $this->direccion_nueva['usuario_departamento'] = $request->departamento;
-                $this->direccion_nueva['usuario_distrito'] = $request->distrito;
-                $this->direccion_nueva['usuario_pais'] = $request->pais;
-                $this->direccion_nueva['usuario_cod_postal'] = $request->codigo_postal;
+    //             $this->direccion_nueva['usuario_calle'] = $request->calle;
+    //             $this->direccion_nueva['usuario_numero_calle'] = $request->numero;
+    //             $this->direccion_nueva['usuario_barrio'] = $request->barrio;
+    //             $this->direccion_nueva['usuario_ciudad'] = $request->ciudad;
+    //             $this->direccion_nueva['usuario_departamento'] = $request->departamento;
+    //             $this->direccion_nueva['usuario_distrito'] = $request->distrito;
+    //             $this->direccion_nueva['usuario_pais'] = $request->pais;
+    //             $this->direccion_nueva['usuario_cod_postal'] = $request->codigo_postal;
 
-                $direccion_nueva_pedido = session('direccion_nueva');
-                $direccion_nueva_pedido = $this->direccion_nueva;
-                session()->put('direccion_nueva', $direccion_nueva_pedido);
+    //             $direccion_nueva_pedido = session('direccion_nueva');
+    //             $direccion_nueva_pedido = $this->direccion_nueva;
+    //             session()->put('direccion_nueva', $direccion_nueva_pedido);
 
-                echo json_encode(array(
-                    'status' => 'Success',
-                    'message' => 'Dirección cambiada exitosamente',
-                    'data' => $this->direccion_nueva
-                ));
-            }
-        }
-    }
+    //             echo json_encode(array(
+    //                 'status' => 'Success',
+    //                 'message' => 'Dirección cambiada exitosamente',
+    //                 'data' => $this->direccion_nueva
+    //             ));
+    //         }
+    //     }
+    // }
 
     private function obtener_cantidad_productos($cart) {
         if(!empty($cart)) {
