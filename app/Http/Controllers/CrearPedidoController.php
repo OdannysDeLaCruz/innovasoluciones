@@ -88,30 +88,27 @@ class CrearPedidoController extends Controller
 			    				]);
 					        }
 
-					        // Guardar dirección 
+					        // Obtener direccion de envio por defecto
 
 					        // Obtener direccion por defecto
-							$direccion_defecto_usuario = session('direccion_defecto');
+							// $direccion_defecto_usuario = session('direccion_defecto');
 					        // Obtener direccion nueva de envio
-					        $direccion_nueva_pedido = session('direccion_nueva');
-
-							// if($direccion_nueva_pedido == []) {
-					  //           $direccion = $direccion_defecto_usuario;
-					  //       }else {
-					  //           $direccion = $direccion_nueva_pedido;
-					  //       }
-					        $direccion = $direccion_nueva_pedido == [] ? $direccion_defecto_usuario : $direccion_nueva_pedido;
+					        // $direccion_nueva_pedido = session('direccion_nueva');
+					        $user_id = Auth::user()->id;
+					        $direccion = App\Direccion::where([ ['user_id', $user_id], ['defecto', 1] ])->get();
+						
+					        // $direccion = $direccion_nueva_pedido == [] ? $direccion_defecto_usuario : $direccion_nueva_pedido;
 					        // Datos de direcion de envio para guardar en tabla direccion_pedido
 							App\DireccionPedido::create([
-								'pedido_id'     => $pedido_id,
-								'pais'          => $direccion['usuario_pais'],
-								'departamento'  => $direccion['usuario_departamento'],
-								'distrito'      => $direccion['usuario_distrito'],
-								'ciudad'        => $direccion['usuario_ciudad'],
-								'barrio'        => $direccion['usuario_barrio'],
-								'calle'         => $direccion['usuario_calle'],
-								'numero'        => $direccion['usuario_numero_calle'],
-								'codigo_postal' => $direccion['usuario_cod_postal'],
+								'pedido_id' => $pedido_id,
+								'nombre'    => $direccion[0]->nombre,
+								'apellido'  => $direccion[0]->apellido,
+								'pais'      => $direccion[0]->pais,
+								'estado'    => $direccion[0]->estado,
+								'ciudad'    => $direccion[0]->ciudad,
+								'direccion' => $direccion[0]->direccion,
+								'telenofo'  => $direccion[0]->telefono,
+								'codigo_postal' => $direccion[0]->codigo_postal,
 							]);
 					        
 							// Enviar email de confirmacion de creacion del pedido, pero no de pago, la confimacion de pago la realiza el controlador ConfirmacionController

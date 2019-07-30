@@ -43,6 +43,13 @@ class PaymentController extends Controller
 	}
    
 	public function payment(Request $request) {
+		// $user_id = Auth::user()->id;
+		// $direccion = App\Direccion::where([
+  //       								['user_id', $user_id],
+  //       								['defecto', 1]
+  //       							])
+  //       						  ->get();
+		// dd($direccion[0]->defecto);
 		 // Verificar si existen datos en el carrito, si no, redireccionar a /cart
 		// if(session('cart') == '' || session('cart') == null ) {
 		// 	return redirect('/cart');
