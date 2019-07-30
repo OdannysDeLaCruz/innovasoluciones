@@ -1489,38 +1489,33 @@ footer {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
+	justify-content: flex-start;
 	position: relative;
 }
 .tarjeta_direccion_envio > .direccion_envio {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	padding: 15px;
 	border: none;
 	cursor: pointer;
-}
-.tarjeta_direccion_envio > .direccion_envio:hover {
-	background: var(--color-azul);
-	color: #fff;
+	position: relative;
 }
 .tarjeta_direccion_envio > .direccion_envio > .direccion_envio_texto {
 	font-weight: 300;
 	margin: 0;
 	display: flex;
 	align-items: center;
+	font-size: 15px;
 }
 .tarjeta_direccion_envio > .direccion_envio > .direccion_envio_texto:hover {
-	color: #fff;
+	color: var(--color-azul);
 }
-.tarjeta_direccion_envio > .direccion_envio.defecto,
-.tarjeta_direccion_envio > .direccion_envio.defecto > .direccion_envio_texto.defecto {
-	background: var(--color-azul);
-	color: #fff;
-}
+
 .tarjeta_direccion_envio > .direccion_envio > .direccion_envio_texto > .direccion_envio_texto_iconselect {
-	width: 30px;
-	height: 30px;
-	font-size: 13px;
-	color: #fff;
+	min-width: 22px;
+	min-height: 22px;
+	font-size: 11px;
+	color: var(--color-azul);
 	margin-right: 10px;
 	background: none;
 	border: 1px solid var(--color-azul);
@@ -1529,9 +1524,79 @@ footer {
 	align-items: center;
 	border-radius: 50%;
 }
+/*direccion seleccionada*/
+.tarjeta_direccion_envio > .direccion_envio.defecto,
+.tarjeta_direccion_envio > .direccion_envio.defecto > .direccion_envio_texto.defecto {
+	color: var(--color-azul);
+}
+/*Deseño de tarjeta flotante*/
+.direccion_envio_tarjeta_flotante {
+	padding: 10px;
+	border: 1px solid #ccc;
+	background: #fff;
+	position: absolute;
+	border-radius: 4px;
+	display: none;
+	flex-direction: column;
+	box-shadow: 0px 0px 3px #ccc;
+	top: 50px;
+	left: 200px;
+	z-index: 999;
+}
+.direccion_envio_tarjeta_flotante:before {
+	content: '';
+	position: absolute;
+	width: 2px;
+	height: 2px;
+	top: -20px;
+	left: 10px;
+	/*triangulo*/
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent; 
+    border-bottom: 10px solid #fff; 
+	border-left: 10px solid transparent;
+}
+.direccion_envio_tarjeta_flotante > .items {
+	margin-bottom: 10px;
+	display: flex;
+}
+.direccion_envio_tarjeta_flotante > .items > .icono {
+	margin-right: 3px;
+	width: 20px;
+	height: 20px;
+	font-size: 13px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--color-azul);
+	opacity: .9;
+}
+.direccion_envio_tarjeta_flotante > .items > .texto {
+	font-size: 13px;
+	color: #000;
+	opacity: .9;
+}
+
+.tarjeta_direccion_envio > .direccion_envio > .direccion_envio_texto > .direccion_envio_texto_iconselect.defecto {
+	color: #fff;
+	background: var(--color-azul);
+	border: 1px solid var(--color-azul);
+}
+/*Opciones de direcciones agregadas*/
+.tarjeta_direccion_envio > .direccion_envio > .direccion_envio_opciones {
+	width: 100px;
+	padding-left: 5px;
+	text-align: right;
+}
+.tarjeta_direccion_envio > .direccion_envio > .direccion_envio_opciones > .direccion_envio_opciones_eliminar {
+	font-size: 14px;
+	color: tomato;
+}
 
 .tarjeta_direccion_envio > .link_agregar_direccion {
-	margin-top: 10px;
+	margin-top: 30px;
+	border-top: 1px solid #ccc;
+	padding-top: 20px;
 }
 .tarjeta_direccion_envio > .link_agregar_direccion > .direccion_link {
 	font-size: 17px;
@@ -1573,11 +1638,12 @@ footer {
 	font-size: 20px;
 	margin-bottom: 20px;
 }
-.form-cambiar-direccion-contenedor-link {
-	font-size: 17px;
+.form-cambiar-direccion-contenedor-tooltips {
+	font-size: 13px;
 	color: var(--color-azul);
 	margin-top: 10px;
 	width: 150px;
+	cursor: pointer;
 }
 .form-cambiar-direccion-contenedor > .form-group {
 	display: flex;

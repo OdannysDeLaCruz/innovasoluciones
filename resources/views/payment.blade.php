@@ -67,7 +67,7 @@
 				</form>
 			</div>
 			<a class="btn btn-outline-primary" href="{{ route('verificar') }}">
-				Ver detalles
+				Volver a detalles
 			</a> 
 		</div>	
 		<div class="col-md-4 seccion_resumen_pedido">

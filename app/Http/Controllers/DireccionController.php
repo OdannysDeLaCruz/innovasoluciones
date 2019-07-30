@@ -15,7 +15,6 @@ class DireccionController extends Controller
 	*/
     public function crear(Request $request) {
         if($request->ajax()) {
-
             $v = \Validator::make($request->all(), [
                 "nombre"    => 'required|string',
                 "apellido"  => 'required|string',
@@ -69,6 +68,29 @@ class DireccionController extends Controller
             }
         }
 
+    }
+
+    /*
+    * Actualizar direccion del usuario
+    */
+    public function eliminar(Request $request) {
+        if($request->ajax()) {
+            $direccion_id = (int)$request->id;
+            $direccion = Direccion::find($direccion_id);
+
+            if($direccion) {
+                $direccion->delete();
+                echo json_encode(array(
+                    'status' => 'Success',
+                    'message' => 'Dirección eliminada'
+                ));
+            }else {
+                echo json_encode(array(
+                    'status' => 'Errors',
+                    'message' => 'Tenemos problemas, intente denuevo'
+                ));
+            }
+        }
     }
 
     /*

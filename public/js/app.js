@@ -89,11 +89,6 @@ $(document).ready(function(){
 
     // ADMIN - PRODUCTOS
 
-    // $('.producto_menu_logo').on('click', function(e){
-    //     let ele = e.target.id;
-    //     $('#' + ele + ' + .producto_menu_accion').toggleClass('menu_visible');        
-    // });
-
     $('.menu_opcion_logo').on('click', function(e){
         let ele = e.target.id;
         $('#' + ele + ' + .menu_opcion_items').toggleClass('menu_visible');        
@@ -105,16 +100,15 @@ $(document).ready(function(){
 
     // Crear funcion que se encargue de enviar la confirmacion a CrearPedidoController para que cree el pedido cuando el usuario de click en el boton pagar con payu, este pedido se creará antes de enviar los datos a payu.
 
-    // Configurar las cabeceras para que el controlador de laravel CrearPedidoController acepte la petición ajax.
-    // Aquí envío el token csrf de laravel
+    // CONFIGURACION DE CABECERAS CON EL TOKEN CSRF DE LARAVEL PARA PETICIONES AJAX A LOS CONTROLADORES
     $.ajaxSetup({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }        
     });
-    // Crear pedido
+    // CREAR UN PEDIDO
     $('#crearPedido').on('click', function(e) {
         
         e.preventDefault();
-        alertify.confirm('Comfirma tu pedido', 'Seras llevado a Payu para finalizar el pago', 
+        alertify.confirm('Comfirma tu pedido', 'Pagar pedido con Payú', 
             function() { 
                 $.ajax({
                     url: '/checkout/buying/payment/crearpedido',
@@ -128,7 +122,7 @@ $(document).ready(function(){
                             alertify.notify('Será redireccionado a Payu', 'success', 10);
                             // Despues de que se crea el pedido y sus detalles, se obtiene el id que returna crearPedidoController.php de ese pedido se añade a la descripcion que se envía a payu
 
-                            document.getElementById('pedido_id').value = data.pedido_id;
+                            // document.getElementById('pedido_id').value = data.pedido_id;
                             
                             // Enviar formulario despues de añadir el id a la descrición
                             $('#enviar-formulario-payu').submit();
@@ -169,34 +163,30 @@ $(document).ready(function(){
         }
     });
 
-    $('#btn_cambiar_direccion').on('click', function(e){
-        e.preventDefault();
-        const frm = $('#form_cambiar_direccion');
-        let datos_direccion = $('#form_cambiar_direccion').serialize();
-        // console.log(datos_direccion);
-        $.ajax({
-            url: frm.attr('action'),
-            type: 'POST',
-            data: datos_direccion,
-            dataType: 'json',
-            success: function(data){
-                if (data.status == 'Errors') {
-                    console.log(data);
-                    // Mostrar errores en el formulario
-                }
-                if (data.status == 'Success') {
-                    console.log(data);
-                    window.location.reload();
-                }
-            },
-            error: function(data){
-                console.log(data);
-                // alertify.alert("Ha ocurrido un error, recarga la página o contácta a soporte técnico", function() {
-                    // window.location.reload();                 
-                // });
-            }
-        });
-    });
+    // $('#btn_cambiar_direccion').on('click', function(e){
+    //     e.preventDefault();
+    //     const frm = $('#form_cambiar_direccion');
+    //     let datos_direccion = $('#form_cambiar_direccion').serialize();
+    //     // console.log(datos_direccion);
+    //     $.ajax({
+    //         url: frm.attr('action'),
+    //         type: 'POST',
+    //         data: datos_direccion,
+    //         dataType: 'json',
+    //         success: function(data){
+    //             if (data.status == 'Errors') {
+    //                 console.log(data);
+    //             }
+    //             if (data.status == 'Success') {
+    //                 console.log(data);
+    //                 window.location.reload();
+    //             }
+    //         },
+    //         error: function(data){
+    //             console.log(data);
+    //         }
+    //     });
+    // });
 
     // OCULTAR O MOSTRAR LA SECCION DE INFORMACION DEL PEDIDO
     $('#btn-toggle-detalles').on('click', function(){
@@ -213,16 +203,7 @@ $(document).ready(function(){
         }
     });
 
-    // EDITOR DE TEXTO DE PAGINA CREAR PRODUCTOS
-
-    // $('#producto_descripcsion').Editor();
-
-    // $('#btn-crear-producto').click(function() {
-    //     $('#producto_descripcion').text($('#producto_descripcion').Editor('getText'));
-    //     // $('#form_crear_producto').submit();
-    // });
-
-    // Editor de texto de descripcion de producto
+    // EDITOR DE TEXTO DE PAGINA CREAR PRODUCTOS (CAMPO DESCRIPCION)
     CKEDITOR.replace( 'producto_descripcion', {
         customConfig: '/js/editor_config.js',
         language: 'es',
@@ -238,85 +219,28 @@ $(document).ready(function(){
         }
     });
 
-    // CAMBIAR DIRECCION POR DEFECTO PARA EL ENVIO DEL USUARIO
-    // Obtener direccion clickeada (escojida) por el usuario
-    $('.direccion_envio').on('click', function() {
-        let direccion_id = $(this).data('direccion-id');
-        // console.log(direccion_id);
-
-        $.ajax({
-            url: '/establecer-direccion-defecto',
-            type: 'POST',
-            data: { id:direccion_id },
-            dataType: 'json',
-            beforeSend: function(objeto){
-                console.log("Cambiando direccion...");
-                $('#tarjeta_direccion_envio_cargador').css('display', 'flex');
-            },
-            complete: function(objeto, exito){
-                console.log("Terminé.");
-                window.location.reload();
-            },
-            success: function(data){
-                // console.log("Direccion cambiada");
-                // console.log(data.direcciones);
-                // $direcciones = data.direcciones;
-            },
-            error: function(data){
-                console.log(data);
-            }
-        });
-    });
-
-    // AGREGAR DIRECCION PARA EL ENVIO DEL USUARIO
-    $('.direccion_envio').on('click', function() {
-        let direccion_id = $(this).data('direccion-id');
-        // console.log(direccion_id);
-
-        $.ajax({
-            url: '/establecer-direccion-defecto',
-            type: 'POST',
-            data: { id:direccion_id },
-            dataType: 'json',
-            beforeSend: function(objeto){
-                console.log("Cambiando direccion...");
-                $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
-            },
-            complete: function(objeto, exito){
-                console.log("Terminé.");
-                window.location.reload();
-            },
-            success: function(data){
-            },
-            error: function(data){
-                console.log(data);
-            }
-        });
-    });
-
+    // AGREGAR DIRECCION DE USUARIO
     $('#btn_agregar_direccion').on('click', function(e){
         e.preventDefault();
         const frm = $('#form_agregar_direccion');
         let datos_direccion = $('#form_agregar_direccion').serialize();
-        // console.log(datos_direccion);
+
         $.ajax({
             url: frm.attr('action'),
             type: 'POST',
             data: datos_direccion,
             dataType: 'json',
-            beforeSend: function(objeto) {
-                // console.log("Agregando direccion...");
+            beforeSend: function() {
                 $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
             },
-            complete: function(objeto, exito){
-                // console.log("Terminé.");
-                // window.location.reload();
+            complete: function(){
                 $('.tarjeta_direccion_envio_cargador').css('display', 'none');
+                // window.location.reload();
             },
             success: function(data) {
-                // $('.form-cambiar-direccion-error').css('display', 'none');
+                // si hay errores, limipiar los mensajes de error mostrados anteriormente
+                $('.form-cambiar-direccion-error').css('display', 'none');
                 if (data.status == 'Errors') {
-                    // si hay errores, limipiar los mensajes de error mostrados anteriormente
                     for(const e in data.data) {
                         let spanError = $('#'+e+'_error');
                         spanError.text(data.data[e][0]).css('display', 'block');
@@ -324,8 +248,8 @@ $(document).ready(function(){
                 }
                 if (data.status == 'Success') {
                     console.log(data.message);
-                    frm[0].reset();
-                    $('..contenedor-form-cambiar-direccion').css('display', 'none');
+                    // frm[0].reset();
+                    // $('.contenedor-form-cambiar-direccion').css('display', 'none');
                     window.location.reload();
                 }
             },
@@ -334,9 +258,34 @@ $(document).ready(function(){
             }
         });
     });
-    // Obtener paises y estados
 
-    // Paises
+    // ASIGNAR DIRECCION POR DEFECTO
+    $('.direccion_envio_texto').on('click', function() {
+        let direccion = $(this).data('defecto');
+
+        if(direccion != 'defecto') {
+            let direccion_id = $(this).data('direccion-id');
+            $.ajax({
+                url: '/establecer-direccion-defecto',
+                type: 'POST',
+                data: { id:direccion_id },
+                dataType: 'json',
+                beforeSend: function() {
+                    $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
+                },
+                complete: function(){
+                    window.location.reload();
+                },
+                success: function(data){
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            });            
+        }
+    });
+
+    // MOSTRAR PAISES
     $.ajax({
         url: '/paises',
         type: 'POST',
@@ -379,6 +328,38 @@ $(document).ready(function(){
         error: function(data){
             console.log(data);
         }
+    });
+
+    // MOSTRAR TARJETA DE DETALLE DE ENVIO DE PEDIDO
+    $('.direccion_envio_texto').hover( 
+        function() {
+            $(this).siblings('.direccion_envio_tarjeta_flotante').fadeIn();
+        },
+        function() {
+            $('.direccion_envio_tarjeta_flotante').css('display','none');
+        }
+    );
+
+    // ELIMINAR DIRECCION
+    $('.direccion_envio_opciones_eliminar').on('click', function() {
+        const direccion_id = $(this).data('direccion-id');
+        console.log(direccion_id);
+        $.ajax({
+            url: '/eliminar-direccion',
+            type: 'POST',
+            data: { id:direccion_id },
+            dataType: 'json',
+            beforeSend: function() {
+                $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
+            },
+            success: function(data){
+                console.log(data);
+                window.location.reload();
+            },
+            error: function(data){
+                // console.log(data);
+            }
+        }); 
     });
 
 

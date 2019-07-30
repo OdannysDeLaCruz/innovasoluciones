@@ -129,27 +129,49 @@
 
 				<section class="payment_proceso_tarjeta tarjeta_direccion_envio" id="seccionDirecciones">
 					@if(isset($direcciones))
+						<!-- Cargador de espera -->
+						<div class="tarjeta_direccion_envio_cargador">
+							<img src="{{ asset('img/logos/cargador.gif') }}">
+						</div>
 						@foreach($direcciones as $direccion)
 							@php
 								$defecto = $direccion->defecto ? 'defecto' : ''
 							@endphp
-							<!-- Cargador de espera -->
-							<div class="tarjeta_direccion_envio_cargador">
-								<img src="{{ asset('img/logos/cargador.gif') }}">
-							</div>
 
-							<div class="direccion_envio {{ $defecto }} direccion_defecto_id" data-direccion-id="{{ $direccion->id }}">
-								<p class="direccion_envio_texto {{ $defecto }}">
-									<span class="fa fa-check direccion_envio_texto_iconselect"></span>
-									{{ $direccion->nombre . ' ' . $direccion->apellido . ' | ' . "$direccion->direccion,  $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais" }}
+							<div class="direccion_envio {{ $defecto }} direccion_defecto_id">
+								<p class="direccion_envio_texto {{ $defecto }}" data-defecto="{{ $defecto }}" data-direccion-id="{{ $direccion->id }}">
+									<span class="fa fa-check direccion_envio_texto_iconselect {{ $defecto }}"></span>
+									{{ "$direccion->nombre $direccion->apellido | $direccion->direccion, $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais | $direccion->telefono" }}
 								</p>
+								<!-- tarjeta de detalle de dirección -->
+								<span class="direccion_envio_tarjeta_flotante">
+									<span class="items">
+										<span class="icono fa fa-user"></span>
+										<span class="texto"> {{ $direccion->nombre }} {{ $direccion->apellido }} </span>
+									</span>
+									<span class="items">
+										<span class="icono fa fa-map-marker"></span>
+										<span class="texto"> {{ $direccion->direccion }}, {{ $direccion->ciudad }}, {{ $direccion->estado }}, {{ $direccion->codigo_postal }} </span>
+									</span>
+									<span class="items">
+										<span class="icono fa fa-globe"></span>
+										<span class="texto"> {{ $direccion->pais }} </span>
+									</span>
+									<span class="items">
+										<span class="icono fa fa-phone"></span>
+										<span class="texto"> {{ $direccion->telefono }} </span>
+									</span>
+								</span>
+								<span class="direccion_envio_opciones">
+									<a href="#" data-direccion-id="{{ $direccion->id }}" class="direccion_envio_opciones_eliminar">Eliminar</a>
+								</span>
 							</div>
-						@endforeach
+						@endforeach								
 					@endif
 					<div class="link_agregar_direccion">
 						<a href="" class="direccion_link text-center btn-mostrar-form-cambio-direccion" id="btn-mostrar-form-cambio-direccion">
 							<span class="fa fa-plus mr-2"></span> Agregar nueva dirección de envío
-						</a>						
+						</a>
 					</div>
 				</section>
 			
@@ -207,7 +229,7 @@
 
 								<label class="form-cambiar-direccion-error" id="telefono_error"></label>
 
-								<a data-toggle="tooltip" data-placement="bottom" title="Le solicitamos su número de teléfono en caso de que necesitemos contactarlo con respecto a su pedido." class="form-cambiar-direccion-contenedor-link" href="#" id="btn-mostrar-form-cambio-direccion">¿Por qué un teléfono?</a>
+								<p data-toggle="tooltip" data-placement="bottom" title="Le solicitamos su número de teléfono en caso de que necesitemos contactarlo con respecto a su pedido." class="form-cambiar-direccion-contenedor-tooltips">¿Por qué un teléfono?</p>
 							</div>
 						</div>
 

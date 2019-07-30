@@ -66,10 +66,7 @@ Route::get('/verificacion', 'VerificarPedidoController@verificar')->name('verifi
 
 Route::post('/verificacion/cambiar-direccion', 'VerificarPedidoController@cambiar_direccion_envio')->name('cambiar-direccion-envio');
 
-Route::post('/establecer-direccion-defecto', 'DireccionController@establecerDireccionDefecto');
-
 // Ruta para agregar una nueva dirección de envio
-Route::post('/agregar-direccion', 'DireccionController@crear')->name('agregar-direccion');
 
 Route::post('/verificarCodigo', 'VerificarPedidoController@verificarCodigo')->name('verificarCodigo');
 
@@ -80,6 +77,13 @@ Route::post('checkout/buying/payment/crearpedido', 'CrearPedidoController@crearP
 Route::get('/response', 'ConfirmationController@response');
 
 Route::post('/confirmation', 'ConfirmationController@confirmation')->name('confirmation');
+
+// RUTAS PARA DIRECCIONES
+Route::post('/agregar-direccion', 'DireccionController@crear')->name('agregar-direccion');
+
+Route::post('/establecer-direccion-defecto', 'DireccionController@establecerDireccionDefecto');
+
+Route::post('/eliminar-direccion', 'DireccionController@eliminar');
 
 // RUTAS PARA AUTENTICACION DE USUARIOS
 Auth::routes();
