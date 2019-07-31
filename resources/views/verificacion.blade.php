@@ -20,36 +20,56 @@
 	<!-- SECCION DE PAYMENT -->
 	<section class="contenedor_payment row">
 		<!-- Div para hacer un layout -->
-		<div class="col-md-8 seccion_payment_proceso">
+		<div class="col-lg-8 seccion_payment_proceso px-0 px-md-3">
 			<section id="detalles" class="payment_proceso payment_activo">
-				<h1 class="payment_titulos">Detalles del pedido</h1>		
+				<h1 class="payment_titulos">Detalles del pedido</h1>
+
 				<section class="payment_proceso_tarjeta tarjeta_detalle_pedido">
 					@foreach($cart as $carrito)
 						<section class="pedido">
 							<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
-									@php
-										$url = "uploads/productos/imagenes/miniaturas/" . $carrito['imagen'];
-									@endphp
+								@php $url = "uploads/productos/imagenes/miniaturas/" . $carrito['imagen']; @endphp
 								<img class="pedido_img" src="{{ $url }}">						
 							</a>
 							<div class="pedido_info">
 								<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
 									<h1 class="pedido_info_nombre">{{ $carrito['nombre'] }}</h1>
 								</a>
-								<label class="pedido_info_precio">
-									Precio: <b>${{ number_format($carrito['precio'], 0, '', '.') }} </b>
-								</label>
-								<label class="pedido_info_cantidad">
-									Cantidad: <b>{{ $carrito['cantidad'] }}</b>
-								</label>
-								@if($carrito['promocion'] != '')
-									<label class="pedido_info_precio">
-										Descuento x unidad: <b> {{ $carrito['promocion'] }} </b>
-									</label>								
-								@endif
-								<label class="pedido_info_precio">
-									Total: <b>${{ number_format($carrito['total'], 0, '', '.') }} </b>
-								</label>
+								<div class="pedido_info_datos">
+									<span class="pedido_info_datos_precio">
+										Precio: <br> 
+										<b>${{ number_format($carrito['precio'], 0, '', '.') }} </b>
+									</span>
+									<span class="pedido_info_datos_cantidad">
+
+										Cantidad: <br> 
+										<input style="width: 30px;" class="ml-2" type="number" min="1" max="10" value="{{ $carrito['cantidad'] }}" id="producto_{{ $carrito['id'] }}">
+										<a
+							      			data-toggle="tooltip"
+							      			data-placement="top"
+							      			title="Actualizar cantidad"
+							      			href="#"
+							      			class="btn btn-primary btn-sm btn_actualizar_carrito"
+							      			data-href="/cart/update/{{ $carrito['id'] }}"
+							      			data-id="{{ $carrito['id'] }}"
+							      		>
+								      		<i  class="fa fa-refresh icono_actualizar"></i>
+								      	</a>
+									</span>
+									@if($carrito['promocion'] != '')
+										<span class="pedido_info_datos_promocion">
+											Desc x unidad: <br> 
+											<b> {{ $carrito['promocion'] }} </b>
+										</span>								
+									@endif
+									<span class="pedido_info_datos_total">
+										Total: <br>
+										<b>${{ number_format($carrito['total'], 0, '', '.') }} </b>
+									</span>									
+								</div>
+							</div>
+							<div class="pedido_opciones">
+								
 							</div>
 						</section>
 					@endforeach
@@ -125,7 +145,6 @@
 			<!-- SECCION DIRECCION DE ENVIO DE PEDIDO -->
 			<section id="datos_envio" class="payment_proceso payment_envio">
 				<h1 class="payment_titulos">¿Donde quieres recibirlo?</h1>
-				<!-- <small>Si deseas recibir el pedido a otra dirección cambiela desde su cuenta de perfil.</small> -->
 
 				<section class="payment_proceso_tarjeta tarjeta_direccion_envio" id="seccionDirecciones">
 					@if(isset($direcciones))
@@ -239,32 +258,38 @@
 						</div>
 
 					</form>
-
 				</div>
 				<!-- Fin Formulario -->
 
 				<h1 class="payment_titulos">¿Como desea recibir el pedido?</h1>
 
 				<section class="payment_proceso_tarjeta tarjeta_tipo_envio">
-					@if($tipo_entregas)
-						@foreach($tipo_entregas as $tipo)
-							<section class="tarjeta_envio_domicilio">
+					<section class="tarjeta_envio_domicilio">
+						@if($tipo_entregas)
+							@foreach($tipo_entregas as $tipo)
 								<form class="form_opcion_envio" action="{{ route('payment') }}" method="POST">
 									{{ csrf_field() }} 
 									<input type="hidden" name="tipo_entrega" value="{{ $tipo->id }}">
 									<button class="btn_opcion_envio">
-										<span class="text_opcion_envio">
-											{{ $tipo->envio_metodo }} <br>
+										@if($tipo->envio_metodo == 'Domicilio')
+											<span class="fa fa-map-marker btn_opcion_envio_icono"></span>
+											<p class="btn_opcion_envio_texto">
+												{{ $tipo->envio_metodo }}
+												<small style="color: #333;">Tu dirección</small>
+											</p>
 
-											@if($tipo->envio_metodo == 'Tienda fisica')
+										@elseif($tipo->envio_metodo == 'Tienda fisica')
+											<span class="fa fa-truck btn_opcion_envio_icono"></span>
+											<p class="btn_opcion_envio_texto">
+												{{ $tipo->envio_metodo }}
 												<small style="color: #333;">Calle 6 # 42-90 Valledupar - Colombia</small>												
-											@endif
-										</span>
+											</p>
+										@endif
 									</button>
 								</form>
-							</section>
-						@endforeach
-					@endif				
+							@endforeach
+						@endif				
+					</section>
 				</section>
 
 				<section class="payment_proceso_tarjeta tarjeta_ver_detalle_pedido">
@@ -277,7 +302,7 @@
 				</section>				
 			</section>			
 		</div>
-		<div class="col-md-4 seccion_resumen_pedido">
+		<div class="col-lg-4 seccion_resumen_pedido">
 			<section class="payment_proceso_tarjeta tarjeta_resumen_pedidos">
 				<span class="payment_proceso_tarjeta titulo_resumen_table">
 					<strong>Resumen del pedido</strong>

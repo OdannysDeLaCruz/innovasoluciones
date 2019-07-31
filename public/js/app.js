@@ -20,7 +20,6 @@ $(document).ready(function(){
         $("#detalle_visualizador img").remove();
 
         $("#detalle_visualizador").append("<img src=' " + url_img + "'>");
-
     });
 
 	// EFECTOS DEL MENÚ

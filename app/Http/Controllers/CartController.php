@@ -148,7 +148,8 @@ class CartController extends Controller
 
     	session()->put('cart', $cart);
     	
-    	return redirect()->route('showCart');
+    	// return redirect()->route('showCart');
+        return back();
     }
 
     // Obtenemos el total del pedido

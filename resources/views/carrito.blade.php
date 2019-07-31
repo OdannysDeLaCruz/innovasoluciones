@@ -67,21 +67,22 @@
 						      			value="{{ $carrito['cantidad'] }}"
 						      			id="producto_{{ $carrito['id'] }}" 
 						      		>
-						      		<a 
-						      			data-toggle="tooltip" 
-						      			data-placement="top" 
+						      		<!-- Actualizar producto del carrito -->
+						      		<a
+						      			data-toggle="tooltip"
+						      			data-placement="top"
 						      			title="Actualizar cantidad"
-
 						      			href="#"
 						      			class="btn btn-primary btn-sm btn_actualizar_carrito"
 						      			data-href="/cart/update/{{ $carrito['id'] }}"
-						      			data-id="{{ $carrito['id'] }}" 	
+						      			data-id="{{ $carrito['id'] }}"
 						      		>
 						      			<span  class="fa fa-refresh"></span>
 						      		</a>
 						      		<td class="carrito_fila_precio"><i>{{ $carrito['promocion'] }}</i></td>
 						      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['total'], 0, ',', '.') }}</i></td>
 						      		</td>
+						      		<!-- Eliminar producto del carrito -->
 						      		<td class="carrito_fila_borrar">
 						      			<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
 						      				<span class="fa fa-trash-o"></span>
