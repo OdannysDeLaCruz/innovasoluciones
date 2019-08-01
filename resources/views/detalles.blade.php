@@ -52,11 +52,12 @@
 						@if($detalle['promo_tipo'] == '%')
 							<p class="antes"> Antes ${{ number_format($detalle['producto_precio'], 0, ',', '.') }}</p>
 							<span class="promo">
-								-{{ $detalle['promo_costo'] }}% DESCUENTO
+								-{{ $detalle['promo_costo'] }}% OFF
 							</span>
 						@elseif($detalle['promo_tipo'] == '$')
+							<p class="antes"> Antes ${{ number_format($detalle['producto_precio'], 0, ',', '.') }}</p>
 							<span class="promo">
-								Cupón de ${{ number_format($detalle['promo_costo'], 0, ',', '.') }} <small>COP</small>
+								${{ number_format($detalle['promo_costo'], 0, ',', '.') }} <small>COP</small> OFF
 							</span>
 						@elseif($detalle['promo_tipo'] == '2x1')
 							<span class="promo">{{$detalle['promo_tipo']}}</span>
@@ -68,12 +69,11 @@
 						if ($detalle['promo_tipo'] == '%') {
 							$descuento = $detalle['producto_precio'] * ($detalle['promo_costo'] / 100);
 							$total     = $detalle['producto_precio'] - $descuento;
-							$total     = '<span class="ahora">Ahora</span>' . 
-							'<span class="total">$ ' .  number_format($total, 0, '', '.') .  '</span>'; 
+							$total     = '<span class="ahora">Ahora</span>' . '<span class="total">$ ' .  number_format($total, 0, '', '.') . '<small>COP</small>' . '</span>'; 
 						}
 						elseif($detalle['promo_tipo'] == '$'){
 							$total = $detalle['producto_precio'] - $detalle['promo_costo'];
-							$total = '<span class="total">$ ' .  number_format($total, 0, '', '.') .  '</span>';
+							$total = '<span class="ahora">Ahora</span>' . '<span class="total">$ ' .  number_format($total, 0, '', '.') . '<small>COP</small>' . '</span>';
 						}
 						else {
 							$total = "$" . number_format($detalle['producto_precio'], 0, ',', '.');

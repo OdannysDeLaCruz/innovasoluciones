@@ -26,7 +26,7 @@
 
 				<section class="payment_proceso_tarjeta tarjeta_detalle_pedido">
 					@foreach($cart as $carrito)
-						<section class="pedido">
+						<!-- <section class="pedido">
 							<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
 								@php $url = "uploads/productos/imagenes/miniaturas/" . $carrito['imagen']; @endphp
 								<img class="pedido_img" src="{{ $url }}">						
@@ -60,19 +60,121 @@
 										<span class="pedido_info_datos_promocion">
 											Desc x unidad: <br> 
 											<b> {{ $carrito['promocion'] }} </b>
-										</span>								
+										</span>
 									@endif
 									<span class="pedido_info_datos_total">
 										Total: <br>
 										<b>${{ number_format($carrito['total'], 0, '', '.') }} </b>
-									</span>									
+									</span>
 								</div>
 							</div>
 							<div class="pedido_opciones">
 								
 							</div>
+						</section> -->
+						<section class="pedido">
+							<div class="pedido-img">
+								<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
+									@php $url = "uploads/productos/imagenes/miniaturas/" . $carrito['imagen']; @endphp
+									<img src="{{ $url }}">						
+								</a>
+							</div>
+							<div class="pedido-info">
+								<ul class="pedido-info-list d-flex flex-column">
+									<li class="pedido-info-list-item nombre-producto">
+										<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
+											{{ $carrito['nombre'] }}
+										</a>
+									</li>
+									@if($carrito['talla'] != '')
+										<li class="pedido-info-list-item talla-producto">
+											<b>Talla: {{ $carrito['talla'] }} </b>
+										</li>
+									@endif
+									@if($carrito['color'] != '')
+										<li class="pedido-info-list-item color-producto">
+											<b>Color: {{ $carrito['color'] }} </b>
+										</li>
+									@endif
+									@if($carrito['promocion'] != '')
+										<li class="pedido-info-list-item promocion-producto">
+											<span class="promocion-producto-precio-anterior">${{ number_format($carrito['precio'], 0, '', '.') }}</span>
+											<span class="promocion-producto-tag">{{ $carrito['promocion'] }} OFF</span>
+										</li>
+									@endif
+									<li class="pedido-info-list-item nombre-precio">
+										${{ number_format($carrito['total'], 0, '', '.') }} <small> COP</small>
+									</li>
+									<li class="pedido-info-list-item nombre-opciones">
+										<div class="nombre-opciones-items nombre-opciones-cantidad">
+											<input style="width: 30px;" class="ml-2" type="number" min="1" max="10" value="{{ $carrito['cantidad'] }}" id="producto_{{ $carrito['id'] }}">
+											<a  data-toggle="tooltip"
+								      			data-placement="top"
+								      			title="Actualizar cantidad"
+								      			href="#"
+								      			class="btn_actualizar_carrito"
+								      			data-href="/cart/update/{{ $carrito['id'] }}"
+								      			data-id="{{ $carrito['id'] }}"
+								      		>
+									      		<div class="fa fa-refresh"></div>
+									      	</a>
+										</div>
+										<div class="nombre-opciones-items nombre-opciones-eliminar">
+											<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
+						      					<span class="fa fa-trash-o"></span>
+						      				</a>
+										</div>
+									</li>
+								</ul>
+								
+							</div>
+							
 						</section>
 					@endforeach
+						<!-- <section class="pedido">
+							<div class="pedido-img">
+								<a target="_blank" href="/productos/">
+									<img class="pedido_img" src="">						
+								</a>
+							</div>
+							<div class="pedido-info">
+								<ul class="pedido-info-list d-flex flex-column">
+									<li class="pedido-info-list-item nombre-producto">
+										<a target="_blank" href="/productos/">
+											Nombre del producto, descripcion corta de ejemplo
+										</a>
+									</li>
+									<li class="pedido-info-list-item nombre-promocion">
+										Codigo de promocion
+									</li>
+									<li class="pedido-info-list-item nombre-precio">
+										$300.000
+									</li>
+									<li class="pedido-info-list-item nombre-opciones">
+										<div class="nombre-opciones-items nombre-opciones-cantidad">
+											<input style="width: 30px;" class="ml-2" type="number" min="1" max="10" value="{{ $carrito['cantidad'] }}" id="producto_{{ $carrito['id'] }}">
+											<a  data-toggle="tooltip"
+								      			data-placement="top"
+								      			title="Actualizar cantidad"
+								      			href="#"
+								      			class="btn btn-primary btn-sm btn_actualizar_carrito"
+								      			data-href="/cart/update/{{ $carrito['id'] }}"
+								      			data-id="{{ $carrito['id'] }}"
+								      		>
+									      		<span class="fa fa-refresh"></span>
+									      	</a>
+										</div>
+										<div class="nombre-opciones-items nombre-opciones-eliminar">
+											<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
+						      					<span class="fa fa-trash-o"></span>
+						      				</a>
+										</div>
+									</li>
+								</ul>
+								
+							</div>
+							
+						</section> -->
 				</section>
 
 				<!-- SECCION CODIGO DE DESCUENTO -->

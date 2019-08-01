@@ -115,7 +115,9 @@ class CartController extends Controller
             }
         }
 
-    	return redirect()->route('showCart');
+    	// return redirect()->route('showCart');
+        $this->total();
+        return back();
     }
 
     // Actualizar item del carrito
@@ -127,7 +129,7 @@ class CartController extends Controller
     	$precio_nuevo  = $cart[$id]['precio'] * $cart[$id]['cantidad'];
         // Calculo el precio nuevo total
         // Verificao si promo_tipo existe en el array del producto a actualizar
-        if(array_key_exists('promo_tipo', $cart[$id])){            
+        if(array_key_exists('promo_tipo', $cart[$id])) {
             switch ($cart[$id]['promo_tipo']) {
                 case '%':
                     $descuento = $precio_nuevo * ($cart[$id]['promo_costo'] / 100);
@@ -149,6 +151,7 @@ class CartController extends Controller
     	session()->put('cart', $cart);
     	
     	// return redirect()->route('showCart');
+        $this->total();
         return back();
     }
 

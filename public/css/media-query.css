@@ -89,7 +89,7 @@
 	}
 	/*--ESTILOS DE CARRITO DESPLEGABLE--*/
 	.carrito_botones {
-		flex-direction: column;
+		/*flex-direction: column;*/
 		justify-content: space-around;
 		align-items: center;
 	}
@@ -100,8 +100,8 @@
 		font-size: 20px;
 	}
 	.carrito_botones div {
-		width: 130px;
-		height: 40px;
+		/*width: 130px;
+		height: 40px;*/
 	}
 	/*ESTILOS DE NAV DE CATEGORIAS*/
 	.nav_categorias {

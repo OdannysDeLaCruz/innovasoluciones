@@ -86,6 +86,8 @@ class VerificarPedidoController extends Controller
 
         $tipo_entregas = App\Envio::select('id', 'envio_metodo')->get();
 
+        // dd($total_pagar);
+
         // return view('productos');  
         return view('verificacion', compact('cart','direcciones', 'cantidad_productos','tipo_entregas','total_del_pedido','descuento_peso','total_pagar'));
     }
