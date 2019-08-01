@@ -58,6 +58,10 @@
 				  	<input name="confirmationUrl" type="hidden"  value="{{ $dataPayu['confirmationUrl'] }}" >
 
 					<section class="payment_proceso_tarjeta tarjeta_form_btn_payu">
+						<!-- Cargador de espera -->
+						<div class="tarjeta_direccion_envio_cargador">
+							<img src="{{ asset('img/logos/cargador.gif') }}">
+						</div>
 						<!-- Este botón envia los datos a payu, pero antes elimina el carrito de compra desde app.js -->
 						<button type="submit" class="btn_datos_envio" id="crearPedido">
 							Pagar con 

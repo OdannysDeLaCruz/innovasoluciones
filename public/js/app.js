@@ -114,29 +114,37 @@ $(document).ready(function(){
                     type: 'POST',
                     data: {crear : true},
                     dataType: 'json',
+                    beforeSend: function() {
+                        $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
+                    },
+                    // complete: function(){
+                    //     $('.tarjeta_direccion_envio_cargador').css('display', 'none');
+                    // },
                     success: function(data){
                         if (data.status == 'Success') {
-                            console.log(data.message);
+                            // console.log(data.message);
                             alertify.notify(data.message, 'success', 10);
                             alertify.notify('Será redireccionado a Payu', 'success', 10);
+
                             // Despues de que se crea el pedido y sus detalles, se obtiene el id que returna crearPedidoController.php de ese pedido se añade a la descripcion que se envía a payu
 
-                            // document.getElementById('pedido_id').value = data.pedido_id;
+                            document.getElementById('pedido_id').value = data.pedido_id;
                             
                             // Enviar formulario despues de añadir el id a la descrición
                             $('#enviar-formulario-payu').submit();
-
                         }
                         else {
+                            $('.tarjeta_direccion_envio_cargador').css('display', 'none');
                             e.preventDefault();
                             alertify.alert(data.status + ': ' + data.message, function() {
                                 window.location.href = '/cart';
                             });
                         }
                     },
-                    error: function(data){
-                        if(data.status == 500){
-                            console.log(data.responseText);
+                    error: function(data) {
+                        $('.tarjeta_direccion_envio_cargador').css('display', 'none');
+                        if(data.status == 500) {
+                            // console.log(data.responseText);
                             e.preventDefault();
                             alertify.alert("Ha ocurrido un error, recarga la página o contácta a soporte técnico", function() {
                                 window.location.reload();                 
