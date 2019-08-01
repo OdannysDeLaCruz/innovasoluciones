@@ -1675,7 +1675,7 @@ footer {
 }
 .tarjeta_direccion_envio > .direccion_envio {
 	display: flex;
-	align-items: flex-start;
+	justify-content: space-between;
 	padding: 15px;
 	border: none;
 	cursor: pointer;
@@ -1875,7 +1875,9 @@ footer {
 .btn-cambiar-direccion:hover {
 	background: var(--color-azul-hover);
 }
-
+.tarjeta_tipo_envio {
+	display: none;
+}
 .tarjeta_tipo_envio > .tarjeta_envio_domicilio,
 .tarjeta_tipo_envio > .tarjeta_retiro_tienda {
 	display: flex;

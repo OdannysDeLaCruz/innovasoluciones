@@ -363,9 +363,10 @@
 				</div>
 				<!-- Fin Formulario -->
 
-				<h1 class="payment_titulos">¿Como desea recibir el pedido?</h1>
 
+				<!-- SECCION TIPO DE ENVIO -->
 				<section class="payment_proceso_tarjeta tarjeta_tipo_envio">
+				<h1 class="payment_titulos">¿Como desea recibir el pedido?</h1>
 					<section class="tarjeta_envio_domicilio">
 						@if($tipo_entregas)
 							@foreach($tipo_entregas as $tipo)
@@ -394,6 +395,7 @@
 					</section>
 				</section>
 
+				<!-- SECCION BOTONES DE PEDIDO -->
 				<section class="payment_proceso_tarjeta tarjeta_ver_detalle_pedido">
 					<div class="botones_innova">
 						<a id="btn_ver_detalles" href="/verificacion">

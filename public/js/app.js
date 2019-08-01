@@ -361,5 +361,14 @@ $(document).ready(function(){
         }); 
     });
 
+    // OCULTAR SECCION TIPO DE ENVIO SI NO HAY DIRECCIONES EN LA SECCION (#seccionDirecciones)
+    if( $('.direccion_envio').length > 0 ) {
+        console.log( 'Existe' );
+        $('.tarjeta_tipo_envio').css('display', 'block');
+    }
+    else {
+        console.log('No existe');
+    }
+
 
 });
