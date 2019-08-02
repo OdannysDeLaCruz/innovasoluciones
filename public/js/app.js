@@ -117,12 +117,9 @@ $(document).ready(function(){
                     beforeSend: function() {
                         $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
                     },
-                    // complete: function(){
-                    //     $('.tarjeta_direccion_envio_cargador').css('display', 'none');
-                    // },
                     success: function(data){
                         if (data.status == 'Success') {
-                            // console.log(data.message);
+                            console.log(data);
                             alertify.notify(data.message, 'success', 10);
                             alertify.notify('Será redireccionado a Payu', 'success', 10);
 
@@ -142,6 +139,7 @@ $(document).ready(function(){
                         }
                     },
                     error: function(data) {
+                        // console.log(data);
                         $('.tarjeta_direccion_envio_cargador').css('display', 'none');
                         if(data.status == 500) {
                             // console.log(data.responseText);
@@ -169,31 +167,6 @@ $(document).ready(function(){
             $('.contenedor-form-cambiar-direccion').slideUp(200);;            
         }
     });
-
-    // $('#btn_cambiar_direccion').on('click', function(e){
-    //     e.preventDefault();
-    //     const frm = $('#form_cambiar_direccion');
-    //     let datos_direccion = $('#form_cambiar_direccion').serialize();
-    //     // console.log(datos_direccion);
-    //     $.ajax({
-    //         url: frm.attr('action'),
-    //         type: 'POST',
-    //         data: datos_direccion,
-    //         dataType: 'json',
-    //         success: function(data){
-    //             if (data.status == 'Errors') {
-    //                 console.log(data);
-    //             }
-    //             if (data.status == 'Success') {
-    //                 console.log(data);
-    //                 window.location.reload();
-    //             }
-    //         },
-    //         error: function(data){
-    //             console.log(data);
-    //         }
-    //     });
-    // });
 
     // OCULTAR O MOSTRAR LA SECCION DE INFORMACION DEL PEDIDO
     $('#btn-toggle-detalles').on('click', function(){

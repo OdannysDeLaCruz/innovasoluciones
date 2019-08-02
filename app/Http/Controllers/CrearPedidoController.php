@@ -86,19 +86,18 @@ class CrearPedidoController extends Controller
 							        'detalle_talla'        => $detalle['talla'],
 							        'detalle_color'        => $detalle['color']
 			    				]);
+
+			    				// Descontar la cantidad de este producto en la base de datos
+			    				$producto = App\Producto::where('producto_ref', $detalle['producto_ref'])->first();
+			    				$nueva_cantidad = $producto->producto_cant - $detalle['cantidad'];
+			    				$producto->producto_cant = $nueva_cantidad;
+			    				$producto->save();
 					        }
 
 					        // Obtener direccion de envio por defecto
-
-					        // Obtener direccion por defecto
-							// $direccion_defecto_usuario = session('direccion_defecto');
-					        // Obtener direccion nueva de envio
-					        // $direccion_nueva_pedido = session('direccion_nueva');
 					        $user_id = Auth::user()->id;
 					        $direccion = App\Direccion::where([ ['user_id', $user_id], ['defecto', 1] ])->get();
-						
-					        // $direccion = $direccion_nueva_pedido == [] ? $direccion_defecto_usuario : $direccion_nueva_pedido;
-					        // Datos de direcion de envio para guardar en tabla direccion_pedido
+
 							App\DireccionPedido::create([
 								'pedido_id' => $pedido_id,
 								'nombre'    => $direccion[0]->nombre,
@@ -118,13 +117,11 @@ class CrearPedidoController extends Controller
 							$this->eliminarVariablesSession();	            		
 		    				
 				        	// Enviar mensaje de creación de pedido y envio de Email de confirmacion
-
 				        	echo json_encode(array(
 								'status' => 'Success',
 								'pedido_id' => $pedido_id,
 								'message' => 'Pedido realizado correctamente'
 							));
-
 				        }
 				        else { 
 				        	echo json_encode(array(
@@ -145,9 +142,6 @@ class CrearPedidoController extends Controller
 				} catch (Exception $e) {
 					echo "Mensaje de error: " . $e->getMessage();
 				}
-
-				
-
 			}
 			else {
 				echo json_encode(array(
