@@ -150,7 +150,7 @@ $(document).ready(function(){
                         }
                     }
                 });
-            }, 
+            },
             function() { 
                 alertify.error('Pedido cancelado', 10);
             }

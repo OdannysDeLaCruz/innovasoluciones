@@ -88,10 +88,10 @@ class CrearPedidoController extends Controller
 			    				]);
 
 			    				// Descontar la cantidad de este producto en la base de datos
-			    				$producto = App\Producto::where('producto_ref', $detalle['producto_ref'])->first();
-			    				$nueva_cantidad = $producto->producto_cant - $detalle['cantidad'];
-			    				$producto->producto_cant = $nueva_cantidad;
-			    				$producto->save();
+			    				// $producto = App\Producto::where('producto_ref', $detalle['producto_ref'])->first();
+			    				// $nueva_cantidad = $producto->producto_cant - $detalle['cantidad'];
+			    				// $producto->producto_cant = $nueva_cantidad;
+			    				// $producto->save();
 					        }
 
 					        // Obtener direccion de envio por defecto

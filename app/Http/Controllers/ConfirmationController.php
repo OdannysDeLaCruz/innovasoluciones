@@ -204,7 +204,7 @@ class ConfirmationController extends Controller
 
     	
 
-    	$pedido_id = (int)$pedido_id;
+    	$pedido_id = (int)$pedido_id
         $pedido    = App\Pedido::find($pedido_id);
         $pedido->pedido_ref_venta = $reference_sale;
 	    $transaccion_id = $pedido->transaccion_id;
@@ -215,6 +215,17 @@ class ConfirmationController extends Controller
     		// Verificar el estado de la transacción
 			if ($state_pol == 4 && $response_message_pol === 'APPROVED' && $response_code_pol == 1) {  
 	  			$descripcion_transaccion = 'Transacción aprobada';
+
+	  			// Obtener productos de este pedido
+        		$detalles  = App\DetallePedido::where('pedido_id', $pedido_id)->get();
+
+	  			// Descontar de la base de datos la cantidad de los productos comprados 
+	  			foreach ($detalles as $detalle) {
+	  				$producto = App\Producto::where('producto_ref', $detalle->detalle_producto_ref)->first();
+    				$nueva_cantidad = $producto->producto_cant - $detalle->detalle_cantidad;
+    				$producto->producto_cant = $nueva_cantidad;
+    				$producto->save();
+	  			}
 			}
 			if ($state_pol == 6) {
 				if ($response_code_pol == 4) {
@@ -349,8 +360,8 @@ class ConfirmationController extends Controller
 			fwrite($fp, "\r\n\r\n $response_message_pol: $descripcion_transaccion \r\n\r\n");
 			fclose($fp);
 
+			// ACTUALIZAR LA TRANSACCIÓN DE ESTE PEDIDO REALIZADO ANTERIORMENTE
 			$transaccion = App\Transaccion::find($transaccion_id);
-
 			$transaccion->estado                = $state_pol;
 	        $transaccion->mensaje_respuesta     = $response_message_pol;
 	        $transaccion->codigo_respuesta      = $response_code_pol;
