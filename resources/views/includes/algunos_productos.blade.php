@@ -9,7 +9,7 @@
 			?>
 			<section class="producto">
 				<figure>
-					<a href="/productos/{{ $ref }}-{{ $nombre }}">
+					<a href="{{ route('descripcion', [ 'ref' => $ref, 'descripcion' => $nombre ]) }}">
 						<img src='{{ asset("uploads/productos/imagenes/miniaturas/$algunos->producto_imagen") }}' class="producto_img" alt="{{ $algunos->producto_nombre }}">
 					</a>
 				</figure>
@@ -18,6 +18,6 @@
 
 	</div>
 	<div class="btn_seccion_ver_mas botones_innova">
-		<a href="/productos">Ver mas productos</a>
+		<a href="{{route('productos')}}">Ver mas productos</a>
 	</div>
 </section>

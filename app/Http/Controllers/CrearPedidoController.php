@@ -15,10 +15,12 @@ class CrearPedidoController extends Controller
 	public function crearPedido(Request $request) {
 
     	// Verificar si app.js envía una peticion ajax para crear el pedido
+				
 		if($request->ajax()) {
 
 			if ($_POST["crear"] == true) {
 				date_default_timezone_set('America/Bogota');
+
 
 				try {
 					// Crear una transacción
@@ -41,7 +43,7 @@ class CrearPedidoController extends Controller
 				        'pse_references'          => 'En espera',
 					]);
 
-	    			// Si la tranasaccion es exitosa y hay productos en el carrito, crear el pedido
+	   				// Si la tranasaccion es exitosa y hay productos en el carrito, crear el pedido
 					if($transaccion != "" && count(session('cart')) > 0 ) {
 						date_default_timezone_set('America/Bogota');
 
@@ -56,23 +58,23 @@ class CrearPedidoController extends Controller
 					        'transaccion_id'          => $transaccion_id
 				        ]);
 
-		    			// verificamos si el pedido se creo correctamente
+		     			// verificamos si el pedido se creo correctamente
 				        if($pedido != "") {
 
 				        	$pedido_id = $pedido->id; 
 
-				        	// Recorro el carrito de compra
-		    				$cart = session('cart');
-		    				foreach ($cart as $detalle) {
+					        // Recorro el carrito de compra
+			  		  		$cart = session('cart');
+		  					foreach ($cart as $detalle) {
 
-		    					// Verifico si tiene algún tipo de promocion
-		    					if (array_key_exists('promo_tipo', $detalle)) {
-		    						$promo_info = "Tipo de promoción " . $detalle['promo_tipo'] . ", tiene un descuento de " . $detalle['promo_costo'];
-		    					}else {
-		    						$promo_info = '';
-		    					}
+		  						// Verifico si tiene algún tipo de promocion
+			  		  			if (array_key_exists('promo_tipo', $detalle)) {
+			  							$promo_info = "Tipo de promoción " . $detalle['promo_tipo'] . ", tiene un descuento de " . $detalle['promo_costo'];
+			  		  			}else {
+			  		  				$promo_info = '';
+			  		  			}
 
-		    					// Crear detalle por cada producto en el carrito
+		  						// Crear detalle por cada producto en el carrito
 					            App\DetallePedido::create([
 							        'pedido_id'            => $pedido_id,
 							        'detalle_producto_ref' => $detalle['producto_ref'],
@@ -85,14 +87,8 @@ class CrearPedidoController extends Controller
 							        'detalle_precio_final' => $detalle['total'],
 							        'detalle_talla'        => $detalle['talla'],
 							        'detalle_color'        => $detalle['color']
-			    				]);
-
-			    				// Descontar la cantidad de este producto en la base de datos
-			    				// $producto = App\Producto::where('producto_ref', $detalle['producto_ref'])->first();
-			    				// $nueva_cantidad = $producto->producto_cant - $detalle['cantidad'];
-			    				// $producto->producto_cant = $nueva_cantidad;
-			    				// $producto->save();
-					        }
+								]);
+				        	}
 
 					        // Obtener direccion de envio por defecto
 					        $user_id = Auth::user()->id;
@@ -109,11 +105,11 @@ class CrearPedidoController extends Controller
 								'telenofo'  => $direccion[0]->telefono,
 								'codigo_postal' => $direccion[0]->codigo_postal,
 							]);
-					        
-							// Enviar email de confirmacion de creacion del pedido, pero no de pago, la confimacion de pago la realiza el controlador ConfirmacionController
+				        
+				 			// Enviar email de confirmacion de creacion del pedido, pero no de pago, la confimacion de pago la realiza el controlador ConfirmacionController
 							$this->sendEmailConfirmation();
 
-		    				// Eliminar variables de session creadas a lo largo del proceso de compra
+		  					// Eliminar variables de session creadas a lo largo del proceso de compra
 							$this->eliminarVariablesSession();	            		
 		    				
 				        	// Enviar mensaje de creación de pedido y envio de Email de confirmacion
@@ -122,7 +118,7 @@ class CrearPedidoController extends Controller
 								'pedido_id' => $pedido_id,
 								'message' => 'Pedido realizado correctamente'
 							));
-				        }
+				    	}
 				        else { 
 				        	echo json_encode(array(
 								'status' => 'Error',
@@ -139,7 +135,8 @@ class CrearPedidoController extends Controller
 							'message' => 'No hay productos en el carrito'
 						));
 					}	
-				} catch (Exception $e) {
+				} 
+				catch (Exception $e) {
 					echo "Mensaje de error: " . $e->getMessage();
 				}
 			}

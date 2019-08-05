@@ -50,12 +50,12 @@
 					?>
 					<section class="producto">
 						<figure>
-							<a href="/productos/{{ $ref }}-{{ $nombre }}">
+							<a href="{{ route('descripcion', [ 'ref' => $ref, 'descripcion' => $nombre ]) }}">
 								<img src='{{ asset("uploads/productos/imagenes/miniaturas/$producto->producto_imagen") }}' class="producto_img" alt="{{ $producto->producto_nombre }}">							
 							</a>
 						</figure>
 						<div class="producto_info">
-							<a href="/productos/{{ $ref }}-{{ $nombre }}">
+							<a href="{{ route('descripcion', [ 'ref' => $ref, 'descripcion' => $nombre ]) }}">
 								<h1 class="producto_titulo">{{ $producto->producto_nombre }}</h1>
 							</a>
 

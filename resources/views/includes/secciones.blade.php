@@ -12,10 +12,10 @@
 
     		<div class="item">
 				<label class="item_img">
-					<img src="img/logos/svg/{{ $seccion['seccion_imagen'] }}">
+					<img src='{{ asset("img/logos/svg/$seccion->seccion_imagen") }}'>
 				</label>
 				<h1 class="item_titulo">{{ $seccion['seccion_nombre'] }} </h1>
-				<a class="item_link" href="/productos/{{ $seccion['seccion_nombre'] }}"></a>
+				<a class="item_link" href="{{ route('categorias', $seccion->seccion_nombre) }}"></a>
 			</div>
 
 		@endforeach

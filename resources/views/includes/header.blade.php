@@ -58,7 +58,7 @@
             @endguest
         </ul>
 	</nav>
-    <a href="/cart">
+    <a href="{{ route('showCart') }}">
     <?php 
         $cantidad_productos = 0;
         $cart = session('cart');

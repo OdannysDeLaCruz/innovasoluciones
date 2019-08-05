@@ -386,6 +386,8 @@ class ConfirmationController extends Controller
 	        $fp = fopen("data.txt", "a");
 			fwrite($fp, "\r\n \r\n Transacción actualizada \r\n: $transaccion_id");
 			fclose($fp);
+
+			// ENVIAR EMAIL DE CONFIRMACIÓN DE PAGO AL USUARIO, INFORMANDOLE EL ESTADO DE SU PEDIDO
     	}
     }
 }

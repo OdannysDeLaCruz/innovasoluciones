@@ -87,39 +87,55 @@ $(document).ready(function(){
     });
 
     // ADMIN - PRODUCTOS
-
     $('.menu_opcion_logo').on('click', function(e){
         let ele = e.target.id;
         $('#' + ele + ' + .menu_opcion_items').toggleClass('menu_visible');        
     });
 
+    // CONFIRMACION DE ELIMINAR PRODUCTO
+    $('.btnEliminarProducto').on('click', function(e) {
+        $eliminar = confirm('¿Desea eliminar este producto?');
+        if (!$eliminar) {
+            e.preventDefault();
+        }
+    });
+
     $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    // EDITOR DE TEXTO DE PAGINA CREAR PRODUCTOS (CAMPO DESCRIPCION)
+    CKEDITOR.replace( 'producto_descripcion', {
+        customConfig: '/js/editor_config.js',
+        language: 'es',
+        width: '100%',
+        height: 300
+    });
 
     // Crear funcion que se encargue de enviar la confirmacion a CrearPedidoController para que cree el pedido cuando el usuario de click en el boton pagar con payu, este pedido se creará antes de enviar los datos a payu.
 
     // CONFIGURACION DE CABECERAS CON EL TOKEN CSRF DE LARAVEL PARA PETICIONES AJAX A LOS CONTROLADORES
     $.ajaxSetup({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }        
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
     // CREAR UN PEDIDO
-    $('#crearPedido').on('click', function(e) {
-        
+    $('#crearPedido').on('click', function(e) {        
         e.preventDefault();
+        const route = $(this).data('route-crearpedido');
+
         alertify.confirm('Comfirma tu pedido', 'Pagar pedido con Payú', 
             function() { 
                 $.ajax({
-                    url: '/checkout/buying/payment/crearpedido',
+                    url: route,
                     type: 'POST',
                     data: {crear : true},
                     dataType: 'json',
                     beforeSend: function() {
-                        $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
+                        $('#cargador_formulario_payu').css('display', 'flex');
                     },
                     success: function(data){
-                        if (data.status == 'Success') {
                             console.log(data);
+                        if (data.status == 'Success') {
                             alertify.notify(data.message, 'success', 10);
                             alertify.notify('Será redireccionado a Payu', 'success', 10);
 
@@ -131,7 +147,7 @@ $(document).ready(function(){
                             $('#enviar-formulario-payu').submit();
                         }
                         else {
-                            $('.tarjeta_direccion_envio_cargador').css('display', 'none');
+                            $('#cargador_formulario_payu').css('display', 'none');
                             e.preventDefault();
                             alertify.alert(data.status + ': ' + data.message, function() {
                                 window.location.href = '/cart';
@@ -139,8 +155,8 @@ $(document).ready(function(){
                         }
                     },
                     error: function(data) {
-                        // console.log(data);
-                        $('.tarjeta_direccion_envio_cargador').css('display', 'none');
+                        console.log(data);
+                        $('#cargador_formulario_payu').css('display', 'none');
                         if(data.status == 500) {
                             // console.log(data.responseText);
                             e.preventDefault();
@@ -150,13 +166,14 @@ $(document).ready(function(){
                         }
                     }
                 });
-            },
+            }, 
             function() { 
                 alertify.error('Pedido cancelado', 10);
             }
         );
     });
 
+    // MOSTRAR FORMULARIO PARA AGREGAR DIRECCIONES
     $('.btn-mostrar-form-cambio-direccion').on('click', function(e){
         e.preventDefault();
         let display = $('.contenedor-form-cambiar-direccion').css('display');
@@ -183,21 +200,9 @@ $(document).ready(function(){
         }
     });
 
-    // EDITOR DE TEXTO DE PAGINA CREAR PRODUCTOS (CAMPO DESCRIPCION)
-    CKEDITOR.replace( 'producto_descripcion', {
-        customConfig: '/js/editor_config.js',
-        language: 'es',
-        width: '100%',
-        height: 300
-    });
+    
 
-    // CONFIRMACION DE ELIMINAR PRODUCTO
-    $('.btnEliminarProducto').on('click', function(e) {
-        $eliminar = confirm('¿Desea eliminar este producto?');
-        if (!$eliminar) {
-            e.preventDefault();
-        }
-    });
+    
 
     // AGREGAR DIRECCION DE USUARIO
     $('#btn_agregar_direccion').on('click', function(e){
@@ -211,10 +216,10 @@ $(document).ready(function(){
             data: datos_direccion,
             dataType: 'json',
             beforeSend: function() {
-                $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
+                $('#cargador_agregar_direccion').css('display', 'flex');
             },
             complete: function(){
-                $('.tarjeta_direccion_envio_cargador').css('display', 'none');
+                $('#cargador_agregar_direccion').css('display', 'none');
                 // window.location.reload();
             },
             success: function(data) {
@@ -242,16 +247,17 @@ $(document).ready(function(){
     // ASIGNAR DIRECCION POR DEFECTO
     $('.direccion_envio_texto').on('click', function() {
         let direccion = $(this).data('defecto');
+        let route = $(this).data('href');
 
         if(direccion != 'defecto') {
             let direccion_id = $(this).data('direccion-id');
             $.ajax({
-                url: '/establecer-direccion-defecto',
+                url: route,
                 type: 'POST',
                 data: { id:direccion_id },
                 dataType: 'json',
                 beforeSend: function() {
-                    $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
+                    $('#cargador_direccion_defecto').css('display', 'flex');
                 },
                 complete: function(){
                     window.location.reload();
@@ -265,15 +271,39 @@ $(document).ready(function(){
         }
     });
 
+    // ELIMINAR DIRECCION
+    $('.direccion_envio_opciones_eliminar').on('click', function() {
+        const direccion_id = $(this).data('direccion-id');
+        const route = $(this).data('href');
+        console.log(direccion_id);
+        $.ajax({
+            url: route,
+            type: 'POST',
+            data: { id:direccion_id },
+            dataType: 'json',
+            beforeSend: function() {
+                $('#cargador_direccion_defecto').css('display', 'flex');
+            },
+            success: function(data){
+                console.log(data);
+                window.location.reload();
+            },
+            error: function(data){
+                // console.log(data);
+            }
+        }); 
+    });
+
     // MOSTRAR PAISES
+    $('#lista_paises').append("<option value=''>Pais</option>");
     $.ajax({
         url: '/paises',
         type: 'POST',
         dataType: 'json',
         success: function(data){
             // console.log(data);
+            $('#lista_paises').append("<option value=''>Ej</option>");
             if(data.status = 'Success') {
-                $('#lista_paises').append("<option value=''>Pais</option>");
                 // Recorrer los paises
                 data.paises.forEach( pais => { 
                     $('#lista_paises').append("<option value='" + pais.id + "'>" + pais.pais_nombre + "</option>");
@@ -320,36 +350,19 @@ $(document).ready(function(){
         }
     );
 
-    // ELIMINAR DIRECCION
-    $('.direccion_envio_opciones_eliminar').on('click', function() {
-        const direccion_id = $(this).data('direccion-id');
-        console.log(direccion_id);
-        $.ajax({
-            url: '/eliminar-direccion',
-            type: 'POST',
-            data: { id:direccion_id },
-            dataType: 'json',
-            beforeSend: function() {
-                $('.tarjeta_direccion_envio_cargador').css('display', 'flex');
-            },
-            success: function(data){
-                console.log(data);
-                window.location.reload();
-            },
-            error: function(data){
-                // console.log(data);
-            }
-        }); 
-    });
+    
 
     // OCULTAR SECCION TIPO DE ENVIO SI NO HAY DIRECCIONES EN LA SECCION (#seccionDirecciones)
     if( $('.direccion_envio').length > 0 ) {
         console.log( 'Existe' );
         $('.tarjeta_tipo_envio').css('display', 'block');
     }
-    else {
-        console.log('No existe');
-    }
 
+    // 
+    $('.btn_opcion_envio').on('click', function(e) {
+        // e.preventDefault();
+        $('#cargador_tipo_envio').css('display', 'flex');
+        
+    });
 
 });

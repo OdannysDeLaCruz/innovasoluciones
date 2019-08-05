@@ -41,7 +41,7 @@
 					  		@foreach($cart as $carrito)
 					  			<tr class="carrito_fila">
 					  				<td scope="row">
-					  					<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
+					  					<a target="_blank" href="{{ route('descripcion', [ 'ref' => $carrito['producto_ref'], 'descripcion' => $carrito['nombre'] ]) }}">
 					  						@php
 												$url = "uploads/productos/imagenes/miniaturas/" . $carrito['imagen'];
 											@endphp
@@ -50,12 +50,12 @@
 						      		</td>
 						      		<td class="carrito_fila_titulo">
 						      			<p>
-						      				<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
+						      				<a target="_blank" href="{{ route('descripcion', [ 'ref' => $carrito['producto_ref'], 'descripcion' => $carrito['nombre'] ]) }}">
 						      					{{ $carrito['nombre'] }}
 						      				</a>
 						      				<br>
-						      				Color: {{ $carrito['color'] }} <br>
 						      				Talla: {{ $carrito['talla'] }} 
+						      				Color: {{ $carrito['color'] }} <br>
 								      	</p>					      					
 						      		</td>
 						      		<td class="carrito_fila_precio"><i>${{ number_format($carrito['precio'], 0, ',', '.') }}</i></td>

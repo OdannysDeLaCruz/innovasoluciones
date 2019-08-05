@@ -26,55 +26,9 @@
 
 				<section class="payment_proceso_tarjeta tarjeta_detalle_pedido">
 					@foreach($cart as $carrito)
-						<!-- <section class="pedido">
-							<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
-								@php $url = "uploads/productos/imagenes/miniaturas/" . $carrito['imagen']; @endphp
-								<img class="pedido_img" src="{{ $url }}">						
-							</a>
-							<div class="pedido_info">
-								<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
-									<h1 class="pedido_info_nombre">{{ $carrito['nombre'] }}</h1>
-								</a>
-								<div class="pedido_info_datos">
-									<span class="pedido_info_datos_precio">
-										Precio: <br> 
-										<b>${{ number_format($carrito['precio'], 0, '', '.') }} </b>
-									</span>
-									<span class="pedido_info_datos_cantidad">
-
-										Cantidad: <br> 
-										<input style="width: 30px;" class="ml-2" type="number" min="1" max="10" value="{{ $carrito['cantidad'] }}" id="producto_{{ $carrito['id'] }}">
-										<a
-							      			data-toggle="tooltip"
-							      			data-placement="top"
-							      			title="Actualizar cantidad"
-							      			href="#"
-							      			class="btn btn-primary btn-sm btn_actualizar_carrito"
-							      			data-href="/cart/update/{{ $carrito['id'] }}"
-							      			data-id="{{ $carrito['id'] }}"
-							      		>
-								      		<i  class="fa fa-refresh icono_actualizar"></i>
-								      	</a>
-									</span>
-									@if($carrito['promocion'] != '')
-										<span class="pedido_info_datos_promocion">
-											Desc x unidad: <br> 
-											<b> {{ $carrito['promocion'] }} </b>
-										</span>
-									@endif
-									<span class="pedido_info_datos_total">
-										Total: <br>
-										<b>${{ number_format($carrito['total'], 0, '', '.') }} </b>
-									</span>
-								</div>
-							</div>
-							<div class="pedido_opciones">
-								
-							</div>
-						</section> -->
 						<section class="pedido">
 							<div class="pedido-img">
-								<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
+								<a target="_blank" href="{{ route('descripcion', [ 'ref' => $carrito['producto_ref'], 'descripcion' => $carrito['nombre'] ]) }}">
 									@php $url = "uploads/productos/imagenes/miniaturas/" . $carrito['imagen']; @endphp
 									<img src="{{ $url }}">						
 								</a>
@@ -82,7 +36,7 @@
 							<div class="pedido-info">
 								<ul class="pedido-info-list d-flex flex-column">
 									<li class="pedido-info-list-item nombre-producto">
-										<a target="_blank" href="/productos/{{ $carrito['producto_ref'] }}-{{ $carrito['nombre'] }}">
+										<a target="_blank" href="{{ route('descripcion', [ 'ref' => $carrito['producto_ref'], 'descripcion' => $carrito['nombre'] ]) }}">
 											{{ $carrito['nombre'] }}
 										</a>
 									</li>
@@ -113,7 +67,7 @@
 								      			title="Actualizar cantidad"
 								      			href="#"
 								      			class="btn_actualizar_carrito"
-								      			data-href="/cart/update/{{ $carrito['id'] }}"
+								      			data-href="{{ route('updateItem', $carrito['id']) }}"
 								      			data-id="{{ $carrito['id'] }}"
 								      		>
 									      		<div class="fa fa-refresh"></div>
@@ -126,55 +80,9 @@
 										</div>
 									</li>
 								</ul>
-								
 							</div>
-							
 						</section>
 					@endforeach
-						<!-- <section class="pedido">
-							<div class="pedido-img">
-								<a target="_blank" href="/productos/">
-									<img class="pedido_img" src="">						
-								</a>
-							</div>
-							<div class="pedido-info">
-								<ul class="pedido-info-list d-flex flex-column">
-									<li class="pedido-info-list-item nombre-producto">
-										<a target="_blank" href="/productos/">
-											Nombre del producto, descripcion corta de ejemplo
-										</a>
-									</li>
-									<li class="pedido-info-list-item nombre-promocion">
-										Codigo de promocion
-									</li>
-									<li class="pedido-info-list-item nombre-precio">
-										$300.000
-									</li>
-									<li class="pedido-info-list-item nombre-opciones">
-										<div class="nombre-opciones-items nombre-opciones-cantidad">
-											<input style="width: 30px;" class="ml-2" type="number" min="1" max="10" value="{{ $carrito['cantidad'] }}" id="producto_{{ $carrito['id'] }}">
-											<a  data-toggle="tooltip"
-								      			data-placement="top"
-								      			title="Actualizar cantidad"
-								      			href="#"
-								      			class="btn btn-primary btn-sm btn_actualizar_carrito"
-								      			data-href="/cart/update/{{ $carrito['id'] }}"
-								      			data-id="{{ $carrito['id'] }}"
-								      		>
-									      		<span class="fa fa-refresh"></span>
-									      	</a>
-										</div>
-										<div class="nombre-opciones-items nombre-opciones-eliminar">
-											<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
-						      					<span class="fa fa-trash-o"></span>
-						      				</a>
-										</div>
-									</li>
-								</ul>
-								
-							</div>
-							
-						</section> -->
 				</section>
 
 				<!-- SECCION CODIGO DE DESCUENTO -->
@@ -238,7 +146,8 @@
 							<a href="{{ route('productos') }}"><i class="fa fa-arrow-left"></i>Seguir comprando</a>
 						</div>
 						<div class="pedidos_botones_btn botones_innova">
-							<a href="/verificacion?s=datos_envio" id="btn_siguiente" onclick="history.pushState(null, '', '/verificacion?s=datos_envio');">Siguiente <i class="fa fa-arrow-right"></i></a>
+							<?php $url = route('verificar') . "/?s=datos_envio"; ?>
+							<a href="{{ route('verificar') }}?s=datos_envio" id="btn_siguiente" onclick="history.pushState(null, '', '<?php echo $url ?>' ) ">Siguiente <i class="fa fa-arrow-right"></i></a>
 						</div>
 					</div>			
 				</section>
@@ -251,7 +160,7 @@
 				<section class="payment_proceso_tarjeta tarjeta_direccion_envio" id="seccionDirecciones">
 					@if(isset($direcciones))
 						<!-- Cargador de espera -->
-						<div class="tarjeta_direccion_envio_cargador">
+						<div class="tarjeta_direccion_envio_cargador" id="cargador_direccion_defecto">
 							<img src="{{ asset('img/logos/cargador.gif') }}">
 						</div>
 						@foreach($direcciones as $direccion)
@@ -260,7 +169,7 @@
 							@endphp
 
 							<div class="direccion_envio {{ $defecto }} direccion_defecto_id">
-								<p class="direccion_envio_texto {{ $defecto }}" data-defecto="{{ $defecto }}" data-direccion-id="{{ $direccion->id }}">
+								<p class="direccion_envio_texto {{ $defecto }}" data-href="{{ route('establecer-direccion-defecto') }}" data-defecto="{{ $defecto }}" data-direccion-id="{{ $direccion->id }}">
 									<span class="fa fa-check direccion_envio_texto_iconselect {{ $defecto }}"></span>
 									{{ "$direccion->nombre $direccion->apellido | $direccion->direccion, $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais | $direccion->telefono" }}
 								</p>
@@ -284,7 +193,7 @@
 									</span>
 								</span>
 								<span class="direccion_envio_opciones">
-									<a href="#" data-direccion-id="{{ $direccion->id }}" class="direccion_envio_opciones_eliminar">Eliminar</a>
+									<a href="#" data-href="{{ route('eliminar-direccion') }}" data-direccion-id="{{ $direccion->id }}" class="direccion_envio_opciones_eliminar">Eliminar</a>
 								</span>
 							</div>
 						@endforeach								
@@ -299,7 +208,7 @@
 				<!-- Formulario cambiar dirección de envio del pedido -->
 				<div class="contenedor-form-cambiar-direccion payment_proceso_tarjeta">
 					<!-- Cargador de espera -->
-					<div class="tarjeta_direccion_envio_cargador">
+					<div class="tarjeta_direccion_envio_cargador" id="cargador_agregar_direccion">
 						<img src="{{ asset('img/logos/cargador.gif') }}">
 					</div>
 					<form class="form-cambiar-direccion" id="form_agregar_direccion" action="{{ route('agregar-direccion') }}" method="POST">
@@ -318,7 +227,7 @@
 							</div>
 							<!-- CAMPO PAIS -->
 							<div class="form-group">
-								<select class="form-cambiar-direccion-contenedor-inputs" name="pais" id="lista_paises" required>
+								<select class="form-cambiar-direccion-contenedor-inputs" name="pais" id="lista_paises" placeholder="Pais" required>
 								</select>
 								<label class="form-cambiar-direccion-error" id="pais_error"></label>
 							</div>
@@ -368,6 +277,10 @@
 				<section class="payment_proceso_tarjeta tarjeta_tipo_envio">
 				<h1 class="payment_titulos">¿Como desea recibir el pedido?</h1>
 					<section class="tarjeta_envio_domicilio">
+						<!-- Cargador de espera -->
+						<div class="tarjeta_direccion_envio_cargador" id="cargador_tipo_envio">
+							<img src="{{ asset('img/logos/cargador.gif') }}">
+						</div>
 						@if($tipo_entregas)
 							@foreach($tipo_entregas as $tipo)
 								<form class="form_opcion_envio" action="{{ route('payment') }}" method="POST">
@@ -398,7 +311,7 @@
 				<!-- SECCION BOTONES DE PEDIDO -->
 				<section class="payment_proceso_tarjeta tarjeta_ver_detalle_pedido">
 					<div class="botones_innova">
-						<a id="btn_ver_detalles" href="/verificacion">
+						<a id="btn_ver_detalles" href="{{route('verificar')}}">
 							<i class="fa fa-arrow-left mr-2"></i>
 							Ver detalles
 						</a> 

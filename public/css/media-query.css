@@ -242,8 +242,14 @@
 	.detalle_titulo {
 		font-size: 18px;
 	}
+	@supports(object-fit: contain) {
+		.detalle_descripcion_img_banner_lista > img {
+			object-fit: contain;
+			object-position: top center;
+		}
+	}
 	.detalle_descripcion_img #detalle_visualizador {
-		width: 100%;
+		height: 330px;
 	}
 	.detalle_info_titulo {
 		font-size: 20px;

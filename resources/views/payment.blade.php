@@ -59,11 +59,11 @@
 
 					<section class="payment_proceso_tarjeta tarjeta_form_btn_payu">
 						<!-- Cargador de espera -->
-						<div class="tarjeta_direccion_envio_cargador">
+						<div class="tarjeta_direccion_envio_cargador" id="cargador_formulario_payu">
 							<img src="{{ asset('img/logos/cargador.gif') }}">
 						</div>
 						<!-- Este botón envia los datos a payu, pero antes elimina el carrito de compra desde app.js -->
-						<button type="submit" class="btn_datos_envio" id="crearPedido">
+						<button type="submit" class="btn_datos_envio" id="crearPedido" data-route-crearpedido="{{ route('crearpedido') }}">
 							Pagar con 
 							<img class="logo_payu" src="{{ asset('img/logos/payu.png')}}">
 						</button>

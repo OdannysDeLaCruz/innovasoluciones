@@ -958,7 +958,7 @@ footer {
 	margin: 3px;
 	object-fit: contain;
 	filter: opacity(.5);
-	border: 1px solid #ccc;
+	/*border: 1px solid #ccc;*/
 }
 
 @supports(object-fit: contain) {
@@ -2619,7 +2619,7 @@ footer {
 		flex-direction: row;
 	}
 	.detalle_descripcion_img_banner_lista {
-		width: 11%;
+		width: 90px;
 		height: 500px;
 		flex-direction: column;
 		overflow: hidden;
