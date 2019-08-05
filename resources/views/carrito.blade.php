@@ -119,10 +119,15 @@
 				session()->forget('notificacion_codigo');		
 			@endphp
 
-			<h1 class="msm_carrito_vacio">{{ "No hay productos en el carrito" }}</h1>
+			<div class="msm_carrito_vacio">
+				<img class="msm_carrito_vacio_img" src="{{ asset('img/logos/shopping-bag.png') }}">
+				<p class="msm_carrito_vacio_texto">Su carrito esta vacío</p>
+			</div>
 			<label class="carrito_botones">
 				<div class="btn_seguir_comprando botones_innova">
-					<a href="{{ route('productos') }}"><span class="fa fa-arrow-left mr-2"> </span> Ver productos</a>
+					<a href="{{ route('productos') }}">
+						<span class="fa fa-arrow-left mr-2"> </span> Ir de compras
+					</a>
 				</div>
 			</label>
 		@endif

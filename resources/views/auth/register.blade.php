@@ -49,6 +49,7 @@
 		                    </span>
 		                @endif	                	
 	                </div>
+	                <!-- EMAIL -->
 					<div class="user col-xs-12">
 						<input id="email" type="email" class="email {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}" required placeholder="Correo electrónico">
 
@@ -71,15 +72,14 @@
                 @endif
 				
 				<!-- PASSWORD CONFIRMED -->
-                <!-- <label for="password" class="texto">Confirmar contraseña</label> -->
 				<input id="password-confirm" type="password" class="password" name="password_confirmation" placeholder="Confirmar contraseña">
 
 				<label class="aceptar_terminos">
-					Al registrarme, declaro que soy mayor de edad y acepto los <a href="terminos">Terminos y Condiciones de Innova Soluciones</a>
+					Al registrarme, declaro que soy mayor de edad y acepto los <a href="#">Términos y Condiciones de Innova Inc.</a>
 				</label>
 				<button type="submit" class="btn_registrarse">Registrarme</button>
 				<label class="ya_tengo_cuenta">
-					<p>Ya tengo una cuenta <a href="{{ route('login') }}">Iniciar sesión</a></p>					
+					<p>Ya tengo una cuenta <a href="{{ route('login') }}">Iniciar sesión</a></p>
 				</label>
 			</div>
 		</form>

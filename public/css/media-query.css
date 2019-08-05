@@ -266,12 +266,22 @@
 		padding-top: 20px;
 		margin: 0 20px;
 	}
+	.form_registro > figure {
+		margin-bottom: 0px;
+	}
+	.form_registro_logo {
+		width: 150px;
+	}
 	.form_registro_titulo {
-		font-size: 18px;
+		font-size: 13px;
+		margin: 0px 5px 20px;
 	}
 	.form_registro_grupo {
 		width: 100%;
 		padding: 20px;
+	}
+	.aceptar_terminos, .ya_tengo_cuenta, .olvide_password {
+		font-size: 12px;
 	}
 	/*--ESTILOS DE PAGINA DE VERIFICACION--*/
 	.payment_titulos {

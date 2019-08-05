@@ -1,5 +1,5 @@
 <header class="header_principal">
-	<a class="header_principal_img" href="/">
+	<a class="header_principal_img" href="{{ route('home') }}">
 		<img src="{{ asset('img/logos/LogoInnova.svg') }}" alt="Logotipo de Innova Soluciones">
 	</a>
 	<div class="contenedor_formulario">
