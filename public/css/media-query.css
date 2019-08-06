@@ -287,8 +287,20 @@
 	.payment_titulos {
 		font-size: 18px;
 	}
+	.payment_subtitulos {
+		font-size: 16px;
+	}
 	.payment_proceso, .detalles {
 		padding: 20px 10px;
+	}
+	.seccion_metodo_pago_lista_items {
+		width: 140px;
+	}
+	.seccion_metodo_pago_lista_items > img {
+		max-width: 100px;
+		margin: 0 10px;
+		height: auto;
+		filter: grayscale(5);
 	}
 	.pedido_img {
 		width: 50px;

@@ -36,7 +36,8 @@ Route::get('/verificacion', 'VerificarPedidoController@verificar')->name('verifi
 Route::post('/verificacion/cambiar-direccion', 'VerificarPedidoController@cambiar_direccion_envio')->name('cambiar-direccion-envio');
 Route::post('/verificarCodigo', 'VerificarPedidoController@verificarCodigo')->name('verificarCodigo');
 Route::post('checkout/buying/payment/', 'PaymentController@payment')->name('payment');
-Route::post('checkout/buying/payment/crearpedido', 'CrearPedidoController@crearPedido')->name('crearpedido');
+// Ruta para crear pedido con payu
+Route::post('checkout/buying/payment/crear-pedido-payu', 'CrearPedidoPayuController@index')->name('crear-pedido-payu');
 
 // RUTA PARA CONFIRMACION Y RESPUESTA DE PAYU
 Route::get('/response', 'ConfirmationController@response');

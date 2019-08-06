@@ -119,7 +119,7 @@ $(document).ready(function(){
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
     // CREAR UN PEDIDO
-    $('#crearPedido').on('click', function(e) {        
+    $('#crearPedidoPayu').on('click', function(e) {        
         e.preventDefault();
         const route = $(this).data('route-crearpedido');
 
@@ -155,7 +155,7 @@ $(document).ready(function(){
                         }
                     },
                     error: function(data) {
-                        console.log(data);
+                        // console.log(data);
                         $('#cargador_formulario_payu').css('display', 'none');
                         if(data.status == 500) {
                             // console.log(data.responseText);

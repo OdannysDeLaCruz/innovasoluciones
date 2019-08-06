@@ -1310,19 +1310,46 @@ footer {
 	min-height: 100vh;
 }
 .seccion_payment_proceso {
-	background: tomato;
 	background: #eee;
 	padding-top: 20px;
-	/*margin-right: 0;
-	margin-left: 0;*/
 }
 .seccion_metodo_pago {
 	padding: 30px;
 }
-.seccion_metodo_pago > .seccion_metodo_pago_lista {
-	margin: 0;
-	width: 100%;
+.seccion_metodo_pago_lista {
+	margin: 20px 0;
+	padding: 0px 0 !important;
+	background: none !important;
+	box-shadow: none !important;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
 }
+.seccion_metodo_pago_lista_items {
+	position: relative;
+	width: 160px;
+	height: 60px;
+	border-radius: 5px;
+	margin: 0 10px 10px 0;
+	padding: 10px;
+	background: #fff;
+	border: 1px solid #ccc;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.seccion_metodo_pago_lista_items > img {
+	max-width: 130px;
+	margin: 0 10px;
+	height: auto;
+	filter: grayscale();
+	transition: ease all .1s;
+}
+.seccion_metodo_pago_lista_items:hover > img {
+	filter: none;
+}
+
 .seccion_metodo_pago > .seccion_metodo_pago_lista li {
 	font-weight: 300;
 	font-size: 18px;
@@ -1343,7 +1370,6 @@ footer {
 .payment_proceso {
 	display: none;
 	border-radius: 5px;
-	/*max-width: 800px;*/
 	margin: auto;
 }
 .payment_activo {
@@ -1351,17 +1377,47 @@ footer {
 }
 .payment_titulos {
 	font-size: 24px;
-	color: #333;
+	color: #000;
+	opacity: .9;
 	font-weight: 500;
+}
+.payment_subtitulos {
+	font-size: 18px;
+	color: #000;
+	opacity: .6;
+	font-weight: 500;
+}
+.payment_opciones {
+	position: relative;
 	margin-bottom: 20px;
-	padding: 10px 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+.payment_opciones_items {
+	display: flex;
+	margin: 0 10px 10px 0;
+}
+.payment_opciones_items_form_btn_envio_dato {
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+}
+.payment_opciones_items_form_btn_envio_dato:hover {
+	box-shadow: 0 0 0px 3px var(--color-azul);
+}
+.payment_opciones_items_form_btn_envio_dato > img {
+	width: 100px;
+	filter: contrast(1);
 }
 .payment_proceso_tarjeta {
 	position: relative;
 	background: #fff;
 	width: 100%;
 	margin: 20px auto;
-	/*border-radius: 5px;*/
 	padding: 20px;
 	box-shadow: 0 0 3px 0 rgba(146, 146, 146, 0.3)
 }
@@ -1370,67 +1426,6 @@ footer {
 	box-shadow: none;
 	padding: 0;
 }
-/*.tarjeta_detalle_pedido > .pedido {
-	background: #F5F5F5;
-	display: flex;
-	padding: 15px;
-	min-height: 100px;
-	width: 100%;
-	border-radius: 2px;
-	margin-bottom: 10px;
-	background: red;
-}
-.payment_proceso_tarjeta > .pedido > a > .pedido_img {
-	width: 60px;
-	height: 60px;
-	margin: 0;
-}
-.payment_proceso_tarjeta > .pedido > .pedido_info {
-	display: flex;
-	flex-direction: column;
-	padding-left: 15px;
-	width: 100%;
-}
-.payment_proceso_tarjeta > .pedido > .pedido_info a:hover {
-	text-decoration: none;
-}
-.payment_proceso_tarjeta > .pedido > .pedido_info > a > .pedido_info_nombre {
-	font-size: 18px;
-	color: #000;
-	font-weight: 600;
-	text-align: justify;
-}
-.payment_proceso_tarjeta > .pedido > .pedido_info > .pedido_info_datos {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	width: 100%;
-}
-.payment_proceso_tarjeta > .pedido > .pedido_info > .pedido_info_datos > span {
-	text-align: left;
-	padding: 5px 5px 5px 0;
-	width: 50%;
-	height: 80px;
-	font-size: 17px;
-	color: #3E3E3E;
-}
-
-.payment_proceso_tarjeta > .pedido > .pedido_info > .pedido_info_datos > .pedido_info_datos_total {
-	font-size: 20px;
-}
-.payment_proceso_tarjeta > .pedido > .pedido_info > .pedido_info_datos > .pedido_info_datos_cantidad > .btn_actualizar_carrito > .icono_actualizar {
-	font-size: 14px;
-}
-.payment_proceso_tarjeta > .pedido > .pedido_opciones {
-	background: blue;
-}
-*/
-
-/*Diseño de tarjeta de pedido para visualizacion de verificacion*/
-
-
-
-
 .pedido {
 	background: #fff;
 	padding: 5px;
@@ -1449,26 +1444,22 @@ footer {
 }
 .pedido-info {
 	padding: 5px;
-	/*background: blue;*/
 	width: 100%;
 }
 .pedido-info-list {
 	padding-left: 0;
 	margin-bottom: 0;
-	/*background: tomato;*/
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 }
 .pedido-info-list .pedido-info-list-item {
-	/*background: yellow;*/
 	display: flex;
 	margin: 2px;
 	font-size: 15px;
 	font-weight: 300;
 	color: #000;
 	margin-right: 20px;
-
 }
 .pedido-info-list > .pedido-info-list-item > a {
 	color: #000;
@@ -1504,7 +1495,6 @@ footer {
 	align-items: center;
 }
 .pedido-info-list > .nombre-precio {
-	/*background: purple;*/
 	width: 90px;
 	color: #000;
 	opacity: .7;
@@ -1518,7 +1508,6 @@ footer {
 	margin-left: 3px;
 }
 .pedido-info-list > .nombre-opciones {
-	/*background: orange;*/
 	width: 100%;
 	margin-top: 10px;
 	display: flex;
@@ -1529,7 +1518,6 @@ footer {
 	text-decoration: none;
 }
 .pedido-info-list > .nombre-opciones > .nombre-opciones-cantidad {
-	/*width: 80px;*/
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -1541,7 +1529,6 @@ footer {
 	padding-left: 5px; 
 	margin: 0 !important;
 }
-
 .pedido-info-list > .nombre-opciones > .nombre-opciones-cantidad > a > div {
 	width: 30px;
 	height: 30px;
@@ -1551,9 +1538,7 @@ footer {
 	justify-content: center;
 	align-items: center;
 }
-
 .pedido-info-list > .nombre-opciones > .nombre-opciones-eliminar {
-	/*background: aqua;*/
 	font-size: 22px;
 	margin-right: 20px;
 	display: flex;
@@ -1566,12 +1551,6 @@ footer {
 	margin-right: 20px;
 	display: flex;
 }
-
-.pedido-info-list-item > .nombre-opciones > .nombre-opciones-items {}
-
-
-
-
 
 .tarjeta_codigo_descuento > .codigo_descuento {
 	text-align: right;
@@ -1651,8 +1630,11 @@ footer {
 	margin: 20px 0;
 	display: flex;
 	justify-content: center;
+	background: none;
+	border: none;
+	box-shadow: none;
 }
-.tarjeta_form_btn_payu > .btn_datos_envio {
+/*.tarjeta_form_btn_payu > .btn_datos_envio {
 	height: 60px;
 	padding: 0 20px;
 	background: #A6C307;
@@ -1664,16 +1646,17 @@ footer {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-.tarjeta_form_btn_payu > .btn_datos_envio:hover {
+}*/
+/*.tarjeta_form_btn_payu > .btn_datos_envio:hover {
 	background: #91AA06;
 	cursor: pointer;
 	font-weight: bold;
-}
-.tarjeta_form_btn_payu > .btn_datos_envio > .logo_payu {
+}*/
+/*.tarjeta_form_btn_payu > .btn_datos_envio > .logo_payu {
 	width: 50px;
 	margin-left: 10px;
-}
+}*/
+
 .tarjeta_direccion_envio {
 	display: flex;
 	flex-wrap: wrap;

@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -25,51 +26,54 @@
 	<!-- SECCION PRINCIPAL -->
 	<section class="contenedor_payment row">
 		<div class="col-md-8 seccion_metodo_pago">
-			<h1 class="payment_titulos">¡Casi terminas! <br> Utilizámos Payu para brindarte diferentes formas de pago.</h1>
-			<ul class="payment_proceso_tarjeta seccion_metodo_pago_lista">
-				<li><span class="fa fa-credit-card-alt fa-lg"></span> Tarjeta de crédito</li>
-				<li><span class="fa fa-exchange fa-lg"></span> Debito bancario PSE</li>
-				<li><span class="fa fa-money fa-lg"></span> Pago en efectivo</li>
-				<li><span class="fa fa-university fa-lg"></span> Pago en bancos</li>
-			</ul>
-			<!-- Formulario de pago de PAYU -->
-			<div id="formulario_payu" class="contenedor_formulario_payu payment_datos_botones">
-				<form method="post" id="enviar-formulario-payu" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
-
-					<meta name="csrf-token" content="{{ csrf_token() }}">
-
-				  	<input name="merchantId"    type="hidden"  value="{{ $dataPayu['merchantId'] }}">
-				  	<input name="accountId"     type="hidden"  value="{{ $dataPayu['accountId'] }}" >
-				  	<input name="description"   type="hidden"  value="{{ $dataPayu['description'] }}">
-				  	<input name="extra2" id="pedido_id" type="hidden"  value="{{ $dataPayu['extra2'] }}">
-				  	<input name="referenceCode" type="hidden"  value="{{ $dataPayu['referenceCode'] }}" >
-				  	<input name="amount"        type="hidden"  value="{{ $dataPayu['amount'] }}"   >
-				  	<input name="tax"           type="hidden"  value="{{ $dataPayu['tax'] }}"  >
-				  	<input name="taxReturnBase" type="hidden"  value="{{ $dataPayu['taxReturnBase'] }}" >
-				  	<input name="currency"      type="hidden"  value="{{ $dataPayu['currency'] }}" >
-				  	<input name="signature"     type="hidden"  value="{{ $dataPayu['signature'] }}"  >
-				  	<input name="test"          type="hidden"  value="{{ $dataPayu['test'] }}" >
-				  	
-				  	<input name="buyerFullName" type="hidden"  value="{{ $dataPayu['buyerFullName'] }}" >
-				  	<input name="buyerEmail"    type="hidden"  value="{{ $dataPayu['buyerEmail'] }}" >
-				  	<input name="telephone"    type="hidden"  value="{{ $dataPayu['telephone'] }}" >
-				  	
-				  	<input name="responseUrl"   type="hidden"  value="{{ $dataPayu['responseUrl'] }}" >
-				  	<input name="confirmationUrl" type="hidden"  value="{{ $dataPayu['confirmationUrl'] }}" >
-
-					<section class="payment_proceso_tarjeta tarjeta_form_btn_payu">
-						<!-- Cargador de espera -->
-						<div class="tarjeta_direccion_envio_cargador" id="cargador_formulario_payu">
-							<img src="{{ asset('img/logos/cargador.gif') }}">
-						</div>
-						<!-- Este botón envia los datos a payu, pero antes elimina el carrito de compra desde app.js -->
-						<button type="submit" class="btn_datos_envio" id="crearPedido" data-route-crearpedido="{{ route('crearpedido') }}">
-							Pagar con 
-							<img class="logo_payu" src="{{ asset('img/logos/payu.png')}}">
+			<h2 class="payment_titulos mt-3 mb-4">Casi terminas, escoge tu medio de pago</h2>
+			<div class="payment_opciones d-flex justify-content-arrow justify-md-content-center">
+				<!-- Cargador de espera -->
+				<div class="tarjeta_direccion_envio_cargador" id="cargador_formulario_payu">
+					<img src="{{ asset('img/logos/cargador.gif') }}">
+				</div>
+				<div class="payment_opciones_items">
+					<form method="post" id="enviar-formulario-payu" class="payment_opciones_items_form_payu" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+						
+					  	<input name="merchantId"    type="hidden"  value="{{ $dataPayu['merchantId'] }}">
+					  	<input name="accountId"     type="hidden"  value="{{ $dataPayu['accountId'] }}" >
+					  	<input name="description"   type="hidden"  value="{{ $dataPayu['description'] }}">
+					  	<input name="extra2" id="pedido_id" type="hidden"  value="{{ $dataPayu['extra2'] }}">
+					  	<input name="referenceCode" type="hidden"  value="{{ $dataPayu['referenceCode'] }}" >
+					  	<input name="amount"        type="hidden"  value="{{ $dataPayu['amount'] }}"   >
+					  	<input name="tax"           type="hidden"  value="{{ $dataPayu['tax'] }}"  >
+					  	<input name="taxReturnBase" type="hidden"  value="{{ $dataPayu['taxReturnBase'] }}" >
+					  	<input name="currency"      type="hidden"  value="{{ $dataPayu['currency'] }}" >
+					  	<input name="signature"     type="hidden"  value="{{ $dataPayu['signature'] }}"  >
+					  	<input name="test"          type="hidden"  value="{{ $dataPayu['test'] }}" >				  	
+					  	<input name="buyerFullName" type="hidden"  value="{{ $dataPayu['buyerFullName'] }}" >
+					  	<input name="buyerEmail"    type="hidden"  value="{{ $dataPayu['buyerEmail'] }}" >
+					  	<input name="telephone"     type="hidden"  value="{{ $dataPayu['telephone'] }}" >			  	
+					  	<input name="responseUrl"   type="hidden"  value="{{ $dataPayu['responseUrl'] }}" >
+					  	<input name="confirmationUrl" type="hidden"  value="{{ $dataPayu['confirmationUrl'] }}" >
+						
+						<button type="submit" class="payment_opciones_items_form_btn_envio_dato px-3 py-1 px-md-5" id="crearPedidoPayu" data-route-crearpedido="{{ route('crear-pedido-payu') }}">
+							<img src="{{ asset('img/logos/payu.png')}}">
 						</button>
-					</section>
-				</form>
+					</form>
+				</div>
 			</div>
+			<hr>
+
+			<h2 class="payment_subtitulos mt-5 mb-4">¿Qué medios de pagos te ofrecemos con PayU?</h2>
+
+			<div class="payment_proceso_tarjeta seccion_metodo_pago_lista pt-4">
+				<span class="seccion_metodo_pago_lista_items"> <img src="{{ asset('img/metodos_pago/visa.png') }}"> </span>
+				<span class="seccion_metodo_pago_lista_items"> <img src="{{ asset('img/metodos_pago/davivienda.png') }}"> </span>
+				<span class="seccion_metodo_pago_lista_items"> <img src="{{ asset('img/metodos_pago/mastercard.png') }}"> </span>
+				<span class="seccion_metodo_pago_lista_items"> <img src="{{ asset('img/metodos_pago/american_express.png') }}"> </span>
+				<span class="seccion_metodo_pago_lista_items"> <img src="{{ asset('img/metodos_pago/pse.png') }}"> </span>
+				<span class="seccion_metodo_pago_lista_items"> <img src="{{ asset('img/metodos_pago/DinersClub_PayU.png') }}"> </span>
+				<span class="seccion_metodo_pago_lista_items"> <img src="{{ asset('img/metodos_pago/bancobog-1.png') }}"> </span>
+				<span class="seccion_metodo_pago_lista_items"> <img src="{{ asset('img/metodos_pago/codensa.png') }}"> </span>
+				<span class="seccion_metodo_pago_lista_items"> <img src="{{ asset('img/metodos_pago/su_red.png') }}"> </span>
+			</div>
+
 			<a class="btn btn-outline-primary" href="{{ route('verificar') }}">
 				Volver a detalles
 			</a> 

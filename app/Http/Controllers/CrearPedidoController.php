@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ConfirmacionPedidoRealizado;
 use Jenssegers\Agent\Agent;
 
-class CrearPedidoController extends Controller
+class CrearPedidoPayuController extends Controller
 {
-	public function crearPedido(Request $request) {
+	public function index(Request $request) {
 
     	// Verificar si app.js envía una peticion ajax para crear el pedido
 				

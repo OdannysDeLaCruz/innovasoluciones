@@ -1,6 +1,6 @@
 <header class="header_principal">
 	<a class="header_principal_img" href="{{ route('home') }}">
-		<img src="{{ asset('img/logos/LogoInnova.svg') }}" alt="Logotipo de Innova Soluciones">
+		<img src="{{ asset('img/logos/logo-innova-negro.svg') }}" alt="Logotipo de Innova Soluciones">
 	</a>
 	<div class="contenedor_formulario">
 		<form class="formulario_buscar_producto" action="{{ route('searchtags') }}" method="POST">
@@ -12,7 +12,7 @@
 	<nav class="nav_principal">
 		<span class="fa fa-times cerrar_menu" id="cerrar_menu"></span>
 		<ul>
-			<a href="{{ route('home') }}"><img class="nav_principal_logotipo" src="{{ asset('img/logos/LogoInnova.svg') }}"></a>
+			<a href="{{ route('home') }}"><img class="nav_principal_logotipo" src="{{ asset('img/logos/logo-innova-negro.svg') }}"></a>
 			<li><a href="/">Home</a></li>
 			<li><a href="{{ route('productos') }}">Productos</a></li>
             <!-- Authentication Links -->
