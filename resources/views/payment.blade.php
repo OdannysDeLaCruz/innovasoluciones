@@ -85,6 +85,16 @@
 				</span>
 				<table class="table table-bordered resumen_table">
 				  	<tr>
+				    	<th>Productos ({{ $cantidad_productos }})</th>
+				    	<td>${{ number_format( $total_del_pedido, 0, ',', '.')  }}</td>
+				  	</tr>
+				  	@if($descuento_peso > 0)
+				  	<tr>
+				    	<th>Descuento por código</th>
+				    	<td>${{ number_format( $descuento_peso, 0, ',', '.')  }}</td>
+				  	</tr>
+				  	@endif
+				  	<tr>
 				    	<th style="font-weight: 400;">TOTAL A PAGAR</th>
 				    	<td>${{  number_format($total_pagar, 0, ',', '.') }}</td>
 				  	</tr>

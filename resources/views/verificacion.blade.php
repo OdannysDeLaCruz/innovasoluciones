@@ -30,7 +30,7 @@
 							<div class="pedido-img">
 								<a target="_blank" href="{{ route('descripcion', [ 'ref' => $carrito['producto_ref'], 'descripcion' => $carrito['nombre'] ]) }}">
 									@php $url = "uploads/productos/imagenes/miniaturas/" . $carrito['imagen']; @endphp
-									<img src="{{ $url }}">						
+									<img src="{{ $url }}">
 								</a>
 							</div>
 							<div class="pedido-info">
@@ -102,9 +102,9 @@
 									¿Tienes algún código de descuento? 
 									<small class="text-muted">(opcional)</small>
 								</label><br>
-								<div>
-									<input type="text" id="codigo" name="codigo_descuento" value="{{ session('codigo_verificado') ? session('codigo_verificado') : '' }}" required>
-									<button type="submit" class="btn_enviar_codigo mt-1 mt-sm-0" name="verificarCodigo">
+								<div class="p-2 d-flex flex-column flex-sm-row justify-content-center">
+									<input class="my-1 mx-1" type="text" id="codigo" name="codigo_descuento" value="{{ session('codigo_verificado') ? session('codigo_verificado') : '' }}" required>
+									<button type="submit" class="btn_enviar_codigo my-1 mx-1" name="verificarCodigo">
 										Descontar
 									</button>
 								</div>
@@ -283,8 +283,7 @@
 						</div>
 						@if($tipo_entregas)
 							@foreach($tipo_entregas as $tipo)
-								<form class="form_opcion_envio" action="{{ route('payment') }}" method="POST">
-									{{ csrf_field() }} 
+								<form class="form_opcion_envio" action="{{ route('payment') }}" method="GET">
 									<input type="hidden" name="tipo_entrega" value="{{ $tipo->id }}">
 									<button class="btn_opcion_envio">
 										@if($tipo->envio_metodo == 'Domicilio')

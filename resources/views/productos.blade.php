@@ -26,11 +26,11 @@
 	
 	<!-- SECCION PRODUCTOS -->
 	<section class="seccion_productos">
-		<span class="seccion_productos_logo">
+		<!-- <span class="seccion_productos_logo">
 			<div class="contenedor_logo">
 				<img class="logo" src="{{asset('img/logos/LogoInnovate.svg')}}">
 			</div>
-		</span>
+		</span> -->
 		<span>
 			@isset($search) 
 				@isset($productos)

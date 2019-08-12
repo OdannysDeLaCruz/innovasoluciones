@@ -26,9 +26,13 @@ $(document).ready(function(){
 
 	$('.abrir_menu').on( 'click', function() {
     	$('.nav_principal').css("left", "0%");
+        $('html, body').css('overflow','hidden');
 	});
-    $('.cerrar_menu').on('click', function(){
-    	$('.nav_principal').css("left", "-100%");
+    $('#cerrar_menu, #nav_principal').on('click', function(e){
+        if(e.target.id == 'nav_principal' || e.target.id == 'cerrar_menu') {
+    	   $('.nav_principal').css("left", "-100%");
+            $('html, body').css('overflow','visible');
+        }
     });
 
     //BOTON SIGUIENTE DE DETALLES

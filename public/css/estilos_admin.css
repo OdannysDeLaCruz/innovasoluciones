@@ -1,5 +1,7 @@
 :root {
 	--color-letras: #03002D;
+	--color-azul-oscuro: #162D50;
+	--color-azul-hover: #1D3B68;
 }
 .boton-defaul-azul {
 	background: #2541EA;
@@ -45,7 +47,7 @@ body {
 	align-items: center;
 	justify-content: center;
 }
-.content_menu_lateral_admin > .menu_lateral_admin ul {
+.content_menu_lateral_admin > .menu_lateral_admin > ul {
 	padding: 0;
 	width: 100%;
 	display: flex;
@@ -53,14 +55,23 @@ body {
 	justify-content: center;
 	align-items: center;
 }
-.content_menu_lateral_admin > .menu_lateral_admin ul > .logotipo-page {
+.content_menu_lateral_admin > .menu_lateral_admin > ul > .avatar_usuario {
 	width: 100%;
-	text-align: left;
-	padding-left: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
 }
-.content_menu_lateral_admin > .menu_lateral_admin ul > .logotipo-page > img {
-	width: 120px;
-	margin: 30px 0;
+.content_menu_lateral_admin > .menu_lateral_admin > ul > .avatar_usuario > img {
+	width: 50px;
+}
+.content_menu_lateral_admin > .menu_lateral_admin > ul > .avatar_usuario > .avatar_usuario_nombre {
+	font-size: 17px;
+	font-weight: 600;
+	color: var(--color-azul-oscuro);
+	text-align: center;
+	margin-bottom: 0;
 }
 .content_menu_lateral_admin > .menu_lateral_admin ul .items {
 	position: relative;
@@ -72,11 +83,21 @@ body {
 	align-items: center;
 	width: 100%;
 }
-.content_menu_lateral_admin > .menu_lateral_admin ul > .items:hover {
+.content_menu_lateral_admin > .menu_lateral_admin > ul .link-visitar-pagina {
+	margin-top: 15px;
+	padding-left: 20px;
+	padding: 20px 0 20px 20px;
+	color: #fff;
+	background: var(--color-azul-oscuro);
+}
+.content_menu_lateral_admin > .menu_lateral_admin > ul > .items:hover {
 	background: #37c8ab;
 	color: #ffffff;
 }
-.content_menu_lateral_admin  > .menu_lateral_admin ul > li.active {
+.content_menu_lateral_admin > .menu_lateral_admin > ul .link-visitar-pagina:hover {
+	background: var(--color-azul-hover);
+}
+.content_menu_lateral_admin  > .menu_lateral_admin > ul > li.active {
 	background: #37c8ab;
 	color: #ffffff;
 }
@@ -87,24 +108,24 @@ body {
 	width: 25px;
 	margin-right: 10px;
 }
-.content_menu_lateral_admin  > .menu_lateral_admin ul .items > .items_text {
+.content_menu_lateral_admin  > .menu_lateral_admin > ul .items > .items_text {
 	margin-right: 10px;
 	padding-left: 10px;
 	font-size: 14px;
 	font-weight: 500;
 	text-transform: capitalize;
 }
-
-.content_menu_lateral_admin > .menu_lateral_admin ul > .items > .items_link {
+.content_menu_lateral_admin > .menu_lateral_admin > ul > .items > .items_link {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
 } 
-.content_menu_lateral_admin > .menu_lateral_admin ul > .items > .items_icon.cod_desc {
+.content_menu_lateral_admin > .menu_lateral_admin > ul > .items > .items_icon.cod_desc {
 	transform: rotate(45deg);
 }
+
 /*--ESTILOS DE PAGINA DE PRODUCTOS--*/
 .contenido_principal {
 	position: relative;

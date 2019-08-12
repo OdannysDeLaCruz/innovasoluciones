@@ -89,7 +89,17 @@ class VerificarPedidoController extends Controller
         // dd($total_pagar);
 
         // return view('productos');  
-        return view('verificacion', compact('cart','direcciones', 'cantidad_productos','tipo_entregas','total_del_pedido','descuento_peso','total_pagar'));
+        return view('verificacion', 
+            compact(
+                'cart',
+                'direcciones', 
+                'cantidad_productos',
+                'tipo_entregas',
+                'total_del_pedido',
+                'descuento_peso',
+                'total_pagar'
+            )
+        );
     }
 
     // VERIFICAR CODIGO DE DESCUENTO

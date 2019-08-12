@@ -1,9 +1,11 @@
 <section class="content_menu_lateral_admin col-12 col-md-2">
 	<nav class="menu_lateral_admin">
 		<ul>
-			<span class="logotipo-page">
-				<img class="items_icon" src="{{ asset('img/logos/LogoInnova.svg') }}">
+			<span class="avatar_usuario">
+				<img src="{{ asset('uploads/avatars/avatar.png') }}">
+				<h1 class="avatar_usuario_nombre">{{ Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido }} </h1>
 			</span>
+			<hr style="width: 100%; margin-top: 0;">
 			<li class="items  @yield('inicio')">
 				<span class="items_icon fas fa-tachometer-alt"></span>
 				<span class="items_text">inicio</span>
@@ -43,6 +45,13 @@
 				<span class="items_icon fas fa-user-cog"></span>
 				<span class="items_text">usuarios del sistema</span>
 				<a href="/admin/usuarios" class="items_link"></a>
+			</li>
+			<hr style="width: 100%">
+			<li class="items link-visitar-pagina">
+				<!-- <span class="items_icon fa fa-share-square-o"></span> -->
+				<span class="items_icon fas fa-external-link-alt"></span>
+				<span class="items_text">Visitar sitio web</span>
+				<a href="{{ route('home') }}" class="items_link"></a>
 			</li>
 		</ul>
 	</nav>

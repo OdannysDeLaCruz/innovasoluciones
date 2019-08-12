@@ -16,7 +16,6 @@ class PaymentController extends Controller
 		$this->middleware('auth');
 		$cart = session('cart');
 		if (count($cart) == 0) {
-			session()->flash('response', true);
 			return redirect()->route('showCart');
 		}
 	}
@@ -28,14 +27,7 @@ class PaymentController extends Controller
 	}
 
 	public function calcularTotal() {
-		$cart = session('cart');
-		// if (count($cart) == 0) {
-		// 	//Si no hay productos, se redirige a cart con la variable responses en true
-		// 	session()->flash('response', true);
-		// 	return redirect()->route('showCart');
-		// }
-		// Hago descuento por el codigo ingresado por usuario, este codigo ya ha sido verificado por la funcion verificarCodigo
-		
+		$cart = session('cart');		
 		$total_del_pedido = session('total_del_pedido');
 		$descuento_peso   = session('descuento_peso');
 		$total_pagar      = session('total_pagar');
@@ -43,18 +35,6 @@ class PaymentController extends Controller
 	}
    
 	public function payment(Request $request) {
-		// $user_id = Auth::user()->id;
-		// $direccion = App\Direccion::where([
-  //       								['user_id', $user_id],
-  //       								['defecto', 1]
-  //       							])
-  //       						  ->get();
-		// dd($direccion[0]->defecto);
-		 // Verificar si existen datos en el carrito, si no, redireccionar a /cart
-		// if(session('cart') == '' || session('cart') == null ) {
-		// 	return redirect('/cart');
-		// }
-
 		// Obtener total a pagar
 		$total_pagar = $this->calcularTotal();
 		
@@ -95,9 +75,28 @@ class PaymentController extends Controller
 		$dataPayu['confirmationUrl'] = "https://innovainc.co/confirmation";
 		// $dataPayu['confirmationUrl'] = "www.innovasoluciones.com/confirmation";
 
+		$cart = session('cart');
+
+		if (empty($cart)) {
+            session()->flash('vacio', true);
+            return redirect()->route('showCart');
+        }
+        $cantidad_productos = 0;
+        foreach ($cart as $producto) {
+            $cantidad_productos += $producto['cantidad'];
+        }
+
+        $total_del_pedido = session('total_del_pedido');
+        $descuento_peso   = session('descuento_peso') ? session('descuento_peso') : 0;
+
+        $total_pagar = $total_del_pedido - $descuento_peso;
+        session()->put('total_pagar', $total_pagar);
+        $total_pagar = session('total_pagar');
+        
 		return view('payment', 
 			compact(
 				'total_del_pedido',
+				'cantidad_productos',
 				'descuento_peso',
 				'total_pagar',
 				'dataPayu'
