@@ -109,7 +109,7 @@ $(document).ready(function(){
     });
 
     // EDITOR DE TEXTO DE PAGINA CREAR PRODUCTOS (CAMPO DESCRIPCION)
-    CKEDITOR.replace( 'producto_descripcion', {
+    CKEDITOR.replace( 'descripcion', {
         customConfig: '/js/editor_config.js',
         language: 'es',
         width: '100%',
@@ -127,8 +127,8 @@ $(document).ready(function(){
         e.preventDefault();
         const route = $(this).data('route-crearpedido');
 
-        alertify.confirm('Comfirma tu pedido', 'Pagar pedido con Payú', 
-            function() { 
+        // alertify.confirm('Comfirma tu pedido', 'Pagar pedido con Payú', 
+        //     function() { 
                 $.ajax({
                     url: route,
                     type: 'POST',
@@ -159,22 +159,22 @@ $(document).ready(function(){
                         }
                     },
                     error: function(data) {
-                        // console.log(data);
+                        console.log(data);
                         $('#cargador_formulario_payu').css('display', 'none');
                         if(data.status == 500) {
                             // console.log(data.responseText);
                             e.preventDefault();
                             alertify.alert("Ha ocurrido un error, recarga la página o contácta a soporte técnico", function() {
-                                window.location.reload();                 
+                                // window.location.reload();                 
                             });
                         }
                     }
                 });
-            }, 
-            function() { 
-                alertify.error('Pedido cancelado', 10);
-            }
-        );
+            // }, 
+            // function() { 
+            //     alertify.error('Pedido cancelado', 10);
+            // }
+        // );
     });
 
     // MOSTRAR FORMULARIO PARA AGREGAR DIRECCIONES
@@ -204,10 +204,6 @@ $(document).ready(function(){
         }
     });
 
-    
-
-    
-
     // AGREGAR DIRECCION DE USUARIO
     $('#btn_agregar_direccion').on('click', function(e){
         e.preventDefault();
@@ -221,10 +217,6 @@ $(document).ready(function(){
             dataType: 'json',
             beforeSend: function() {
                 $('#cargador_agregar_direccion').css('display', 'flex');
-            },
-            complete: function(){
-                $('#cargador_agregar_direccion').css('display', 'none');
-                // window.location.reload();
             },
             success: function(data) {
                 // si hay errores, limipiar los mensajes de error mostrados anteriormente

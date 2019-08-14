@@ -16,7 +16,7 @@ class CreateProductosTable extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('categoria_id')->unsigned(); //Dependiendo de la categoria se rellenan los campos tamaño y color
-            $table->integer('proveedor_id')->unsigned(); // Proveedor del producto
+            $table->integer('proveedor_id')->unsigned()->nullable(); // Proveedor del producto, es null porque puede no tener un proveedor especifico
             $table->integer('marca_id')->unsigned(); // Informacion de marca del producto
             $table->string('producto_nombre')->unique()->required();
             $table->longText('producto_descripcion')->required();

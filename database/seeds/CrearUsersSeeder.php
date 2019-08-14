@@ -26,8 +26,7 @@ class CrearUsersSeeder extends Seeder
         $odannys->usuario_estado   = 1;
         $odannys->save();
         $odannys->direccion()->create([
-            'nombre'     => 'Odannys',
-            'apellido'   => 'De La Cruz',
+            'nombre_completo' => 'Odannys De La Cruz',
             'pais'       => 'Colombia',
             'estado'     => 'Cesar',
             'ciudad'     => 'Valledupar',
@@ -50,8 +49,7 @@ class CrearUsersSeeder extends Seeder
         $ruben->usuario_estado   = 1;
         $ruben->save();
         $ruben->direccion()->create([
-            'nombre'     => 'Ruben',
-            'apellido'   => 'Gonzales',
+            'nombre_completo' => 'Ruben Gonzales',
             'pais'       => 'Colombia',
             'estado'     => 'Cesar',
             'ciudad'     => 'Valledupar',
@@ -74,8 +72,7 @@ class CrearUsersSeeder extends Seeder
         $jose->usuario_estado   = 1;
         $jose->save();
         $jose->direccion()->create([
-            'nombre'     => 'Jose',
-            'apellido'   => 'Meriño',
+            'nombre_completo' => 'Jose Meriño',
             'pais'       => 'Colombia',
             'estado'     => 'Cesar',
             'ciudad'     => 'Valledupar',
@@ -98,8 +95,7 @@ class CrearUsersSeeder extends Seeder
         $eduardo->usuario_estado   = 1;
         $eduardo->save();
         $eduardo->direccion()->create([
-            'nombre'     => 'Eduardo',
-            'apellido'   => 'Lodico',
+            'nombre_completo' => 'Eduardo Lodico',
             'pais'       => 'Venezuela',
             'estado'     => 'Algún Lugar',
             'ciudad'     => 'Ni idea loco',

@@ -14,15 +14,235 @@
 			</header>
 			
 			<section class="contenedor_tabla">
-				<h1 class="indicador_de_formulario">Datos del nuevo productos a crear. Tenga en cuenta que los campos con (<span class="form_titulos_required">*</span>) son obligatorios.</h1>
+				<!-- <h1 class="indicador_de_formulario">Datos del nuevo productos a crear. Tenga en cuenta que los campos con (<span class="form_titulos_required">*</span>) son obligatorios.</h1> -->
 				<form class="form_crear_producto" id="form_crear_producto" action="{{ route('createProductos') }}" method="post" enctype="multipart/form-data">
 					{{ csrf_field() }}
+
+
+					<!-- Información basica del producto -->
+					<section class="form-group bg-dark">
+						<h1 class="form-group-titulo">Información básica del producto</h1>
+						<div class="form-group-blocks row bg-info">
+							<!-- Nombre -->
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<label class="form-group-subtitulo" for="nombre">
+									<span class="form_titulos_required">*</span>Nombre del producto
+								</label>
+								<input autofocus type="text" id="nombre" class="form-control" name="nombre" value="{{ old('nombre') }}" required>
+								@if ($errors->has('nombre'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('nombre') }}</p>
+				                    </span>
+				                @endif
+							</div>
+							<!-- Precio -->
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<label class="form-group-subtitulo" for="precio">
+									<span class="form_titulos_required">*</span>Precio
+								</label>
+								<input type="text" id="precio" class="form-control" name="precio" value="{{ old('precio') }}" required>
+								@if ($errors->has('precio'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('precio') }}</p>
+				                    </span>
+				                @endif
+							</div>
+							<!-- Cantidad -->
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<label class="form-group-subtitulo" for="cantidad">
+									<span class="form_titulos_required">*</span>Cantidad
+								</label>
+								<input type="number" min="1" id="cantidad" class="form-control" name="cantidad" value="{{ old('cantidad') }}" required>
+								@if ($errors->has('cantidad'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('cantidad') }}</p>
+				                    </span>
+				                @endif
+							</div>
+							<!-- Categoria -->
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<label class="form-group-subtitulo" for="categoria">
+									<span class="form_titulos_required">*</span>Categoria
+								</label>
+								<select class="form-control" id="categoria" name="categoria" value="{{ old('categoria') }}" required>
+									<option>Escoge una categoria</option>
+									@if(isset($categorias))
+										@foreach($categorias as $categoria)
+											@if(old('categorias') == $categoria->id )
+												<option value="{{ $categoria->id }}" selected>{{ $categoria->categoria_nombre }}</option>
+											@else
+												<option value="{{ $categoria->id }}">{{ $categoria->categoria_nombre }}</option>
+											@endif
+										@endforeach
+									@endif
+								</select>
+								@if ($errors->has('categoria'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('categoria') }}</p>
+				                    </span>
+				                @endif
+							</div>
+							<!-- Descripción -->
+							<div class="form-group-blocks-item col-12">
+								<label class="form-group-subtitulo">
+									<span class="form_titulos_required">*</span>Descripción del producto
+								</label>
+								<!-- <textarea name="descripcion">{{ old('producto_descripcion') }}</textarea> -->
+							</div>
+						</div>						
+					</section>
+
+					<!-- Detalles del producto -->
+					<section class="form-group bg-dark">
+						<h1 class="form-group-titulo">Información básica del producto</h1>
+						<div class="form-group-blocks row bg-info">
+							<!-- Talla -->
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<label class="form-group-subtitulo" for="talla">
+									<span class="form_titulos_required"></span>Talla
+								</label>
+								<input autofocus type="text" id="talla" class="form-control" name="talla" value="{{ old('talla') }}">
+								@if ($errors->has('talla'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('talla') }}</p>
+				                    </span>
+				                @endif
+							</div>
+							<!-- Color -->
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<label class="form-group-subtitulo" for="color">
+									<span class="form_titulos_required"></span>Color
+								</label>
+								<input type="text" id="color" class="form-control" name="color" value="{{ old('color') }}">
+								@if ($errors->has('color'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('color') }}</p>
+				                    </span>
+				                @endif
+							</div>
+							<!-- Proveedor -->
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<label class="form-group-subtitulo" for="proveedor">
+									<span class="form_titulos_required"></span>Proveedor
+								</label>
+				                <select class="form-control" id="proveedor" name="proveedor" value="{{ old('proveedor') }}" required>
+									<option>Escoge un proveedor</option>
+									@if(isset($proveedores))
+										@foreach($proveedores as $proveedor)
+											@if(old('proveedor') == $proveedor->id )
+												<option value="{{ $proveedor->id }}" selected>{{ $proveedor->proveedor_razon_social }}</option>
+											@else
+												<option value="{{ $proveedor->id }}">{{ $proveedor->proveedor_razon_social }}</option>
+											@endif
+										@endforeach
+									@endif
+								</select>
+								@if ($errors->has('proveedor'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('proveedor') }}</p>
+				                    </span>
+				                @endif
+							</div>
+							<!-- Marca -->
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<label class="form-group-subtitulo" for="marca">
+									<span class="form_titulos_required"></span>Marca
+								</label>
+				                <select class="form-control" id="marca" name="marca" value="{{ old('marca') }}" required>
+									<option>Escoge un marca</option>
+									@if(isset($marcas))
+										@foreach($marcas as $marca)
+											@if(old('marca') == $marca->id )
+												<option value="{{ $marca->id }}" selected>{{ $marca->marca_nombre }}</option>
+											@else
+												<option value="{{ $marca->id }}">{{ $marca->marca_nombre }}</option>
+											@endif
+										@endforeach
+									@endif
+								</select>
+								@if ($errors->has('marca'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('marca') }}</p>
+				                    </span>
+				                @endif
+							</div>
+						</div>						
+					</section>
+
+					<!-- Multimedia -->
+					<section class="form-group">
+						<h1 class="form-group-titulo">Información Multimedia del producto</h1>
+						<div class="form-group-blocks row bg-info">
+							<!-- Imagen principal -->
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<label class="form-group-subtitulo" for="portada">
+									<span class="form_titulos_required"></span>Imagen de portada
+								</label>
+								<input type="file" class="form-control" id="portada" name="portada" value="{{ old('portada') }}" >
+
+								@if ($errors->has('portada'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('portada') }}</p>
+				                    </span>
+				                @endif
+							</div>
+							<!-- Imagenes de referencias -->
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<label class="form-group-subtitulo" for="imagenes">
+									<span class="form_titulos_required"></span>Imagenes complementarias
+								</label>
+								<input type="file" class="form-control section_subir_imagenes_input" name="imagenes[]" multiple>
+
+								@if ($errors->has('imagenes'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('imagenes') }}</p>
+				                    </span>
+				                @endif
+							</div>
+							<!-- Videos de referencia -->
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<label class="form-group-subtitulo" for="videos">
+									<span class="form_titulos_required"></span>Videos complementarias
+								</label>
+
+								<input id="videos" type="text" class="form-control section_subir_imagenes_input" name="videos" placeholder="Separe cada código de video con una coma ( , )">
+
+								@if ($errors->has('videos'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('videos') }}</p>
+				                    </span>
+				                @endif
+							</div>
+
+							<div class="form-group-blocks-item col-12 col-sm-6">
+								<span class="section_subir_imagenes_checkbox">
+									<label>¿Descripción por imagen?</label>
+									<input opcion="{{ old('producto_tieneImgDescripcion') }}" type="checkbox" name="producto_tieneImgDescripcion">						
+								</span>
+
+								<input id="videos" type="text" class="form-control section_subir_imagenes_input" name="videos" placeholder="Separe cada código de video con una coma ( , )">
+
+								@if ($errors->has('videos'))
+				                    <span class="invalid-feedback" role="alert">
+				                        <p>{{ $errors->first('videos') }}</p>
+				                    </span>
+				                @endif
+							</div>
+						</div>
+					</section>
+
+
+
+
+
+
+
 
 	                <!-- Nombre -->
 					<div class="form-group">
 						<div class="form-group-items">
 							<label class="form_titulos" for="producto_nombre"> <span class="form_titulos_required">*</span> Nombre del producto</label>
-							<input type="text" id="producto_nombre" class="form-control" name="producto_nombre" value="{{ old('producto_nombre') }}" required>	
+							<input autofocus type="text" id="producto_nombre" class="form-control" name="producto_nombre" value="{{ old('producto_nombre') }}" required>	
 						</div>
 		                @if ($errors->has('producto_nombre'))
 		                    <span class="invalid-feedback" role="alert">
@@ -31,18 +251,18 @@
 		                @endif					
 					</div>					
 	                <!-- Descripcion -->
-					<div class="form-group">
-						<div class="form-group-items descripcion_editor">
-							<label class="form_titulos" for="producto_descripcion"> <span class="form_titulos_required"></span> Descripción del producto</label>
+					<!-- <div class="form-group"> -->
+						<!-- <div class="form-group-items descripcion_editor">
+							<label class="form_titulos" for="producto_descripcion"> <span class="form_titulos_required"></span> Descripción del producto</label> -->
 							<!-- <textarea id="producto_descripcion" name="producto_descripcion" placeholder="Escribe la increible descripcion de este producto"></textarea> -->
-							<textarea name="producto_descripcion" placeholder="Escribe la increible descripcion de este producto">{{ old('producto_descripcion') }}</textarea>
+							<!-- <textarea name="producto_descripcion" placeholder="Escribe la increible descripcion de este producto">{{ old('producto_descripcion') }}</textarea>
 						</div>
 						@if ($errors->has('producto_descripcion'))
 		                    <span class="invalid-feedback" role="alert">
 		                        <p>{{ $errors->first('producto_descripcion') }}</p>
 		                    </span>
 		                @endif
-					</div>
+					</div> -->
 					<!-- Precio -->
 					<div class="form-group">
 						<div class="form-group-items">

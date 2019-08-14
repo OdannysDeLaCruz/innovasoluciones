@@ -16,8 +16,7 @@ class CreateDireccionesTable extends Migration
         Schema::create('direcciones', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('nombre');
-            $table->string('apellido');
+            $table->string('nombre_completo');
             $table->string('pais');
             $table->string('estado'); // estado / provincia / region / departamento
             $table->string('ciudad');

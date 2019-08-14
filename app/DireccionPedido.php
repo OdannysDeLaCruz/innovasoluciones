@@ -10,8 +10,7 @@ class DireccionPedido extends Model
 	protected $fillable = [
     	'id',
 		'pedido_id',
-		'nombre',
-		'apellido',
+		'nombre_completo',
 		'pais',
 		'estado',
 		'ciudad',

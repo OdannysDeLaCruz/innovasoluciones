@@ -64,6 +64,7 @@ Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function() {
 	Route::get('/clientes', 'AdminController@getClientes')->name('getClientes');
 	Route::get('/codigos', 'AdminController@getCodigos')->name('getCodigos');
 	Route::get('/secciones', 'AdminController@getSecciones')->name('getSecciones');
+	Route::get('/categorias', 'AdminController@getCategorias')->name('getCategorias');
 	Route::get('/usuarios', 'AdminController@getUsuarios')->name('getUsuarios');
 });
 

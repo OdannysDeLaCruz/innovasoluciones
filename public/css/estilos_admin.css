@@ -476,31 +476,37 @@ body {
 
 
 /*--ESTILOS DE PAGINA CREAR NUEVO PRODUCTO--*/
-.indicador_de_formulario {
+/*.indicador_de_formulario {
 	text-align: center;
 	font-size: 17px;
 	background: #fff;
 	padding: 10px;
 	color: #333; 
-}
+}*/
 .form_crear_producto {
 	width: 100%;
 	padding: 20px;
+	background: tomato;
 }
-.form_crear_producto > .form-group {
+.form_crear_producto .form-group {
 	max-width: 800px;
 	margin: 20px auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
-.form_crear_producto > .form-group > .form-group-items {
+.form_crear_producto .form-group-blocks {
+	width: 100%;
+}
+.form_crear_producto .form-group-blocks-item {
+}
+/*.form_crear_producto > .form-group > .form-group-items {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	/*justify-content: flex-end;*/
-}
+	justify-content: flex-end;
+}*/
 .form_crear_producto > .form-group > .form-group-items > label.form_titulos {
 	margin: 10px 0;
 	color: #666;
@@ -579,7 +585,7 @@ body {
 	display: flex;
 	align-items: center;
 }
-.form_crear_producto > .section_subir_imagenes > .section_subir_imagenes_checkbox > p{
+.form_crear_producto > .section_subir_imagenes > .section_subir_imagenes_checkbox > label {
 	margin: 0 10px 0 0;
 }
 .form_crear_producto > .form_botones_accion {

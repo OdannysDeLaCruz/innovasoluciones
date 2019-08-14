@@ -92,12 +92,16 @@
 			</div>
 			
 			<span class="carrito_botones">
-				<div class="botones_innova">
-					<a href="{{ route('productos') }}"><span class="fa fa-arrow-left mr-2"></span> Seguir comprando</a>
-				</div>
-				<div class="botones_innova btn_carrito_pagar">
-					<a href="{{ route('verificar') }}"><span class="fa fa-credit-card-alt"></span> Comprar</a>
-				</div>
+					
+				<a href="{{ route('productos') }}" class="btn-innova btn-principal">
+					<span class="fa fa-arrow-left mr-2"></span> Comprar más
+				</a>
+
+				<a href="{{ route('verificar') }}" class="btn-innova btn-principal">
+					<span class="fa fa-credit-card-alt mr-2"></span> Tramitar
+				</a>
+
+
 			</span>
 		@else 
 			<!-- Elimino el las variables de session codigos_usados, descuento_peso y notificacion_codigo si no hay algo en el carrito-->
@@ -111,12 +115,10 @@
 				<img class="msm_carrito_vacio_img" src="{{ asset('img/logos/shopping-bag.png') }}">
 				<p class="msm_carrito_vacio_texto">Su carrito esta vacío</p>
 			</div>
-			<label class="carrito_botones ">
-				<div class="btn_seguir_comprando botones_innova">
-					<a href="{{ route('productos') }}">
-						<span class="fa fa-arrow-left mr-2"> </span> Ir de compras
-					</a>
-				</div>
+			<label class="carrito_botones ">		
+				<a href="{{ route('productos') }}" class="btn-innova btn-principal">
+					<span class="fa fa-arrow-left mr-2"> </span> Ir de compras
+				</a>
 			</label>
 		@endif
 	</section>

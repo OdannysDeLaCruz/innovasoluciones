@@ -103,9 +103,9 @@
 									<small class="text-muted">(opcional)</small>
 								</label><br>
 								<div class="p-2 d-flex flex-column flex-sm-row justify-content-center">
-									<input class="my-1 mx-1" type="text" id="codigo" name="codigo_descuento" value="{{ session('codigo_verificado') ? session('codigo_verificado') : '' }}" required>
+									<input class="my-1 mx-1" type="text" id="codigo" name="codigo_descuento" value="{{ session('codigo_verificado') ? session('codigo_verificado') : '' }}" placeholder="Escribe tu código" required>
 									<button type="submit" class="btn_enviar_codigo my-1 mx-1" name="verificarCodigo">
-										Descontar
+										Aplicar código
 									</button>
 								</div>
 							</div>
@@ -142,13 +142,20 @@
 				<!-- SECCION BOTONES DE PEDIDO -->
 				<section class="payment_proceso_tarjeta tarjeta_botones_pedidos">
 					<div class="pedidos_botones">
-						<div class="pedidos_botones_btn botones_innova">
-							<a href="{{ route('productos') }}"><i class="fa fa-arrow-left"></i>Seguir comprando</a>
-						</div>
-						<div class="pedidos_botones_btn botones_innova">
-							<?php $url = route('verificar') . "/?s=datos_envio"; ?>
-							<a href="{{ route('verificar') }}?s=datos_envio" id="btn_siguiente" onclick="history.pushState(null, '', '<?php echo $url ?>' ) ">Siguiente <i class="fa fa-arrow-right"></i></a>
-						</div>
+
+						<a class="btn-innova btn-secundario" href="{{ route('productos') }}">
+							<i class="fa fa-arrow-left mr-2"></i> Comprar más
+						</a>
+
+						<?php $url = route('verificar') . '?s=datos_envio'; ?>
+
+						<a class="btn-innova btn-principal" 
+						   href="{{ route('verificar') }}?s=datos_envio" 
+						   id="btn_siguiente"
+						   onclick="history.pushState(null, '', '<?php echo $url ?>' ) ">
+							Siguiente <i class="fa fa-arrow-right ml-2"></i>
+						</a>
+	
 					</div>			
 				</section>
 			</section>
@@ -171,13 +178,13 @@
 							<div class="direccion_envio {{ $defecto }} direccion_defecto_id">
 								<p class="direccion_envio_texto {{ $defecto }}" data-href="{{ route('establecer-direccion-defecto') }}" data-defecto="{{ $defecto }}" data-direccion-id="{{ $direccion->id }}">
 									<span class="fa fa-check direccion_envio_texto_iconselect {{ $defecto }}"></span>
-									{{ "$direccion->nombre $direccion->apellido | $direccion->direccion, $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais | $direccion->telefono" }}
+									{{ "$direccion->nombre_completo | $direccion->direccion, $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais | $direccion->telefono" }}
 								</p>
 								<!-- tarjeta de detalle de dirección -->
 								<span class="direccion_envio_tarjeta_flotante">
 									<span class="items">
 										<span class="icono fa fa-user"></span>
-										<span class="texto"> {{ $direccion->nombre }} {{ $direccion->apellido }} </span>
+										<span class="texto"> {{ $direccion->nombre_completo }} </span>
 									</span>
 									<span class="items">
 										<span class="icono fa fa-map-marker"></span>
@@ -196,10 +203,12 @@
 									<a href="#" data-href="{{ route('eliminar-direccion') }}" data-direccion-id="{{ $direccion->id }}" class="direccion_envio_opciones_eliminar">Eliminar</a>
 								</span>
 							</div>
-						@endforeach								
+						@endforeach	
+						<div class="divisor"></div>
 					@endif
+
 					<div class="link_agregar_direccion">
-						<a href="" class="direccion_link text-center btn-mostrar-form-cambio-direccion" id="btn-mostrar-form-cambio-direccion">
+						<a href="" class="direccion_link text-center btn-mostrar-form-cambio-direccion">
 							<span class="fa fa-plus mr-2"></span> Agregar nueva dirección de envío
 						</a>
 					</div>
@@ -217,13 +226,8 @@
 							<h4 class="form-cambiar-direccion-contenedor-titulo">Dirección de envío</h4>
 							<!-- CAMPO NOMBRE -->
 							<div class="form-group">
-								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="nombre_completo" id="nombre" placeholder="Nombre de destinatario" required>
 								<label class="form-cambiar-direccion-error" id="nombre_error">Mensaje de error aqui</label>
-							</div>
-							<!-- CAMPO APELLIDO -->
-							<div class="form-group">
-								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="apellido" id="apellido" placeholder="Apellido" required>
-									<label class="form-cambiar-direccion-error" id="apellido_error"></label>
 							</div>
 							<!-- CAMPO PAIS -->
 							<div class="form-group">
@@ -265,7 +269,6 @@
 
 						<div class="form-group-btns">
 							<input type="submit" id="btn_agregar_direccion" class="btn-cambiar-direccion" value="Guardar">
-							<input type="reset" id="btn_cancelar_direccion" class="btn-cancelar-direccion btn-mostrar-form-cambio-direccion" value="Cancelar">
 						</div>
 
 					</form>
@@ -285,19 +288,31 @@
 							@foreach($tipo_entregas as $tipo)
 								<form class="form_opcion_envio" action="{{ route('payment') }}" method="GET">
 									<input type="hidden" name="tipo_entrega" value="{{ $tipo->id }}">
-									<button class="btn_opcion_envio">
-										@if($tipo->envio_metodo == 'Domicilio')
-											<span class="fa fa-map-marker btn_opcion_envio_icono"></span>
-											<p class="btn_opcion_envio_texto">
+									<button class="btn_opcion_envio flex-column flex-sm-row justify-content-center">
+										@if($tipo->envio_metodo == 'Tienda fisica')
+											<span class="btn_opcion_envio_icono">
+												<img src="{{ asset('img/logos/tienda.png') }}">								
+											</span>
+											<p class="btn_opcion_envio_texto text-center align-items-center align-items-sm-start mt-3 mt-sm-0">
 												{{ $tipo->envio_metodo }}
-												<small style="color: #333;">Tu dirección</small>
+												<small class="align-items-center align-items-sm-start text-center text-sm-left">Mz 15 Casa 6b - La Castellana, Valledupar - Colombia</small>												
 											</p>
-
-										@elseif($tipo->envio_metodo == 'Tienda fisica')
-											<span class="fa fa-truck btn_opcion_envio_icono"></span>
-											<p class="btn_opcion_envio_texto">
+										@elseif($tipo->envio_metodo == 'Domicilio')
+											<span class="btn_opcion_envio_icono">
+												<img src="{{ asset('img/logos/domicilio.png') }}">				
+											</span>
+											<p class="btn_opcion_envio_texto align-items-center align-items-sm-start mt-3 mt-sm-0">
 												{{ $tipo->envio_metodo }}
-												<small style="color: #333;">Calle 6 # 42-90 Valledupar - Colombia</small>												
+												<small class="align-items-center align-items-sm-start text-center text-sm-left">
+													@if(isset($direcciones))
+														@foreach($direcciones as $direccion)
+															@if($direccion->defecto == true)
+																{{ "Recibe: $direccion->nombre_completo" }} <br>
+																{{ "$direccion->direccion, $direccion->ciudad" }}
+															@endif
+														@endforeach
+													@endif
+												</small>
 											</p>
 										@endif
 									</button>
@@ -309,12 +324,16 @@
 
 				<!-- SECCION BOTONES DE PEDIDO -->
 				<section class="payment_proceso_tarjeta tarjeta_ver_detalle_pedido">
-					<div class="botones_innova">
+					<!-- <div class="botones_innova">
 						<a id="btn_ver_detalles" href="{{route('verificar')}}">
 							<i class="fa fa-arrow-left mr-2"></i>
 							Ver detalles
-						</a> 
-					</div>
+						</a>
+					</div> -->
+					<a id="btn_ver_detalles" href="{{route('verificar')}}" class="btn-innova btn-principal">
+						<i class="fa fa-arrow-left mr-2"></i>
+						Volver a detalles
+					</a> 
 				</section>				
 			</section>			
 		</div>
@@ -326,17 +345,17 @@
 				<table class="table table-bordered resumen_table">
 					<tr>
 				    	<th>Productos ({{ $cantidad_productos }})</th>
-				    	<td>${{ number_format( $total_del_pedido, 0, ',', '.')  }}</td>
+				    	<td>$ {{ number_format( $total_del_pedido, 0, ',', '.') }} <small>COP</small></td>
 				  	</tr>
 				  	@if($descuento_peso > 0)
 				  	<tr>
 				    	<th>Descuento por código</th>
-				    	<td>${{ number_format( $descuento_peso, 0, ',', '.')  }}</td>
+				    	<td>$ {{ number_format( $descuento_peso, 0, ',', '.') }} <small>COP</small></td>
 				  	</tr>
 				  	@endif
 				  	<tr>
 				    	<th style="font-weight: 400;">TOTAL A PAGAR</th>
-				    	<td>${{  number_format($total_pagar, 0, ',', '.') }}</td>
+				    	<td>$ {{  number_format($total_pagar, 0, ',', '.') }} <small>COP</small></td>
 				  	</tr>
 				</table>
 			</section>

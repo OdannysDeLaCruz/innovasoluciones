@@ -16,8 +16,7 @@ class CreateDireccionPedidoTable extends Migration
         Schema::create('direccion_pedido', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('pedido_id')->unsigned();
-            $table->string('nombre');
-            $table->string('apellido');
+            $table->string('nombre_completo');
             $table->string('pais');
             $table->string('estado');
             $table->string('ciudad');

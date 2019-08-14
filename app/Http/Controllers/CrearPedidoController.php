@@ -96,8 +96,7 @@ class CrearPedidoPayuController extends Controller
 
 							App\DireccionPedido::create([
 								'pedido_id' => $pedido_id,
-								'nombre'    => $direccion[0]->nombre,
-								'apellido'  => $direccion[0]->apellido,
+								'nombre_completo' => $direccion[0]->nombre_completo,
 								'pais'      => $direccion[0]->pais,
 								'estado'    => $direccion[0]->estado,
 								'ciudad'    => $direccion[0]->ciudad,

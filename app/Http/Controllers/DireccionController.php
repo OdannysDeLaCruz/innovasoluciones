@@ -16,8 +16,7 @@ class DireccionController extends Controller
     public function crear(Request $request) {
         if($request->ajax()) {
             $v = \Validator::make($request->all(), [
-                "nombre"    => 'required|string',
-                "apellido"  => 'required|string',
+                "nombre_completo" => 'required|string',
                 "pais"      => 'required|string',
                 "estado"    => 'required|string',
                 "ciudad"    => 'required|string',
@@ -40,9 +39,8 @@ class DireccionController extends Controller
                 Direccion::where('defecto', true)->update(['defecto' => false]);
 
                 $direccion = new Direccion;
-                $direccion->user_id    = Auth::user()->id;
-                $direccion->nombre     = $request->nombre;
-                $direccion->apellido   = $request->apellido;
+                $direccion->user_id = Auth::user()->id;
+                $direccion->nombre_completo = $request->nombre_completo;
 
                 // Obtener Nombre pais
                 $pais_id = (int)$request->pais;

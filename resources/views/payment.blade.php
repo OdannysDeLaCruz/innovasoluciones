@@ -26,7 +26,7 @@
 	<!-- SECCION PRINCIPAL -->
 	<section class="contenedor_payment row">
 		<div class="col-md-8 seccion_metodo_pago">
-			<h2 class="payment_titulos mt-3 mb-4">Casi terminas, escoge tu medio de pago</h2>
+			<h2 class="payment_titulos mt-3 mb-4">Casi terminas, pagar con:</h2>
 			<div class="payment_opciones d-flex justify-content-arrow justify-md-content-center">
 				<!-- Cargador de espera -->
 				<div class="tarjeta_direccion_envio_cargador" id="cargador_formulario_payu">
@@ -58,7 +58,9 @@
 					</form>
 				</div>
 			</div>
-			<hr>
+			<a style="width: 200px;" class="btn btn-innova btn-principal" href="{{ route('verificar') }}">
+				<span class="fa fa-arrow-left mr-2"></span> Volver a detalles
+			</a>
 
 			<h2 class="payment_subtitulos mt-5 mb-4">¿Qué medios de pagos te ofrecemos con PayU?</h2>
 
@@ -74,9 +76,7 @@
 				<span class="seccion_metodo_pago_lista_items"> <img src="{{ asset('img/metodos_pago/su_red.png') }}"> </span>
 			</div>
 
-			<a class="btn btn-outline-primary" href="{{ route('verificar') }}">
-				Volver a detalles
-			</a> 
+			 
 		</div>	
 		<div class="col-md-4 seccion_resumen_pedido">
 			<section class="payment_proceso_tarjeta tarjeta_resumen_pedidos">
@@ -86,17 +86,17 @@
 				<table class="table table-bordered resumen_table">
 				  	<tr>
 				    	<th>Productos ({{ $cantidad_productos }})</th>
-				    	<td>${{ number_format( $total_del_pedido, 0, ',', '.')  }}</td>
+				    	<td>$ {{ number_format( $total_del_pedido, 0, ',', '.')  }} <small>COP</small></td>
 				  	</tr>
 				  	@if($descuento_peso > 0)
 				  	<tr>
 				    	<th>Descuento por código</th>
-				    	<td>${{ number_format( $descuento_peso, 0, ',', '.')  }}</td>
+				    	<td>$ {{ number_format( $descuento_peso, 0, ',', '.')  }} <small>COP</small></td>
 				  	</tr>
 				  	@endif
 				  	<tr>
 				    	<th style="font-weight: 400;">TOTAL A PAGAR</th>
-				    	<td>${{  number_format($total_pagar, 0, ',', '.') }}</td>
+				    	<td>$ {{  number_format($total_pagar, 0, ',', '.') }} <small>COP</small></td>
 				  	</tr>
 				</table>
 			</section>
