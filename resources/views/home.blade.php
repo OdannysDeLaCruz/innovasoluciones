@@ -36,7 +36,7 @@
 </head> 
 <body> 
 	<div class="contenedor-img"> 
-		<img src="{{ asset('img/cuadro.png') }}">	
+		<img src="{{ asset('img/logos/logo-innova-blanco.svg') }}">	
 	</div> 
 </body> 
 </html>

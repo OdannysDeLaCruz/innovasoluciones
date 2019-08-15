@@ -204,7 +204,7 @@ class ConfirmationController extends Controller
 
     	
 
-    	$pedido_id = (int)$pedido_id
+    	$pedido_id = (int)$pedido_id;
         $pedido    = App\Pedido::find($pedido_id);
         $pedido->pedido_ref_venta = $reference_sale;
 	    $transaccion_id = $pedido->transaccion_id;

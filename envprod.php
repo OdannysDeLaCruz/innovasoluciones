@@ -1,4 +1,4 @@
-APP_NAME='Innova Soluciones'
+APP_NAME='Innova Inc'
 APP_ENV=production
 APP_KEY=base64:BoBXViKv8iEyxqHL9r3pUb3131BRv/+eUL7FlQCpzmQ=
 APP_DEBUG=true
@@ -7,7 +7,7 @@ APP_URL=https://innovainc.co
 LOG_CHANNEL=stack
 
 DB_CONNECTION=mysql
-DB_HOST=sabia
+DB_HOST=sibia
 DB_PORT=3306
 DB_DATABASE=innova_innovasoluciones
 DB_USERNAME=innova_admin

@@ -1,4 +1,4 @@
-APP_NAME=InnovaSoluciones
+APP_NAME="Innova Inc"
 APP_ENV=local
 APP_KEY=base64:BoBXViKv8iEyxqHL9r3pUb3131BRv/+eUL7FlQCpzmQ=
 APP_DEBUG=true
