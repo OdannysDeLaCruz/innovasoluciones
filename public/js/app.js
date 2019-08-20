@@ -159,7 +159,7 @@ $(document).ready(function(){
                         }
                     },
                     error: function(data) {
-                        console.log(data);
+                        console.log(data.responseJSON);
                         $('#cargador_formulario_payu').css('display', 'none');
                         if(data.status == 500) {
                             // console.log(data.responseText);
@@ -219,9 +219,12 @@ $(document).ready(function(){
                 $('#cargador_agregar_direccion').css('display', 'flex');
             },
             success: function(data) {
-                // si hay errores, limipiar los mensajes de error mostrados anteriormente
-                $('.form-cambiar-direccion-error').css('display', 'none');
+                // Mostrar los nuevos errores
                 if (data.status == 'Errors') {
+                    // si hay errores, limipiar los mensajes de error mostrados anteriormente
+                    $('.form-cambiar-direccion-error').css('display', 'none');
+                    // Quitar cargador si hay errores
+                    $('#cargador_agregar_direccion').css('display', 'none');
                     for(const e in data.data) {
                         let spanError = $('#'+e+'_error');
                         spanError.text(data.data[e][0]).css('display', 'block');

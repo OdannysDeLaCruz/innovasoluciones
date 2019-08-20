@@ -106,7 +106,7 @@ class CrearPedidoPayuController extends Controller
 							]);
 				        
 				 			// Enviar email de confirmacion de creacion del pedido, pero no de pago, la confimacion de pago la realiza el controlador ConfirmacionController
-							$this->sendEmailConfirmation();
+							// $this->sendEmailConfirmation();
 
 		  					// Eliminar variables de session creadas a lo largo del proceso de compra
 							$this->eliminarVariablesSession();	            		

@@ -226,7 +226,7 @@
 							<h4 class="form-cambiar-direccion-contenedor-titulo">Dirección de envío</h4>
 							<!-- CAMPO NOMBRE -->
 							<div class="form-group">
-								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="nombre_completo" id="nombre" placeholder="Nombre de destinatario" required>
+								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="nombre_completo" id="nombre_completo" placeholder="Nombre de destinatario" required>
 								<label class="form-cambiar-direccion-error" id="nombre_error">Mensaje de error aqui</label>
 							</div>
 							<!-- CAMPO PAIS -->
@@ -254,7 +254,7 @@
 							</div>
 							<!-- CAMPO CODIGO POSTAL -->	
 							<div class="form-group d-flex">
-								<input class="form-cambiar-direccion-contenedor-inputs" type="number" name="codigo_postal" id="codigo_postal" placeholder="Codigo postal" required>	
+								<input class="form-cambiar-direccion-contenedor-inputs" type="number" name="codigo_postal" id="codigo_postal" placeholder="Codigo postal">	
 								<label class="form-cambiar-direccion-error" id="codigo_postal_error"></label>
 							</div>
 							<!-- CAMPO TELEFONO -->	

@@ -22,7 +22,7 @@ class DireccionController extends Controller
                 "ciudad"    => 'required|string',
                 "direccion" => 'required|string',
                 "telefono"  => 'required|string',
-                "codigo_postal" => 'required|integer',
+                "codigo_postal" => 'nullable|integer',
             ]);
             // dd($v);
             // Si hay errores
