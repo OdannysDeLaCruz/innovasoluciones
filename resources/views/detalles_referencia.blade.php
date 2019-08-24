@@ -34,36 +34,40 @@
 						</a>											
 					@endforeach
 				</span>
+
+				<!-- SECCION DE DESCUENTO O PROMOCION DEL PRODUCTO -->
 				@if($detalle['promo_tipo'])
 					<span class="detalle_info_precio_anterior">
 						@if($detalle['promo_tipo'] == '%')
-							<p class="antes"> Antes ${{ number_format($detalle['producto_precio'], 0, ',', '.') }}</p>
+							<p class="antes"> Antes COP$ {{ number_format($detalle['producto_precio'], 0, ',', '.') }}</p>
 							<span class="promo">
-								-{{ $detalle['promo_costo'] }}% OFF
+								{{ $detalle['promo_costo'] }}% DCTO
 							</span>
 						@elseif($detalle['promo_tipo'] == '$')
-							<p class="antes"> Antes ${{ number_format($detalle['producto_precio'], 0, ',', '.') }}</p>
+							<p class="antes"> Antes COP$ {{ number_format($detalle['producto_precio'], 0, ',', '.') }}</p>
 							<span class="promo">
-								${{ number_format($detalle['promo_costo'], 0, ',', '.') }} <small>COP</small> OFF
+								COP$ {{ number_format($detalle['promo_costo'], 0, ',', '.') }} <small>DCTO</small>
 							</span>
 						@elseif($detalle['promo_tipo'] == '2x1')
 							<span class="promo">{{$detalle['promo_tipo']}}</span>
 						@endif					
 					</span>
 				@endif
+
+				<!-- SECCION TOTAL DEL PRODUCTO -->
 				<span class="detalle_info_precio detalle_info_item"> 
 					<?php 
 						if ($detalle['promo_tipo'] == '%') {
 							$descuento = $detalle['producto_precio'] * ($detalle['promo_costo'] / 100);
 							$total     = $detalle['producto_precio'] - $descuento;
-							$total     = '<span class="ahora">Ahora</span>' . '<span class="total">$ ' .  number_format($total, 0, '', '.') . '<small>COP</small>' . '</span>'; 
+							$total     = '<span class="ahora">Ahora</span>' . '<span class="total">COP$ ' .  number_format($total, 0, '', '.') . '</span>'; 
 						}
 						elseif($detalle['promo_tipo'] == '$'){
 							$total = $detalle['producto_precio'] - $detalle['promo_costo'];
-							$total = '<span class="ahora">Ahora</span>' . '<span class="total">$' .  number_format($total, 0, '', '.') . '<small>COP</small>' . '</span>';
+							$total = '<span class="ahora">Ahora</span>' . '<span class="total">COP$ ' .  number_format($total, 0, '', '.') . '</span>';
 						}
 						else {
-							$total = "$" . number_format($detalle['producto_precio'], 0, ',', '.');
+							$total = '<span class="total">COP$ ' .   number_format($detalle['producto_precio'], 0, ',', '.') . '</span>';
 						}
 					 ?>
 					{!! $total !!}
@@ -98,7 +102,7 @@
 							@endforeach
 						</select>
 					@endempty
-					<button type="submit" id="btn-agregar-producto" class="btn btn-primary detalle_info_btn_comprar">Comprar</button>
+					<button type="submit" id="btn-agregar-producto" class="btn btn-primary detalle_info_btn_comprar">AÑADIR AL CARRITO</button>
 				</form>
 			</section>
 			<div class="detalle_descripcion_img_principal col-12 col-md-8 h-25">

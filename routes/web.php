@@ -20,10 +20,13 @@ Route::group(['namespace' => 'User', 'prefix' => 'perfil'], function() {
 	Route::get('/', 'UserController@showPerfil')->name('perfil');
 	Route::get('pedidos', 'UserController@showPedidos')->name('pedidos');
 	Route::get('pedidos/{id?}', 'UserController@showPedidoDetalles')->name('compras');
-	Route::get('facturas','UserController@showFacturas')->name('facturas');
-	Route::get('facturas/{id?}','UserController@showFacturasDetalles')->name('detalle_factura');
-	Route::get('facturas/descargar/{id?}','UserController@descargarFactura')->name('descargar_factura');
+
+	// RUTAS PARA FACTURAS DE USUARIOS
+	Route::get('facturas','FacturaController@index')->name('facturas');
+	Route::get('facturas/{id?}','FacturaController@show')->name('detalle_factura');
+	Route::get('facturas/descargar/{id?}','FacturaController@download')->name('descargar_factura');
 });
+
 
 // RUTAS PARA CARRITO DE COMPRAS
 Route::get('/cart', 'CartController@show')->name('showCart');

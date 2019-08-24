@@ -16,9 +16,13 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
 	<title>Innova Soluciones | Cart </title>
 </head>
-<body>
+<body style="padding-top: 50px;">
 	<!-- SECCION HEADER -->
-	@include('includes/header')
+	<div class="carrito_regresar">
+		<a href="javascript:history.back(-1);">
+			<span class="fa fa-chevron-left mr-2"></span> Carrito de compras			
+		</a>
+	</div>
 	<!-- FIN HEADER -->	
 	<!-- SECCION CARRITO -->
 	<section class="contenedor_carrito">
@@ -38,25 +42,23 @@
 									{{ $carrito['nombre'] }}
 								</a>
 							</li>
-							@if($carrito['talla'] != '')
-								<li class="pedido-info-list-item talla-producto">
-									<b>Talla: {{ $carrito['talla'] }} </b>
-								</li>
-							@endif
-							@if($carrito['color'] != '')
-								<li class="pedido-info-list-item color-producto">
-									<b>Color: {{ $carrito['color'] }} </b>
-								</li>
-							@endif
+							<?php 
+								$color = $carrito['color'] != '' ? $carrito['color'] : '';
+								$talla = $carrito['talla'] != '' ? $carrito['talla'] : '';
+							?>
+							<li class="pedido-info-list-item talla-producto">
+								<b>Talla: {{ $talla }} | Color: {{ $color }} </b>
+							</li>
 							@if($carrito['promocion'] != '')
 								<li class="pedido-info-list-item promocion-producto">
-									<span class="promocion-producto-precio-anterior">${{ number_format($carrito['precio'], 0, '', '.') }}</span>
-									<span class="promocion-producto-tag">{{ $carrito['promocion'] }} OFF</span>
+									<span class="promocion-producto-precio-anterior">
+										COP$ {{ number_format($carrito['precio'], 0, '', '.') }}
+									</span>
+									<span class="promocion-producto-tag">
+										COP$ {{ number_format($carrito['promocion'], 0, '', '.') }} DCTO
+									</span>
 								</li>
 							@endif
-							<li class="pedido-info-list-item nombre-precio">
-								${{ number_format($carrito['total'], 0, '', '.') }} <small> COP</small>
-							</li>
 							<li class="pedido-info-list-item nombre-opciones">
 								<div class="nombre-opciones-items nombre-opciones-cantidad">
 									<input style="width: 30px;" class="ml-2" type="number" min="1" max="10" value="{{ $carrito['cantidad'] }}" id="producto_{{ $carrito['id'] }}">
@@ -71,12 +73,15 @@
 							      		<div class="fa fa-refresh"></div>
 							      	</a>
 								</div>
-								<div class="nombre-opciones-items nombre-opciones-eliminar">
-									<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
-				      					<span class="fa fa-trash-o"></span>
-				      				</a>
-								</div>
+							</li>									
+					      	<li class="pedido-info-list-item nombre-precio">
+								COP$ {{ number_format($carrito['total'], 0, '', '.') }}
 							</li>
+							<div class="nombre-opciones-items nombre-opciones-eliminar">
+								<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
+			      					<span class="fa fa-trash-o"></span>
+			      				</a>
+							</div>
 						</ul>
 					</div>
 				</section>
@@ -84,24 +89,35 @@
 
 			<div class="suma_total_carrito">
 				<small>Total a pagar:</small>
-				${{ number_format( session('total_del_pedido'), 0, ',', '.') }} <br>
+				COP$ {{ number_format( session('total_del_pedido'), 0, '', '.') }} <br>
 				@if(session('codigos_usados'))
 					<small style="font-size: 13px;">Usted utilizó el código {{ session('codigos_usados') }}</small>
 					
 				@endif
 			</div>
 			
-			<span class="carrito_botones">
-					
+			<span class="carrito_botones">		
 				<a href="{{ route('productos') }}" class="btn-innova btn-principal">
-					<span class="fa fa-arrow-left mr-2"></span> Comprar más
+					<span class="fa fa-chevron-left mr-2"></span> Comprar más
 				</a>
-
 				<a href="{{ route('verificar') }}" class="btn-innova btn-principal">
 					<span class="fa fa-credit-card-alt mr-2"></span> Tramitar
 				</a>
-
-
+			</span>
+			
+			<!-- BARRA FIJA DE TRAMITAR -->
+			<span class="carrito_barra_moviles">	
+				<div class="carrito_barra_moviles_resumen">
+					Total: <span class="carrito_barra_moviles_resumen_total">COP$ {{ number_format( session('total_del_pedido'), 0, '', '.') }}</span>
+				</div>				
+				<div class="carrito_barra_moviles_botones">					
+					<a href="{{ route('productos') }}" class="btn-innova btn-principal">
+						<span class="fa fa-chevron-left mr-2"></span> Comprar más
+					</a>
+					<a href="{{ route('verificar') }}" class="btn-innova btn-principal">
+						<span class="fa fa-credit-card-alt mr-2"></span> Tramitar
+					</a>
+				</div>				
 			</span>
 		@else 
 			<!-- Elimino el las variables de session codigos_usados, descuento_peso y notificacion_codigo si no hay algo en el carrito-->

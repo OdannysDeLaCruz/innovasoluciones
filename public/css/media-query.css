@@ -247,7 +247,7 @@
 		height: auto;
 		filter: grayscale(5);
 	}
-	.pedido-img {
+	.pedido-img .carrito-img {
 		width: 110px;
 		height: 110px;
 		margin-right: 10px;
@@ -265,6 +265,47 @@
 @media (max-width: 768px) {
 	.detalle_refencia {
 		flex-direction: column-reverse;
+	}
+	.carrito_botones, .suma_total_carrito {
+		display: none;
+	}
+	.carrito_barra_moviles {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 100vw;
+		padding: 0 10px;
+		background: #fff;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		-webkit-box-shadow: 0px 10px 50px 0px rgba(0,0,0,0.43);
+		-moz-box-shadow: 0px 10px 50px 0px rgba(0,0,0,0.43);
+		box-shadow: 0px 10px 50px 0px rgba(0,0,0,0.43);
+	}
+	.carrito_barra_moviles_resumen {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		padding: 5px 0;
+	}
+	.carrito_barra_moviles_resumen_total {
+		margin-left: 10px;
+		color: orange;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 700;
+		font-size: 16px;
+	}
+	.carrito_barra_moviles_botones {
+		padding: 5px 0;
+		display: flex;
+		justify-content: space-between;
+		flex-direction: row; 
+	}
+	.carrito_barra_moviles_botones > a {
+		padding: 5px;
+		width: 140px;
+		height: 40px;
 	}
 }
 

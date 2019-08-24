@@ -85,18 +85,22 @@
 				</span>
 				<table class="table table-bordered resumen_table">
 				  	<tr>
-				    	<th>Productos ({{ $cantidad_productos }})</th>
-				    	<td>$ {{ number_format( $total_del_pedido, 0, ',', '.')  }} <small>COP</small></td>
+				    	<th>
+				    		Productos <span class="resaltado">{{ $cantidad_productos }}</span>
+				    	</th>
+				    	<td>COP$ {{ number_format( $total_del_pedido, 0, '', '.') }} </td>
 				  	</tr>
 				  	@if($descuento_peso > 0)
-				  	<tr>
-				    	<th>Descuento por código</th>
-				    	<td>$ {{ number_format( $descuento_peso, 0, ',', '.')  }} <small>COP</small></td>
-				  	</tr>
+					  	<tr>
+					    	<th>
+					    		<span class="resaltado">Descuento al pedido</span>
+					    	</th>
+					    	<td>COP$ {{ number_format( $descuento_peso, 0, '', '.') }} </td>
+					  	</tr>
 				  	@endif
 				  	<tr>
-				    	<th style="font-weight: 400;">TOTAL A PAGAR</th>
-				    	<td>$ {{  number_format($total_pagar, 0, ',', '.') }} <small>COP</small></td>
+				    	<th style="font-weight: 700; font-size: 15px;">TOTAL A PAGAR</th>
+				    	<td class="resumen_total_pagar">COP$ {{  number_format($total_pagar, 0, '', '.') }}</td>
 				  	</tr>
 				</table>
 			</section>

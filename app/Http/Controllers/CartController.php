@@ -75,7 +75,7 @@ class CartController extends Controller
                         $dato['total'] = $total - $descuento;
                         break; 
                     case '$':
-                        $dato['promocion'] = '$' . number_format($dato['promo_costo'], 0, ',', '.');
+                        $dato['promocion'] = $dato['promo_costo'];
                         $descuento = $dato['promo_costo'] * $dato['cantidad']; 
                         $dato['total'] = $total - $descuento;
                         break;

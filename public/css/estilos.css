@@ -17,8 +17,8 @@ body {
 	padding-top: 60px;
 	background: #ebebeb;
 	/*  Fuente global  */
-	font-family: 'Roboto Condensed', sans-serif;
-	/*font-family: 'Montserrat', sans-serif;*/
+	/*font-family: 'Roboto Condensed', sans-serif;*/
+	font-family: 'Montserrat', sans-serif;
 	font-family: 'Nunito', sans-serif;
 }
 /*--ESTILOS DE BOTONES LINK--*/
@@ -98,12 +98,34 @@ body {
 	border: 1px solid #333;
 }
 /*--ESTILOS DEL CARRITO--*/
-
+.carrito_regresar {
+	background: #fff;
+	position: fixed;
+	z-index: 1000;
+	width: 100%;
+	height: 50px;
+	padding: 5px 15px;
+	top: 0;
+	left: 0;
+	display: flex;
+    align-items: center;
+	-webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.43);
+	-moz-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.43);
+	box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.43);
+}
+.carrito_regresar > a {
+	text-decoration: none;
+	font-size: 16px;
+	color: var(--color-letras);
+	display: flex;
+    align-items: center;
+}
 .contenedor_carrito {
 	display: block;
 	background: #333;
 	padding: 20px;
-	height: 100vh;
+	min-height: 100vh;
+	width: 100%;
 }
 .carrito {
 	background: #fff;
@@ -111,7 +133,10 @@ body {
 	margin: auto;
 }
 .carrito-img {
-	width: 80px !important;
+	min-width: 80px !important;
+	min-height: 80px !important;
+	max-width: 80px !important;
+	max-height: 80px !important;
 }
 .suma_total_carrito {
 	background: linear-gradient(to right, #F7898A, #5860B9);
@@ -131,6 +156,9 @@ body {
 	height: auto;
 	margin: auto;
 	padding-bottom: 20px;
+}
+.carrito_barra_moviles {
+	display: none;
 }
 .carrito_fila_precio {
 	min-width: 130px;
@@ -970,9 +998,10 @@ footer {
 .section_principal_btncomprar {
 	background: #08a5ff;
 	color: #fff;
-	font-size: 17px;
+	font-size: 14px;
+	font-weight: 700;
 	border: none;
-	padding: 5px 15px;
+	padding: 10px 15px;
 	border-radius: 5px;
 	cursor: pointer;
 }
@@ -1164,15 +1193,15 @@ footer {
 }
 .detalle_info_precio_anterior p.antes {
 	display: inline;
-	color: #FF6600;
-	font-size: 15px;
-	font-weight: 500;
+	color: #FF781E;
+	font-size: 16px;
+	font-weight: 600;
 	text-decoration: line-through;	
 }
 .detalle_info_precio_anterior span.promo {
 	color: #fff;	
-	font-size: 18px;
-	font-weight: 500;
+	font-size: 16px;
+	font-weight: 600;
 	background: linear-gradient(to right, orange, #FF6600);
 	padding: 5px 10px;
 	border-radius: 2.5px;
@@ -1196,9 +1225,10 @@ footer {
 	margin-right: 15px;
 }
 .detalle_info_precio > .total {
-	font-size: 40px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 30px;
+	font-weight: 700;
 	color: #000;
-	font-weight: 300;
 }
 .detalle_info_item {
 	margin: 10px 0;
@@ -1223,18 +1253,24 @@ footer {
 	display: flex;
 	flex-direction: column;
 }
+
 .detalle_info_color, 
 .detalle_info_talla {
 	color: #9C9C9C;
 	margin-bottom: 20px;
 	border: 1px solid #ccc;
+	text-transform: capitalize;
 }
 .detalle_info_btn_comprar {
+	font-family: 'Montserrat', sans-serif;
 	margin-top: 30px;
 	align-self: center;
+	border: none;
+	border-radius: 2px;
 	width: 100%;
-	padding: 10px 0;
-	font-size: 18px;
+	padding: 15px 0;
+	font-size: 16px;
+	font-weight: 600;
 	background: var(--color-azul);
 }
 .detalle_info_descripcion {}
@@ -1474,6 +1510,8 @@ footer {
 }
 .seccion_resumen_pedido {
 	background: #F5F5F5;
+	padding-right: 0;
+	padding-left: 0;
 }
 .payment_proceso {
 	display: none;
@@ -1541,10 +1579,13 @@ footer {
 	padding: 5px;
 	display: flex;
 	margin-bottom: 5px;
+	position: relative;
 }
 .pedido-img {
-	width: 150px;
-	height: 150px;
+	min-width: 100px;
+	max-width: 100px;
+	min-height: 100px;
+	max-height: 100px;
 	margin-right: 10px;
 }
 .pedido-img > a > img {
@@ -1552,23 +1593,20 @@ footer {
 	margin-bottom: 0;
 }
 .pedido-info {
-	/*padding: 5px;*/
 	width: 100%;
 }
 .pedido-info-list {
 	padding-left: 0;
-	margin-bottom: 0;
+	margin-bottom: 5px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 }
 .pedido-info-list .pedido-info-list-item {
 	display: flex;
-	/*margin: 2px;*/
 	font-size: 15px;
 	font-weight: 300;
 	color: #000;
-	margin-right: 20px;
 }
 .pedido-info-list > .pedido-info-list-item > a {
 	color: #000;
@@ -1586,31 +1624,35 @@ footer {
 }
 .pedido-info-list > .promocion-producto {
 	color: #717171;
+	font-size: 14px;
+	display: flex;
+	flex-wrap: wrap;
 }
 .pedido-info-list > .promocion-producto > .promocion-producto-precio-anterior {
 	text-decoration: line-through;
 	color: tomato;
 	margin-right: 5px;
+	width: 100px;
 }
 .pedido-info-list > .promocion-producto > .promocion-producto-tag {
 	background: linear-gradient(to right, orange, #FF6600);
 	color: #fff;
 	padding: 0 7px;
 	margin-right: 4px;
-	font-size: 14px;
 	padding-bottom: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 150px;
 }
 .pedido-info-list > .nombre-precio {
-	width: 90px;
+	font-family: 'Montserrat', sans-serif;
 	color: #000;
-	opacity: .7;
 	font-weight: 600;
-	font-size: 19px;
+	font-size: 17px;
 	display: flex;
 	align-items: center;
+	line-height: 40px;
 }
 .pedido-info-list > .nombre-precio > small {
 	font-size: 12px;
@@ -1647,16 +1689,19 @@ footer {
 	justify-content: center;
 	align-items: center;
 }
-.pedido-info-list > .nombre-opciones > .nombre-opciones-eliminar {
-	font-size: 22px;
+.pedido-info-list > .nombre-opciones-eliminar {
 	display: flex;
 	justify-content: center;
 	align-self: flex-end;
+	padding: 5px;
+	background: tomato;
+	position: absolute;
+	top: 0px;
+	right: 0px;
 }
-.pedido-info-list > .nombre-opciones > .nombre-opciones-eliminar > a {
-	color: tomato;
-	font-size: 22px;
-	margin-right: 20px;
+.pedido-info-list > .nombre-opciones-eliminar > a {
+	color: #fff;
+	font-size: 18px;
 	display: flex;
 }
 
@@ -1710,6 +1755,9 @@ footer {
  	width: 100%;
  	margin: 0;
 }
+.tarjeta_resumen_pedidos > .resumen_table td {
+	padding: 10px 5px 10px 0px;
+}
 .tarjeta_resumen_pedidos > .resumen_table th {
  	text-align: left;
  	font-weight: 300;
@@ -1720,6 +1768,17 @@ footer {
 }
 .tarjeta_resumen_pedidos > .resumen_table td {
  	text-align: right;
+}
+.tarjeta_resumen_pedidos > .resumen_table .resaltado {
+ 	background: linear-gradient(to right, var(--color-azul), var(--color-azul-hover));
+ 	padding: 3px 15px;
+ 	border-radius: 3px;
+ 	font-size: 15px;
+ 	color: #fff;
+}
+.tarjeta_resumen_pedidos > .resumen_table td.resumen_total_pagar {
+ 	font-family: 'Montserrat', sans-serif;
+ 	font-weight: 700;
 }
 .tarjeta_botones_pedidos > .pedidos_botones {
 	padding: 20px;

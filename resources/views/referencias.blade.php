@@ -22,10 +22,10 @@
 		<section class="section_principal">
 			<span class="section_principal_titulo"> 
 				<a href="javascript:history.back(-1);">
-					<span class="fa fa-arrow-left mr-2"></span> {{ $producto['nombre'] }}
+					<span class="fa fa-chevron-left mr-2"></span> {{ $producto['nombre'] }}
 				</a>
 				<a href="{{ route('showDetallesCompra', [ $producto['ref'], $producto['nombre-url'] ]) }}">
-					<button class="section_principal_btncomprar">Comprar</button>				
+					<button class="section_principal_btncomprar">VER DETALLES <span class="fa fa-chevron-right ml-2"></span></button>				
 				</a>				
 			</span>
 		</section>

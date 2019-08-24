@@ -40,25 +40,26 @@
 											{{ $carrito['nombre'] }}
 										</a>
 									</li>
-									@if($carrito['talla'] != '')
-										<li class="pedido-info-list-item talla-producto">
-											<b>Talla: {{ $carrito['talla'] }} </b>
-										</li>
-									@endif
-									@if($carrito['color'] != '')
-										<li class="pedido-info-list-item color-producto">
-											<b>Color: {{ $carrito['color'] }} </b>
-										</li>
-									@endif
+									<?php 
+										$color = $carrito['color'] != '' ? $carrito['color'] : '';
+										$talla = $carrito['talla'] != '' ? $carrito['talla'] : '';
+									?>
+									<li class="pedido-info-list-item talla-producto">
+										<b>Talla: {{ $talla }} | Color: {{ $color }} </b>
+									</li>
+
+
 									@if($carrito['promocion'] != '')
 										<li class="pedido-info-list-item promocion-producto">
-											<span class="promocion-producto-precio-anterior">${{ number_format($carrito['precio'], 0, '', '.') }}</span>
-											<span class="promocion-producto-tag">{{ $carrito['promocion'] }} OFF</span>
+											<span class="promocion-producto-precio-anterior">
+												COP$ {{ number_format($carrito['precio'], 0, '', '.') }}
+											</span>
+											<span class="promocion-producto-tag">
+												COP$ {{ number_format($carrito['promocion'], 0, '', '.') }} DCTO
+											</span>
 										</li>
 									@endif
-									<li class="pedido-info-list-item nombre-precio">
-										${{ number_format($carrito['total'], 0, '', '.') }} <small> COP</small>
-									</li>
+
 									<li class="pedido-info-list-item nombre-opciones">
 										<div class="nombre-opciones-items nombre-opciones-cantidad">
 											<input style="width: 30px;" class="ml-2" type="number" min="1" max="10" value="{{ $carrito['cantidad'] }}" id="producto_{{ $carrito['id'] }}">
@@ -73,12 +74,16 @@
 									      		<div class="fa fa-refresh"></div>
 									      	</a>
 										</div>
-										<div class="nombre-opciones-items nombre-opciones-eliminar">
-											<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
-						      					<span class="fa fa-trash-o"></span>
-						      				</a>
-										</div>
 									</li>
+
+									<li class="pedido-info-list-item nombre-precio">
+										COP$ {{ number_format($carrito['total'], 0, '', '.') }}
+									</li>
+									<div class="nombre-opciones-items nombre-opciones-eliminar">
+										<a href="{{ route('deleteItem', $carrito['id']) }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
+					      					<span class="fa fa-trash-o"></span>
+					      				</a>
+									</div>
 								</ul>
 							</div>
 						</section>
@@ -344,18 +349,22 @@
 				</span>
 				<table class="table table-bordered resumen_table">
 					<tr>
-				    	<th>Productos ({{ $cantidad_productos }})</th>
-				    	<td>$ {{ number_format( $total_del_pedido, 0, ',', '.') }} <small>COP</small></td>
+				    	<th>
+				    		Productos <span class="resaltado">{{ $cantidad_productos }}</span>
+				    	</th>
+				    	<td>COP$ {{ number_format( $total_del_pedido, 0, '', '.') }} </td>
 				  	</tr>
 				  	@if($descuento_peso > 0)
 				  	<tr>
-				    	<th>Descuento por código</th>
-				    	<td>$ {{ number_format( $descuento_peso, 0, ',', '.') }} <small>COP</small></td>
+				    	<th>
+				    		<span class="resaltado">Descuento al pedido</span>
+				    	</th>
+				    	<td>COP$ {{ number_format( $descuento_peso, 0, '', '.') }} </td>
 				  	</tr>
 				  	@endif
 				  	<tr>
 				    	<th style="font-weight: 400;">TOTAL A PAGAR</th>
-				    	<td>$ {{  number_format($total_pagar, 0, ',', '.') }} <small>COP</small></td>
+				    	<td class="resumen_total_pagar">COP$ {{  number_format($total_pagar, 0, '', '.') }} </td>
 				  	</tr>
 				</table>
 			</section>
