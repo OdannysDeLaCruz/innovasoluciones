@@ -86,7 +86,7 @@ Route::get('/data', function() {
 	fclose($file);
 });
 Route::get('ver-facturas',function() {
-	return view('users.template-factura.factura');
+	return view('users.facturas.detalle');
 });
 Route::get('ver-email',function() {
 	return view('emails.confirmacion_pedido');
