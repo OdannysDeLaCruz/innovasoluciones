@@ -28,41 +28,12 @@ class VerificarPedidoController extends Controller
     }
     
     public function verificar() {
-        // dd(session('direccion_defecto'), session('direccion_nueva'));
         $cart = session('cart');
-        // Agregar datos de direccion del usuario a una variable de session 
-        // Se agragará la direccion con la que se registro por defecto
-
-        // Obtener direccion principal de envio del usuario
-        // $this->direccion_defecto['usuario_calle']      = Auth::user()->direccion()->value('calle');
-        // $this->direccion_defecto['usuario_numero_calle']  = Auth::user()->direccion()->value('numero');
-        // $this->direccion_defecto['usuario_barrio']     = Auth::user()->direccion()->value('barrio');
-        // $this->direccion_defecto['usuario_ciudad']     = Auth::user()->direccion()->value('ciudad');
-        // $this->direccion_defecto['usuario_departamento']  = Auth::user()->direccion()->value('departamento');
-        // $this->direccion_defecto['usuario_distrito']    = Auth::user()->direccion()->value('distrito');
-        // $this->direccion_defecto['usuario_pais']        = Auth::user()->direccion()->value('pais');
-        // $this->direccion_defecto['usuario_cod_postal']  = Auth::user()->direccion()->value('codigo_postal');
-
-        // $direccion_defecto_usuario = session('direccion_defecto');
-        // $direccion_defecto_usuario = $this->direccion_defecto;
-        // session()->put('direccion_defecto', $direccion_defecto_usuario);
-        // $direccion_defecto_usuario = session('direccion_defecto');
-
-        // Obtener direccion nueva de envio
-        // $direccion_nueva_pedido = session('direccion_nueva');
-        
-        // Verificar que dirección existe para envio del pedido
-        // if($direccion_nueva_pedido == []) {
-        //     $direccion = $direccion_defecto_usuario;
-        // }else {
-        //     $direccion = $direccion_nueva_pedido;
-        // }
-
+        // dd($cart);
 
         // Obtener direccciones del usuario
         $user_id = Auth::user()->id;
         $direcciones = Auth::user()->direccion;
-        // dd($direcciones);
 
         if (empty($cart)) {
             session()->flash('vacio', true);

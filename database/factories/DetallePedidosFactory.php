@@ -13,7 +13,8 @@ $factory->define(App\DetallePedido::class, function (Faker $faker) {
         'detalle_imagen' => $faker->imageUrl($width = 200, $height = 200),
         'detalle_precio' => 30000,
         'detalle_cantidad' => 1,
-        'detalle_promo_info' => 'promo_tipo - promo_costo',
+        'detalle_promo_tipo' => 'promo_tipo',
+        'detalle_promo_costo' => 'promo_costo',
         'detalle_precio_final' => 40000,
         'detalle_talla' => '20x20',
         'detalle_color' => 'negro'

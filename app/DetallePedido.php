@@ -15,7 +15,8 @@ class DetallePedido extends Model
         'detalle_imagen',
         'detalle_precio',
         'detalle_cantidad',
-        'detalle_promo_info',
+        'detalle_promo_tipo',
+        'detalle_promo_costo',
         'detalle_precio_final',
         'detalle_talla',
         'detalle_color'

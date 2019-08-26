@@ -24,7 +24,8 @@ class CreateDetallePedidosTable extends Migration
             $table->integer('detalle_cantidad');
 
             // detalle_promo_info contendra los datos de promo_tipo y promo_costo en caso de que hayan sido aplicados a este producto, esto servira para dar mas información al administrador
-            $table->string('detalle_promo_info')->nullable(); 
+            $table->string('detalle_promo_tipo')->nullable(); 
+            $table->string('detalle_promo_costo')->nullable(); 
 
             // Precio final = (detalle_precio * detalle_cantidad) - (descuento * detalle_precio)
             // El descuento se aplica a la hora de crear el detalle_pedido

@@ -35,6 +35,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('dateformat', function ($expression) {            
             return "<?php echo strftime('%A, %d de %B de %Y - %H:%M', strtotime($expression)); ?>"; 
         });
+        Blade::directive('dateformatsimple', function ($expression) {            
+            return "<?php echo strftime('%d de %B de %Y', strtotime($expression)); ?>"; 
+        });
     }
 
     /**

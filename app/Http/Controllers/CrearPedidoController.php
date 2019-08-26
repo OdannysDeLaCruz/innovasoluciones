@@ -69,9 +69,14 @@ class CrearPedidoPayuController extends Controller
 
 		  						// Verifico si tiene algún tipo de promocion
 			  		  			if (array_key_exists('promo_tipo', $detalle)) {
-			  							$promo_info = "Tipo de promoción " . $detalle['promo_tipo'] . ", tiene un descuento de " . $detalle['promo_costo'];
+			  							// $promo_info = "Tipo de promoción " . $detalle['promo_tipo'] . ", tiene un descuento de " . $detalle['promo_costo'];
+
+			  							$promo_tipo = $detalle['promo_tipo'];
+			  							$promo_costo = $detalle['promo_costo'];
 			  		  			}else {
 			  		  				$promo_info = '';
+			  		  				$promo_tipo = '';
+			  						$promo_costo = '';
 			  		  			}
 
 		  						// Crear detalle por cada producto en el carrito
@@ -83,7 +88,8 @@ class CrearPedidoPayuController extends Controller
 							        'detalle_imagen'       => $detalle['imagen'],
 							        'detalle_precio'       => $detalle['precio'],
 							        'detalle_cantidad'     => $detalle['cantidad'],
-							        'detalle_promo_info'   => $promo_info,
+							        'detalle_promo_tipo'   => $promo_tipo,
+							        'detalle_promo_costo'  => $promo_costo,
 							        'detalle_precio_final' => $detalle['total'],
 							        'detalle_talla'        => $detalle['talla'],
 							        'detalle_color'        => $detalle['color']

@@ -54,9 +54,20 @@
 									<span class="promocion-producto-precio-anterior">
 										COP$ {{ number_format($carrito['precio'], 0, '', '.') }}
 									</span>
-									<span class="promocion-producto-tag">
-										COP$ {{ number_format($carrito['promocion'], 0, '', '.') }} DCTO
-									</span>
+
+									@if($carrito['promo_tipo'] == '%')
+										<span class="promocion-producto-tag">
+											{{ $carrito['promocion'] }} DCTO
+										</span>
+									@elseif($carrito['promo_tipo'] == '$')
+										<span class="promocion-producto-tag">
+											COP$ {{ number_format($carrito['promocion'], 0, '', '.') }} DCTO
+										</span>
+									@else
+										<span class="promocion-producto-tag">
+											{{ $carrito['promocion'] }}
+										</span>
+									@endif
 								</li>
 							@endif
 							<li class="pedido-info-list-item nombre-opciones">
