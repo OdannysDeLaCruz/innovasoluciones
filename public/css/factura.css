@@ -1,0 +1,219 @@
+@page { 
+	margin: 40px 40px 20px; 
+}
+body {
+	z-index: 1;
+	font-family: "Arial", Sans-Serif;
+}
+:root {
+	/*Colores de Innova*/
+	--color-azul: #00AFF0;
+	--color-verde: #00A85A;
+	--color-magenta: #EE2F5A;
+	--color-amarillo: #FFF112;
+	--color-naranja: #F58634;
+	--color-morado: #A43792;
+}
+.header {
+	width: 100%;
+	height: 100px;
+	margin-bottom: 20px;
+	position: relative;
+	border-bottom: 1px solid #ccc;
+}
+.header-logotipo {
+	width: 100%;
+	text-align: center;
+}
+.header-logotipo > img {
+	width: 200px;
+}
+.header-info {
+	width: 100%;
+}
+.header-info > p {
+	font-size: 14px;
+	line-height: 5px;
+	color: #000;
+	opacity: .5;
+	text-align: center;
+}
+.detalle-factura {
+	height: 210px;
+}
+.bloque {
+	margin: 0px;
+	float: left;
+	width: 330px;
+	width: 50%;
+	padding: 10px 0px;
+}
+.bloque-items {
+	list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.bloque-item-titulo {
+	font-size: 14px;
+}
+.bloque-item-titulo > div {
+	font-weight: 600;
+	margin-bottom: 0px;
+	color: #00313a;
+}
+.bloque-item-titulo > div > p {
+	font-weight: 500;
+	display: inline-block;
+	opacity: .9;
+	margin: 10px 0px;
+}
+.productos {
+	font-size: 14px;
+	width: 100%; 
+	border-collapse: collapse; 
+}
+.productos thead {
+	background: #00AFF0;
+}
+.productos thead th {
+	color: #fff
+}
+.productos th {
+	font-size: 14px;
+	font-weight: normal;
+	padding: 8px;
+	color: #000;
+	font-weight: bold;
+}
+.productos tbody tr {
+	height: 40px;
+}
+.productos tbody tr:nth-child(odd) {
+	background: #fff;
+}
+.productos tbody tr:nth-child(even) {
+	background: rgba(0, 175, 240, .2);
+}
+.productos td {
+	padding: 8px;
+	color: #000;
+}
+.productos td.total {
+	font-weight: bold;
+}
+.contenedor-tabla-total {
+	margin-top: 30px;
+	padding: 10px;
+	height: 200px;
+}
+.contenedor-tabla-total > table {
+	float: right;
+	padding: 10px;
+	width: 400px;
+}
+.contenedor-tabla-total > table th.titulos {
+	font-size: 14px;  
+	padding: 5px;     
+	color: #00313a;
+	font-weight: bold;
+	text-align: left;
+}
+.contenedor-tabla-total > table td.texto {
+	font-size: 15px;
+	font-weight: normal;
+	color: #00313a;
+	text-align: right;
+	padding-right: 10px;
+}
+.contenedor-tabla-total > table tr.total {
+	height: 60px;
+	background: #00AFF0;
+}
+
+
+
+
+
+
+
+/*
+.total_pagar {
+	font-size: 15px;
+	background: #0066ff;
+	color: #fff;
+	width: 250px;
+	padding: 10px;
+	text-align: center;
+	border-radius: 5px;
+	position: relative;
+}
+.total_pagar > h4 {
+	margin: 0;
+}
+
+.facturar, .enviar {
+	width: 330px;
+	margin: 0px;
+	position: relative;
+}
+.facturar th, .enviar th {
+	font-size: 13px;
+	width: 80px;
+}
+.facturar td, .enviar td {
+	font-size: 12px;
+	text-align: left;
+}
+.detalle_titulo {
+	background: #6a9ca4;
+	color: #00313a;
+	padding: 10px;
+	margin: 0px;
+	font-size: 13px;
+	text-align: center;
+}
+
+.facturar,
+.enviar, 
+.procesamiento {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 15px; 
+	background: #e8edff;
+	color: #669;
+	margin: 30px 0;
+}
+
+.facturar td, 
+.enviar td, 
+.procesamiento td {
+	padding: 5px;     
+	font-weight: bold;
+}
+.procesamiento > td {
+	text-align: right;
+	min-width: 300px;
+	background: red;
+}
+.procesamiento .total_pagar {
+	background: #6A9CA4;
+	color: #00313a;
+}
+.msm_envio {
+	width: 290px;
+}
+.msm_envio p {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;			
+	font-size: 12px;
+	color: #332;
+	text-align: justify;
+	margin: 0;
+}
+.footer {
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	left: 0;
+}
+.footer > img {
+	width: 100%;
+}*/
