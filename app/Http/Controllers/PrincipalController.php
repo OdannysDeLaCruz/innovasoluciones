@@ -45,14 +45,14 @@ class PrincipalController extends Controller
 
     	$publicidad = $publicidad->isEmpty() ? '' : $publicidad;
 
-    	// return view('index',
-    	// 	compact(
-     //            'productos_nuevos',
-     //            'algunos_productos',
-     //            'publicidad'
-    	// 	)
-    	// );
-        return view('home');
+    	return view('index',
+    		compact(
+                'productos_nuevos',
+                'algunos_productos',
+                'publicidad'
+    		)
+    	);
+        // return view('home');
     }
     public function showProductos() {
         $productos = App\Producto::select('productos.*', 'promociones.promo_tipo', 'promociones.promo_costo')

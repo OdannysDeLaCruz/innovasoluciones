@@ -1842,6 +1842,7 @@ footer {
 	display: flex;
 	justify-content: space-between;
 	padding: 15px;
+	margin-bottom: 20px;
 	border: none;
 	cursor: pointer;
 	position: relative;
@@ -1851,7 +1852,7 @@ footer {
 	margin: 0;
 	display: flex;
 	align-items: center;
-	font-size: 15px;
+	font-size: 17px;
 }
 .tarjeta_direccion_envio > .direccion_envio > .direccion_envio_texto:hover {
 	color: var(--color-azul);
@@ -1877,6 +1878,7 @@ footer {
 }
 /*Deseño de tarjeta flotante*/
 .direccion_envio_tarjeta_flotante {
+	min-width: 200px;
 	padding: 10px;
 	border: 1px solid #ccc;
 	background: #fff;
@@ -1886,7 +1888,7 @@ footer {
 	flex-direction: column;
 	box-shadow: 0px 0px 3px #ccc;
 	top: 50px;
-	left: 200px;
+	left: 50px;
 	z-index: 999;
 }
 .direccion_envio_tarjeta_flotante:before {
@@ -1936,12 +1938,18 @@ footer {
 	margin: 20px 0;
 }
 .tarjeta_direccion_envio > .direccion_envio > .direccion_envio_opciones {
-	width: 100px;
-	padding-left: 5px;
+	min-width: 20px;
+	max-width: 20px;
 	text-align: right;
+	margin-left: 5px;
+	border-left: 1px solid tomato;
+	display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
 }
 .tarjeta_direccion_envio > .direccion_envio > .direccion_envio_opciones > .direccion_envio_opciones_eliminar {
-	font-size: 14px;
+	font-size: 19px;
 	color: tomato;
 }
 
@@ -1984,6 +1992,7 @@ footer {
 /*--Fomulario cambiar direccion de envio--*/
 .contenedor-form-cambiar-direccion {
 	display: none;
+	padding-top: 5px;
 }
 .form-cambiar-direccion {
 	margin: auto;
@@ -2002,7 +2011,17 @@ footer {
 .form-cambiar-direccion-contenedor-titulo {
 	font-size: 20px;
 	margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
+.form-cambiar-direccion-contenedor-titulo >  .btn-cerrar-form-cambio-direccion {
+	font-size: 20px;
+	padding: 10px;
+	color: tomato;
+	cursor: pointer;
+}
+
 .form-cambiar-direccion-contenedor-tooltips {
 	font-size: 13px;
 	color: var(--color-azul);

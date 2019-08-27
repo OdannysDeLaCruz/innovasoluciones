@@ -180,6 +180,11 @@ $(document).ready(function(){
     // MOSTRAR FORMULARIO PARA AGREGAR DIRECCIONES
     $('.btn-mostrar-form-cambio-direccion').on('click', function(e){
         e.preventDefault();
+
+        $('html, body').animate({
+            scrollTop: $(this).offset().top - 70
+        }, 500);
+
         let display = $('.contenedor-form-cambiar-direccion').css('display');
         if (display == 'none') {
             $('.contenedor-form-cambiar-direccion').slideDown(200);
@@ -188,19 +193,16 @@ $(document).ready(function(){
             $('.contenedor-form-cambiar-direccion').slideUp(200);;            
         }
     });
+    // OCULTAR FORMULARIO PARA AGREGAR DIRECCIONES
+    $('.btn-cerrar-form-cambio-direccion').on('click', function(e){
+        e.preventDefault();
 
-    // OCULTAR O MOSTRAR LA SECCION DE INFORMACION DEL PEDIDO
-    $('#btn-toggle-detalles').on('click', function(){
-        let display = $('#info_pedido').css('display');
-        if (display == 'flex') {
-            $('#info_pedido').fadeOut(200);
-            $('#texto-toggle').text('Mostrar detalles');
-            $('#icono-toggle').css('transform', 'rotate(-90deg)')
+        let display = $('.contenedor-form-cambiar-direccion').css('display');
+        if (display == 'none') {
+            $('.contenedor-form-cambiar-direccion').slideDown(200);
         }
         else {
-            $('#info_pedido').fadeIn(200);
-            $('#texto-toggle').text('Ocultar detalles');
-            $('#icono-toggle').css('transform', 'rotate(-0deg)')
+            $('.contenedor-form-cambiar-direccion').slideUp(200);;            
         }
     });
 
@@ -242,6 +244,23 @@ $(document).ready(function(){
             }
         });
     });
+
+    // OCULTAR O MOSTRAR LA SECCION DE INFORMACION DEL PEDIDO
+    $('#btn-toggle-detalles').on('click', function(){
+        let display = $('#info_pedido').css('display');
+        if (display == 'flex') {
+            $('#info_pedido').fadeOut(200);
+            $('#texto-toggle').text('Mostrar detalles');
+            $('#icono-toggle').css('transform', 'rotate(-90deg)')
+        }
+        else {
+            $('#info_pedido').fadeIn(200);
+            $('#texto-toggle').text('Ocultar detalles');
+            $('#icono-toggle').css('transform', 'rotate(-0deg)')
+        }
+    });
+
+    
 
     // ASIGNAR DIRECCION POR DEFECTO
     $('.direccion_envio_texto').on('click', function() {
@@ -349,15 +368,12 @@ $(document).ready(function(){
         }
     );
 
-    
-
     // OCULTAR SECCION TIPO DE ENVIO SI NO HAY DIRECCIONES EN LA SECCION (#seccionDirecciones)
     if( $('.direccion_envio').length > 0 ) {
         console.log( 'Existe' );
         $('.tarjeta_tipo_envio').css('display', 'block');
     }
 
-    // 
     $('.btn_opcion_envio').on('click', function(e) {
         // e.preventDefault();
         $('#cargador_tipo_envio').css('display', 'flex');

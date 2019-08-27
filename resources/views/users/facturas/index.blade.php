@@ -30,7 +30,7 @@
 							<tr class="facturas_titulos">
 								<th>Ref. pedido</th>
 								<th class="d-none d-md-table-cell">Fecha de la factura</th>
-								<th>Costo <small>(COP)</small></th>
+								<th>Total</th>
 								<th>Detalles</th>
 								<th>Estado</th>
 							</tr>
@@ -40,7 +40,7 @@
 							<tr class="facturas_datos">
 								<td>{{ $pedido['ref_venta'] }}</td>
 								<td class="d-none d-md-table-cell">@dateformat( $pedido['fecha_creado'] )</td>
-								<td class="facturas_datos_precio">$ {{ $pedido['precio_final'] }}</td>
+								<td class="facturas_datos_precio">COP$ {{ number_format($pedido['total'], 0, '', '.') }}</td>
 								<td>
 									<a target="_blanc" href="{{ route('detalle_factura', $pedido['id']) }}">Ver</a> | 
 									<a href="{{  route('descargar_factura', $pedido['id']) }}">Descargar</a>

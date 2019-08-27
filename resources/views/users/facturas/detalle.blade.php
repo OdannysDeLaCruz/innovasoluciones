@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta charset="UTF-8">
-	<title>Factura Innova Inc</title>
+	<title>FACTURA_{{ $pedido[0]['ref_venta'] }}</title>
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/factura.css')}}">
 
 </head>

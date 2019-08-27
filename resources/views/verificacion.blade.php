@@ -178,7 +178,7 @@
 
 			<!-- SECCION DIRECCION DE ENVIO DE PEDIDO -->
 			<section id="datos_envio" class="payment_proceso payment_envio">
-				<h1 class="payment_titulos">¿Donde quieres recibirlo?</h1>
+				<h1 class="payment_titulos">¿A que dirección deseas recibirlo?</h1>
 
 				<section class="payment_proceso_tarjeta tarjeta_direccion_envio" id="seccionDirecciones">
 					@if(isset($direcciones))
@@ -194,7 +194,7 @@
 							<div class="direccion_envio {{ $defecto }} direccion_defecto_id">
 								<p class="direccion_envio_texto {{ $defecto }}" data-href="{{ route('establecer-direccion-defecto') }}" data-defecto="{{ $defecto }}" data-direccion-id="{{ $direccion->id }}">
 									<span class="fa fa-check direccion_envio_texto_iconselect {{ $defecto }}"></span>
-									{{ "$direccion->nombre_completo | $direccion->direccion, $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais | $direccion->telefono" }}
+									{{ "$direccion->nombre_completo" }} <br> {{ "$direccion->direccion, $direccion->ciudad, $direccion->estado, $direccion->codigo_postal, $direccion->pais" }}
 								</p>
 								<!-- tarjeta de detalle de dirección -->
 								<span class="direccion_envio_tarjeta_flotante">
@@ -216,7 +216,7 @@
 									</span>
 								</span>
 								<span class="direccion_envio_opciones">
-									<a href="#" data-href="{{ route('eliminar-direccion') }}" data-direccion-id="{{ $direccion->id }}" class="direccion_envio_opciones_eliminar">Eliminar</a>
+									<a href="#" data-href="{{ route('eliminar-direccion') }}" data-direccion-id="{{ $direccion->id }}" class="direccion_envio_opciones_eliminar">X</a>
 								</span>
 							</div>
 						@endforeach	
@@ -225,13 +225,13 @@
 
 					<div class="link_agregar_direccion">
 						<a href="" class="direccion_link text-center btn-mostrar-form-cambio-direccion">
-							<span class="fa fa-plus mr-2"></span> Agregar nueva dirección de envío
+							<span class="fa fa-plus mr-2"></span> Agregar nueva dirección
 						</a>
 					</div>
 				</section>
 			
 				<!-- Formulario cambiar dirección de envio del pedido -->
-				<div class="contenedor-form-cambiar-direccion payment_proceso_tarjeta">
+				<div class="contenedor-form-cambiar-direccion payment_proceso_tarjeta" id="seccion_form_agregar_direccion">
 					<!-- Cargador de espera -->
 					<div class="tarjeta_direccion_envio_cargador" id="cargador_agregar_direccion">
 						<img src="{{ asset('img/logos/cargador.gif') }}">
@@ -239,11 +239,14 @@
 					<form class="form-cambiar-direccion" id="form_agregar_direccion" action="{{ route('agregar-direccion') }}" method="POST">
 						@csrf
 						<div class="form-cambiar-direccion-contenedor d-flex justify-content-center justify-content-md-start">
-							<h4 class="form-cambiar-direccion-contenedor-titulo">Dirección de envío</h4>
+							<h4 class="form-cambiar-direccion-contenedor-titulo">
+								Dirección de envío 
+								<span class="btn-cerrar-form-cambio-direccion" id="">X</span>
+							</h4>
 							<!-- CAMPO NOMBRE -->
 							<div class="form-group">
 								<input class="form-cambiar-direccion-contenedor-inputs" type="text" name="nombre_completo" id="nombre_completo" placeholder="Nombre de destinatario" required>
-								<label class="form-cambiar-direccion-error" id="nombre_error">Mensaje de error aqui</label>
+								<label class="form-cambiar-direccion-error" id="nombre_error"></label>
 							</div>
 							<!-- CAMPO PAIS -->
 							<div class="form-group">

@@ -247,6 +247,12 @@
 		height: auto;
 		filter: grayscale(5);
 	}
+	.tarjeta_direccion_envio > .direccion_envio {
+	    padding: 0px; 
+	}
+	.tarjeta_direccion_envio > .direccion_envio > .direccion_envio_texto {
+		font-size: 13px;
+	}
 	.pedido-img .carrito-img {
 		width: 110px;
 		height: 110px;
