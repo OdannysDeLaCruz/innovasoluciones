@@ -14,15 +14,13 @@
 
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.2/build/alertify.min.js"></script>
 
+<!-- Cargar React. -->
+  <!-- Nota: cuando se despliegue, reemplazar "development.js" con "production.min.js". -->
+<!--   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script> -->
 
-<!-- Main Quill library -->
-<!-- <script src="//cdn.quilljs.com/1.3.6/quill.js"></script> -->
-<!-- <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script> -->
-<!-- Core build with no theme, formatting, non-essential modules -->
-<!-- <script src="//cdn.quilljs.com/1.3.6/quill.core.js"></script> -->
-
-<!-- Librería Editor.js -->
-<!-- <script src="{{ asset('js/editor.js') }}"></script> -->
+  <!-- Cargamos nuestro componente de React. -->
+  <!-- <script src="{{ asset('js/tags_adder.js') }}"></script> -->
 
 <!-- Ckeditor.js -->
 <script src="https://cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>

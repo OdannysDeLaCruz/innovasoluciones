@@ -57,12 +57,16 @@ Auth::routes();
 // RUTAS PARA ADMIN - PANEL DE ADMINISTRACION
 Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function() {
 	Route::get('/', 'AdminController@index')->name('admin');
-	Route::get('/productos', 'AdminController@getProductos')->name('getProductos');
-	Route::get('/productos/nuevo', 'AdminController@showCreateProductos')->name('showCreateProductos');	
-	Route::get('/productos/{producto_ref}', 'AdminController@getDetallesProducto')->name('getDetallesProducto');
-	Route::post('/productos/{producto_ref}/actualizar', 'AdminController@actualizarProducto')->name('actualizarProducto');
-	Route::get('/productos/eliminar/{id}', 'AdminController@eliminarProducto')->name('eliminarProducto');	
-	Route::post('/productos/registrar', 'AdminController@createProductos')->name('createProductos');
+
+	// PRODUCTOS
+	Route::get('/productos', 'ProductoController@index')->name('getProductos');
+	Route::get('/productos/crear', 'ProductoController@show')->name('showCreate');	
+	Route::post('/productos/{producto_ref}/actualizar', 'ProductoController@actualizarProducto')->name('actualizarProducto');
+	Route::get('/productos/{producto_ref}', 'ProductoController@getDetallesProducto')->name('getDetallesProducto');
+	Route::post('/productos/registrar', 'ProductoController@create')->name('createProducto');
+	Route::get('/productos/eliminar/{id}', 'ProductoController@eliminarProducto')->name('eliminarProducto');	
+
+
 	Route::get('/pedidos', 'AdminController@getPedidos')->name('getPedidos');
 	Route::get('/clientes', 'AdminController@getClientes')->name('getClientes');
 	Route::get('/codigos', 'AdminController@getCodigos')->name('getCodigos');

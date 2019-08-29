@@ -93,8 +93,74 @@ $(document).ready(function(){
     // ADMIN - PRODUCTOS
     $('.menu_opcion_logo').on('click', function(e){
         let ele = e.target.id;
-        $('#' + ele + ' + .menu_opcion_items').toggleClass('menu_visible');        
+        $('#' + ele + ' + .menu_opcion_items').toggleClass('menu_visible');
     });
+    $("#precio").on({
+        "focus": function(event) {
+            $(event.target).select();
+        },
+        "keyup": function(event) {
+            $(event.target).val(function(index, value) {
+                // Texto devuelto para el span precioPreview
+                let newValue = value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                $('#precioPreview').text(newValue);
+
+                // Texto devuelto para el input
+                return value.replace(/\D/g, "");
+            });
+        }
+    });
+
+    let tags = [];
+    $('#tagsInput').on('keypress', function (e) {
+        if(e.which == 32) {
+            // Obtener el input #tagsInput y limpiar de espacios en blanco
+            const value = $(this).val().trim();
+
+            if(value.length > 1) {
+                // Almacenar tags en un array
+                tags.push(value);
+                // Limpiar el input #tagsInput
+                $(this).val('');
+            }
+            // Limpiar tags-preview y input tags de valores antiguos
+            $('#tags-preview').html('');
+            $('#tags').val('');
+            for(let tag in tags) {
+                // Mostrar los tags en el tags-preview y en el input tags
+                $('#tags-preview').append(`<div class="tags-preview-item" data-index-tags="${tag}">${tags[tag]}</div>`);
+                
+                // Concatenar en el input #tags
+                let oldValue = $('#tags').val();
+                $('#tags').val(oldValue + tags[tag] + '-');
+            }
+        }
+    });
+
+    // Quitar tags del tags-view
+    $('#tags-preview').on('click', 'div.tags-preview-item',  function() {
+        let index = $(this).data('index-tags');
+        tags.splice(index, 1);
+        for(let tag in tags) {
+            console.log(tag);
+        }
+
+        // Limpiar denuevo tags-preview y input tags de valores antiguos
+        $('#tags-preview').html('');
+        $('#tags').val('');
+
+        for(let tag in tags) {
+            // Mostrar denuevo los tags en el tags-preview y en el input tags
+             $('#tags-preview').append(`<div class="tags-preview-item" data-index-tags="${tag}">${tags[tag]}</div>`);
+            
+            // Concatenar denuevo en el input #tags
+            let oldValue = $('#tags').val();
+            $('#tags').val(oldValue + tags[tag] + '-');
+        }
+    });
+
+
+
 
     // CONFIRMACION DE ELIMINAR PRODUCTO
     $('.btnEliminarProducto').on('click', function(e) {

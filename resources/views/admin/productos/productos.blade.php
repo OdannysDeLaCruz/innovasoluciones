@@ -8,9 +8,9 @@
 			<header class="encabezado_principal">
 				<h1 class="titulo_principal">Productos</h1>
 				<div class="crear_productos">
-					<a href="/admin/productos/nuevo">
+					<a href="{{ route('showCreate') }}">
 						<span class="fa fa-plus crear_productos_icon"></span>
-						Nuevo producto
+						Crear producto
 					</a>
 				</div>
 			</header>
