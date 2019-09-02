@@ -112,7 +112,8 @@ class CrearPedidoPayuController extends Controller
 							]);
 				        
 				 			// Enviar email de confirmacion de creacion del pedido, pero no de pago, la confimacion de pago la realiza el controlador ConfirmacionController
-							// $this->sendEmailConfirmation();
+
+							$this->sendEmailConfirmation(Auth::user()->email, Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido);
 
 		  					// Eliminar variables de session creadas a lo largo del proceso de compra
 							$this->eliminarVariablesSession();	            		
@@ -232,7 +233,7 @@ class CrearPedidoPayuController extends Controller
         }
 	}
 	// Enviar mensaje de confirmación al usuario
-	private function sendEmailConfirmation() {
-		Mail::to('el_odanis321@hotmail.com', 'Odannys De La Cruz')->send(new ConfirmacionPedidoRealizado());
+	private function sendEmailConfirmation($email, $user) {
+		Mail::to($email, $user)->send(new ConfirmacionPedidoRealizado());
 	}
 }

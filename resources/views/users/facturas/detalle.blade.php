@@ -53,7 +53,7 @@
 					<div>
 						Enviar a: <br>
 						<p style="line-height: 20px;">
-							{{ $direccion['nombre_completo'] }} <br>
+							{{ $direccion[0]['nombre_completo'] }} <br>
 						</p> 
 					</div>
 				</li>
@@ -61,8 +61,8 @@
 					<div>
 						Dirección: <br>
 						<p style="line-height: 20px;">
-							{{ $direccion['direccion'] }} <br>
-							{{ $direccion['ciudad'] }}, {{ $direccion['estado'] }}, {{ $direccion['codigo_postal'] }}, {{ $direccion['pais'] }}
+							{{ $direccion[0]['direccion'] }} <br>
+							{{ $direccion[0]['ciudad'] }}, {{ $direccion[0]['estado'] }}, {{ $direccion[0]['codigo_postal'] }}, {{ $direccion[0]['pais'] }}
 						</p> 
 					</div>					
 				</li>

@@ -1188,6 +1188,8 @@ footer {
 	margin-top: 20px;
 	margin-bottom: 20px;
 	font-weight: 300;
+	display: flex;
+	flex-wrap: wrap;
 }
 .detalle_info_precio_anterior p.antes {
 	display: inline;
@@ -1212,6 +1214,8 @@ footer {
 	font-size: 30px;
 	font-weight: 400;
 	color: #0CB418;
+	display: flex;
+	flex-wrap: wrap;
 }
 .detalle_info_precio .icono_total {
 	font-size: 25px;

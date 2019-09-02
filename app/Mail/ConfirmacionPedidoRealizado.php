@@ -30,6 +30,6 @@ class ConfirmacionPedidoRealizado extends Mailable
     {
         return $this->from('ventas@innovainc.co', 'Confirmación de tu pedido en Innova Inc')
                     ->view('emails.confirmacion_pedido')
-                    ->subject('Mensaje de prueba');
+                    ->subject('Confirmación de tu pedido en Innova Inc');
     }
 }
