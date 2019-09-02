@@ -95,6 +95,7 @@ $(document).ready(function(){
         let ele = e.target.id;
         $('#' + ele + ' + .menu_opcion_items').toggleClass('menu_visible');
     });
+    // DINAMISMO PRECIO DEL PRODUCTO
     $("#precio").on({
         "focus": function(event) {
             $(event.target).select();
@@ -111,8 +112,12 @@ $(document).ready(function(){
         }
     });
 
+    // DINAMISMO ETIQUETAS DEL PRODUCTO
     let tags = [];
     $('#tagsInput').on('keypress', function (e) {
+        if (e.which == 13) {
+            return false;
+        }
         if(e.which == 32) {
             // Obtener el input #tagsInput y limpiar de espacios en blanco
             const value = $(this).val().trim();
@@ -156,6 +161,20 @@ $(document).ready(function(){
             // Concatenar denuevo en el input #tags
             let oldValue = $('#tags').val();
             $('#tags').val(oldValue + tags[tag] + '-');
+        }
+    });
+
+    // DINAMISNMO COSTO DE ENVIO DEL PRODUCTO
+    $("#costo_envio").on({
+        "keyup": function(event) {
+            $(event.target).val(function(index, value) {
+                // Texto devuelto para el span precioPreview
+                let newValue = value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                $('#costo_envioPreview').text(newValue);
+
+                // Texto devuelto para el input
+                return value.replace(/\D/g, "");
+            });
         }
     });
 

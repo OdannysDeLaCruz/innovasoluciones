@@ -2588,6 +2588,7 @@ footer {
 	font-size: 22px; 
 	font-weight: 800;
 	color: var(--color-letras);
+	font-family: 'Montserrat', sans-serif;
 }
 .compras_users .info_pedido {
 	padding-top: 20px;
@@ -2643,6 +2644,7 @@ footer {
 	display: flex;
 	padding-left: 10px;
 	flex-direction: column;
+	align-items: flex-start;
 }
 .compras_users > .compras > .compras_info > .compras_info_datos > a > .compras_info_descripcion {
 	font-size: 17px;
@@ -2657,14 +2659,15 @@ footer {
 .compras_users > .compras > .compras_info > .compras_info_datos > .compras_promo_info {
 	font-size: 16px;
 	background: #00DAEE;
-	border-radius: 25px;
+	border-radius: 4px;
 	color: #fff;
-	padding: 2px 5px 2px 10px;
+	padding: 2px 10px;
 }
 .compras_users > .compras > .compras_info > .compras_info_datos > .compras_total {
 	margin-top: 10px;
-	font-size: 1.01em;
-	font-weight: 600;
+	font-size: 18px;
+	font-weight: 800;
+	font-family: 'Montserrat', sans-serif;
 }
 
 /*---Estilos de la tabla de facturas del usuario---*/

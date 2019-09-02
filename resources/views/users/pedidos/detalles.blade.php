@@ -34,7 +34,7 @@
 						</span>
 					</h1>
 					<span class="costo_pedido">
-						Costo del pedido: $ {{ $costo_pedido }}					
+						Total: COP$ {{ $costo_pedido }}					
 					</span>
 					@if(isset($info_pedido) && isset($detalle_pedido))
 						@foreach($info_pedido as $pedido)
@@ -42,8 +42,8 @@
 								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
 									<span class="info_pedido_seccion_block_items titulo">Dirección envío</span>
 									<span class="info_pedido_seccion_block_items texto">
-										{{ $direccion[0]->calle . ' #' . $direccion[0]->numero . ' ' . $direccion[0]->barrio }} <br>
-										{{ $direccion[0]->ciudad . ' - ' . $direccion[0]->departamento . ' - ' . $direccion[0]->pais }}
+										{{ $direccion[0]->direccion }} <br>
+										{{ $direccion[0]->ciudad . ' - ' . $direccion[0]->estado . ', ' . $direccion[0]->pais }}
 									</span>
 								</div>
 								<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
@@ -55,19 +55,38 @@
 									<span class="info_pedido_seccion_block_items titulo">Valor de transacción pagado</span>
 									<span class="info_pedido_seccion_block_items texto">
 										@if($pedido->valor_transaccion != 0)
-											 {{ "$ " . number_format($pedido->valor_transaccion, 0, '', '.') . ' ' . $pedido->tipo_moneda_transaccion }}										
+											 {{ $pedido->tipo_moneda_transaccion . "$ " . number_format($pedido->valor_transaccion, 0, '', '.') }}			
 										@else
-											{{ "$ 0" }}
+											{{ "COP$ 0.0" }}
 										@endif
 									</span>
 								</div>
 								<!-- PROMOCION -->
 								@if($pedido->promo_nombre) 
 									<div class="info_pedido_seccion_block col-6 col-md-4 col-lg-">
-										<span class="info_pedido_seccion_block_items titulo">Promoción</span>
+										<span class="info_pedido_seccion_block_items titulo">Descuento por código</span>
 										<span class="info_pedido_seccion_block_items texto">
-												{{ 'Nombre: ' . $pedido->promo_nombre}} <br>
-												{{ 'Costo: ' . $pedido->promo_tipo . ' ' . number_format($pedido->promo_costo, 0, '', '.') }} <br>
+			
+									 		<table class="table table-bordered table-sm">
+													<tr>
+														<th scope="col">Codigo</th>
+														<td scope="row">
+															{{ $pedido->promo_nombre }}
+														</td>
+													</tr>											    
+													<tr>
+														<th scope="col">DCTO</th>
+														<td scope="row">
+															@if($pedido['promo_tipo'] == '%')
+																{{ $pedido['promo_costo'] }}%
+															@elseif($pedido['promo_tipo'] == '$')
+																COP$ {{ number_format($pedido['promo_costo'], 0, '', '.') }}
+															@elseif($pedido['promo_tipo'] == '2x1')
+																{{ '2x1' }}
+															@endif																
+														</td>
+													</tr>
+											</table>
 										</span>
 									</div>
 								@endif
@@ -149,18 +168,30 @@
 										<span class="compras_info_datos_items compras_costo_cantidad">
 											$ {{ number_format($detalle['detalle_precio'], 0, '', '.') }} x {{ $detalle['detalle_cantidad'] }} unidad(es)
 										</span>
-										@if($detalle['detalle_promo_info'] != '')
+
+									<!-- 	@if($detalle['detalle_promo_tipo'] != '')
 											<span class="compras_info_datos_items compras_promo_info">
 												{{ $detalle['detalle_promo_info'] }}
 											</span>
-										@endif
+										@endif -->
+
+										<span class="compras_info_datos_items compras_promo_info">
+											@if($detalle['detalle_promo_tipo'] == '%')
+									 			-{{ $detalle['detalle_promo_costo'] }}%
+									 		@elseif($detalle['detalle_promo_tipo'] == '$')
+									 			- {{ number_format($detalle['detalle_promo_costo'], 0, '', '.') }}
+									 		@elseif($detalle['detalle_promo_tipo'] == '2x1')
+									 			{{ '2x1' }}
+									 		@endif
+										</span>
+
 										<span class="compras_info_datos_items compras_total">
 											<?php 
 												$precio = $detalle['precio'] * $detalle['cantidad'];
 												$a_descontar = $precio * ($detalle['descuento_porcentual'] / 100);
 												$total = $precio - $a_descontar;
 											?> 
-											Total: $ {{ number_format($detalle['detalle_precio_final'], 0, '', '.') }} 
+											Total: COP$ {{ number_format($detalle['detalle_precio_final'], 0, '', '.') }} 
 										</span>	
 									</div>
 								</span>

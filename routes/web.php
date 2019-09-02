@@ -59,12 +59,12 @@ Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function() {
 	Route::get('/', 'AdminController@index')->name('admin');
 
 	// PRODUCTOS
-	Route::get('/productos', 'ProductoController@index')->name('getProductos');
-	Route::get('/productos/crear', 'ProductoController@show')->name('showCreate');	
-	Route::post('/productos/{producto_ref}/actualizar', 'ProductoController@actualizarProducto')->name('actualizarProducto');
-	Route::get('/productos/{producto_ref}', 'ProductoController@getDetallesProducto')->name('getDetallesProducto');
-	Route::post('/productos/registrar', 'ProductoController@create')->name('createProducto');
-	Route::get('/productos/eliminar/{id}', 'ProductoController@eliminarProducto')->name('eliminarProducto');	
+	Route::get('/productos', 'ProductoController@index')->name('getProducts');
+	Route::get('/productos/crear', 'ProductoController@create')->name('createProduct');	
+	Route::post('/productos/registrar', 'ProductoController@store')->name('storeProduct');
+	Route::get('/productos/{producto_ref}', 'ProductoController@show')->name('showProduct');
+	Route::post('/productos/{producto_ref}/actualizar', 'ProductoController@update')->name('updateProduct');
+	Route::get('/productos/eliminar/{id}', 'ProductoController@destroy')->name('destroyProduct');	
 
 
 	Route::get('/pedidos', 'AdminController@getPedidos')->name('getPedidos');

@@ -11,28 +11,24 @@ body {
 	--color-azul-oscuro: #162D50;
 	--color-azul-hover: #1D3B68;
 }
-.boton-defaul-azul {
-	background: #2541EA;
+.boton-defaul-verde {
+	background: #37C8AB;
 	color: #ffffff;
-	border-radius: 5px;
-	border: 1px solid #2518D3;
+	border-radius: 2px;
+	border: none;
 	font-size: 16px;
-	padding: 5px 10px;
+	text-transform: uppercase;
+	padding: 10px 20px;
 	cursor: pointer;
+}
+.boton-defaul-verde:hover {
+	background: #45BBA3;
 }
 .boton-defaul-blanco {
 	background: #ffffff;
 	border-radius: 5px;
 	border: 1px solid #cccccc;
 	font-size: 16px;
-	padding: 5px 10px;
-	cursor: pointer;
-}
-.boton-defaul-rojo {
-	background: none;
-	border: none;
-	font-size: 16px;
-	color: tomato;
 	padding: 5px 10px;
 	cursor: pointer;
 }
@@ -482,7 +478,7 @@ body {
 	padding: 20px;
 }
 .form_crear_producto .form-group {
-	max-width: 800px;
+	max-width: 1000px;
 	margin: 20px auto;
 	display: flex;
 	flex-direction: column;
@@ -493,13 +489,19 @@ body {
 .form_crear_producto .form-group-titulo {
 	font-size: 30px;
 	font-weight: 700;
-	margin: 10px 0px;
+	margin: 10px 0px 30px;
 	width: 100%;
 	text-align: left;
 }
 .form_crear_producto .form-group-subtitulo {
 	font-size: 17px;
 	margin: 15px 0;
+}
+.form_crear_producto .form-group-subtitulo.descripcion_por_imagen,
+.form_crear_producto .form-group-subtitulo.iva,
+.form_crear_producto .form-group-subtitulo.payu {
+	font-weight: 700;
+	font-family: "Montserrat", sans-serif;
 }
 .form_crear_producto .form_titulos_required {
 	color: tomato;
@@ -515,7 +517,8 @@ body {
 	width: 100%;
 	font-size: 16px;
 }
-.form_crear_producto .form-group-blocks-item > .precio-preview {
+.form_crear_producto .form-group-blocks-item > .form-group-subtitulo > .precio-preview,
+.form_crear_producto .form-group-blocks-item > .form-group-subtitulo > .costo_envio-preview {
 	margin: 10px 0;
 	font-size: 20px;
 	font-weight: 900;
@@ -524,8 +527,6 @@ body {
 	margin-bottom: 10px;
 	font-size: 17px;
 	font-weight: 900;
-	padding: 10px;
-	border: 1px solid lightgreen;
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
@@ -535,7 +536,7 @@ body {
 	font-weight: 600;
 	padding: 5px 10px;
 	background: lightgreen;
-	margin: 3px;
+	margin: 5px;
 	border-radius: 25px;
 	cursor: pointer;
 }
@@ -563,30 +564,15 @@ body {
 	font-size: 14px;
 	letter-spacing: .5px;
 }
-
-
-
-
-
 .form_crear_producto > .form_botones_accion {
-	max-width: 600px;
+	background: none;
 	margin: 10px auto 30px;
+	padding: 20px 0px;
 	display: flex;
-	justify-content: space-between;
+	flex-direction: row;
+	justify-content: flex-end;
 	align-items: center;
 }
-.form_crear_producto > .form_botones_accion > button > .fa {
-	font-size: 40px;
-}
-.form_crear_producto > .form_botones_accion > .btn_cancelar {
-	color: #EE7864;
-}
-.form_crear_producto > .form_botones_accion > .btn_cancelar:hover {
-	color: #F33E1E;
-}
-.form_crear_producto > .form_botones_accion > .btn_terminar {
-	color: #8CEA8E;
-}
-.form_crear_producto > .form_botones_accion > .btn_terminar:hover {
-	color: #2DD131;
+.form_crear_producto > .form_botones_accion > button {
+	font-weight: 600;
 }

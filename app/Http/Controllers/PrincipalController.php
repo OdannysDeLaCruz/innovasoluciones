@@ -57,6 +57,7 @@ class PrincipalController extends Controller
     public function showProductos() {
         $productos = App\Producto::select('productos.*', 'promociones.promo_tipo', 'promociones.promo_costo')
                                 ->leftJoin('promociones', 'productos.promocion_id', '=', 'promociones.id')
+                                ->latest('fecha_creado') 
                                 ->where([
                                     ['producto_estado', '=', 1],
                                     ['producto_cant', '>', 0]

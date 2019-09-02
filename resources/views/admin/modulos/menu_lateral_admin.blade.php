@@ -14,7 +14,7 @@
 			<li class="items  @yield('productos')">
 				<span class="items_icon fa fa-cubes"></span>
 				<span class="items_text">productos</span>				
-				<a href="{{ route('getProductos') }}" class="items_link"></a>
+				<a href="{{ route('getProducts') }}" class="items_link"></a>
 			</li>
 			<li class="items  @yield('pedidos')">
 				<span class="items_icon fa fa-shopping-bag"></span>

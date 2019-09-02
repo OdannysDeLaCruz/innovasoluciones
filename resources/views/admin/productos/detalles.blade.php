@@ -6,11 +6,11 @@
 	@section('contenido')
 	<section class="col-10 col-sm-10 col-md-10 contenido_principal">
 		<header class="encabezado_principal">
-			<h1 class="titulo_principal"> <a href="{{ route('getProductos') }}">Productos</a> / {{ "PRODUCTO2" }}</h1>
+			<h1 class="titulo_principal"> <a href="{{ route('getProducts') }}">Productos</a> / {{ "PRODUCTO2" }}</h1>
 		</header>
 		<section class="contenedor_tabla">
 			<h1 class="indicador_de_formulario">Tenga en cuenta que los campos con (<span class="form_titulos_required">*</span>) son obligatorios.</h1>
-			<form class="form_crear_producto form_editar_producto" id="form_editar_producto" action="{{ route('createProductos') }}" method="post" enctype="multipart/form-data">
+			<form class="form_crear_producto form_editar_producto" id="form_editar_producto" action="{{ route('createProduct') }}" method="post" enctype="multipart/form-data">
 				{{ csrf_field() }}
 
 				@if($producto_detalle)

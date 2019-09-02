@@ -8,7 +8,7 @@
 			<header class="encabezado_principal">
 				<h1 class="titulo_principal">Productos</h1>
 				<div class="crear_productos">
-					<a href="{{ route('showCreate') }}">
+					<a href="{{ route('createProduct') }}">
 						<span class="fa fa-plus crear_productos_icon"></span>
 						Crear producto
 					</a>
@@ -88,10 +88,10 @@
 								@endphp
 							</span>
 							<span class="contenedor_tabla_body_titulos producto-operaciones">
-								<a data-toggle="tooltip" data-placement="top" title="Ver producto" href="{{ route ('getDetallesProducto', $producto->id ) }}">
+								<a data-toggle="tooltip" data-placement="top" title="Ver producto" href="{{ route ('showProduct', $producto->id ) }}">
 									<span class="fa fa-edit mr-2 btn-ver-item"></span>
 								</a>  |  
-								<a class="btnEliminarProducto" data-toggle="tooltip" data-placement="top" title="Eliminar producto" href="{{ route ('eliminarProducto', $producto->id ) }}">
+								<a class="btnEliminarProducto" data-toggle="tooltip" data-placement="top" title="Eliminar producto" href="{{ route ('destroyProduct', $producto->id ) }}">
 									<span class="fa fa-trash ml-2 btn-eliminar-item"></span>
 								</a>
 							</span>
