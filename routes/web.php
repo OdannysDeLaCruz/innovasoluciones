@@ -67,6 +67,7 @@ Route::group(['middleware' => 'adminAuth', 'prefix' => 'admin'], function() {
 	Route::get('/productos/eliminar/{id}', 'ProductoController@destroy')->name('destroyProduct');	
 
 
+
 	Route::get('/pedidos', 'AdminController@getPedidos')->name('getPedidos');
 	Route::get('/clientes', 'AdminController@getClientes')->name('getClientes');
 	Route::get('/codigos', 'AdminController@getCodigos')->name('getCodigos');

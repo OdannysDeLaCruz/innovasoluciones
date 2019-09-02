@@ -125,9 +125,10 @@ class PrincipalController extends Controller
             $videos = App\VideoProducto::select('id', 'producto_id', 'video_url')->where('producto_id', $producto_id)->get();
 
             // Formatear los tags
-            foreach ($producto as $product) {
-                $tags = explode( ',', $product->producto_tags );
-            }
+            // foreach ($producto as $product) {
+            //     $tags = explode( '-', $product->producto_tags );
+            // }
+            $tags = $this->tagsFormat($producto);
             return view('detalles', compact('producto', 'imagenes', 'tags', 'videos'));
         }
     }
@@ -143,9 +144,10 @@ class PrincipalController extends Controller
                                 ->where('productos.producto_nombre', $nombre)
                                 ->get();
         // Formatear los tags
-        foreach ($producto as $product) {
-            $tags = explode( ',', $product->producto_tags );
-        }
+        // foreach ($producto as $product) {
+        //     $tags = explode( '-', $product->producto_tags );
+        // }
+        $tags = $this->tagsFormat($producto);
 
         return view('detalles_referencia', compact('producto', 'tags'));
     }
@@ -165,9 +167,6 @@ class PrincipalController extends Controller
 
     /**
      * Funcion para obtener productos
-     *
-     * @param  int  $ids
-     * @return \Illuminate\Http\Response
      */
     private function obtenerProductos($ids) {
         // dd($ids);
@@ -183,5 +182,21 @@ class PrincipalController extends Controller
                                 ->paginate(20);
         // dd($productos);
         return $productos;
+    }
+
+    /**
+     * Funcion para obtener los tags de un producto
+     *
+     * @param  obj  $producto
+     * @return Variable de tipo array con los tags del producto
+     */
+    private function tagsFormat($producto) {
+        // dd($producto);
+        foreach ($producto as $product) {
+            $tags = trim($product->producto_tags);
+            $tags = explode( '-', $tags );
+            $tags = array_filter($tags);  
+        }
+        return $tags;
     }
 }
