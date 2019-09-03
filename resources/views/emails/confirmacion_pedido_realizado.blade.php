@@ -1,1 +1,0 @@
-<p>Tu pedido ha sido realizado con exito, esperamos por tu confirmacion de pago, si ya has realizao el pago de este pedido, omita este correo.</p>
