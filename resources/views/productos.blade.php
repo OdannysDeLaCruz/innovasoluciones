@@ -51,7 +51,7 @@
 					<section class="producto">
 						<figure>
 							<a href="{{ route('descripcion', [ 'ref' => $ref, 'descripcion' => $nombre ]) }}">
-								<img src='{{ asset("uploads/productos/imagenes/miniaturas/$producto->producto_imagen") }}' class="producto_img" alt="{{ $producto->producto_nombre }}">							
+								<img src='{{ asset("uploads/productos/imagenes/miniaturas/$producto->producto_imagen") }}' class="producto_img" alt="{{ $producto->producto_nombre }}">
 							</a>
 						</figure>
 						<div class="producto_info">

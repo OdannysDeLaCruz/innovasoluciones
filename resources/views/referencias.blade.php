@@ -20,24 +20,28 @@
 	
 	<section class="contenido_principal">
 		<section class="section_principal">
-			<span class="section_principal_titulo"> 
+			<span class="section_principal_atras"> 
 				<a href="javascript:history.back(-1);">
 					<span class="fa fa-chevron-left mr-2"></span> {{ $producto['nombre'] }}
 				</a>
+			</span>
+			<span class="section_principal_link">
 				<a href="{{ route('showDetallesCompra', [ $producto['ref'], $producto['nombre-url'] ]) }}">
 					<button class="section_principal_btncomprar">VER DETALLES <span class="fa fa-chevron-right ml-2"></span></button>				
-				</a>				
+				</a>			
 			</span>
 		</section>
 		<section class="section_referencias">
 			@foreach ($imagenes as $imagen)
 				<img class="section_referencias_img" src='{{ asset("uploads/productos/imagenes/$imagen->imagen_url") }}'>
 	        @endforeach
-	        <div class="section_referencias_contenedor_videos">
-		        @foreach ($videos as $video)
-					{!! $video->video_url !!}
-		        @endforeach	        	
-	        </div>
+	        @if($videos != '')
+		        <div class="section_referencias_contenedor_videos">
+			        @foreach ($videos as $video)
+						{!! $video->video_url !!}
+			        @endforeach	        	
+		        </div>
+	        @endif
 		</section>
 	</section>
 

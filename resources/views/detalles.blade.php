@@ -21,6 +21,15 @@
 	<div class="detalle_fondo_img">
 		<img src="{{ asset('img/detalle_fondo.jpg') }}">
 	</div>
+	<div class="detalle contenedor-breadcrumb row m-auto ml-0 mr-0">
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+		    <li class="breadcrumb-item"><a href="{{ route('productos') }}">Productos</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+		  </ol>
+		</nav>
+	</div>
 	<section class="detalle row ml-4 mr-4 m-md-auto">
 		
 		@foreach($producto as $detalle)			

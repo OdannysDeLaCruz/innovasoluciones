@@ -182,7 +182,7 @@
 		display: none;
 	}
 	.detalle {
-		top: 20px;
+		top: 0px;
 	}
 	.detalle_titulo {
 		font-size: 18px;
@@ -266,6 +266,9 @@
 	}
 	.alertify .ajs-dialog {
 		max-width: 90%;
+	}
+	footer {
+	    margin-top: 40px;
 	}
 }
 @media (max-width: 768px) {

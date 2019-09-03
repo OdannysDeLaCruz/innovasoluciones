@@ -116,6 +116,9 @@ class PrincipalController extends Controller
 
             $imagenes = App\Imagen::select('id', 'producto_id', 'imagen_url')->where('producto_id', $producto_id)->get();
             $videos = App\VideoProducto::select('id', 'producto_id', 'video_url')->where('producto_id', $producto_id)->get();
+
+            $imagenes = $imagenes->isEmpty() ? '' : $imagenes;
+            $videos = $videos->isEmpty() ? '' : $videos;
             return view('referencias', compact('producto', 'imagenes', 'videos'));
         }
 

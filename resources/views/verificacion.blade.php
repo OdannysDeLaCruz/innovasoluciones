@@ -45,7 +45,10 @@
 										$talla = $carrito['talla'] != '' ? $carrito['talla'] : '';
 									?>
 									<li class="pedido-info-list-item talla-producto">
-										<b>Talla: {{ $talla }} | Color: {{ $color }} </b>
+										<b>
+											@if($talla != '') Talla: {{ $talla }} | @endif
+											@if($color != '') Color: {{ $color }} @endif
+										</b>
 									</li>
 
 

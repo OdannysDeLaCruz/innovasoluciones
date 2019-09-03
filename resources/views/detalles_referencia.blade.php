@@ -22,8 +22,17 @@
 	<div class="detalle_fondo_img">
 		<img src="{{ asset('img/detalle_fondo.jpg') }}">
 	</div>
-
-	<section class="detalle detalle_referencia row ml-4 mr-4 m-md-auto flex-column-reverse flex-md-row">		
+	
+	<div class="detalle contenedor-breadcrumb row m-auto ml-0 mr-0">
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+		    <li class="breadcrumb-item"><a href="{{ route('productos') }}">Productos</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+		  </ol>
+		</nav>
+	</div>
+	<section class="detalle detalle_referencia row m-auto ml-0 mr-0 flex-column-reverse flex-md-row">
 		@foreach($producto as $detalle)
 			<section class="detalle_info col-12 col-md-4 pt-4 pt-md-4">
 				<h1 class="detalle_info_titulo ">{{ $detalle->producto_nombre }}</h1>
@@ -105,14 +114,17 @@
 					<button type="submit" id="btn-agregar-producto" class="btn btn-primary detalle_info_btn_comprar">AÑADIR AL CARRITO</button>
 				</form>
 			</section>
-			<div class="detalle_descripcion_img_principal col-12 col-md-8 h-25">
+			<div class="detalle_descripcion_container col-12 col-md-8 h-25">
 				<!-- Va de primero la imagen que viene desde la tabla producto -->
-				<img class="img_principal" src='{{ asset("uploads/productos/imagenes/miniaturas/$detalle->producto_imagen") }}' alt="{{ $detalle->producto_nombre }}">
+				<div class="detalle_descripcion_container_img">
+					<img class="img_principal" src='{{ asset("uploads/productos/imagenes/miniaturas/$detalle->producto_imagen") }}' alt="{{ $detalle->producto_nombre }}">
+					
+				</div>
 				<!-- <img class="img_principal" src='{{ asset("uploads/productos/imagenes/miniaturas/1563425529_asus1.png") }}' alt="imganes de descripcion"> -->
 			</div> 
 		@endforeach
 	</section>
-	<section class="detalle detalle_referencia row ml-4 mr-4 m-md-auto">
+	<section class="detalle detalle_referencia row m-auto ml-0 mr-0">
 		<section class="col-12 col-md-4 pt-4 pt-md-4">
 			<!-- <section class="detalle_info_descripcion">
 				<article>
