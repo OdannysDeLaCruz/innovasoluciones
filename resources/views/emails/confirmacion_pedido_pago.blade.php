@@ -194,7 +194,7 @@
 											<div align="left" class="img-container left fullwidthOnMobile fixedwidth" style="padding-right: 0px;padding-left: 0px;">
 												<span style="padding-left:0px;padding-right:0px;display:inline-block;">
 													<span style="line-height: 32px;">
-														<span style="font-size: 20px; line-height: 28px; font-weight: bold; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif;">Confirmación de pedido</span>
+														<span style="font-size: 20px; line-height: 28px; font-weight: bold; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif;">Confirmación de pago</span>
 													</span>
 												</span>	
 											</div>
@@ -250,7 +250,7 @@
 													<span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;">
 														<span style="font-size: 16px; line-height: 32px;">
 															<span style="font-size: 18px; line-height: 36px;">
-																<strong><span style="font-size: 16px; line-height: 32px; margin-right: 10px;">Ver detalle del pedido en el sitio web</span> › </strong>
+																<strong><span style="font-size: 16px; line-height: 32px; margin-right: 10px;">Ver estado del pedido</span> › </strong>
 															</span>
 														</span>
 													</span>
@@ -269,14 +269,10 @@
 							<div style="border-collapse: collapse;display: table;width: 100%;background-color:#FFFFFF;">
 								<div class="col num3" style="max-width: 320px; min-width: 162px; display: table-cell; vertical-align: top; width: 162px;">
 									<div style="width:100% !important;">
-										<!--[if (!mso)&(!IE)]><!-->
 										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 15px;">
-											<!--<![endif]-->
 											<div align="center" class="img-container center fixedwidth" style="padding-right: 0px;padding-left: 0px;">
-											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 0px;padding-left: 0px;" align="center"><![endif]--><img align="center" alt="Image" border="0" class="center fixedwidth" src="{{ asset('img/emails/004-happiness.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 59px; display: block;" title="Image" width="59"/>
-												<!--[if mso]></td></tr></table><![endif]-->
+												<img align="center" alt="Image" border="0" class="center fixedwidth" src="{{ asset('img/emails/004-happiness.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 59px; display: block;" title="Image" width="59"/>
 											</div>
-											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 0px; padding-top: 5px; padding-bottom: 5px; font-family: Tahoma, Verdana, sans-serif"><![endif]-->
 											<div style="color:#5E5E5E;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;line-height:150%;padding-top:5px;padding-right:10px;padding-bottom:5px;padding-left:0px;">
 												<div style="font-size: 12px; line-height: 18px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; color: #5E5E5E;">
 													<p style="font-size: 14px; line-height: 24px; text-align: center; margin: 0;">
@@ -284,10 +280,7 @@
 													</p>
 												</div>
 											</div>
-											<!--[if mso]></td></tr></table><![endif]-->
-											<!--[if (!mso)&(!IE)]><!-->
 										</div>
-										<!--<![endif]-->
 									</div>
 								</div>
 								<div class="col num3" style="max-width: 320px; min-width: 162px; display: table-cell; vertical-align: top; width: 162px;">
@@ -310,15 +303,10 @@
 								</div>
 								<div class="col num3" style="max-width: 320px; min-width: 162px; display: table-cell; vertical-align: top; width: 162px;">
 									<div style="width:100% !important;">
-										<!--[if (!mso)&(!IE)]><!-->
 										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
-											<!--<![endif]-->
 											<div align="center" class="img-container center fixedwidth" style="padding-right: 0px;padding-left: 0px;">
-												<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 0px;padding-left: 0px;" align="center"><![endif]-->
 												<img align="center" alt="Image" border="0" class="center fixedwidth" src="{{ asset('img/emails/002-refund.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 57px; display: block;" title="Image" width="57"/>
-												<!--[if mso]></td></tr></table><![endif]-->
 											</div>
-											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 0px; padding-top: 5px; padding-bottom: 5px; font-family: Tahoma, Verdana, sans-serif"><![endif]-->
 											<div style="color:#5E5E5E;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;line-height:150%;padding-top:5px;padding-right:10px;padding-bottom:5px;padding-left:0px;">
 												<div style="font-size: 12px; line-height: 18px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; color: #5E5E5E;">
 													<p style="font-size: 14px; line-height: 24px; text-align: center; margin: 0;">
@@ -327,22 +315,15 @@
 													</p>
 												</div>
 											</div>
-											<!--[if mso]></td></tr></table><![endif]-->
-											<!--[if (!mso)&(!IE)]><!-->
 										</div>
-										<!--<![endif]-->
 									</div>
 								</div>
 								<div class="col num3" style="max-width: 320px; min-width: 162px; display: table-cell; vertical-align: top; width: 162px;">
 									<div style="width:100% !important;">
-										<!--[if (!mso)&(!IE)]><!-->
 										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 15px; padding-left: 0px;">
-											<!--<![endif]-->
 											<div align="center" class="img-container center fixedwidth" style="padding-right: 0px;padding-left: 0px;">
-												<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 0px;padding-left: 0px;" align="center"><![endif]--><img align="center" alt="Image" border="0" class="center fixedwidth" src="{{ asset('img/emails/001-customer-service.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 59px; display: block;" title="Image" width="59"/>
-												<!--[if mso]></td></tr></table><![endif]-->
+												<img align="center" alt="Image" border="0" class="center fixedwidth" src="{{ asset('img/emails/001-customer-service.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 59px; display: block;" title="Image" width="59"/>
 											</div>
-											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 0px; padding-top: 5px; padding-bottom: 5px; font-family: Tahoma, Verdana, sans-serif"><![endif]-->
 											<div style="color:#5E5E5E;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;line-height:150%;padding-top:5px;padding-right:10px;padding-bottom:5px;padding-left:0px;">
 												<div style="line-height: 18px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; font-size: 12px; color: #5E5E5E;">
 													<p style="line-height: 24px; text-align: center; font-size: 12px; margin: 0;">
@@ -350,10 +331,7 @@
 													</p>
 												</div>
 											</div>
-											<!--[if mso]></td></tr></table><![endif]-->
-											<!--[if (!mso)&(!IE)]><!-->
 										</div>
-										<!--<![endif]-->
 									</div>
 								</div>
 							</div>
