@@ -169,7 +169,7 @@ class FacturaController extends Controller
             return view('error.404', ['response' => 'Esta factura no existe!']);
         }
         // Dirección de envio del pedido
-        $direccion = App\DireccionPedido::find($id);
+        $direccion = App\DireccionPedido::where('pedido_id', $id)->get();
 
         $pedido    = $pedido->toArray();
         $detalles  = $detalles->toArray();

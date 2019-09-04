@@ -11,14 +11,18 @@ class ConfirmacionPedidoRealizado extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $pdf;
+    private $filename;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($pdf, $filename)
     {
-        
+        $this->pdf = $pdf;
+        $this->filename = $filename;
     }
 
     /**
@@ -30,6 +34,13 @@ class ConfirmacionPedidoRealizado extends Mailable
     {
         return $this->from('ventas@innovainc.co', 'Confirmación de tu pedido en Innova Inc')
                     ->view('emails.confirmacion_pedido')
+                    // ->attach('/path/to/file', [
+                    //     'as' => 'name.pdf',
+                    //     'mime' => 'application/pdf',
+                    // ])
+                    ->attachData($this->pdf, $this->filename, [
+                        'mime' => 'application/pdf',
+                    ])
                     ->subject('Confirmación de tu pedido en Innova Inc');
     }
 }

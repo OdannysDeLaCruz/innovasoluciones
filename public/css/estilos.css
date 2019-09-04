@@ -2023,7 +2023,7 @@ footer {
 	 display: none;
 	justify-content: center;
 	align-items: center;
-	z-index: 99999;
+	z-index: 100;
 }
 .tarjeta_direccion_envio_cargador img {
 	width: 70px;

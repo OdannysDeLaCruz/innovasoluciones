@@ -212,54 +212,46 @@ $(document).ready(function(){
         e.preventDefault();
         const route = $(this).data('route-crearpedido');
 
-        // alertify.confirm('Comfirma tu pedido', 'Pagar pedido con Payú', 
-        //     function() { 
-                $.ajax({
-                    url: route,
-                    type: 'POST',
-                    data: {crear : true},
-                    dataType: 'json',
-                    beforeSend: function() {
-                        $('#cargador_formulario_payu').css('display', 'flex');
-                    },
-                    success: function(data){
-                            console.log(data);
-                        if (data.status == 'Success') {
-                            alertify.notify(data.message, 'success', 10);
-                            alertify.notify('Será redireccionado a Payu', 'success', 10);
+        $.ajax({
+            url: route,
+            type: 'POST',
+            data: {crear : true},
+            dataType: 'json',
+            beforeSend: function() {
+                $('#cargador_formulario_payu').css('display', 'flex');
+            },
+            success: function(data){
+                if (data.status == 'Success') {
+                    alertify.notify(data.message, 'success', 10);
+                    alertify.notify('Será redireccionado a Payu', 'success', 10);
 
-                            // Despues de que se crea el pedido y sus detalles, se obtiene el id que returna crearPedidoController.php de ese pedido se añade a la descripcion que se envía a payu
+                    // Despues de que se crea el pedido y sus detalles, se obtiene el id que returna crearPedidoController.php de ese pedido se añade a la descripcion que se envía a payu
 
-                            document.getElementById('pedido_id').value = data.pedido_id;
-                            
-                            // Enviar formulario despues de añadir el id a la descrición
-                            $('#enviar-formulario-payu').submit();
-                        }
-                        else {
-                            $('#cargador_formulario_payu').css('display', 'none');
-                            e.preventDefault();
-                            alertify.alert(data.status + ': ' + data.message, function() {
-                                window.location.href = '/cart';
-                            });
-                        }
-                    },
-                    error: function(data) {
-                        console.log(data.responseJSON);
-                        $('#cargador_formulario_payu').css('display', 'none');
-                        if(data.status == 500) {
-                            // console.log(data.responseText);
-                            e.preventDefault();
-                            alertify.alert("Ha ocurrido un error, recarga la página o contácta a soporte técnico", function() {
-                                // window.location.reload();                 
-                            });
-                        }
-                    }
-                });
-            // }, 
-            // function() { 
-            //     alertify.error('Pedido cancelado', 10);
-            // }
-        // );
+                    document.getElementById('pedido_id').value = data.pedido_id;
+                    
+                    // Enviar formulario despues de añadir el id a la descrición
+                    $('#enviar-formulario-payu').submit();
+                }
+                else {
+                    $('#cargador_formulario_payu').css('display', 'none');
+                    e.preventDefault();
+                    alertify.alert(data.status + ': ' + data.message, function() {
+                        window.location.href = '/cart';
+                    });
+                }
+            },
+            error: function(data) {
+                // console.log(data.responseJSON);
+                $('#cargador_formulario_payu').css('display', 'none');
+                if(data.status == 500) {
+                    // console.log(data.responseText);
+                    e.preventDefault();
+                    alertify.alert(`Ha ocurrido un error, recarga la página o contácta a <a href="/soporte-tecnico">soporte técnico</a>`, function() {
+                        // window.location.reload();                 
+                    });
+                }
+            }
+        });
     });
 
     // MOSTRAR FORMULARIO PARA AGREGAR DIRECCIONES

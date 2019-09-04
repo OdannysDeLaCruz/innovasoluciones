@@ -94,6 +94,7 @@ Route::get('ver-facturas', function() {
 	return view('users.facturas.detalle');
 });
 Route::get('ver-email',function() {
-	return view('emails.confirmacion_pedido');
+	// return view('emails.confirmacion_pedido');
+	return (new App\Mail\ConfirmacionPedidoRealizado())->render();
 });
 Route::post('/prueba-editor', 'AdminController@pruebaEditor')->name('prueba-editor');

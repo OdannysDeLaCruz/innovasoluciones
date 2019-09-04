@@ -110,10 +110,14 @@ class CrearPedidoPayuController extends Controller
 								'telenofo'  => $direccion[0]->telefono,
 								'codigo_postal' => $direccion[0]->codigo_postal,
 							]);
+
+							// Obtener factura y nombre de este pedido
+							$factura = $this->generateInvoice($pedido_id);
+							$factura_pdf = $factura['pdf'];
+							$filename    = $factura['name'];
 				        
 				 			// Enviar email de confirmacion de creacion del pedido, pero no de pago, la confimacion de pago la realiza el controlador ConfirmacionController
-
-							$this->sendEmailConfirmation(Auth::user()->email, Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido);
+							$this->sendEmailConfirmation(Auth::user()->email, Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido, $factura_pdf, $filename);
 
 		  					// Eliminar variables de session creadas a lo largo del proceso de compra
 							$this->eliminarVariablesSession();	            		
@@ -233,7 +237,76 @@ class CrearPedidoPayuController extends Controller
         }
 	}
 	// Enviar mensaje de confirmación al usuario
-	private function sendEmailConfirmation($email, $user) {
-		Mail::to($email, $user)->send(new ConfirmacionPedidoRealizado());
+	private function sendEmailConfirmation($email, $user, $factura_pdf, $filename) {
+		Mail::to($email, $user)
+			->send(new ConfirmacionPedidoRealizado($factura_pdf, $filename));
+
+		// Mail::to($email, $user)
+		//     ->queue(new ConfirmacionPedidoRealizado($factura_pdf));
 	}
+
+	 /**
+     * Generar factura para adjuntar al correo
+     * @return $pdf
+     */
+	private function generateInvoice($id) {
+
+        $user_id = Auth::user()->id;
+        $id = $id;
+        // Pedido
+        $pedido = App\Pedido::select(
+        					'pedidos.id as pedidos_id', 
+        					'pedidos.pedido_ref_venta as ref_venta',
+        					'pedidos.fecha_creado',
+        					// Promoción que se le haya aplicado a este pedido
+        					'promociones.promo_nombre',
+        					'promociones.promo_tipo',
+        					'promociones.promo_costo'
+        					)
+        					->where([
+                             	['pedidos.id', '=', $id],
+                             	['pedidos.user_id', '=', $user_id]
+                            ])
+                            ->leftJoin('promociones', 'pedidos.promocion_id', '=', 'promociones.id')
+                            ->get();
+        // Detalles del pedido
+        $detalles = App\Pedido::select('detalle_pedidos.*')
+        					->where([
+                             	['pedidos.id', '=', $id],
+                             	['pedidos.user_id', '=', $user_id]
+                            ])
+                            ->join('detalle_pedidos', 'detalle_pedidos.pedido_id', '=', 'pedidos.id')
+                            ->get();
+        // Dirección de envio del pedido
+        $direccion = App\DireccionPedido::where('pedido_id', $id)->get();
+
+        $pedido    = $pedido->toArray();
+        $detalles  = $detalles->toArray();
+        $direccion = $direccion->toArray();
+
+        if($pedido[0]['promo_tipo']) {
+ 			$costo_promo_pedido =  $pedido[0]['promo_costo'];
+ 		}
+
+        foreach ($detalles as $detalle) {
+        	$importes[] = $detalle['detalle_precio_final'];
+        	$subtotal = array_sum($importes);
+        }
+
+        if ($pedido[0]['promo_tipo'] == '%') {
+			$descuento = $subtotal * $costo_promo_pedido / 100;
+			$total = $subtotal - $descuento;
+		}elseif ($pedido[0]['promo_tipo'] == '$') {
+			$descuento = $costo_promo_pedido;
+			$total = $subtotal - $descuento;
+		}
+		else{
+			$total = $subtotal;
+		}
+
+        $pdf = \PDF::loadView('users.facturas.detalle', compact('pedido', 'detalles', 'direccion', 'subtotal', 'costo_promo_pedido', 'total'));
+        $pdf =  $pdf->download(); 
+        $factura = ['pdf' => $pdf, 'name' => 'FACTURA_' . $pedido[0]['ref_venta'] . '.pdf'];
+        return $factura;
+    }
 }
