@@ -60,9 +60,7 @@ class CrearPedidoPayuController extends Controller
 
 		     			// verificamos si el pedido se creo correctamente
 				        if($pedido != "") {
-
-				        	$pedido_id = $pedido->id; 
-
+				        	$pedido_id = $pedido->id;
 					        // Recorro el carrito de compra
 			  		  		$cart = session('cart');
 		  					foreach ($cart as $detalle) {

@@ -42,7 +42,7 @@ class PaymentController extends Controller
 		$this->modoEnvio($request);
 
 		// Guardar referencia del pedido en una variable de sesion
-		$pedido_ref_venta = 'RV' . time() . mt_rand(999, 999); // RV = Referencia de Venta
+		$pedido_ref_venta = 'RV' . time() . mt_rand(1111, 9999); // RV = Referencia de Venta
 		session()->put('pedido_ref_venta', $pedido_ref_venta);
 
 		// Configurar los datos para la pasarela de Payu
