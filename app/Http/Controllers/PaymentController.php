@@ -62,9 +62,9 @@ class PaymentController extends Controller
 		$dataPayu['signature'] = md5($firma);
 		$dataPayu['test'] = 1;
 
-		$dataPayu['buyerFullName'] = Auth::user()->nombre . Auth::user()->apellido;
-		$dataPayu['buyerEmail'] = Auth::user()->email;
-		$dataPayu['telephone'] = Auth::user()->telefono;
+		$dataPayu['buyerFullName'] = Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido;
+		$dataPayu['buyerEmail']    = Auth::user()->email;
+		$dataPayu['telephone']     = Auth::user()->usuario_telefono;
 
 		// $dataPayu['shippingAddress'] = Auth::user()->direccion . ' - ' . Auth::user()->barrio;
 		// $dataPayu['shippingCity'] = Auth::user()->ciudad;

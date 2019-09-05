@@ -17,7 +17,7 @@ class CreateProductosTable extends Migration
             $table->increments('id');
             $table->integer('categoria_id')->unsigned()->nullable(); //Dependiendo de la categoria se rellenan los campos tamaño y color
             $table->integer('proveedor_id')->unsigned()->nullable(); // Proveedor del producto, es null porque puede no tener un proveedor especifico
-            $table->integer('marca_id')->unsigned(); // Informacion de marca del producto
+            $table->integer('marca_id')->unsigned()->nullable(); // Informacion de marca del producto
             $table->string('producto_nombre')->unique()->required();
             $table->longText('producto_descripcion')->nullable();
             $table->string('producto_tags')->required();

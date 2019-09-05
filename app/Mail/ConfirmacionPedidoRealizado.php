@@ -32,15 +32,11 @@ class ConfirmacionPedidoRealizado extends Mailable
      */
     public function build()
     {
-        return $this->from('ventas@innovainc.co', 'Confirmación de tu pedido en Innova Inc')
+        return $this->from('ventas@innovainc.co', 'Innova Inc, confirmación de pedido realizado.')
                     ->view('emails.confirmacion_pedido')
-                    // ->attach('/path/to/file', [
-                    //     'as' => 'name.pdf',
-                    //     'mime' => 'application/pdf',
-                    // ])
                     ->attachData($this->pdf, $this->filename, [
                         'mime' => 'application/pdf',
                     ])
-                    ->subject('Confirmación de tu pedido en Innova Inc');
+                    ->subject('Innova Inc, confirmación de pedido realizado.');
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-08-2019 a las 23:31:56
+-- Tiempo de generación: 05-09-2019 a las 18:29:14
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.8
 
@@ -42,21 +42,21 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `seccion_id`, `categoria_nombre`, `categoria_descripcion`, `fecha_creado`, `fecha_actualizado`) VALUES
-(1, 1, 'vitae', 'Occaecati asperiores libero nesciunt aut.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(2, 2, 'rem', 'Quidem qui sunt et.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(3, 1, 'quod', 'Rerum quis eum possimus voluptas.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(4, 1, 'quaerat', 'Quia necessitatibus ex sit est.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(5, 2, 'nihil', 'Ducimus ullam deleniti suscipit aut.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(6, 1, 'modi', 'Officiis sit repudiandae excepturi eius aut est.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(7, 3, 'magni', 'Enim laboriosam neque optio iure hic ratione.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(8, 1, 'non', 'Officiis voluptatibus fuga quia nihil maxime.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(9, 2, 'error', 'Voluptate optio ratione et accusamus sunt quis.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(10, 2, 'enim', 'Aut rem ex inventore ut quod consequuntur enim.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(11, 3, 'vero', 'Dicta nostrum nostrum distinctio.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(12, 2, 'in', 'Tempore sapiente adipisci libero atque.', '2019-08-15 21:26:34', '2019-08-15 21:26:34'),
-(13, 2, 'fugit', 'Molestiae in ratione iste aut.', '2019-08-15 21:26:35', '2019-08-15 21:26:35'),
-(14, 3, 'asperiores', 'Et sed sed consequatur dolor.', '2019-08-15 21:26:35', '2019-08-15 21:26:35'),
-(15, 3, 'id', 'Nostrum quia nostrum aut voluptate.', '2019-08-15 21:26:35', '2019-08-15 21:26:35');
+(1, 1, 'qui', 'Ut dolor architecto qui illum dolores.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(2, 1, 'ipsam', 'Nihil et fuga neque eligendi animi dicta.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(3, 1, 'libero', 'Magnam non velit aut distinctio.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(4, 2, 'quo', 'Velit reiciendis officia suscipit.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(5, 1, 'quae', 'Consequatur ipsam nesciunt sint dolorum illo.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(6, 1, 'delectus', 'Quas perferendis ut et ut.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(7, 3, 'consequatur', 'Qui delectus rerum et non qui.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(8, 1, 'sed', 'Numquam aut ipsa numquam dolor labore hic.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(9, 2, 'quis', 'Voluptatum harum ducimus optio praesentium.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(10, 2, 'id', 'Modi nisi error qui culpa minima voluptatum.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(11, 2, 'ratione', 'Numquam repellendus sed aut corporis.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(12, 1, 'reiciendis', 'Eius sed exercitationem eos nisi aut sint ea.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(13, 2, 'dolor', 'Esse at dolore dolore eum qui perferendis.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(14, 3, 'ipsa', 'Sint consequuntur quaerat vitae cumque voluptas.', '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(15, 2, 'ut', 'Ex eius similique dolore minus autem quia est.', '2019-09-05 16:26:14', '2019-09-05 16:26:14');
 
 -- --------------------------------------------------------
 
@@ -69,11 +69,12 @@ CREATE TABLE `detalle_pedidos` (
   `pedido_id` int(10) UNSIGNED NOT NULL,
   `detalle_producto_ref` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `detalle_nombre` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `detalle_descripcion` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `detalle_descripcion` longtext COLLATE utf8mb4_unicode_ci,
   `detalle_imagen` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `detalle_precio` decimal(10,2) NOT NULL,
   `detalle_cantidad` int(11) NOT NULL,
-  `detalle_promo_info` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `detalle_promo_tipo` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `detalle_promo_costo` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `detalle_precio_final` decimal(10,2) NOT NULL,
   `detalle_talla` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `detalle_color` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -105,10 +106,10 @@ CREATE TABLE `direcciones` (
 --
 
 INSERT INTO `direcciones` (`id`, `user_id`, `nombre_completo`, `pais`, `estado`, `ciudad`, `direccion`, `telefono`, `codigo_postal`, `defecto`, `fecha_creado`, `fecha_actualizado`) VALUES
-(1, 1, 'Odannys De La Cruz', 'Colombia', 'Cesar', 'Valledupar', 'Calle 6b # 41 - 36 La Nevada', '3043614864', 200001, 1, '2019-08-15 21:26:32', '2019-08-15 21:26:32'),
-(2, 2, 'Ruben Gonzales', 'Colombia', 'Cesar', 'Valledupar', 'Calle 6b # 41 - 36 La Nevada', '3172660830', 200001, 1, '2019-08-15 21:26:32', '2019-08-15 21:26:32'),
-(3, 3, 'Jose Meriño', 'Colombia', 'Cesar', 'Valledupar', 'Mz 15 casa 6b -  La Castellana', '3172660830', 200001, 1, '2019-08-15 21:26:32', '2019-08-15 21:26:32'),
-(4, 4, 'Eduardo Lodico', 'Venezuela', 'Algún Lugar', 'Ni idea loco', 'Si no me se la ciudad, la dirección menos.', '3172660830', 20005, 1, '2019-08-15 21:26:33', '2019-08-15 21:26:33');
+(1, 1, 'Odannys De La Cruz', 'Colombia', 'Cesar', 'Valledupar', 'Calle 6b # 41 - 36 La Nevada', '3043614864', 200001, 1, '2019-09-05 16:26:11', '2019-09-05 16:26:11'),
+(2, 2, 'Ruben Gonzales', 'Colombia', 'Cesar', 'Valledupar', 'Calle 6b # 41 - 36 La Nevada', '3172660830', 200001, 1, '2019-09-05 16:26:12', '2019-09-05 16:26:12'),
+(3, 3, 'Jose Meriño', 'Colombia', 'Cesar', 'Valledupar', 'Mz 15 casa 6b -  La Castellana', '3172660830', 200001, 1, '2019-09-05 16:26:12', '2019-09-05 16:26:12'),
+(4, 4, 'Eduardo Lodico', 'Venezuela', 'Algún Lugar', 'Ni idea loco', 'Si no me se la ciudad, la dirección menos.', '3172660830', 20005, 1, '2019-09-05 16:26:12', '2019-09-05 16:26:12');
 
 -- --------------------------------------------------------
 
@@ -148,8 +149,8 @@ CREATE TABLE `envios` (
 --
 
 INSERT INTO `envios` (`id`, `envio_metodo`, `fecha_creado`, `fecha_actualizado`) VALUES
-(1, 'Domicilio', '2019-08-15 21:26:35', '2019-08-15 21:26:35'),
-(2, 'Tienda fisica', '2019-08-15 21:26:35', '2019-08-15 21:26:35');
+(1, 'Domicilio', '2019-09-05 16:26:15', '2019-09-05 16:26:15'),
+(2, 'Tienda fisica', '2019-09-05 16:26:15', '2019-09-05 16:26:15');
 
 -- --------------------------------------------------------
 
@@ -819,106 +820,106 @@ CREATE TABLE `imagenes` (
 --
 
 INSERT INTO `imagenes` (`id`, `producto_id`, `imagen_url`) VALUES
-(1, 5, '1562990851_03 p Mi band 3 1.jpg'),
-(2, 9, '1562990851_03 p Mi band 3 1.jpg'),
-(3, 4, '1562990851_03 p Mi band 3 1.jpg'),
-(4, 2, '1562990851_03 p Mi band 3 1.jpg'),
-(5, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(6, 4, '1562990851_03 p Mi band 3 1.jpg'),
-(7, 10, '1562990851_03 p Mi band 3 1.jpg'),
-(8, 2, '1562990851_03 p Mi band 3 1.jpg'),
-(9, 5, '1562990851_03 p Mi band 3 1.jpg'),
-(10, 9, '1562990851_03 p Mi band 3 1.jpg'),
-(11, 9, '1562990851_03 p Mi band 3 1.jpg'),
+(1, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(2, 2, '1562990851_03 p Mi band 3 1.jpg'),
+(3, 6, '1562990851_03 p Mi band 3 1.jpg'),
+(4, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(5, 6, '1562990851_03 p Mi band 3 1.jpg'),
+(6, 9, '1562990851_03 p Mi band 3 1.jpg'),
+(7, 4, '1562990851_03 p Mi band 3 1.jpg'),
+(8, 1, '1562990851_03 p Mi band 3 1.jpg'),
+(9, 3, '1562990851_03 p Mi band 3 1.jpg'),
+(10, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(11, 1, '1562990851_03 p Mi band 3 1.jpg'),
 (12, 4, '1562990851_03 p Mi band 3 1.jpg'),
-(13, 1, '1562990851_03 p Mi band 3 1.jpg'),
-(14, 10, '1562990851_03 p Mi band 3 1.jpg'),
-(15, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(16, 2, '1562990851_03 p Mi band 3 1.jpg'),
-(17, 8, '1562990851_03 p Mi band 3 1.jpg'),
-(18, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(19, 4, '1562990851_03 p Mi band 3 1.jpg'),
-(20, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(21, 10, '1562990851_03 p Mi band 3 1.jpg'),
-(22, 6, '1562990851_03 p Mi band 3 1.jpg'),
-(23, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(24, 4, '1562990851_03 p Mi band 3 1.jpg'),
-(25, 3, '1562990851_03 p Mi band 3 1.jpg'),
-(26, 1, '1562990851_03 p Mi band 3 1.jpg'),
-(27, 8, '1562990851_03 p Mi band 3 1.jpg'),
-(28, 9, '1562990851_03 p Mi band 3 1.jpg'),
-(29, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(30, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(31, 5, '1562990851_03 p Mi band 3 1.jpg'),
+(13, 3, '1562990851_03 p Mi band 3 1.jpg'),
+(14, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(15, 8, '1562990851_03 p Mi band 3 1.jpg'),
+(16, 9, '1562990851_03 p Mi band 3 1.jpg'),
+(17, 10, '1562990851_03 p Mi band 3 1.jpg'),
+(18, 9, '1562990851_03 p Mi band 3 1.jpg'),
+(19, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(20, 4, '1562990851_03 p Mi band 3 1.jpg'),
+(21, 4, '1562990851_03 p Mi band 3 1.jpg'),
+(22, 10, '1562990851_03 p Mi band 3 1.jpg'),
+(23, 5, '1562990851_03 p Mi band 3 1.jpg'),
+(24, 6, '1562990851_03 p Mi band 3 1.jpg'),
+(25, 10, '1562990851_03 p Mi band 3 1.jpg'),
+(26, 3, '1562990851_03 p Mi band 3 1.jpg'),
+(27, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(28, 1, '1562990851_03 p Mi band 3 1.jpg'),
+(29, 5, '1562990851_03 p Mi band 3 1.jpg'),
+(30, 3, '1562990851_03 p Mi band 3 1.jpg'),
+(31, 7, '1562990851_03 p Mi band 3 1.jpg'),
 (32, 3, '1562990851_03 p Mi band 3 1.jpg'),
-(33, 9, '1562990851_03 p Mi band 3 1.jpg'),
-(34, 6, '1562990851_03 p Mi band 3 1.jpg'),
-(35, 10, '1562990851_03 p Mi band 3 1.jpg'),
-(36, 1, '1562990851_03 p Mi band 3 1.jpg'),
-(37, 5, '1562990851_03 p Mi band 3 1.jpg'),
-(38, 8, '1562990851_03 p Mi band 3 1.jpg'),
-(39, 1, '1562990851_03 p Mi band 3 1.jpg'),
-(40, 3, '1562990851_03 p Mi band 3 1.jpg'),
-(41, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(42, 2, '1562990851_03 p Mi band 3 1.jpg'),
-(43, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(44, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(45, 2, '1562990851_03 p Mi band 3 1.jpg'),
+(33, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(34, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(35, 2, '1562990851_03 p Mi band 3 1.jpg'),
+(36, 4, '1562990851_03 p Mi band 3 1.jpg'),
+(37, 1, '1562990851_03 p Mi band 3 1.jpg'),
+(38, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(39, 6, '1562990851_03 p Mi band 3 1.jpg'),
+(40, 9, '1562990851_03 p Mi band 3 1.jpg'),
+(41, 1, '1562990851_03 p Mi band 3 1.jpg'),
+(42, 10, '1562990851_03 p Mi band 3 1.jpg'),
+(43, 3, '1562990851_03 p Mi band 3 1.jpg'),
+(44, 8, '1562990851_03 p Mi band 3 1.jpg'),
+(45, 9, '1562990851_03 p Mi band 3 1.jpg'),
 (46, 6, '1562990851_03 p Mi band 3 1.jpg'),
-(47, 2, '1562990851_03 p Mi band 3 1.jpg'),
-(48, 4, '1562990851_03 p Mi band 3 1.jpg'),
-(49, 10, '1562990851_03 p Mi band 3 1.jpg'),
-(50, 4, '1562990851_03 p Mi band 3 1.jpg'),
-(51, 1, '1562990851_03 p Mi band 3 1.jpg'),
-(52, 5, '1562990851_03 p Mi band 3 1.jpg'),
-(53, 3, '1562990851_03 p Mi band 3 1.jpg'),
-(54, 1, '1562990851_03 p Mi band 3 1.jpg'),
-(55, 3, '1562990851_03 p Mi band 3 1.jpg'),
-(56, 8, '1562990851_03 p Mi band 3 1.jpg'),
+(47, 4, '1562990851_03 p Mi band 3 1.jpg'),
+(48, 8, '1562990851_03 p Mi band 3 1.jpg'),
+(49, 1, '1562990851_03 p Mi band 3 1.jpg'),
+(50, 8, '1562990851_03 p Mi band 3 1.jpg'),
+(51, 10, '1562990851_03 p Mi band 3 1.jpg'),
+(52, 9, '1562990851_03 p Mi band 3 1.jpg'),
+(53, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(54, 10, '1562990851_03 p Mi band 3 1.jpg'),
+(55, 5, '1562990851_03 p Mi band 3 1.jpg'),
+(56, 2, '1562990851_03 p Mi band 3 1.jpg'),
 (57, 2, '1562990851_03 p Mi band 3 1.jpg'),
-(58, 2, '1562990851_03 p Mi band 3 1.jpg'),
-(59, 6, '1562990851_03 p Mi band 3 1.jpg'),
-(60, 4, '1562990851_03 p Mi band 3 1.jpg'),
-(61, 9, '1562990851_03 p Mi band 3 1.jpg'),
-(62, 6, '1562990851_03 p Mi band 3 1.jpg'),
-(63, 2, '1562990851_03 p Mi band 3 1.jpg'),
-(64, 4, '1562990851_03 p Mi band 3 1.jpg'),
-(65, 5, '1562990851_03 p Mi band 3 1.jpg'),
-(66, 9, '1562990851_03 p Mi band 3 1.jpg'),
-(67, 5, '1562990851_03 p Mi band 3 1.jpg'),
-(68, 8, '1562990851_03 p Mi band 3 1.jpg'),
-(69, 9, '1562990851_03 p Mi band 3 1.jpg'),
-(70, 1, '1562990851_03 p Mi band 3 1.jpg'),
-(71, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(72, 8, '1562990851_03 p Mi band 3 1.jpg'),
-(73, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(74, 4, '1562990851_03 p Mi band 3 1.jpg'),
-(75, 9, '1562990851_03 p Mi band 3 1.jpg'),
-(76, 5, '1562990851_03 p Mi band 3 1.jpg'),
-(77, 3, '1562990851_03 p Mi band 3 1.jpg'),
-(78, 9, '1562990851_03 p Mi band 3 1.jpg'),
-(79, 8, '1562990851_03 p Mi band 3 1.jpg'),
-(80, 9, '1562990851_03 p Mi band 3 1.jpg'),
-(81, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(82, 9, '1562990851_03 p Mi band 3 1.jpg'),
+(58, 6, '1562990851_03 p Mi band 3 1.jpg'),
+(59, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(60, 5, '1562990851_03 p Mi band 3 1.jpg'),
+(61, 10, '1562990851_03 p Mi band 3 1.jpg'),
+(62, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(63, 9, '1562990851_03 p Mi band 3 1.jpg'),
+(64, 5, '1562990851_03 p Mi band 3 1.jpg'),
+(65, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(66, 8, '1562990851_03 p Mi band 3 1.jpg'),
+(67, 3, '1562990851_03 p Mi band 3 1.jpg'),
+(68, 2, '1562990851_03 p Mi band 3 1.jpg'),
+(69, 6, '1562990851_03 p Mi band 3 1.jpg'),
+(70, 4, '1562990851_03 p Mi band 3 1.jpg'),
+(71, 10, '1562990851_03 p Mi band 3 1.jpg'),
+(72, 5, '1562990851_03 p Mi band 3 1.jpg'),
+(73, 2, '1562990851_03 p Mi band 3 1.jpg'),
+(74, 10, '1562990851_03 p Mi band 3 1.jpg'),
+(75, 6, '1562990851_03 p Mi band 3 1.jpg'),
+(76, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(77, 6, '1562990851_03 p Mi band 3 1.jpg'),
+(78, 8, '1562990851_03 p Mi band 3 1.jpg'),
+(79, 4, '1562990851_03 p Mi band 3 1.jpg'),
+(80, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(81, 6, '1562990851_03 p Mi band 3 1.jpg'),
+(82, 5, '1562990851_03 p Mi band 3 1.jpg'),
 (83, 6, '1562990851_03 p Mi band 3 1.jpg'),
-(84, 10, '1562990851_03 p Mi band 3 1.jpg'),
-(85, 8, '1562990851_03 p Mi band 3 1.jpg'),
-(86, 1, '1562990851_03 p Mi band 3 1.jpg'),
-(87, 6, '1562990851_03 p Mi band 3 1.jpg'),
-(88, 6, '1562990851_03 p Mi band 3 1.jpg'),
-(89, 2, '1562990851_03 p Mi band 3 1.jpg'),
-(90, 3, '1562990851_03 p Mi band 3 1.jpg'),
-(91, 4, '1562990851_03 p Mi band 3 1.jpg'),
-(92, 1, '1562990851_03 p Mi band 3 1.jpg'),
-(93, 6, '1562990851_03 p Mi band 3 1.jpg'),
-(94, 6, '1562990851_03 p Mi band 3 1.jpg'),
+(84, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(85, 2, '1562990851_03 p Mi band 3 1.jpg'),
+(86, 10, '1562990851_03 p Mi band 3 1.jpg'),
+(87, 8, '1562990851_03 p Mi band 3 1.jpg'),
+(88, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(89, 7, '1562990851_03 p Mi band 3 1.jpg'),
+(90, 2, '1562990851_03 p Mi band 3 1.jpg'),
+(91, 10, '1562990851_03 p Mi band 3 1.jpg'),
+(92, 6, '1562990851_03 p Mi band 3 1.jpg'),
+(93, 1, '1562990851_03 p Mi band 3 1.jpg'),
+(94, 2, '1562990851_03 p Mi band 3 1.jpg'),
 (95, 8, '1562990851_03 p Mi band 3 1.jpg'),
-(96, 3, '1562990851_03 p Mi band 3 1.jpg'),
-(97, 7, '1562990851_03 p Mi band 3 1.jpg'),
-(98, 9, '1562990851_03 p Mi band 3 1.jpg'),
+(96, 1, '1562990851_03 p Mi band 3 1.jpg'),
+(97, 9, '1562990851_03 p Mi band 3 1.jpg'),
+(98, 4, '1562990851_03 p Mi band 3 1.jpg'),
 (99, 6, '1562990851_03 p Mi band 3 1.jpg'),
-(100, 6, '1562990851_03 p Mi band 3 1.jpg');
+(100, 1, '1562990851_03 p Mi band 3 1.jpg');
 
 -- --------------------------------------------------------
 
@@ -940,16 +941,16 @@ CREATE TABLE `marcas` (
 --
 
 INSERT INTO `marcas` (`id`, `marca_nombre`, `marca_descripcion`, `marca_logo`, `fecha_creado`, `fecha_actualizado`) VALUES
-(1, 'Marca_477', 'Qui rerum id deleniti.', 'marca.jpg', '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(2, 'Marca_968', 'Nulla quibusdam velit incidunt voluptas.', 'marca.jpg', '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(3, 'Marca_511', 'Facilis consequuntur aut voluptas eveniet.', 'marca.jpg', '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(4, 'Marca_913', 'Ab nam molestias dolores itaque.', 'marca.jpg', '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(5, 'Marca_679', 'Eum sunt minima non cupiditate quo possimus.', 'marca.jpg', '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(6, 'Marca_230', 'Asperiores rerum et odio.', 'marca.jpg', '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(7, 'Marca_407', 'Quis sed tempore quo maiores aut sint provident.', 'marca.jpg', '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(8, 'Marca_263', 'Repudiandae rem unde eligendi sunt ipsam sunt.', 'marca.jpg', '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(9, 'Marca_466', 'Pariatur aut laudantium qui omnis ut qui quia.', 'marca.jpg', '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(10, 'Marca_139', 'Dolorum autem ducimus deleniti.', 'marca.jpg', '2019-08-15 21:26:36', '2019-08-15 21:26:36');
+(1, 'Marca_274', 'Temporibus quia voluptatibus ut est ipsa.', 'marca.jpg', '2019-09-05 16:26:16', '2019-09-05 16:26:16'),
+(2, 'Marca_708', 'Omnis numquam culpa reiciendis porro culpa.', 'marca.jpg', '2019-09-05 16:26:16', '2019-09-05 16:26:16'),
+(3, 'Marca_56', 'Tempora id eius enim et et sunt.', 'marca.jpg', '2019-09-05 16:26:16', '2019-09-05 16:26:16'),
+(4, 'Marca_309', 'Ipsum est accusamus quae sit.', 'marca.jpg', '2019-09-05 16:26:16', '2019-09-05 16:26:16'),
+(5, 'Marca_270', 'Amet assumenda laudantium nisi ea dolores.', 'marca.jpg', '2019-09-05 16:26:16', '2019-09-05 16:26:16'),
+(6, 'Marca_387', 'Et quibusdam earum amet nemo tempora.', 'marca.jpg', '2019-09-05 16:26:16', '2019-09-05 16:26:16'),
+(7, 'Marca_880', 'Earum consequuntur beatae odit repudiandae et et.', 'marca.jpg', '2019-09-05 16:26:16', '2019-09-05 16:26:16'),
+(8, 'Marca_825', 'Omnis veniam ea sit dolores voluptate ratione.', 'marca.jpg', '2019-09-05 16:26:16', '2019-09-05 16:26:16'),
+(9, 'Marca_201', 'Laborum et magni repudiandae voluptatibus.', 'marca.jpg', '2019-09-05 16:26:16', '2019-09-05 16:26:16'),
+(10, 'Marca_949', 'Similique aut neque illo.', 'marca.jpg', '2019-09-05 16:26:16', '2019-09-05 16:26:16');
 
 -- --------------------------------------------------------
 
@@ -1071,11 +1072,11 @@ CREATE TABLE `pedidos` (
 
 CREATE TABLE `productos` (
   `id` int(10) UNSIGNED NOT NULL,
-  `categoria_id` int(10) UNSIGNED NOT NULL,
+  `categoria_id` int(10) UNSIGNED DEFAULT NULL,
   `proveedor_id` int(10) UNSIGNED DEFAULT NULL,
   `marca_id` int(10) UNSIGNED NOT NULL,
   `producto_nombre` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `producto_descripcion` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `producto_descripcion` longtext COLLATE utf8mb4_unicode_ci,
   `producto_tags` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `producto_ref` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `producto_imagen` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1095,16 +1096,16 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `categoria_id`, `proveedor_id`, `marca_id`, `producto_nombre`, `producto_descripcion`, `producto_tags`, `producto_ref`, `producto_imagen`, `producto_precio`, `promocion_id`, `producto_tallas`, `producto_colores`, `producto_tieneImgDescripcion`, `producto_cant`, `producto_estado`, `fecha_creado`, `fecha_actualizado`) VALUES
-(1, 10, 3, 9, 'Commodi qui et.', 'Unde eius nulla reiciendis voluptatem. Aut quia voluptatem impedit aut minima et. Et hic inventore culpa ut veritatis fugiat qui illo.', 'cel,ruedas,cel,tennis,cel', 'AUT1162', '1562990443_05 p Moonbeam.jpg', '30000.00', 3, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 0, 0, '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(2, 7, 2, 2, 'Dicta.', 'Recusandae nisi animi et cumque asperiores. Qui quam voluptatem rerum distinctio perspiciatis quis aut. Fuga officia et laudantium facere nihil.', 'pc,portatiles,computadores,portatiles,cargador', 'CORRUPTI2256', '1562990443_05 p Moonbeam.jpg', '40000.00', 3, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 1, 4, 1, '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(3, 5, 3, 7, 'Deleniti hic ab.', 'Aperiam est et rerum esse esse qui natus. Iure animi alias laborum nihil voluptas dicta. Illum minima adipisci aut quia id in commodi.', 'smartphones,celular,cadenas,reloj,computadores', 'FACERE3522', '1562990443_05 p Moonbeam.jpg', '50000.00', 2, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 1, 9, 1, '2019-08-15 21:26:36', '2019-08-15 21:26:36'),
-(4, 8, 3, 10, 'Ipsa assumenda.', 'Optio ut culpa quas dolores. In et qui cupiditate odio. A reiciendis officiis ullam cumque possimus. Et assumenda nam amet in.', 'ruedas,portatiles,ruedas,zapatos,televisor', 'ILLUM1158', '1562990443_05 p Moonbeam.jpg', '20000.00', 2, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 1, 10, 1, '2019-08-15 21:26:37', '2019-08-15 21:26:37'),
-(5, 15, 1, 2, 'Accusamus et nam.', 'Itaque voluptatibus neque deleniti quibusdam. Iusto aut commodi numquam omnis ducimus. Atque nesciunt ut est ut blanditiis minus et.', 'cargador,phone,celular,tennis,zapatos', 'DELENITI924', '1562990443_05 p Moonbeam.jpg', '40000.00', 1, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 1, 8, 1, '2019-08-15 21:26:37', '2019-08-15 21:26:37'),
-(6, 3, 4, 4, 'Totam recusandae.', 'Recusandae asperiores omnis sint dolorem ex non. Eaque optio vel est rem et. Cum voluptas ipsa sit delectus sint.', 'cel,cargador,tablets,cargador,pc', 'AUT1804', '1562990443_05 p Moonbeam.jpg', '20000.00', 2, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 9, 1, '2019-08-15 21:26:37', '2019-08-15 21:26:37'),
-(7, 6, 3, 1, 'Ea est accusantium.', 'Quae maxime omnis excepturi fugiat nobis blanditiis. Enim non eius sunt enim deleniti est maxime.', 'tablets,cel,tennis,mause,tablets', 'UT1995', '1562990443_05 p Moonbeam.jpg', '30000.00', 1, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 2, 1, '2019-08-15 21:26:37', '2019-08-15 21:26:37'),
-(8, 12, 5, 9, 'Dolorum et cumque.', 'Minima eveniet suscipit voluptates veritatis vel. Enim similique est voluptas nihil. Rerum ratione quia quis et suscipit.', 'celular,ruedas,ruedas,cadenas,perlas', 'CUM9170', '1562990443_05 p Moonbeam.jpg', '10000.00', 1, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 1, 3, 1, '2019-08-15 21:26:37', '2019-08-15 21:26:37'),
-(9, 13, 3, 2, 'Architecto ea.', 'Omnis nostrum illo placeat. Fugiat explicabo aliquam sit ea occaecati. Voluptates facilis adipisci nam culpa. Est consequuntur ut nesciunt est vero.', 'tennis,cel,joyas,zapatos,celular', 'IUSTO7658', '1562990443_05 p Moonbeam.jpg', '30000.00', 2, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 1, 1, '2019-08-15 21:26:37', '2019-08-15 21:26:37'),
-(10, 7, 1, 5, 'Sit iusto ratione.', 'Eveniet perferendis in est delectus consequatur. Dolorem et aliquid et qui id. Aspernatur eum et voluptatum id praesentium rem.', 'portatiles,plasma,cadenas,computadores,computadores', 'RATIONE1314', '1562990443_05 p Moonbeam.jpg', '20000.00', 1, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 1, 7, 1, '2019-08-15 21:26:37', '2019-08-15 21:26:37');
+(1, 9, 3, 5, 'Inventore et sint.', 'Corrupti reiciendis ut cum. Qui qui aut eos. Adipisci cupiditate praesentium sequi aliquid unde.', 'cadenas,tennis,ruedas,portatiles,zapatos', 'VOLUPTAS1848', '1562990443_05 p Moonbeam.jpg', '20000.00', 3, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 4, 1, '2019-09-05 16:26:17', '2019-09-05 16:26:17'),
+(2, 9, 1, 4, 'Ut et quod.', 'Quia sed voluptas officiis quo quidem. Facere et praesentium fugit qui.', 'cel,smartphones,tablets,reloj,tablets', 'VELIT8075', '1562990443_05 p Moonbeam.jpg', '50000.00', 1, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 2, 1, '2019-09-05 16:26:17', '2019-09-05 16:26:17'),
+(3, 15, 5, 1, 'Nulla odio sint.', 'Quia hic qui placeat hic. Unde earum ea quisquam quibusdam maiores reprehenderit. Saepe molestiae tempore omnis aut facilis.', 'smartphones,zapatos,tv,cel,mause', 'DOLORIBUS4167', '1562990443_05 p Moonbeam.jpg', '40000.00', 3, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 1, 9, 1, '2019-09-05 16:26:17', '2019-09-05 16:26:17'),
+(4, 3, 4, 4, 'Totam neque sint et.', 'Et doloremque ea sint quia et. Omnis ea qui nam qui atque cum. Culpa id voluptatem reprehenderit non.', 'mause,televisor,portatiles,celular,pc', 'PERFERENDIS4709', '1562990443_05 p Moonbeam.jpg', '10000.00', 2, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 1, 1, '2019-09-05 16:26:17', '2019-09-05 16:26:17'),
+(5, 2, 3, 4, 'Mollitia et ut.', 'Earum et magnam aliquid fuga omnis eligendi. Recusandae reprehenderit assumenda molestias voluptas et. Beatae officiis doloribus non tenetur eos.', 'cargador,computadores,perlas,computadores,smartphones', 'AUT5923', '1562990443_05 p Moonbeam.jpg', '30000.00', 2, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 6, 1, '2019-09-05 16:26:17', '2019-09-05 16:26:17'),
+(6, 3, 4, 9, 'Voluptas dolorem et.', 'Aut dolor earum eum explicabo in. A omnis doloremque sit similique nihil veniam sint. Fuga rem aliquam voluptas sint. Fuga aut nesciunt fugit in.', 'cel,zapatos,portatiles,pc,cargador', 'DICTA6414', '1562990443_05 p Moonbeam.jpg', '10000.00', 3, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 4, 1, '2019-09-05 16:26:17', '2019-09-05 16:26:17'),
+(7, 1, 5, 4, 'Officia veniam.', 'Animi et consequatur ipsum explicabo quaerat iure. Voluptas officiis voluptatem labore sit iusto.', 'tennis,ruedas,pc,ruedas,cel', 'DOLOR3387', '1562990443_05 p Moonbeam.jpg', '40000.00', 1, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 9, 1, '2019-09-05 16:26:17', '2019-09-05 16:26:17'),
+(8, 5, 1, 2, 'Ratione dolores.', 'At impedit distinctio eligendi hic facilis. Asperiores cum aut et sequi est tenetur.', 'perlas,perlas,zapatos,computadores,tennis', 'QUIA853', '1562990443_05 p Moonbeam.jpg', '50000.00', 1, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 1, 7, 1, '2019-09-05 16:26:17', '2019-09-05 16:26:17'),
+(9, 9, 1, 10, 'Unde et quibusdam.', 'Explicabo in qui quia dicta occaecati quibusdam. Beatae enim odio quis quas.', 'phone,phone,mause,televisor,tennis', 'ODIT2364', '1562990443_05 p Moonbeam.jpg', '40000.00', 2, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 1, 1, '2019-09-05 16:26:17', '2019-09-05 16:26:17'),
+(10, 2, 1, 8, 'Nulla cumque qui.', 'Odio consequatur rerum quibusdam sed aspernatur. Et facere aut nobis sit quisquam molestiae eum.', 'pc,televisor,zapatos,ruedas,tablets', 'ODIO6966', '1562990443_05 p Moonbeam.jpg', '50000.00', 3, '28, 30, 32, 50X20, 160X100', 'verdes, rojos, negros, azules', 0, 0, 0, '2019-09-05 16:26:17', '2019-09-05 16:26:17');
 
 -- --------------------------------------------------------
 
@@ -1133,9 +1134,9 @@ CREATE TABLE `promociones` (
 --
 
 INSERT INTO `promociones` (`id`, `promo_nombre`, `promo_tipo`, `promo_costo`, `promo_publicidad`, `promo_banner_publicidad`, `promo_inicio`, `promo_final`, `promo_numero_canjeo`, `promo_minimo_pedido`, `categoria_id`, `fecha_creado`, `fecha_actualizado`) VALUES
-(1, 'Descuento # 1', '%', 10, 1, 'https://lorempixel.com/200/200/cats/?89502', '2019-01-01 01:00:00', '2019-12-31 00:00:00', 3, 50000, NULL, '2019-08-15 21:26:35', '2019-08-15 21:26:35'),
-(2, 'Descuento # 2', '$', 10000, 0, 'https://lorempixel.com/200/200/cats/?41519', '2019-01-01 01:00:00', '2019-12-31 00:00:00', 3, 50000, NULL, '2019-08-15 21:26:35', '2019-08-15 21:26:35'),
-(3, 'Descuento # 3', '2x1', 0, 1, 'https://lorempixel.com/200/200/cats/?30957', '2019-01-01 01:00:00', '2019-12-31 00:00:00', 3, 50000, NULL, '2019-08-15 21:26:35', '2019-08-15 21:26:35');
+(1, 'Descuento # 1', '%', 10, 1, 'https://lorempixel.com/200/200/cats/?50490', '2019-01-01 01:00:00', '2019-12-31 00:00:00', 3, 50000, NULL, '2019-09-05 16:26:14', '2019-09-05 16:26:14'),
+(2, 'Descuento # 2', '$', 10000, 0, 'https://lorempixel.com/200/200/cats/?51496', '2019-01-01 01:00:00', '2019-12-31 00:00:00', 3, 50000, NULL, '2019-09-05 16:26:15', '2019-09-05 16:26:15'),
+(3, 'Descuento # 3', '2x1', 0, 1, 'https://lorempixel.com/200/200/cats/?67703', '2019-01-01 01:00:00', '2019-12-31 00:00:00', 3, 50000, NULL, '2019-09-05 16:26:15', '2019-09-05 16:26:15');
 
 -- --------------------------------------------------------
 
@@ -1157,11 +1158,11 @@ CREATE TABLE `proveedores` (
 --
 
 INSERT INTO `proveedores` (`id`, `proveedor_razon_social`, `proveedor_representante`, `proveedor_email`, `fecha_creado`, `fecha_actualizado`) VALUES
-(1, 'Proveedor_2975', 'Alene Abbott', 'proveedor979@gmail.com', '2019-08-15 21:26:35', '2019-08-15 21:26:35'),
-(2, 'Proveedor_50324', 'Mortimer Schaden', 'proveedor109@gmail.com', '2019-08-15 21:26:35', '2019-08-15 21:26:35'),
-(3, 'Proveedor_68855', 'Andreanne Nikolaus', 'proveedor623@gmail.com', '2019-08-15 21:26:35', '2019-08-15 21:26:35'),
-(4, 'Proveedor_7452', 'Kelsie Paucek', 'proveedor440@gmail.com', '2019-08-15 21:26:35', '2019-08-15 21:26:35'),
-(5, 'Proveedor_23982', 'Francesco Orn', 'proveedor139@gmail.com', '2019-08-15 21:26:35', '2019-08-15 21:26:35');
+(1, 'Proveedor_18691', 'Harry Kovacek', 'proveedor662@gmail.com', '2019-09-05 16:26:15', '2019-09-05 16:26:15'),
+(2, 'Proveedor_72101', 'Karley Abbott', 'proveedor924@gmail.com', '2019-09-05 16:26:15', '2019-09-05 16:26:15'),
+(3, 'Proveedor_6374', 'Davonte Renner', 'proveedor273@gmail.com', '2019-09-05 16:26:15', '2019-09-05 16:26:15'),
+(4, 'Proveedor_28011', 'Fritz Cummerata', 'proveedor300@gmail.com', '2019-09-05 16:26:15', '2019-09-05 16:26:15'),
+(5, 'Proveedor_66076', 'Edgardo Bechtelar', 'proveedor710@gmail.com', '2019-09-05 16:26:15', '2019-09-05 16:26:15');
 
 -- --------------------------------------------------------
 
@@ -1180,9 +1181,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `rol_nombre`, `fecha_creado`) VALUES
-(1, 'Admin', '2019-08-15 21:26:31'),
-(2, 'Visitante', '2019-08-15 21:26:31'),
-(3, 'Cliente', '2019-08-15 21:26:31');
+(1, 'Admin', '2019-09-05 16:26:10'),
+(2, 'Visitante', '2019-09-05 16:26:10'),
+(3, 'Cliente', '2019-09-05 16:26:10');
 
 -- --------------------------------------------------------
 
@@ -1203,9 +1204,9 @@ CREATE TABLE `secciones` (
 --
 
 INSERT INTO `secciones` (`id`, `seccion_nombre`, `seccion_descripcion`, `seccion_imagen`, `fecha_creado`) VALUES
-(1, 'tecnologias', 'Sección de articulos tecnologicos', 'celular.svg', '2019-08-15 21:26:31'),
-(2, 'zapatos', 'Sección de venta de calzado', 'zapatos.svg', '2019-08-15 21:26:31'),
-(3, 'joyas', 'Sección de venta de joyas', 'joyas.svg', '2019-08-15 21:26:31');
+(1, 'tecnologias', 'Sección de articulos tecnologicos', 'celular.svg', '2019-09-05 16:26:10'),
+(2, 'zapatos', 'Sección de venta de calzado', 'zapatos.svg', '2019-09-05 16:26:10'),
+(3, 'joyas', 'Sección de venta de joyas', 'joyas.svg', '2019-09-05 16:26:10');
 
 -- --------------------------------------------------------
 
@@ -1264,13 +1265,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `rol_id`, `usuario_nombre`, `usuario_apellido`, `usuario_cedula`, `usuario_sexo`, `usuario_avatar`, `usuario_telefono`, `email`, `password`, `usuario_estado`, `fecha_creado`, `fecha_actualizado`, `remember_token`) VALUES
-(1, 1, 'Odannys', 'De La Cruz Calvo', '1065825573', 'm', 'avatar.png', '3107484079', 'el_odanis321@hotmail.com', '$2y$10$7aa5uWY9XYHSSzNQruo4teow059cIL0Mzdh79Q0oi6Dr7IZMF/eVq', 1, '2019-08-15 21:26:32', '2019-08-15 21:26:32', NULL),
-(2, 1, 'Ruben', 'Gonzales', '1065640192', 'm', 'avatar.png', '3172660830', 'rubensistenas@gmail.com', '$2y$10$VT2IdTpOcRPG9iKEx.Qdt.JfgdKUFEvTZD2x7yKzLhwAcZzPjtr4S', 1, '2019-08-15 21:26:32', '2019-08-15 21:26:32', NULL),
-(3, 1, 'Jose', 'Meriño', '432423423', 'm', 'avatar.png', '3172660830', 'jl@gmail.com', '$2y$10$jnFl/kccSWvOXw/xuke61.WsGRPr6uX05DqYpFAkkgtBi2h1WYkN6', 1, '2019-08-15 21:26:32', '2019-08-15 21:26:32', NULL),
-(4, 1, 'Eduardo', 'Lodico', '55555555', 'm', 'avatar.png', '3172660830', 'lodico@gmail.com', '$2y$10$yHSFTABnAcN83vRBQ2ll/OP7XOuEgU/266OZYSHckA2.xoIZblnQq', 1, '2019-08-15 21:26:33', '2019-08-15 21:26:33', NULL),
-(5, 2, 'August', 'Windler', '941494510', NULL, 'avatar.png', '535-472-0724 x3994', 'usuario312@gmail.com', '$2y$10$bkxNtu6hoCZ1hWqBzB8e2ulxl9ZvZ.Ik.os3T0H7gP5uPqIzU.246', 0, '2019-08-15 21:26:34', '2019-08-15 21:26:34', NULL),
-(6, 2, 'Skye', 'Legros', '873482288', NULL, 'avatar.png', '+1 (247) 993-2199', 'usuario878@gmail.com', '$2y$10$NH/yxjr1utZzk0rU2w7.8e6l8WbSQwG1./2cy0bDzBZupd/UM1Xai', 0, '2019-08-15 21:26:34', '2019-08-15 21:26:34', NULL),
-(7, 2, 'Adelia', 'Runolfsdottir', '934670497', NULL, 'avatar.png', '874-434-3584 x3277', 'usuario6@gmail.com', '$2y$10$GUK1PloKSnpcXzthI8fEDOvQR1MdocnNnVJzR.W26yck7oEWadQ9u', 0, '2019-08-15 21:26:34', '2019-08-15 21:26:34', NULL);
+(1, 1, 'Odannys', 'De La Cruz Calvo', '1065825573', 'm', 'avatar.png', '3107484079', 'el_odanis321@hotmail.com', '$2y$10$Qcg3PCSVG4HEUALlbgoEK.0s3B29dgLZEyt3w/ecXvdJmdsqqyyA.', 1, '2019-09-05 16:26:11', '2019-09-05 16:26:11', NULL),
+(2, 1, 'Ruben', 'Gonzales', '1065640192', 'm', 'avatar.png', '3172660830', 'rubensistenas@gmail.com', '$2y$10$4np0voFqSzEB5p.YFVWkSe9p6p6jTJPkFHqt1uaEODe2b3Evf1AtG', 1, '2019-09-05 16:26:12', '2019-09-05 16:26:12', NULL),
+(3, 1, 'Jose', 'Meriño', '432423423', 'm', 'avatar.png', '3172660830', 'jl@gmail.com', '$2y$10$berXHYlYnBIuVhBhQCaaYua8JwSWZkBQVSwSEnhMe8EAvZ5R9IqnG', 1, '2019-09-05 16:26:12', '2019-09-05 16:26:12', NULL),
+(4, 1, 'Eduardo', 'Lodico', '55555555', 'm', 'avatar.png', '3172660830', 'lodico@gmail.com', '$2y$10$t927BYd6YM3l6gll8khrtuLn39yyqca47NxcuRRkYkYozA//Mh2ga', 1, '2019-09-05 16:26:12', '2019-09-05 16:26:12', NULL),
+(5, 2, 'Maudie', 'Terry', '539357003', NULL, 'avatar.png', '615.249.7978 x596', 'usuario6@gmail.com', '$2y$10$yhgsS8KUnizcGlSW.F6iyOnXU1hBjsXNUO30TEis8dKwWA596n0ri', 1, '2019-09-05 16:26:13', '2019-09-05 16:26:13', NULL),
+(6, 2, 'Brionna', 'Cronin', '574088675', NULL, 'avatar.png', '643-827-4274', 'usuario68@gmail.com', '$2y$10$2bBu/9U1G/f/HYhiwpQ99eW7/l0Cv9ofW1IP5/e30kf7m0fXHS82a', 1, '2019-09-05 16:26:13', '2019-09-05 16:26:13', NULL),
+(7, 2, 'Narciso', 'Kiehn', '688242177', NULL, 'avatar.png', '491-266-9058 x31476', 'usuario34@gmail.com', '$2y$10$hCyJzbYrIizWtWLErX6TOOkfA1ciugBY3OwVrt1ESpvcOkxBhKJuy', 1, '2019-09-05 16:26:13', '2019-09-05 16:26:13', NULL);
 
 -- --------------------------------------------------------
 

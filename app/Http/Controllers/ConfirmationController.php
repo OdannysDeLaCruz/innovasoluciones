@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\DB;
 use App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmacionPedidoPago;
+
 class ConfirmationController extends Controller
 {
 
@@ -97,12 +100,20 @@ class ConfirmationController extends Controller
 	// Enviar mensaje de correo electronico al usuario informando de el estado de su pedido
  
     public function confirmation() {
+        
+        $fp = fopen("data.txt", "a");
+		fwrite($fp, "\r\n\r\n 1-------------------------- \r\n\r\n");
+		fclose($fp);
 		// Firma digital de la transacción que viene de Payu
 		$sign = $_POST['sign']; //e1b0939bbdc99ea84387bee9b90e4f5c
 
 	    $mensajeLog = print_r($_POST,true) . "\r\n";
 		$fp = fopen("data.txt", "a");
 		fwrite($fp, "Sing: $sign \r\nDatos obtenidos: \r\n $mensajeLog \r\n\r\n");
+		fclose($fp);
+		
+		$fp = fopen("data.txt", "a");
+		fwrite($fp, "\r\n\r\n 2-------------------------- \r\n\r\n");
 		fclose($fp);
 
     	date_default_timezone_set('America/Bogota');
@@ -127,13 +138,6 @@ class ConfirmationController extends Controller
 		// Esquema de la firma : "ApiKey~merchant_id~reference_sale~new_value~currency~state_pol"
     	$firma_cadena  = md5("$this->ApiKey~$merchant_id~$reference_sale~$new_value~$currency~$state_pol");
 
-
-
-
-
-
-
-
 		/* ENTITY_DECLINED  APPROVED, PAYMENT_NETWORK_REJECTED, INVALID_CARD, INSUFFICIENT_FUNDS, CONTACT_THE_ENTITY, EXPIRED_CARD, RESTRICTED_CARD, INVALID_EXPIRATION_DATE_OR_SECURITY_CODE, INVALID_TRANSACTION, EXCEEDED_AMOUNT, ABANDONED_TRANSACTION, PAYMENT_NETWORK_NO_CONNECTION, NOT_ACCEPTED_TRANSACTION, ERROR, EXPIRED_TRANSACTION */
 		$response_message_pol = $_POST['response_message_pol'];
 
@@ -146,6 +150,7 @@ class ConfirmationController extends Controller
 		// Puedo utilizar cualquiera de los dos para identificar el medio de pago
 		// El tipo de medio de pago utilizado para el pago, Numérico.
 		$payment_method_type = $_POST['payment_method_type'];
+
 		// Identificador del medio de pago.
 		$payment_method_id = $_POST['payment_method_id'];
 
@@ -172,9 +177,8 @@ class ConfirmationController extends Controller
 		// id de la transacción hecha en payu
 		$transaction_id = $_POST['transaction_id']; //f5e668f1-7ecc-4b83-a4d1-0aaa68260862
 
+		// Nombre del metodo de pago
 		$payment_method_name = $_POST['payment_method_name']; //VISA
-
-		
 
 		// Número de cuotas en las cuales se difirió el pago con tarjeta crédito.
 		$installments_number = $_POST['installments_number']; //1
@@ -182,33 +186,41 @@ class ConfirmationController extends Controller
 		// Id del pedido a actualizar
 		$pedido_id = $_POST['extra2']; // 10
 
+		// Id del pedido a actualizar
+		$nickname_buyer = $_POST['nickname_buyer']; // Nombre corto del usuario comprador
+
+		// Id del pedido a actualizar
+		$email_buyer = $_POST['email_buyer']; // Correo del usuario comprador
+
 		// Dirección ip desde donde se realizó la transacción.
 		$ip = $_POST['ip']; //190.242.116.98
 
 		// Referencia del pedido en payu
 		$reference_pol = $_POST['reference_pol']; //7069375
 
-
-
 		// Para pagos con pse
-		$pse_cus        = $_POST['cus'];
-		$pse_bank       = $_POST['pse_bank'];
-		$pse_reference1 = $_POST['pse_reference1'];
-		$pse_reference2 = $_POST['pse_reference2'];
-		$pse_reference3 = $_POST['pse_reference3'];
+		$pse_cus        = isset($_POST['cus']) ? $_POST['cus'] : '';
+		$pse_bank       = isset($_POST['pse_bank']) ? $_POST['pse_bank'] : '';
+		$pse_reference1 = isset($_POST['pse_reference1']) ? $_POST['pse_reference1'] : '';
+		$pse_reference2 = isset($_POST['pse_reference2']) ? $_POST['pse_reference2'] : '';
+		$pse_reference3 = isset($_POST['pse_reference3']) ? $_POST['pse_reference3'] : '';
 
 
 		// VERIFICAR LA FIRMA QUE VIENE DE PAYU
 
-    	
-
-    	
+    	$fp = fopen("data.txt", "a");
+		fwrite($fp, "\r\n\r\n 3-------------------------- \r\n\r\n");
+		fclose($fp);	
 
     	$pedido_id = (int)$pedido_id;
         $pedido    = App\Pedido::find($pedido_id);
         $pedido->pedido_ref_venta = $reference_sale;
 	    $transaccion_id = $pedido->transaccion_id;
         $pedido->save();
+        
+        $fp = fopen("data.txt", "a");
+		fwrite($fp, "\r\n\r\n 4-------------------------- \r\n\r\n");
+		fclose($fp);
 
     	if ($sign === $firma_cadena) {
 	        
@@ -303,8 +315,17 @@ class ConfirmationController extends Controller
 					}
 				}
 				if ($response_code_pol == 23) {
+				    
+				    $fp = fopen("data.txt", "a");
+		            fwrite($fp, "\r\n\r\n 5-------------------------- \r\n\r\n");
+		            fclose($fp);
+		            
 					if ($response_message_pol === 'ANTIFRAUD_REJECTED') {
 						$descripcion_transaccion = 'Transacción rechazada por sospecha de fraude';
+						
+						$fp = fopen("data.txt", "a");
+		                fwrite($fp, "\r\n\r\n 6-------------------------- \r\n\r\n");
+		                fclose($fp);
 					}
 				}
 				if ($response_code_pol == 9995) {
@@ -375,9 +396,11 @@ class ConfirmationController extends Controller
 	        $transaccion->tipo_moneda_transaccion = $currency;
 	        $transaccion->numero_cuotas_pago    = $installments_number;
 	        $transaccion->ip_transaccion        = $ip;
-	        $transaccion->pse_cus               = $pse_cus ;
+	        
+	        $transaccion->pse_cus               = $pse_cus;
 	        $transaccion->pse_bank              = $pse_bank;
 	        $transaccion->pse_references        = $pse_reference1 . ', ' . $pse_reference2 . ', ' . $pse_reference3;
+	        
 	        $transaccion->fecha_transaccion     = $transaction_date;
 	        $transaccion->fecha_actualizado     = $transaction_date;
 	        $transaccion->save();
@@ -388,6 +411,12 @@ class ConfirmationController extends Controller
 			fclose($fp);
 
 			// ENVIAR EMAIL DE CONFIRMACIÓN DE PAGO AL USUARIO, INFORMANDOLE EL ESTADO DE SU PEDIDO
+			Mail::to($email_buyer, $nickname_buyer)
+				->send(new ConfirmacionPedidoPago());
+
+			$fp = fopen("data.txt", "a");
+			fwrite($fp, "\r\n\r\n Correo: $email_buyer \r\n Usuario: $nickname_buyer \r\n\r\n");
+			fclose($fp);
     	}
     }
 }
