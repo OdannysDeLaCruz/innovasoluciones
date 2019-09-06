@@ -113,9 +113,10 @@ class CrearPedidoPayuController extends Controller
 							$factura = $this->generateInvoice($pedido_id);
 							$factura_pdf = $factura['pdf'];
 							$filename    = $factura['name'];
+							$referencia = $factura['referencia'];
 				        
 				 			// Enviar email de confirmacion de creacion del pedido, pero no de pago, la confimacion de pago la realiza el controlador ConfirmacionController
-							$this->sendEmailConfirmation(Auth::user()->email, Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido, $factura_pdf, $filename);
+							$this->sendEmailConfirmation(Auth::user()->email, Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido, $factura_pdf, $filename, $referencia);
 
 		  					// Eliminar variables de session creadas a lo largo del proceso de compra
 							$this->eliminarVariablesSession();	            		
@@ -235,9 +236,9 @@ class CrearPedidoPayuController extends Controller
         }
 	}
 	// Enviar mensaje de confirmación al usuario
-	private function sendEmailConfirmation($email, $user, $factura_pdf, $filename) {
+	private function sendEmailConfirmation($email, $user, $factura_pdf, $filename, $referencia) {
 		Mail::to($email, $user)
-			->send(new ConfirmacionPedidoRealizado($factura_pdf, $filename));
+			->send(new ConfirmacionPedidoRealizado($factura_pdf, $filename, $referencia));
 
 		// Mail::to($email, $user)
 		//     ->queue(new ConfirmacionPedidoRealizado($factura_pdf));
@@ -304,7 +305,11 @@ class CrearPedidoPayuController extends Controller
 
         $pdf = \PDF::loadView('users.facturas.detalle', compact('pedido', 'detalles', 'direccion', 'subtotal', 'costo_promo_pedido', 'total'));
         $pdf =  $pdf->download(); 
-        $factura = ['pdf' => $pdf, 'name' => 'FACTURA_' . $pedido[0]['ref_venta'] . '.pdf'];
+        $factura = [
+        	'pdf' => $pdf,
+        	'name' => 'FACTURA_' . $pedido[0]['ref_venta'] . '.pdf',
+        	'referencia' => $pedido[0]['ref_venta']
+        ];
         return $factura;
     }
 }

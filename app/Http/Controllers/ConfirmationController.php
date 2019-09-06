@@ -226,7 +226,7 @@ class ConfirmationController extends Controller
 	        
     		// Verificar el estado de la transacción
 			if ($state_pol == 4 && $response_message_pol === 'APPROVED' && $response_code_pol == 1) {  
-	  			$descripcion_transaccion = 'Transacción aprobada';
+	  			$descripcion_transaccion = 'Transacción exitosa';
 
 	  			// Obtener productos de este pedido
         		$detalles  = App\DetallePedido::where('pedido_id', $pedido_id)->get();
@@ -412,7 +412,7 @@ class ConfirmationController extends Controller
 
 			// ENVIAR EMAIL DE CONFIRMACIÓN DE PAGO AL USUARIO, INFORMANDOLE EL ESTADO DE SU PEDIDO
 			Mail::to($email_buyer, $nickname_buyer)
-				->send(new ConfirmacionPedidoPago());
+				->send(new ConfirmacionPedidoPago($state_pol, $value, $reference_sale, $descripcion_transaccion));
 
 			$fp = fopen("data.txt", "a");
 			fwrite($fp, "\r\n\r\n Correo: $email_buyer \r\n Usuario: $nickname_buyer \r\n\r\n");

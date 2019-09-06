@@ -11,14 +11,22 @@ class ConfirmacionPedidoPago extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $estado;
+    public $valor;
+    public $referencia;
+    public $descripcion;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($estado, $valor, $referencia, $descripcion)
     {
-        //
+        $this->estado       = $estado;
+        $this->valor        = $valor;
+        $this->referencia   = $referencia;
+        $this->descripcion  = $descripcion;
     }
 
     /**

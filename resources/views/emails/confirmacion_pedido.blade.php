@@ -142,9 +142,10 @@
 						</div>
 					</div>
 					<div style="background-color:transparent;">
-						<div class="block-grid two-up no-stack" style="Margin: 0 auto; min-width: 320px; max-width: 800px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #FFFFFF;">
+						<div class="block-grid two-up no-stack" style="margin: 0 auto; min-width: 320px; max-width: 800px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #FFFFFF;">
+							<!-- HEADER -->
 							<div style="border-collapse: collapse;display: table;width: 100%;background-color:#FFFFFF;">
-								<div class="col num6" style="min-width: 320px; max-width: 325px; display: table-cell; vertical-align: top; width: 325px;">
+								<div class="col num4" style="min-width: 150px; max-width: 300px; display: table-cell; vertical-align: top; width: 200px;">
 									<div style="width:100% !important;">
 										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:20px; padding-bottom:20px; padding-right: 0px; padding-left: 25px;">
 											<div align="left" class="img-container left fullwidthOnMobile fixedwidth" style="padding-right: 0px;padding-left: 0px;">
@@ -155,38 +156,38 @@
 										</div>
 									</div>
 								</div>
-								<div class="col num6" style="min-width: 320px; max-width: 325px; display: table-cell; vertical-align: top; width: 325px;">
+								<div class="col num8" style="min-width: 320px; max-width: 325px; display: table-cell; vertical-align: top; width: 450px;">
 									<div style="width:100% !important;">
-											<!--[if (!mso)&(!IE)]><!-->
-											<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:15px; padding-bottom:15px; padding-right: 25px; padding-left: 0px;">
-												<!--<![endif]-->
-												<div align="right" class="button-container" style="padding-top:10px;padding-right:0px;padding-bottom:10px;padding-left:10px;">
-													<a href="https://innovainc.co/perfil/pedidos" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color:#5795E2; background-color: none; width: auto; width: auto; padding-top: 3px; padding-bottom: 3px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank">
-														<span style="padding-left:30px;display:inline-block;">
-															<span style="line-height: 32px;">
-																<span style="font-size: 16px; line-height: 28px;">Mis pedidos</span>
-															</span>
+										<div style=" border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:15px; padding-bottom:15px; padding-right: 25px; padding-left: 0px;">
+											<!--<![endif]-->
+											<div align="right" class="button-container" style="padding-top:10px;padding-right:0px;padding-bottom:10px;padding-left:10px;">
+												<a href="https://innovainc.co/perfil/pedidos" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color:#5795E2; background-color: none; width: auto; width: auto; padding-top: 3px; padding-bottom: 3px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank">
+													<span style="padding-left:15px;display:inline-block;">
+														<span style="line-height: 32px;">
+															<span style="font-size: 16px; line-height: 28px;">Mis pedidos</span>
 														</span>
-													</a>
-													<a href="https://innovainc.co/perfil" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color:#5795E2; background-color: none; width: auto; width: auto; padding-top: 3px; padding-bottom: 3px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank">
-														<span style="padding-left:30px;display:inline-block;">
-															<span style="line-height: 32px;">
-																<span style="font-size: 16px; line-height: 28px;">Mi cuenta</span>
-															</span>
+													</span>
+												</a>
+												<a href="https://innovainc.co/perfil" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color:#5795E2; background-color: none; width: auto; width: auto; padding-top: 3px; padding-bottom: 3px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank">
+													<span style="padding-left:15px;display:inline-block;">
+														<span style="line-height: 32px;">
+															<span style="font-size: 16px; line-height: 28px;">Mi cuenta</span>
 														</span>
-													</a>
-													<a href="https://innovainc.co" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color:#5795E2; background-color: none; width: auto; width: auto; padding-top: 3px; padding-bottom: 3px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank">
-														<span style="padding-left:30px;display:inline-block;">
-															<span style="line-height: 32px;">
-																<span style="font-size: 16px; line-height: 28px;">Innovainc.co</span>
-															</span>
+													</span>
+												</a>
+												<a href="https://innovainc.co" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color:#5795E2; background-color: none; width: auto; width: auto; padding-top: 3px; padding-bottom: 3px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank">
+													<span style="padding-left:15px;display:inline-block;">
+														<span style="line-height: 32px;">
+															<span style="font-size: 16px; line-height: 28px;">Innovainc.co</span>
 														</span>
-													</a>
-												</div>
+													</span>
+												</a>
 											</div>
+										</div>
 									</div>
 								</div>
 							</div>
+							<!-- SECCCION DE MENSAJE -->
 							<div style="border-collapse: collapse;display: table;width: 100%;background-color:#FFFFFF; border-top: 1px  solid #ccc;">
 								<div class="col num6" style="min-width: 320px; max-width: 325px; display: table-cell; vertical-align: top; width: 325px;">
 									<div style="width:100% !important;">
@@ -207,7 +208,7 @@
 											<div align="right" class="button-container" style="padding-top:5px;padding-right:0px;padding-bottom:5px;">
 												<span style="padding-left:15px;padding-right:0px;font-size:14px;display:inline-block;">
 													<span style="font-size: 16px; line-height: 32px;">
-														<span style="font-size: 15px; line-height: 28px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif;">Ref n° RV2342134534</span>
+														<span style="font-size: 15px; line-height: 28px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif;">Ref: {{ $referencia }}</span>
 													</span>
 												</span>													
 											</div>
