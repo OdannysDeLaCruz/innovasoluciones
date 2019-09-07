@@ -14,6 +14,7 @@ class ConfirmacionPedidoPago extends Mailable
     public $estado;
     public $valor;
     public $referencia;
+    public $pedido_id;
     public $descripcion;
 
     /**
@@ -21,11 +22,12 @@ class ConfirmacionPedidoPago extends Mailable
      *
      * @return void
      */
-    public function __construct($estado, $valor, $referencia, $descripcion)
+    public function __construct($estado, $valor, $referencia, $pedido_id, $descripcion)
     {
         $this->estado       = $estado;
         $this->valor        = $valor;
         $this->referencia   = $referencia;
+        $this->pedido_id   = $pedido_id;
         $this->descripcion  = $descripcion;
     }
 

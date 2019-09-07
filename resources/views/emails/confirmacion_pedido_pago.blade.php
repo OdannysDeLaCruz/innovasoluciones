@@ -107,6 +107,11 @@
 				max-height: none !important;
 			}
 		}
+		@media (min-width: 671px) {
+			.desktop_hide {
+				display: none;
+			}
+		}
 	</style>
 </head>
 <body class="clean-body" style="margin: 0; padding: 0; -webkit-text-size-adjust: 100%; background-color: #F5F5F5;">
@@ -145,38 +150,39 @@
 						<div class="block-grid two-up no-stack" style="Margin: 0 auto; min-width: 320px; max-width: 800px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #FFFFFF;">
 							<!-- HEADER -->
 							<div style="border-collapse: collapse;display: table;width: 100%;background-color:#FFFFFF;">
-								<div class="col num4" style="min-width: 150px; max-width: 300px; display: table-cell; vertical-align: top; width: 200px;">
+								<div class="" style="display: table-cell; vertical-align: top; width: 100%;">
 									<div style="width:100% !important;">
-										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:20px; padding-bottom:20px; padding-right: 0px; padding-left: 25px;">
-											<div align="left" class="img-container left fullwidthOnMobile fixedwidth" style="padding-right: 0px;padding-left: 0px;">
-												<div style="font-size:1px;line-height:5px"> </div>
-												<img alt="Image" border="0" class="left fullwidthOnMobile fixedwidth" src="{{ asset('img/emails/logo-innova-negro.png') }}"  style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 170px; max-width: 195px; display: block;" title="Image" width="195"/>
-												<!--[if mso]></td></tr></table><![endif]-->
+										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:20px; padding-bottom:0px; padding-right: 0px; padding-left: 25px;">
+											<div align="center" class="img-container center fullwidthOnMobile fixedwidth" style="padding-right: 0px;padding-left: 0px;">
+												<img alt="Image" border="0" class="center fullwidthOnMobile fixedwidth" src="{{ asset('img/emails/logo-innova-negro.png') }}"  style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 170px; max-width: 195px; display: block;" title="Image" width="195"/>
 											</div>
 										</div>
 									</div>
 								</div>
+							</div>
+							<!-- MENU -->
+							<div style="border-collapse: collapse;display: table;width: 100%;background-color:#FFFFFF;">
 								<div class="col num8" style="min-width: 320px; max-width: 325px; display: table-cell; vertical-align: top; width: 450px;">
 									<div style="width:100% !important;">
-										<div style=" border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:15px; padding-bottom:15px; padding-right: 25px; padding-left: 0px;">
+										<div style=" border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:0px; padding-bottom:0px; padding-right: 20px; padding-left: 20px;">
 											<!--<![endif]-->
-											<div align="right" class="button-container" style="padding-top:10px;padding-right:0px;padding-bottom:10px;padding-left:10px;">
+											<div align="center" class="button-container" style="padding-top:10px;padding-right:0px;padding-bottom:10px;padding-left:10px;">
 												<a href="https://innovainc.co/perfil/pedidos" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color:#5795E2; background-color: none; width: auto; width: auto; padding-top: 3px; padding-bottom: 3px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank">
-													<span style="padding-left:15px;display:inline-block;">
+													<span style="padding-left:15px;padding-right:15px;display:inline-block;">
 														<span style="line-height: 32px;">
 															<span style="font-size: 16px; line-height: 28px;">Mis pedidos</span>
 														</span>
 													</span>
 												</a>
 												<a href="https://innovainc.co/perfil" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color:#5795E2; background-color: none; width: auto; width: auto; padding-top: 3px; padding-bottom: 3px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank">
-													<span style="padding-left:15px;display:inline-block;">
+													<span style="padding-left:15px;padding-right:15px;display:inline-block;">
 														<span style="line-height: 32px;">
 															<span style="font-size: 16px; line-height: 28px;">Mi cuenta</span>
 														</span>
 													</span>
 												</a>
 												<a href="https://innovainc.co" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color:#5795E2; background-color: none; width: auto; width: auto; padding-top: 3px; padding-bottom: 3px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank">
-													<span style="padding-left:15px;display:inline-block;">
+													<span style="padding-left:15px;padding-right:15px;display:inline-block;">
 														<span style="line-height: 32px;">
 															<span style="font-size: 16px; line-height: 28px;">Innovainc.co</span>
 														</span>
@@ -192,11 +198,16 @@
 								<div class="col num6" style="min-width: 320px; max-width: 325px; display: table-cell; vertical-align: top; width: 325px;">
 									<div style="width:100% !important;">
 										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:20px; padding-bottom:20px; padding-right: 40px; padding-left: 40px;">
-											<div align="center" class="img-container left fullwidthOnMobile fixedwidth" style="padding-right: 0px;padding-left: 0px;">
+											<div align="justify" class="img-container left fullwidthOnMobile fixedwidth" style="padding-right: 0px;padding-left: 0px;">
 												<span style="padding-left:0px;padding-right:0px;display:inline-block;">
 													<span style="line-height: 32px;">
-														<span style="font-size: 18px; text-align: center; color: #5E5E5E; line-height: 28px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif;">
-															Hola, te informamos que tu pedido con número de referencia  <strong> {{ $referencia }} </strong>, con un valor de <strong> $COP {{ number_format($valor, 0, '', '.') }} </strong>, se encuentra en estado <strong> {{ $descripcion }} </strong>.
+														<span style="font-size: 18px; text-align: justify; color: #5E5E5E; line-height: 28px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif;">
+															@php
+																if($estado == 4) { $color='#00D455'; } // color verde
+																elseif($estado == 6) { $color='#FF2A2A'; } // color rojo
+															@endphp
+															<strong style="color:{{ $color }}">Notificación de pago</strong><br>																
+															Hola, te informamos que tu pedido con número de referencia  <strong> {{ $referencia }} </strong>, con un valor de <strong> $COP {{ number_format($valor, 0, '', '.') }} </strong>, se encuentra en estado <strong style="color:{{ $color }}"> {{ $descripcion }} </strong>.
 														</span>
 													</span>
 												</span>	
@@ -210,14 +221,26 @@
 
 					<!-- IMAGEN DE CONFIRMACIÓN DE PEDIDO -->
 					<div style="background-color:transparent;">
-						<div class="block-grid" style="Margin: 0 auto; min-width: 320px; max-width: 800px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #FFFFFF;">
+						<div class="block-grid" style="margin: 0 auto; min-width: 320px; max-width: 800px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #FFFFFF;">
 							<div style="border-collapse: collapse;display: table;width: 100%;background-color:#FFFFFF;">
 								<div class="col num12" style="min-width: 320px; max-width: 650px; display: table-cell; vertical-align: top; width: 650px;">
 									<div style="width:100% !important;">
 										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
-											<!--<![endif]-->
-											<div align="center" class="img-container center autowidth fullwidth" style="padding-right: 0px;padding-left: 0px;">
-												<img align="center" alt="Confirmación de pedido" border="0" class="center autowidth fullwidth" src="{{ asset('img/emails/carrusel-recomendacionescompra-2_5d0c06189319a.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 800px; display: block;" title="Confirmación de pedido" width="650"/>
+											@php
+												if($estado == 4) { 
+													$img        = 'confirmacion-pago.png';
+													$img_mobile = 'confirmacion-pago-mobile.png';
+												}
+												elseif($estado == 6) { 
+													$img        = 'notificacion-error.png';
+													$img_mobile = 'notificacion-error-mobile.png';
+												}
+											@endphp
+											<div align="center" class="img-container center autowidth fullwidth mobile_hide" style="padding-right: 0px;padding-left: 0px;">
+												<img align="center" alt="Confirmación de pedido" border="0" class="center autowidth fullwidth" src='{{ asset("img/emails/$img") }}' style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 800px; display: block;" title="Confirmación de pedido" width="650"/>
+											</div>
+											<div align="center" class="img-container center autowidth fullwidth desktop_hide" style="padding-right: 0px;padding-left: 0px;">
+												<img align="center" alt="Confirmación de pedido" border="0" class="center autowidth fullwidth" src='{{ asset("img/emails/$img_mobile") }}' style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 800px; display: block;" title="Confirmación de pedido" width="650"/>
 											</div>
 										</div>
 									</div>
@@ -236,11 +259,11 @@
 										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:15px; padding-bottom:35px; padding-right: 0px; padding-left: 0px;">
 
 											<div align="center" class="button-container" style="padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
-												<a href="https://innovainc.co/perfil/pedidos/" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #ffffff; background-color: #5795E2; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; width: auto; width: auto; padding-top: 5px; padding-bottom: 5px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank">
+												<a href="https://innovainc.co/perfil/pedidos/{{$pedido_id}}" style="-webkit-text-size-adjust: none; text-decoration: none; display: inline-block; color: #ffffff; background-color: #5795E2; width: auto; width: auto; padding-top: 10px; padding-bottom: 10px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none; word-break: keep-all;" target="_blank">
 													<span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;">
 														<span style="font-size: 16px; line-height: 32px;">
 															<span style="font-size: 18px; line-height: 36px;">
-																<strong><span style="font-size: 16px; line-height: 32px; margin-right: 10px;">Ver estado del pedido</span> › </strong>
+																<strong><span style="font-size: 20px; font-weight:normal; line-height: 32px; margin-right: 10px;">Ver estado del pedido</span> › </strong>
 															</span>
 														</span>
 													</span>
@@ -376,40 +399,7 @@
 						</div>
 					</div>
 
-					<div style="background-color:transparent;">
-						<div class="block-grid" style="Margin: 0 auto; min-width: 320px; max-width: 800px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #FFFFFF;">
-							<div style="border-collapse: collapse;display: table;width: 100%;background-color:#FFFFFF;">
-								<div class="col num12" style="min-width: 320px; max-width: 650px; display: table-cell; vertical-align: top; width: 650px;">
-									<div style="width:100% !important;">
-										<!--[if (!mso)&(!IE)]><!-->
-										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:0px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
-												<!--<![endif]-->
-											<table border="0" cellpadding="0" cellspacing="0" class="divider" role="presentation" style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;" valign="top" width="100%">
-												<tbody>
-													<tr style="vertical-align: top;" valign="top">
-														<td class="divider_inner" style="word-break: break-word; vertical-align: top; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" valign="top">
-															<table align="center" border="0" cellpadding="0" cellspacing="0" class="divider_content" height="0" role="presentation" style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; border-top: 0px solid transparent; height: 0px;" valign="top" width="100%">
-																<tbody>
-																	<tr style="vertical-align: top;" valign="top">
-																		<td height="0" style="word-break: break-word; vertical-align: top; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;" valign="top"><span></span></td>
-																	</tr>
-																</tbody>
-															</table>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<!--[if (!mso)&(!IE)]><!-->
-										</div>
-										<!--<![endif]-->
-									</div>
-								</div>
-								<!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-								<!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-							</div>
-						</div>
-					</div>
-
+					<!-- REDES SOCIALES -->
 					<div style="background-color:transparent;">
 						<div class="block-grid" style="Margin: 0 auto; min-width: 320px; max-width: 800px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: transparent;">
 							<div style="border-collapse: collapse;display: table;width: 100%;background-color:transparent;">
@@ -423,26 +413,21 @@
 															<table activate="activate" align="center" alignment="alignment" cellpadding="0" cellspacing="0" class="social_table" role="presentation" style="table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: undefined; mso-table-tspace: 0; mso-table-rspace: 0; mso-table-bspace: 0; mso-table-lspace: 0;" to="to" valign="top">
 																<tbody>
 																	<tr align="center" style="vertical-align: top; display: inline-block; text-align: center;" valign="top">
-																	<td style="word-break: break-word; vertical-align: top; padding-bottom: 5px; padding-right: 8px; padding-left: 8px;" valign="top">
-																		<a href="https://www.facebook.com/" target="_blank">
-																			<img alt="Facebook" height="32" src="{{ asset('img/emails/facebook@2x.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;" title="Facebook" width="32"/>
-																		</a>
-																	</td>
-																	<td style="word-break: break-word; vertical-align: top; padding-bottom: 5px; padding-right: 8px; padding-left: 8px;" valign="top">
-																		<a href="https://twitter.com/" target="_blank">
-																			<img alt="Twitter" height="32" src="{{ asset('img/emails/twitter@2x.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;" title="Twitter" width="32"/>
-																		</a>
-																	</td>
-																	<td style="word-break: break-word; vertical-align: top; padding-bottom: 5px; padding-right: 8px; padding-left: 8px;" valign="top">
-																		<a href="https://instagram.com/" target="_blank">
-																			<img alt="Instagram" height="32" src="{{ asset('img/emails/instagram@2x.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;" title="Instagram" width="32"/>
-																		</a>
-																	</td>
-																	<td style="word-break: break-word; vertical-align: top; padding-bottom: 5px; padding-right: 8px; padding-left: 8px;" valign="top">
-																		<a href="https://www.pinterest.com/" target="_blank">
-																			<img alt="Pinterest" height="32" src="{{ asset('img/emails/pinterest@2x.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;" title="Pinterest" width="32"/>
-																		</a>
-																	</td>
+																		<td style="word-break: break-word; vertical-align: top; padding-bottom: 5px; padding-right: 8px; padding-left: 8px;" valign="top">
+																			<a href="https://www.facebook.com/innovainc2019/" target="_blank">
+																				<img alt="Facebook" height="32" src="{{ asset('img/emails/facebook@2x.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;" title="Facebook" width="32"/>
+																			</a>
+																		</td>
+																		<td style="word-break: break-word; vertical-align: top; padding-bottom: 5px; padding-right: 8px; padding-left: 8px;" valign="top">
+																			<a href="https://twitter.com/innovainc_" target="_blank">
+																				<img alt="Twitter" height="32" src="{{ asset('img/emails/twitter@2x.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;" title="Twitter" width="32"/>
+																			</a>
+																		</td>
+																		<td style="word-break: break-word; vertical-align: top; padding-bottom: 5px; padding-right: 8px; padding-left: 8px;" valign="top">
+																			<a href="https://www.instagram.com/innovainc_oficial/" target="_blank">
+																				<img alt="Instagram" height="32" src="{{ asset('img/emails/instagram@2x.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;" title="Instagram" width="32"/>
+																			</a>
+																		</td>
 																	</tr>
 																</tbody>
 															</table>

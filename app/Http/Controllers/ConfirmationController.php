@@ -410,13 +410,18 @@ class ConfirmationController extends Controller
 			fwrite($fp, "\r\n \r\n Transacción actualizada \r\n: $transaccion_id");
 			fclose($fp);
 
-			// ENVIAR EMAIL DE CONFIRMACIÓN DE PAGO AL USUARIO, INFORMANDOLE EL ESTADO DE SU PEDIDO
-			Mail::to($email_buyer, $nickname_buyer)
-				->send(new ConfirmacionPedidoPago($state_pol, $value, $reference_sale, $descripcion_transaccion));
+			// ENVIAR EMAIL DE CONFIRMACIÓN DE PAGO AL USUARIO, 
+			// INFORMANDOLE EL ESTADO DE SU PEDIDO SI EL ESATDO = 4 Ó 6 
+			// SI ES 5 = TRANSACION EXPIRADA, NO SE ENVIARÁ
+			if($state_pol == 4 || $state_pol == 6) {
+				Mail::to($email_buyer, $nickname_buyer)
+					->send(new ConfirmacionPedidoPago($state_pol, $value, $reference_sale, $pedido_id, $descripcion_transaccion));
+				
+				$fp = fopen("data.txt", "a");
+				fwrite($fp, "\r\n\r\n Correo: $email_buyer \r\n Usuario: $nickname_buyer \r\n\r\n");
+				fclose($fp);
+			}
 
-			$fp = fopen("data.txt", "a");
-			fwrite($fp, "\r\n\r\n Correo: $email_buyer \r\n Usuario: $nickname_buyer \r\n\r\n");
-			fclose($fp);
     	}
     }
 }

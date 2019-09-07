@@ -95,16 +95,19 @@ Route::get('ver-facturas', function() {
 });
 Route::get('email-1',function() {
 	$referencia = 'RV134123345435';
+	$pedido_id = 4;
 	// return view('emails.confirmacion_pedido');
-	return (new App\Mail\ConfirmacionPedidoRealizado(0, 'filename', $referencia))->render();
+	return (new App\Mail\ConfirmacionPedidoRealizado(0, 'filename', $referencia, $pedido_id))->render();
 });
 Route::get('email-2',function() {
 	$estado = 6;
 	$valor  = 150000;
 	$referencia = 'RV134123345435';
+	$pedido_id = 4;
 	$descripcion = 'Transacción exitosa';
 
 	// return view('emails.confirmacion_pedido_pago');
-	return (new App\Mail\ConfirmacionPedidoPago($estado, $valor, $referencia, $descripcion))->render();
+	return (new App\Mail\ConfirmacionPedidoPago($estado, $valor, $referencia, $pedido_id, $descripcion))->render();
 });
+
 Route::post('/prueba-editor', 'AdminController@pruebaEditor')->name('prueba-editor');

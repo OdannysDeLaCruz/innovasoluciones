@@ -116,7 +116,7 @@ class CrearPedidoPayuController extends Controller
 							$referencia = $factura['referencia'];
 				        
 				 			// Enviar email de confirmacion de creacion del pedido, pero no de pago, la confimacion de pago la realiza el controlador ConfirmacionController
-							$this->sendEmailConfirmation(Auth::user()->email, Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido, $factura_pdf, $filename, $referencia);
+							$this->sendEmailConfirmation(Auth::user()->email, Auth::user()->usuario_nombre . ' ' . Auth::user()->usuario_apellido, $factura_pdf, $filename, $referencia, $pedido_id);
 
 		  					// Eliminar variables de session creadas a lo largo del proceso de compra
 							$this->eliminarVariablesSession();	            		
@@ -238,7 +238,7 @@ class CrearPedidoPayuController extends Controller
 	// Enviar mensaje de confirmación al usuario
 	private function sendEmailConfirmation($email, $user, $factura_pdf, $filename, $referencia) {
 		Mail::to($email, $user)
-			->send(new ConfirmacionPedidoRealizado($factura_pdf, $filename, $referencia));
+			->send(new ConfirmacionPedidoRealizado($factura_pdf, $filename, $referencia, $pedido_id));
 
 		// Mail::to($email, $user)
 		//     ->queue(new ConfirmacionPedidoRealizado($factura_pdf));

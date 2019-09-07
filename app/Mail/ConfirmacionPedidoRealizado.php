@@ -14,17 +14,19 @@ class ConfirmacionPedidoRealizado extends Mailable
     private $pdf;
     private $filename;
     public $referencia;
+    public $pedido_id;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($pdf, $filename, $referencia)
+    public function __construct($pdf, $filename, $referencia, $pedido_id)
     {
         $this->pdf = $pdf;
         $this->filename = $filename;
         $this->referencia = $referencia;
+        $this->pedido_id = $pedido_id;
     }
 
     /**
