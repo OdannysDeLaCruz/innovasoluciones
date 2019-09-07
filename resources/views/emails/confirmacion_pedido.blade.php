@@ -218,11 +218,8 @@
 								<div class="col num12" style="min-width: 320px; max-width: 650px; display: table-cell; vertical-align: top; width: 650px;">
 									<div style="width:100% !important;">
 										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
-											<!--<![endif]-->
-											<div align="center" class="img-container center autowidth fullwidth mobile_hide" style="padding-right: 0px;padding-left: 0px;">
-												<img align="center" alt="Confirmación de pedido" border="0" class="center autowidth fullwidth" src="{{ asset('img/emails/confirmacion-pedido.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 800px; display: block;" title="Confirmación de pedido" width="650"/>
-											</div>
-											<div align="center" class="img-container center autowidth fullwidth desktop_hide" style="padding-right: 0px;padding-left: 0px;">
+											
+											<div align="center" class="img-container center autowidth fullwidth" style="padding-right: 0px;padding-left: 0px;">
 												<img align="center" alt="Confirmación de pedido" border="0" class="center autowidth fullwidth" src="{{ asset('img/emails/confirmacion-pedido-mobile.png') }}" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 800px; display: block;" title="Confirmación de pedido" width="650"/>
 											</div>
 										</div>

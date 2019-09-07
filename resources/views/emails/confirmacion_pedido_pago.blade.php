@@ -227,18 +227,13 @@
 									<div style="width:100% !important;">
 										<div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
 											@php
-												if($estado == 4) { 
-													$img        = 'confirmacion-pago.png';
+												if($estado == 4) {
 													$img_mobile = 'confirmacion-pago-mobile.png';
 												}
-												elseif($estado == 6) { 
-													$img        = 'notificacion-error.png';
+												elseif($estado == 6) {
 													$img_mobile = 'notificacion-error-mobile.png';
 												}
 											@endphp
-											<div align="center" class="img-container center autowidth fullwidth mobile_hide" style="padding-right: 0px;padding-left: 0px;">
-												<img align="center" alt="Confirmación de pedido" border="0" class="center autowidth fullwidth" src='{{ asset("img/emails/$img") }}' style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 800px; display: block;" title="Confirmación de pedido" width="650"/>
-											</div>
 											<div align="center" class="img-container center autowidth fullwidth desktop_hide" style="padding-right: 0px;padding-left: 0px;">
 												<img align="center" alt="Confirmación de pedido" border="0" class="center autowidth fullwidth" src='{{ asset("img/emails/$img_mobile") }}' style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 800px; display: block;" title="Confirmación de pedido" width="650"/>
 											</div>

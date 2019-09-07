@@ -236,7 +236,7 @@ class CrearPedidoPayuController extends Controller
         }
 	}
 	// Enviar mensaje de confirmación al usuario
-	private function sendEmailConfirmation($email, $user, $factura_pdf, $filename, $referencia) {
+	private function sendEmailConfirmation($email, $user, $factura_pdf, $filename, $referencia, $pedido_id) {
 		Mail::to($email, $user)
 			->send(new ConfirmacionPedidoRealizado($factura_pdf, $filename, $referencia, $pedido_id));
 
